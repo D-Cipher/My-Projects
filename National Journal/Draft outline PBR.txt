@@ -1,0 +1,56 @@
+Cohort 1: What is policy brand? If we had to build a government affairs office what would we focus on?
+[Graphic: "Model Overview"]
+[Create a Graphic showing the Relationship between
+   the index and drivers and the 52 drivers from the original APCO study.]
+[Factor analysis] - to get the composite
+[Impact analysis] - importance of each driver
+
+
+**While these insights were discovered in the cohort 1 data (fall 2013). They are re-affirmed in cohort 4 (spring 2015)
+using the entire dataset up to spring 2014.
+=============== 
+
+Cohort 2: Demographic factors that impact scores.
+Intro: In this study...
+
+Democrats vs Republicans perception of policy brand?
+Public vs Private effect??
+Tenure and age does not matter.
+
+Explore Familiarity and Policy Brand index (need to get the familiarity column in the mastersheet correct)
+
+Link between Lobbying Resources and PAC activity to Policy Brand not found.
+
+**While these insights were discovered in the cohort 2 data (spring 2014). They are re-affirmed in cohort 4 (spring 2015)
+using the entire dataset up to spring 2014.
+=============== 
+ 
+The Industry Effect
+
+
+Cohort 3:
+Effectiveness
+
+Archetypes Cluster Analysis
+
+
+**While these insights were discovered in the cohort 3 data (fall 2014). They are re-affirmed in cohort 4 (spring 2015)
+using the entire dataset up to spring 2014.
+=============== 
+
+Cohort 4 
+% of respect that is influenced by Media [use media profile driver and cheveron question] and % that is influenced by something other than media.
+-How much respect can be influenced by your media efforts?
+
+
+For all cohorts
+[Include the Demographics info of the study]
+[Include a Data appendix Maybe]
+
+
+
+Disclaimer: The views and opinions expressed in this article are those of the authors and do not
+necessarily reflect the official research findings or position of the National Journal Group. Examples of
+analysis performed within this article are only examples intended for achedemic purposes only.
+They are NOT to be utilized in real-world analytic products. If you are interested in the data please 
+contact National Journal Group at 202-..... or email njresearch@nationaljournal.com.

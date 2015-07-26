@@ -1,0 +1,372 @@
+Exploring the HHS Hospital Compare Database: Finding the Right Hospitals Across the US
+===
+
+*by: D'Cypher*
+
+Finding the right hospital can be overwhelming. Hospitals, especially for major care, often have special areas of focus such as heart-attacks or stroke. The purpose of this project is to help lessen some of that work, and to help focus the research for the right hospital for a specific need. 
+
+
+###Synopsis
+
+This project is a program that uses R code to process hospital data and provide recommendations on hospitals within given criterions.
+
+The program uses data from the Hospital Compare web site (http://hospitalcompare.hhs.gov) run by the U.S. Department of Health and Human Services. The purpose of the web site is to provide data and information about the quality of care at over 4,000 Medicare-certified hospitals in the U.S. 
+
+This dataset essentially covers all major U.S. hospitals. This dataset is used for a variety of purposes, including determining whether hospitals should be fined for not providing high quality care to patients (see http://goo.gl/jAXFX for some background on this particular topic).
+
+###Data Processing
+The Hospital Compare web site contains a lot of data and this program will only look at a small subset. The analysis was performed on:
+
+1) outcome-of-care-measures.csv: Contains information about 30-day mortality and readmission rates for heart attacks, heart failure, and pneumonia for over 4,000 hospitals.
+
+2) hospital-data.csv: Contains information about each hospitals
+
+3) Hospital_Revised_Flatfiles.pdf: Descriptions of the variables in each (i.e the code book).
+
+This code reads in the data.
+```{r results='hide', message=FALSE, warning=FALSE}
+setwd("C:/Users/wcai/Desktop/")
+getwd()
+outcome_data <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
+#head(outcome_data)
+
+```
+
+To get a sense of what the data looks like, this is a plot the 30-day mortality rates for heart attacks for hospitals accross the US:
+```{r message=FALSE, warning=FALSE}
+#Histogram of 30 day death rates from heart attacks
+outcome_data[, 11] <- as.numeric(outcome_data[, 11])
+hist(outcome_data[, 11])
+```
+
+##Program 'Best': Finding the best hospital in a state
+This is the first of three programs that processes the data. This program is called 'Best'. It is a function call that takes two inputs: a US State abbreviation, and a catagory ("heart attack", "heart failure", or "pneumonia"). 'Best' then returns the hospital with the lowest mortality on that catagory rate for that given state.
+
+```{r message=FALSE, warning=FALSE}
+# "best" function takes State and outcomes ("heart attack", "heart failure", 
+# or "pneumonia"). and returns hospital with 
+# the lowest mortality rate for that outcome in that state.
+best <- function(state, outcome){
+  
+  #--Input testing:
+possible_state <- (unique(outcome_data$State) == state)
+possible_outcome <- (c("heart attack", "heart failure", "pneumonia") == outcome)
+
+  if(sum(possible_state) != 1){
+    stop(print("invalid state"))
+  } else if(sum(possible_outcome) != 1){
+    stop(print("invalid outcome"))
+  } else {
+  
+  #-- Creates State subset
+  state_filter <- outcome_data[outcome_data$State == state,]
+  
+  state_filter[state_filter == "Not Available" ] = NA
+  #Turns "Not Availible" string into NA
+  
+  state_subset <- data.frame(as.character(state_filter$Hospital.Name), 
+                             as.character(state_filter$State),
+                             as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack),
+                             as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure),
+                             as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia))
+  
+  colnames(state_subset) <- c("Hospital.Name", "State", "heart_attack", "heart_failure", "pneumonia")
+  
+  rm(state_filter)
+  
+  #-- Conditional Min and lookup
+  if(outcome == "heart attack") {
+    min_outcome <- min(state_subset$heart_attack, na.rm = TRUE)
+    lookup_row <- which(state_subset$State == state 
+                        & state_subset$heart_attack == min_outcome 
+                        & complete.cases(state_subset$heart_attack) == T)
+    lookup_col <- which(colnames(state_subset)=="Hospital.Name")
+    best_hospitals <- sort(as.vector(state_subset[lookup_row,lookup_col]))
+    
+  } else if (outcome == "heart failure") {
+    min_outcome <- min(state_subset$heart_failure, na.rm = TRUE)
+    lookup_row <- which(state_subset$State == state 
+                        & state_subset$heart_failure == min_outcome 
+                        & complete.cases(state_subset$heart_failure) == T)
+    lookup_col <- which(colnames(state_subset)=="Hospital.Name")
+    best_hospitals <- sort(as.vector(state_subset[lookup_row,lookup_col]))
+    
+  } else if (outcome == "pneumonia"){
+    min_outcome <- min(state_subset$pneumonia, na.rm = TRUE)
+    lookup_row <- which(state_subset$State == state 
+                        & state_subset$pneumonia == min_outcome 
+                        & complete.cases(state_subset$pneumonia) == T)
+    lookup_col <- which(colnames(state_subset)=="Hospital.Name")
+    best_hospitals <- sort(as.vector(state_subset[lookup_row,lookup_col]))
+    
+  } else {
+    stop(print("Not valid input for outcome."))
+  }
+  
+  #Gives 1 of best hospital based on name order
+  print(best_hospitals[1])
+  }
+}
+```
+
+Here are 4 examples of the input and output:
+```{r}
+#"CYPRESS FAIRBANKS MEDICAL CENTER"
+best("TX", "heart attack")
+
+#"FORT DUNCAN MEDICAL CENTER"
+best("TX", "heart failure")
+
+#"JOHNS HOPKINS HOSPITAL, THE"
+best("MD", "heart attack")
+
+#"GREATER BALTIMORE MEDICAL CENTER"
+best("MD", "pneumonia")
+
+```
+
+##Program 'Rank': Ranking hospitals by outcome in a state
+The next program is called 'Rank'. It's a function called rankhospital that takes three arguments: the 2-character abbreviated name of a state (state), an outcome (outcome), and the ranking of a hospital in that state for that outcome (num). 
+
+The function reads the outcome-of-care-measures.csv and returns a character vector with the name of the hospital that has the ranking specified by the num argument. 
+
+For example, the call rankhospital("MD", "heart failure", 5) would return a character vector containing the name of the hospital with the 5th lowest 30-day death rate for heart failure. The num argument can take values "best", "worst", or an integer indicating the ranking (smaller numbers are better). 
+
+If the number given by num is larger than the number of hospitals in that state, then the function should return NA. Hospitals that do not have data on a particular outcome should be excluded from the set of hospitals when deciding the rankings.
+
+```{r message=FALSE, warning=FALSE}
+# "rankhospital" function takes State, outcomes ("heart attack", "heart failure", 
+# or "pneumonia"), and rank, and returns hospital with 
+# the lowest mortality rate for that outcome in that state for that rank.
+
+rankhospital <- function(state, outcome, num = "best") {
+  
+  #--Input testing on state and outcome:
+  possible_state <- (unique(outcome_data$State) == state)
+  possible_outcome <- (c("heart attack", "heart failure", "pneumonia") == outcome)
+  
+  if(sum(possible_state) != 1){
+    stop(print("invalid state"))
+  } else if(sum(possible_outcome) != 1){
+    stop(print("invalid outcome"))
+  } else {
+    
+    #-- Creates State subset
+    state_filter <- outcome_data[outcome_data$State == state,]
+    
+    state_filter[state_filter == "Not Available" ] = NA
+    #Turns "Not Availible" string into NA
+    
+    state_subset <- data.frame(as.character(state_filter$Hospital.Name), 
+                               as.character(state_filter$State),
+                               as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack),
+                               as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure),
+                               as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia))
+    
+    colnames(state_subset) <- c("Hospital.Name", "State", "heart_attack", "heart_failure", "pneumonia")
+    
+    rm(state_filter)
+    
+    #-- Conditional outcome columns
+    if(outcome == "heart attack"){ 
+      outcome_col = 3
+    } else if (outcome == "heart failure"){
+      outcome_col = 4
+    } else if (outcome == "pneumonia"){
+      outcome_col = 5
+    } else {
+      stop(print("Not valid input for outcome."))
+    }
+    
+    #--Ranking identifier: 
+    n <- as.numeric(sum(complete.cases(state_subset[,outcome_col])))
+    best_outcome <- min(state_subset[,outcome_col], na.rm = TRUE)
+    worst_outcome <- max(state_subset[,outcome_col], na.rm = TRUE)
+    
+    if(num == "best") { 
+      Nth_score <- best_outcome
+    } else if(num == "worst") {
+      Nth_score <- worst_outcome
+    } else if(num >= 1 & num <= n) {
+      Nth_score <- (sort(state_subset[,outcome_col], partial=(n-(n-num)))[n-(n-num)])
+    } else if(num < 0 | num > n) {
+      return("NA")
+    } else {
+      stop(print("Invalid input for num"))
+    }
+
+    sort(state_subset$Hospital.Name, decreasing = TRUE)
+    lookup_row <- which(state_subset$State == state 
+                        & state_subset[,outcome_col] == Nth_score 
+                        & complete.cases(state_subset[,outcome_col]) == T)
+    lookup_col <- as.numeric(which(colnames(state_subset)=="Hospital.Name"))
+    Nth_best <- as.vector(state_subset[lookup_row,lookup_col])
+    
+    countof_Nth_best <- as.numeric(length(Nth_best))
+    
+    if(countof_Nth_best == 1){
+      print(Nth_best)
+    } else if (countof_Nth_best > 1){    
+#-- Breaks ties
+    top_Nth_filter <- state_subset[state_subset[,outcome_col] <= Nth_score & complete.cases(state_subset[,outcome_col]) == T,]
+    top_Nth <- data.frame(as.character(top_Nth_filter$Hospital.Name), 
+               as.character(top_Nth_filter$State), 
+               as.numeric(top_Nth_filter$heart_attack),
+               as.numeric(top_Nth_filter$heart_failure),
+               as.numeric(top_Nth_filter$pneumonia))
+    colnames(top_Nth) <- c("Hospital.Name", "State", "heart_attack", "heart_failure", "pneumonia")
+    rm(top_Nth_filter)
+    
+    outcome_col_name <- names(top_Nth)[outcome_col]
+    hospital_col_name <- names(top_Nth)[1]
+    with_order <- with(top_Nth, order(top_Nth[outcome_col_name], top_Nth[hospital_col_name]))
+    top_Nth_ordered <- top_Nth[with_order, ]
+    print(as.vector(top_Nth_ordered[num,1]))  
+    } else {
+      stop(print("No Hospitals Qualify"))
+    }
+  }
+}
+```
+
+Here are 2 examples of the input and output:
+```{r}
+#"HARFORD MEMORIAL HOSPITAL"
+rankhospital("MD", "heart attack", "worst")
+#"NA"
+rankhospital("ID", "heart failure", 20)
+```
+
+##Program 'Rank All': Ranking hospitals in all states
+This last program is called 'Rank All'. It's a function called rankall that takes two arguments: an outcome name (outcome) and a hospital ranking (num). 
+
+The function reads the outcome-of-care-measures.csv and returns a 2-column data frame containing the hospital in each state that has the ranking specified in num. 
+
+For example the function call rankall("heart attack", "best") would return a data frame containing the names of the hospitals that are the best in their respective states for 30-day heart attack death rates. 
+
+The function should return a value for every state (some may be NA). The first column in the data frame is named hospital, which contains the hospital name, and the second column is named state, which contains the 2-character abbreviation for the state name. Hospitals that do not have data on a particular outcome should be excluded from the set of hospitals when deciding the rankings.
+
+```{r message=FALSE, warning=FALSE}
+# "rankall" function takes outcomes ("heart attack", "heart failure", 
+# or "pneumonia"), and rank, and returns hospital with 
+# the lowest mortality rate for that outcome per state.
+
+rankall <- function(outcome, num = "best") {
+
+state <- as.vector(unique(outcome_data$State))
+
+hospital <- vector(mode ="character")
+
+for (i in seq_along(state)){
+  rankhospital <- function(state, outcome, num = "best") {
+    
+    #--Input testing on state and outcome:
+    possible_state <- (unique(outcome_data$State) == state)
+    possible_outcome <- (c("heart attack", "heart failure", "pneumonia") == outcome)
+    
+    if(sum(possible_state) != 1){
+      stop(print("invalid state"))
+    } else if(sum(possible_outcome) != 1){
+      stop(print("invalid outcome"))
+    } else {
+      
+      #-- Creates State subset
+      state_filter <- outcome_data[outcome_data$State == state,]
+      
+      state_filter[state_filter == "Not Available" ] = NA
+      #Turns "Not Availible" string into NA
+      
+      state_subset <- data.frame(as.character(state_filter$Hospital.Name), 
+                                 as.character(state_filter$State),
+                                 as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack),
+                                 as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure),
+                                 as.numeric(state_filter$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia))
+      
+      colnames(state_subset) <- c("Hospital.Name", "State", "heart_attack", "heart_failure", "pneumonia")
+      
+      rm(state_filter)
+      
+      #-- Conditional outcome columns
+      if(outcome == "heart attack"){ 
+        outcome_col = 3
+      } else if (outcome == "heart failure"){
+        outcome_col = 4
+      } else if (outcome == "pneumonia"){
+        outcome_col = 5
+      } else {
+        stop(print("Not valid input for outcome."))
+      }
+      
+      #--Ranking identifier:    
+      n <- as.numeric(sum(complete.cases(state_subset[,outcome_col])))
+      best_outcome <- min(state_subset[,outcome_col], na.rm = TRUE)
+      worst_outcome <- max(state_subset[,outcome_col], na.rm = TRUE)
+      
+      if(num == "best") { 
+        Nth_score <- best_outcome
+      } else if(num == "worst") {
+        Nth_score <- worst_outcome
+      } else if(num >= 1 & num <= n) {
+        Nth_score <- (sort(state_subset[,outcome_col], partial=(n-(n-num)))[n-(n-num)])
+      } else if(num < 0 | num > n) {
+        return("NA")
+      } else {
+        return("NA")
+      }
+      
+      
+      sort(state_subset$Hospital.Name, decreasing = TRUE)
+      lookup_row <- which(state_subset$State == state 
+                          & state_subset[,outcome_col] == Nth_score 
+                          & complete.cases(state_subset[,outcome_col]) == T)
+      lookup_col <- as.numeric(which(colnames(state_subset)=="Hospital.Name"))
+      Nth_best <- as.vector(state_subset[lookup_row,lookup_col])
+      
+      countof_Nth_best <- as.numeric(length(Nth_best))
+      
+      if(countof_Nth_best == 1){
+        print(Nth_best)
+      } else if (countof_Nth_best > 1){    
+        #-- Breaks ties
+        top_Nth_filter <- state_subset[state_subset[,outcome_col] <= Nth_score & complete.cases(state_subset[,outcome_col]) == T,]
+        top_Nth <- data.frame(as.character(top_Nth_filter$Hospital.Name), 
+                              as.character(top_Nth_filter$State), 
+                              as.numeric(top_Nth_filter$heart_attack),
+                              as.numeric(top_Nth_filter$heart_failure),
+                              as.numeric(top_Nth_filter$pneumonia))
+        colnames(top_Nth) <- c("Hospital.Name", "State", "heart_attack", "heart_failure", "pneumonia")
+        rm(top_Nth_filter)
+        
+        outcome_col_name <- names(top_Nth)[outcome_col]
+        hospital_col_name <- names(top_Nth)[1]
+        with_order <- with(top_Nth, order(top_Nth[outcome_col_name], top_Nth[hospital_col_name]))
+        top_Nth_ordered <- top_Nth[with_order, ]
+        as.vector(top_Nth_ordered[num,1])  
+      } else {
+        stop(print("No Hospitals Qualify"))
+      }
+    }
+  }
+  
+  hospital[i] <- rankhospital(state[i], outcome, num)
+}
+
+Nth_best <- data.frame(hospital, state)
+print(Nth_best)
+}
+```
+
+Here are 3 examples of the input and output:
+```{r}
+#Top 20 on heart attack across the Country
+rankall("heart attack", 20)
+#Top 20 on pneumonia across the Country
+rankall("pneumonia", 20)
+```
+
+###Conclusion
+Researching for the right hospital takes time and is a long process. These programs allow for the user to narrow his/her search very quickly by drawing from data and information about the quality of care at over 4,000 hospitals in the U.S. Narrowing that search is half the battle!
+
+A full description of the variables in each of the files is in the included PDF named Hospital_Revised_Flatfiles.pdf. 
+
+Enjoy the program!

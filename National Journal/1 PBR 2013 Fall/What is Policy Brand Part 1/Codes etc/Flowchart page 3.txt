@@ -1,0 +1,213 @@
+####Graphic 7: Final Driver Set Developed After 3 Rounds of Studies (pg.3)
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+#Final Driver Set Developed after 3 Rounds of Studies (pg.3)
+require(pathdiagram)
+
+par(mar=c(1,.5,.5,.001))
+
+Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white")
+)
+
+#===Manifest Variables
+First_Round = list(
+  Events1 = manifest("Events", x = 0.13, y = 0.805, width = 0.13, height = 0.07, fill = "palegreen3"),
+  IndEnforce = manifest("Industry\nEnforcer", x = 0.13, y = 0.73, width = 0.13, height = 0.07, fill = "palegreen3"),
+  IndConduct = manifest("Ind. Conduct\nAdherance", x = 0.13, y = 0.655, width = 0.13, height = 0.07, fill = "palegreen3"),
+  IndAmbass = manifest("Industry\nAmbassador", x = 0.13, y = 0.58, width = 0.13, height = 0.07, fill = "palegreen3"),
+  IndVoice = manifest("Industry\nVoice", x = 0.13, y = 0.505, width = 0.13, height = 0.07, fill = "palegreen3")
+)  
+
+Second_Round = list(
+  Events2 = manifest("Events", x = 0.34, y = 0.805, width = 0.13, height = 0.07, fill = "palegreen3"),
+  IndStand2 = manifest("Industry\nStandards", x = 0.34, y = 0.670, width = 0.13, height = 0.07, fill = "palegreen3"),
+  UnifiedVoic2 = manifest("Unified\nVoice", x = 0.34, y = 0.535, width = 0.13, height = 0.07, fill = "palegreen3")
+)
+
+Third_Round = list(
+  CSR3 = manifest("CSR", x = 0.55, y = 0.400, width = 0.13, height = 0.07, fill = "plum3"),
+  Ethics3 = manifest("Ethics", x = 0.55, y = 0.265, width = 0.13, height = 0.07, fill = "plum3"),
+  Csuite3 = manifest("C-Suite\nEngagement", x = 0.55, y = 0.130, width = 0.13, height = 0.07, fill = "plum3")
+)
+
+#====latent variables
+Events4 = latent("Events", x = 0.8, y = 0.805, rx = 0.09, ry = 0.065, fill = "#467d70")
+IndStand4 = latent("Industry\nStandards", x = 0.8, y = 0.670, rx = 0.09, ry = 0.065, fill = "#467d70")
+UnifiedVoic4 = latent("Unified\nVoice", x = 0.8, y = 0.535, rx = 0.09, ry = 0.065, fill = "#467d70")
+CSR4 = latent("CSR", x = 0.8, y = 0.400, rx = 0.09, ry = 0.065, fill = "#7c4f87")
+Ethics4 = latent("Ethics", x = 0.8, y = 0.265, rx = 0.09, ry = 0.065, fill = "#7c4f87")
+Csuite4 = latent("C-Suite\nEngagement", x = 0.8, y = 0.130, rx = 0.09, ry = 0.065, fill = "#7c4f87")
+
+#===Draw handlers
+wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
+#draw headers
+for (i in seq_along(Headers)) {
+  draw(Headers[[i]])
+}
+
+# draw latent variables
+draw(Events4)
+draw(IndStand4)
+draw(UnifiedVoic4)
+draw(CSR4)
+draw(Ethics4)
+draw(Csuite4)
+# draw manifest variables
+for (i in seq_along(First_Round)) {
+  draw(First_Round[[i]])
+}
+
+for (i in seq_along(Second_Round)) {
+  draw(Second_Round[[i]])
+}
+
+for (i in seq_along(Third_Round)) {
+  draw(Third_Round[[i]])
+}
+
+#=====draw Paths
+#Events Path
+arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west", col = "#90b1a9")
+arrow(from = Second_Round[[1]], to = Events4, start = "east", end = "west", col = "#90b1a9")
+
+#Industry Standards Path
+for (i in 2:3){
+  arrow(from = First_Round[[i]], to = Second_Round[[2]], start = "east", end = "west", col = "#90b1a9")
+}
+arrow(from = Second_Round[[2]], to = IndStand4, start = "east", end = "west", col = "#90b1a9")
+
+#Unified Voice Path
+for (i in 4:5){
+  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west", col = "#90b1a9")
+}
+arrow(from = Second_Round[[3]], to = UnifiedVoic4, start = "east", end = "west", col = "#90b1a9")
+
+
+#CSR, Ethics, C-Suite Paths
+arrow(from = Third_Round[[1]], to = CSR4, start = "east", end = "west", col = "#b095b7")
+arrow(from = Third_Round[[2]], to = Ethics4, start = "east", end = "west", col = "#b095b7")
+arrow(from = Third_Round[[3]], to = Csuite4, start = "east", end = "west", col = "#b095b7")
+
+title("Final Driver Set Developed after 3 Rounds of Studies (pg.3)", line = 2.5)
+```
+
+The answer to the second question is: perception of an organization's policy brand consists of 4 components. The are as follows:
+
+ * Respect - "[...]respect for [the organization's] role in the public debate?"
+ 
+ * Considetation - "[...]genuine consideration [of the organization's] positions on issues?"
+ 
+ * Influence - "[organization's] views influencing [policy maker's] views favorably?"
+ 
+ * Sharing - "[the willingness of the policy maker to ] seek out or share the organization's opinion on issues"
+
+####Graphic 8: Final Index Measures Developed after 3 Rounds of Studies
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+#Final Index Measures Developed after 3 Rounds of Studies
+require(pathdiagram)
+
+par(mar=c(1,.5,.5,.001))
+
+Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Final Index Measures", x = 0.8, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white")
+)
+
+InvisibleBlock = manifest("", x = 0.61, y = 0.675, width = 0.001, height = 0.08, font = 2, fill = "White")
+
+#===Manifest Variables
+First_Round = list(
+  Consideration1 = manifest("Consideration", x = 0.14, y = 0.805, width = 0.13, height = 0.07, 
+                            fill="#d199a4"),
+  SeekView = manifest("Seek\nVeiwpoint", x = 0.14, y = 0.675, width = 0.13, height = 0.07, fill="#d199a4"),
+  Disseminat1 = manifest("Dissemination", x = 0.14, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
+  Recommend1 = manifest("Recommend", x = 0.14, y = 0.525, width = 0.13, height = 0.07, fill = "#d199a4"),
+  BestBrandsA = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.395, width = 0.13, height = 0.07, 
+                         font = 1, fill = "White", border = "#d199a4"),
+  BestBrandsB = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.32, width = 0.13, height = 0.07, 
+                         font = 1, fill = "White", border = "#d199a4")
+)  
+
+Second_Round = list(
+  Consideration2 = manifest("Consideration", x = 0.34, y = 0.805, width = 0.13, height = 0.07, 
+                            fill="#d199a4"),
+  Disseminat2 = manifest("Dissemination", x = 0.34, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
+  Recommend2 = manifest("Recommend", x = 0.34, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4")
+)
+
+Third_Round = list(
+  Consideration3 = manifest("Consideration", x = 0.55, y = 0.805, width = 0.13, height = 0.07, fill="#d199a4"),
+  Recommend3 = manifest("Recommend", x = 0.55, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4"),
+  Respect3 = manifest("Respect", x = 0.55, y = 0.395, width = 0.13, height = 0.07, fill="#d199a4"),
+  Influence3 = manifest("Influence", x = 0.55, y = 0.32, width = 0.13, height = 0.07, fill="#d199a4")
+)
+
+#====latent variables
+Consideration4 = latent("Consideration", x = 0.8, y = 0.765, rx = 0.09, ry = 0.065, fill="#a12b43")
+Sharing = latent("Sharing", x = 0.8, y = 0.6, rx = 0.09, ry = 0.065, fill="#a12b43")
+Respect4 = latent("Respect", x = 0.8, y = 0.435, rx = 0.09, ry = 0.065, fill="#a12b43")
+Influence4 = latent("Influence", x = 0.8, y = 0.27, rx = 0.09, ry = 0.065, fill="#a12b43")
+
+#===Draw handlers
+wall(xlim = c(0.1, 0.9), ylim = c(0.1, .9))
+#draw headers
+for (i in seq_along(Headers)) {
+  draw(Headers[[i]])
+}
+
+#draw InvisibleBlock
+draw(InvisibleBlock)
+
+# draw latent variables
+draw(Consideration4)
+draw(Sharing)
+draw(Respect4)
+draw(Influence4)
+# draw manifest variables
+for (i in seq_along(First_Round)) {
+  draw(First_Round[[i]])
+}
+
+for (i in seq_along(Second_Round)) {
+  draw(Second_Round[[i]])
+}
+
+for (i in seq_along(Third_Round)) {
+  draw(Third_Round[[i]])
+}
+
+#=====draw Paths
+#Consideration Path
+arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[1]], to = Consideration4, start = "east", end = "west", col = "#d199a4")
+
+#Sharing Path
+arrow(from = First_Round[[2]], to = InvisibleBlock, start = "east", end = "west", col = "#d199a4")
+arrow(from = InvisibleBlock, to = Sharing, start = "east", end = "west", col = "#d199a4")
+arrow(from = First_Round[[3]], to = Second_Round[[2]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Second_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
+arrow(from = First_Round[[4]], to = Second_Round[[3]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Second_Round[[3]], to = Third_Round[[2]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
+
+#Respect Path
+arrow(from = First_Round[[5]], to = Third_Round[[3]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[3]], to = Respect4, start = "east", end = "west", col = "#d199a4")
+
+#Influence
+arrow(from = First_Round[[6]], to = Third_Round[[4]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[4]], to = Influence4, start = "east", end = "west", col = "#d199a4")
+
+title("Final Index Measures Developed after 3 Rounds of Studies", line = 2.5)

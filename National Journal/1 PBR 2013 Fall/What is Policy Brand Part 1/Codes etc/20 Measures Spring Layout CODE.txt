@@ -1,0 +1,21 @@
+setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
+AsoRep_FULLlaunch <- read.csv("AsoRep full launch 7_28_15 BLIND.csv")
+Catagories <- read.table("Catagories AsoRep full launch.txt")
+names(AsoRep_FULLlaunch)
+require(qgraph)
+require(dplyr)
+require(stringr)
+
+AsoRep_FULLlaunchCORR <- cor_auto(select(AsoRep_FULLlaunch, Consideration:Interest.Balance))
+
+Name_Labels <- gsub("\\.", "\n", c(names(select(AsoRep_FULLlaunch, Consideration:Interest.Balance))))
+
+Catagory_Labels <- as.character(data.frame(lapply(Catagories[1,],as.character), stringsAsFactors=FALSE))
+
+#Spring Layout Graph 20 Measures
+corGraph <- qgraph(AsoRep_FULLlaunchCORR, layout = "spring", graph = "cor", posCol = "purple",
+                   labels = Name_Labels, groups = Catagory_Labels,
+                   cut = .75, maximum = 1, minimum = .60, esize = 20, vsize = 6, repulsion = .6, alpha = .05,
+                   label.scale = FALSE, label.cex = .5, borders = FALSE, legend.cex = .26, GLratio = 7,
+                   layoutOffset = c(-.12,-.05), layoutScale = c(1,1))
+title("Relationship Among 15 Measures for Associations (N = 2250)", line = 2.5)

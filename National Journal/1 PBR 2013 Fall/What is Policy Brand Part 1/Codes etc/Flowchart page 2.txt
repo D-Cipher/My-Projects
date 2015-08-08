@@ -1,0 +1,128 @@
+####Graphic 6: Final Driver Set Developed After 3 Rounds of Studies (pg.2)
+
+require(pathdiagram)
+
+par(mar=c(2.5,3.1,4.1,2.1))
+
+Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white")
+)
+
+InvisibleThoughLead = manifest("", x = 0.61, y = 0.755, width = 0.001, height = 0.08, font = 2, fill = "White")
+InvisibleMemberEff = manifest("", x = 0.61, y = 0.5675, width = 0.001, height = 0.08, font = 2, fill = "White")
+InvisibleBlock = manifest("", x = 0.61, y = 0.53, width = 0.001, height = 0.08, font = 2, fill = "White")
+
+#===Manifest Variables
+First_Round = list(
+  Coalition1 = manifest("Coalition\nBuilding", x = 0.13, y = 0.83, width = 0.13, height = 0.07),
+  ThoughtLead = manifest("Thought\nLeader", x = 0.13, y = 0.755, width = 0.13, height = 0.07),
+  GrassCamp1 = manifest("Grassroots\nCampaigns", x = 0.13, y = 0.68, width = 0.13, height = 0.07),
+  MemberSupp = manifest("Member\nSupport", x = 0.13, y = 0.605, width = 0.13, height = 0.07),
+  MemberMob = manifest("Member\nMobilization", x = 0.13, y = 0.53, width = 0.13, height = 0.07),
+  FavCompr = manifest("Favors\nCompromise", x = 0.13, y = 0.455, width = 0.13, height = 0.07),
+  BipCoop = manifest("Bipartisan\nCooperation", x = 0.13, y = 0.38, width = 0.13, height = 0.07),
+  BipFav = manifest("Bipartisan\nFavorability", x = 0.13, y = 0.305, width = 0.13, height = 0.07),
+  InterBal = manifest("Interest\nBalance", x = 0.13, y = 0.23, width = 0.13, height = 0.07),
+  LongPos = manifest("Longterm\nPosition", x = 0.13, y = 0.155, width = 0.13, height = 0.07)
+)  
+
+Second_Round = list(
+  Coalition2 = manifest("Coalition\nBuilding", x = 0.34, y = 0.83, width = 0.13, height = 0.07),
+  GrassCamp2 = manifest("Grassroots\nCampaigns", x = 0.34, y = 0.68, width = 0.13, height = 0.07),
+  MemberEff = manifest("Membership\nEffectiveness", x = 0.34, y = 0.5675, width = 0.13, height = 0.07),
+  BipCollab2 = manifest("Bipartisan\nCollaboration", x = 0.34, y = 0.3225, width = 0.13, height = 0.07)
+)
+
+Third_Round = list(
+  Coalition3 = manifest("Coalition\nBuilding", x = 0.55, y = 0.83, width = 0.13, height = 0.07),
+  GrassCamp3 = manifest("Grassroots\nCampaigns", x = 0.55, y = 0.68, width = 0.13, height = 0.07),
+  Tradeoffs = manifest("Tradeoffs", x = 0.55, y = 0.4950, width = 0.13, height = 0.07),
+  RiskAssess = manifest("Risk\nAssessment", x = 0.55, y = 0.4205, width = 0.13, height = 0.07),
+  BipCollab3 = manifest("Bipartisan\nCollaboration", x = 0.55, y = 0.3225, width = 0.13, height = 0.07),
+  PosAlign = manifest("Position\nAlignment", x = 0.55, y = 0.23, width = 0.13, height = 0.07),
+  ContextPos = manifest("Contextualize\nPosition", x = 0.55, y = 0.155, width = 0.13, height = 0.07)
+)
+
+#====latent variables
+Coalition4 = latent("Coalition\nBuilding", x = 0.8, y = 0.77, rx = 0.09, ry = 0.065)
+Grassroots = latent("Grassroots", x = 0.8, y = 0.625, rx = 0.09, ry = 0.065)
+Compromise = latent("Compromise", x = 0.8, y = 0.48, rx = 0.09, ry = 0.065)
+BipCollab4 = latent("Bipartisan\nCollaboration", x = 0.8, y = 0.335, rx = 0.09, ry = 0.065)
+Relevance = latent("Relevance", x = 0.8, y = 0.19, rx = 0.09, ry = 0.065)
+#===Draw handlers
+wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
+#draw headers
+for (i in seq_along(Headers)) {
+  draw(Headers[[i]])
+}
+
+#draw InvisibleBlock
+draw(InvisibleBlock)
+
+# draw latent variables
+draw(Coalition4)
+draw(Grassroots)
+draw(BipCollab4)
+draw(Compromise)
+draw(Relevance)
+# draw manifest variables
+for (i in seq_along(First_Round)) {
+  draw(First_Round[[i]])
+}
+
+for (i in seq_along(Second_Round)) {
+  draw(Second_Round[[i]])
+}
+
+for (i in seq_along(Third_Round)) {
+  draw(Third_Round[[i]])
+}
+
+#=====draw Paths
+#Coalition Building Path
+arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west")
+arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west")
+arrow(from = Third_Round[[1]], to = Coalition4, start = "east", end = "west")
+arrow(from = First_Round[[2]], to = InvisibleThoughLead, start = "east", end = "west")
+arrow(from = InvisibleThoughLead, to = Coalition4, start = "east", end = "west")
+
+#Grassroots Path
+arrow(from = First_Round[[3]], to = Second_Round[[2]], start = "east", end = "west")
+arrow(from = Second_Round[[2]], to = Third_Round[[2]], start = "east", end = "west")
+arrow(from = Third_Round[[2]], to = Grassroots, start = "east", end = "west")
+for (i in 4:5){
+  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west")
+}
+arrow(from = Second_Round[[3]], to = InvisibleMemberEff, start = "east", end = "west")
+arrow(from = InvisibleMemberEff, to = Grassroots, start = "east", end = "west")
+
+#Compromise Path
+for (i in 3:4){
+arrow(from = First_Round[[6]], to = Third_Round[[i]], start = "east", end = "west")
+}
+for (i in 3:4){
+  arrow(from = Third_Round[[i]], to = Compromise, start = "east", end = "west")
+}
+
+#Bipartisan Collaboration Path
+for (i in 7:8){
+  arrow(from = First_Round[[i]], to = Second_Round[[4]], start = "east", end = "west")
+}
+arrow(from = Second_Round[[4]], to = Third_Round[[5]], start = "east", end = "west")
+arrow(from = Third_Round[[5]], to = BipCollab4, start = "east", end = "west")
+
+#Relevance Path
+arrow(from = First_Round[[9]], to = Third_Round[[6]], start = "east", end = "west")
+arrow(from = First_Round[[10]], to = Third_Round[[7]], start = "east", end = "west")
+
+for (i in 6:7){
+  arrow(from = Third_Round[[i]], to = Relevance, start = "east", end = "west")
+}
+
+title("Final Driver Set Developed after 3 Rounds of Studies (pg.2)", line = 2.5)

@@ -1,0 +1,102 @@
+####Graphic 8: Final Index Measures Developed after 3 Rounds of Studies
+require(pathdiagram)
+
+par(mar=c(1,.5,.5,.001))
+
+Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Final Index Measures", x = 0.8, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white")
+)
+
+InvisibleBlock = manifest("", x = 0.61, y = 0.675, width = 0.001, height = 0.08, font = 2, fill = "White")
+
+#===Manifest Variables
+First_Round = list(
+  Consideration1 = manifest("Consideration", x = 0.14, y = 0.805, width = 0.13, height = 0.07, 
+                            fill="#d199a4"),
+  SeekView = manifest("Seek\nVeiwpoint", x = 0.14, y = 0.675, width = 0.13, height = 0.07, fill="#d199a4"),
+  Disseminat1 = manifest("Dissemination", x = 0.14, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
+  Recommend1 = manifest("Recommend", x = 0.14, y = 0.525, width = 0.13, height = 0.07, fill = "#d199a4"),
+  BestBrandsA = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.395, width = 0.13, height = 0.07, 
+                         font = 1, fill = "White", border = "#d199a4"),
+  BestBrandsB = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.32, width = 0.13, height = 0.07, 
+                         font = 1, fill = "White", border = "#d199a4")
+)  
+
+Second_Round = list(
+  Consideration2 = manifest("Consideration", x = 0.34, y = 0.805, width = 0.13, height = 0.07, 
+                            fill="#d199a4"),
+  Disseminat2 = manifest("Dissemination", x = 0.34, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
+  Recommend2 = manifest("Recommend", x = 0.34, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4")
+)
+
+Third_Round = list(
+  Consideration3 = manifest("Consideration", x = 0.55, y = 0.805, width = 0.13, height = 0.07, fill="#d199a4"),
+  Recommend3 = manifest("Recommend", x = 0.55, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4"),
+  Respect3 = manifest("Respect", x = 0.55, y = 0.395, width = 0.13, height = 0.07, fill="#d199a4"),
+  Influence3 = manifest("Influence", x = 0.55, y = 0.32, width = 0.13, height = 0.07, fill="#d199a4")
+)
+
+#====latent variables
+Consideration4 = latent("Consideration", x = 0.8, y = 0.765, rx = 0.09, ry = 0.065, fill="#a12b43")
+Sharing = latent("Sharing", x = 0.8, y = 0.6, rx = 0.09, ry = 0.065, fill="#a12b43")
+Respect4 = latent("Respect", x = 0.8, y = 0.435, rx = 0.09, ry = 0.065, fill="#a12b43")
+Influence4 = latent("Influence", x = 0.8, y = 0.27, rx = 0.09, ry = 0.065, fill="#a12b43")
+
+#===Draw handlers
+wall(xlim = c(0.1, 0.9), ylim = c(0.1, .9))
+#draw headers
+for (i in seq_along(Headers)) {
+  draw(Headers[[i]])
+}
+
+#draw InvisibleBlock
+draw(InvisibleBlock)
+
+# draw latent variables
+draw(Consideration4)
+draw(Sharing)
+draw(Respect4)
+draw(Influence4)
+# draw manifest variables
+for (i in seq_along(First_Round)) {
+  draw(First_Round[[i]])
+}
+
+for (i in seq_along(Second_Round)) {
+  draw(Second_Round[[i]])
+}
+
+for (i in seq_along(Third_Round)) {
+  draw(Third_Round[[i]])
+}
+
+#=====draw Paths
+#Consideration Path
+arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[1]], to = Consideration4, start = "east", end = "west", col = "#d199a4")
+
+#Sharing Path
+arrow(from = First_Round[[2]], to = InvisibleBlock, start = "east", end = "west", col = "#d199a4")
+arrow(from = InvisibleBlock, to = Sharing, start = "east", end = "west", col = "#d199a4")
+arrow(from = First_Round[[3]], to = Second_Round[[2]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Second_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
+arrow(from = First_Round[[4]], to = Second_Round[[3]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Second_Round[[3]], to = Third_Round[[2]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
+
+#Respect Path
+arrow(from = First_Round[[5]], to = Third_Round[[3]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[3]], to = Respect4, start = "east", end = "west", col = "#d199a4")
+
+#Influence
+arrow(from = First_Round[[6]], to = Third_Round[[4]], start = "east", end = "west", col = "#d199a4")
+arrow(from = Third_Round[[4]], to = Influence4, start = "east", end = "west", col = "#d199a4")
+
+title("Final Index Measures Developed after 3 Rounds of Studies", line = 2.5)

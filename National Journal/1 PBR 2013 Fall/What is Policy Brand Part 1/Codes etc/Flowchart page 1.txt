@@ -1,0 +1,111 @@
+####Graphic 5 Final Driver Set Developed After 3 Rounds of Studies (pg.1)
+
+require(pathdiagram)
+
+par(mar=c(2.5,3.1,4.1,2.1))
+
+Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white"),
+               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
+                        height = 0.035, font = 2, fill = "white")
+               )
+
+InvisibleBlock = manifest("", x = 0.61, y = 0.53, width = 0.001, height = 0.08, font = 2, fill = "White")
+
+#===Manifest Variables
+First_Round = list(
+  LobbyingEff = manifest("Lobbying\nEffectiveness", x = 0.13, y = 0.83, width = 0.13, height = 0.07),
+  PolicyCons = manifest("Policy\nConsultant", x = 0.13, y = 0.755, width = 0.13, height = 0.07),
+  CsuiteNetw = manifest("C-suite\nNetworking", x = 0.13, y = 0.68, width = 0.13, height = 0.07),
+  MediaPres1 = manifest("Media\nPresence", x = 0.13, y = 0.605, width = 0.13, height = 0.07),
+  MediaDem = manifest("Media\nDemanded", x = 0.13, y = 0.53, width = 0.13, height = 0.07),
+  DiscusLead = manifest("Discussion\nLeader", x = 0.13, y = 0.455, width = 0.13, height = 0.07),
+  ProactShar = manifest("Proactive\nSharer", x = 0.13, y = 0.38, width = 0.13, height = 0.07),
+  ResearchDev = manifest("Research\nDevelopment", x = 0.13, y = 0.305, width = 0.13, height = 0.07),
+  ReliableInfo = manifest("Reliable\nInfo Source", x = 0.13, y = 0.23, width = 0.13, height = 0.07),
+  InfoAcc = manifest("Info\nAccuracy", x = 0.13, y = 0.155, width = 0.13, height = 0.07)
+)  
+
+Second_Round = list(
+  LobbyingRep2 = manifest("Lobbying\nRepresentation", x = 0.34, y = 0.755, width = 0.13, height = 0.07),
+  MediaPres2 = manifest("Media\nPresence", x = 0.34, y = 0.605, width = 0.13, height = 0.07),
+  Research2 = manifest("Research", x = 0.34, y = 0.23, width = 0.13, height = 0.07)
+  )
+
+Third_Round = list(
+  LobbyingRep3 = manifest("Lobbying\nRepresentation", x = 0.55, y = 0.755, width = 0.13, height = 0.07),
+  MediaPres3 = manifest("Media\nPresence", x = 0.55, y = 0.605, width = 0.13, height = 0.07),
+  Discourse = manifest("Positive\nDiscourse", x = 0.55, y = 0.455, width = 0.13, height = 0.07),
+  RegularEng = manifest("Regular\nEngagement", x = 0.55, y = 0.38, width = 0.13, height = 0.07),
+  Research3 = manifest("Research", x = 0.55, y = 0.23, width = 0.13, height = 0.07)
+)
+
+#====latent variables
+LobbyingRep4 = latent("Lobbying\nRepresentation", x = 0.8, y = 0.73, rx = 0.09, ry = 0.065)
+MediaProf = latent("Media\nProfile", x = 0.8, y = 0.58, rx = 0.09, ry = 0.065)
+ConstrArg = latent("Constructive\nArguments", x = 0.8, y = 0.43, rx = 0.09, ry = 0.065)
+Research4 = latent("Research", x = 0.8, y = 0.28, rx = 0.09, ry = 0.065)
+
+#===Draw handlers
+wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
+#draw headers
+for (i in seq_along(Headers)) {
+  draw(Headers[[i]])
+}
+
+#draw InvisibleBlock
+draw(InvisibleBlock)
+
+# draw latent variables
+draw(LobbyingRep4)
+draw(MediaProf)
+draw(ConstrArg)
+draw(Research4)
+
+# draw manifest variables
+for (i in seq_along(First_Round)) {
+  draw(First_Round[[i]])
+}
+
+for (i in seq_along(Second_Round)) {
+  draw(Second_Round[[i]])
+}
+
+for (i in seq_along(Third_Round)) {
+  draw(Third_Round[[i]])
+}
+
+#=====draw Paths
+#Lobbying Representation Path
+for (i in 1:3){
+  arrow(from = First_Round[[i]], to = Second_Round[[1]], start = "east", end = "west")
+}
+arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west")
+arrow(from = Third_Round[[1]], to = LobbyingRep4, start = "east", end = "west")
+
+#Media Profile Path
+arrow(from = First_Round[[4]], to = Second_Round[[2]], start = "east", end = "west")
+arrow(from = Second_Round[[2]], to = Third_Round[[2]], start = "east", end = "west")
+arrow(from = Third_Round[[2]], to = MediaProf, start = "east", end = "west")
+arrow(from = First_Round[[5]], to = InvisibleBlock, start = "east", end = "west")
+arrow(from = InvisibleBlock, to = MediaProf, start = "east", end = "west")
+
+#Constructive Arguments Path
+arrow(from = First_Round[[6]], to = Third_Round[[3]], start = "east", end = "west")
+arrow(from = First_Round[[7]], to = Third_Round[[4]], start = "east", end = "west")
+arrow(from = Third_Round[[3]], to = ConstrArg, start = "east", end = "west")
+arrow(from = Third_Round[[4]], to = ConstrArg, start = "east", end = "west")
+
+#Research Path
+for (i in 8:10){
+  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west")
+}
+arrow(from = Second_Round[[3]], to = Third_Round[[5]], start = "east", end = "west")
+arrow(from = Third_Round[[5]], to = Research4, start = "east", end = "west")
+
+
+title("Final Driver Set Developed after 3 Rounds of Studies (pg.1)", line = 2.5)

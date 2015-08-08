@@ -1,0 +1,31 @@
+#NOTE: Make sure to change setwd() to your directory that contains the relevant data files.
+setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
+PBRTest_data <- read.csv("PBR Test Data 7_28_15 BLIND.csv")
+Catagories <- read.table("Catagories PBR Test.txt")
+require(qgraph)
+require(dplyr)
+require(stringr)
+
+#There is an issue with NAs in this data set. Mean substitution method was used to mitigate that issue.
+for(i in 1:ncol(PBRTest_data)){
+  PBRTest_data[is.na(PBRTest_data[,i]), i] <- mean(PBRTest_data[,i], na.rm = TRUE)
+}
+
+PBRTest_dataCORR <- cor_auto(select(PBRTest_data, Respect:Substantive.Dialogue), forcePD = TRUE)
+
+Name_Labels <- gsub("\\.", "\n", c(names(select(PBRTest_data, Respect:Substantive.Dialogue))))
+
+Catagory_Labels <- as.character(data.frame(lapply(Catagories[1,],as.character), stringsAsFactors=FALSE))
+
+#PBR Test Survey Correlation Network Structure Visualized
+corGraph <- qgraph(PBRTest_dataCORR, graph = "cor", posCol = "purple",
+                   labels = Name_Labels, groups = Catagory_Labels,
+                   cut = .75, maximum = 1, minimum = .60, esize = 20, vsize = 6, repulsion = .9, alpha = .05,
+                   label.scale = FALSE, label.cex = .5, borders = FALSE, legend.cex = .33, GLratio = 7,
+                   layoutOffset = c(-.12,-.14), layoutScale = c(1,1))
+title("Graphic 4: Third Round, Testing 37 Measures (N = 216)", line = 2.5)
+
+##Printing to a Graphics Device
+#dev.copy(png, file="plot1.png", units="in", width=12, height=15, res=300)
+#dev.off()
+#dev.off(dev.list()["RStudioGD"])

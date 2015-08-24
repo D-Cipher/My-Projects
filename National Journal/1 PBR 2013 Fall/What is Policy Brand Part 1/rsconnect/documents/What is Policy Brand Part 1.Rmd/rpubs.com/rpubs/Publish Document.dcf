@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+bundleId:
+        https://api.rpubs.com/api/v1/document/99747/ae2d90ba343047a0bda485a08f7bc060
+url: http://rpubs.com/D_Cypher/99747
+when: 1440437726.50297

@@ -4,20 +4,22 @@ What is Policy Brand? (Part 1)
 
 *by: D'Cypher*
 
-With the decline of tenure for Congressional members and staff, the adoption of new technologies within government, and expectations of data-driven decision-making, there is a striking new importance of developing image, profile, and sentiment. This image is not necessarily the corporation's consumer-facing image, but what's called the organization's "policy brand". Policy brand refers to the way senior policy professionals perceive an organization's work inside the Beltway-specifically, the degree to which it compels attention and action on matters of national public policy. 
+With the decline of tenure for Congressional members and staff, the adoption of new technologies within government, and expectations of data-driven decision-making, there is a striking new importance of developing image, profile, and sentiment. Organizations are realizing that money is only a small part of the equation in affecting policy. Money might be highly effective in an ad hoc basis, but it does not guarantee any long term impact. It is more important for an organization to have a profile that is distinguished, highly thought of, and well respected among the policy making community. 
+
+This profile is not necessarily the corporation's consumer-facing image, but what's called the organization's "policy brand". Policy brand refers to the way senior policy professionals perceive an organization's work inside the Beltway-specifically, the degree to which it compels attention and action. That is the key to establishing a lasting presence in the matters of national public policy. 
 
 ###Synopsis
 
-Policy Brands Roundtable (PBR) is National Journal Research's strategic research initiative designed to understand the perceptions of Washington influentials and their views on the major organizations, industies, and players relevant their policy expertise area. 
+Policy Brands Roundtable (PBR) is National Journal Research's strategic research initiative designed to understand the perceptions of Washington influentials and their views on the major organizations, industries, and players relevant their policy expertise area. 
 
 The model that PBR is built on revolves around 16 metrics (called "drivers") that measure an organization performance on the distinct roles, attributes, and the visible activities related to government affairs. The model then compares the performance on these metrics against the perception of the organization evaluated against 4 "index" metrics. 
 
-After rigorously testing of more than 70 different test metrics over the course of two years, this model was developed, and the first installment of the full study was launched in the fall of 2013. Our ongoing research is currently (Spring 2015) on its fourth installment and continues to futher the understanding of the relationship and engagement among organizations and policy makers.
+After rigorously testing of more than 70 different test metrics over the course of two years, this model was developed, and the first installment of the full study was launched in the fall of 2013. Our ongoing research is currently (Spring 2015) on its fourth installment and continues to further the understanding of the relationship and engagement among organizations and policy makers.
 
 This article will focus on the two years leading up to our first full launch. It will provide a detailed overview of the research model that PBR currently uses to capture "policy brand," and describe the major processes and analysis that led up to its conception.
 
 ###Data Processing
-The analyses preform in this project were primarily executed in R. In order to replicate the results that will be described in this overview, please first make sure the following codes run correctly in your R environment.
+The analyses preformed in this project were primarily executed in R. In order to replicate the results that will be described in this overview, please first make sure the following codes run correctly in your R environment.
 
 Important note: Please make sure to change all "setwd()" to your working directory which contain the required data files. 
 
@@ -43,13 +45,13 @@ Catagories <- read.table("Catagories PBR Test.txt")
 ```
 
 ###The Goal of Testing
-Over the course of two years, partnering with APCO International, National Journal Research conducted three major rounds of studies that were precursors to the Policy Brands Roundtable innitiative. These precursors sought to answer two questions: 1) Which organizational activities do policy influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped?
+Over the course of two years, partnering with APCO International, National Journal Research conducted three major rounds of studies that were precursors to the Policy Brands Roundtable initiative. These precursors sought to answer two questions: 1) Which organizational activities do policy influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped?
 
-The first round of testing, we conducted over 380 in depth interviews with policy influentials to try to find out what influentials care about. Based on these interviews, our previous Best Practice research, and other various research studies, we innitially identified around 50 core activies and 6 measures of perception. 
+The first round of testing, we conducted over 380 in depth interviews with policy influentials to try to find out what influentials care about. Based on these interviews, our previous Best Practice research, and other various research studies, we initially identified around 50 core activities and 6 measures of perception. 
 
-While there could be many different roles and duties of an organization's government affairs office, not all of them directly affect their policy brand. For example, an organization could be timely bill payers, always paying their vendors on time or in advance. While this might contribute to an efficencient office, which in turn might enhances their ability to lobby effecitvely, this activity would be an example of something that has a very indirect affect on policy perception. Therefore, "Timely Vendor Payment" would not be within the model.
+While there could be many different roles and duties of an organization's government affairs office, not all of them directly affect their policy brand. For example, an organization could be timely bill payers, always paying their vendors on time or in advance. While this might contribute to an efficient office, which in turn might enhances their ability to lobby effectively, this activity would be an example of something that has a very indirect effect on policy perception. Therefore, "Timely Vendor Payment" would not be within the model.
 
-The challenge is narrowing down from the 50+ core activities identified to ones with the most directly impact policy perception. Hence, goal of this whole process is to reduce the dimentiality of the data so that with only a small number of variables we are able to capture just as much information about policy brand perception as with 50+ variables. 
+The challenge is narrowing down from the 50+ core activities identified to ones with the most directly impact policy perception. Hence, goal of this whole process is to reduce the dimensionality of the data so that with only a small number of variables we are able to capture just as much information about policy brand perception as with 50+ variables. 
 
 ###First Round of Testing
 In the first round of testing, we conducted a test survey on a sample of influentials measuring their perception of different organizations and asking each respondent to rate those organizations on the various activities we identified.
@@ -84,23 +86,23 @@ title("Graphic 1: Relationship Among the 56 Measures (N = 211)", line = 2.5)
 
 The 56 variables represent the individual ratings that the respondents gave on the corresponding survey question. For example the survey text for the variable "Consideration" reads: "Do you genuinely consider [the organization]'s positions on issues?" 
 
-For the full list of cooresponding survey question text, refer to the file "AsoRep study question text Meta.csv". 
+For the full list of corresponding survey question text, refer to the file "AsoRep study question text Meta.csv". 
 
-From our analysis, the 50+ variables generally cluster around 9 catagories: Consideration, Sharing, Industry Stewardship, Subject Matter Contribution, Organizational Visibility, Policy Positioning, External Engagement, Leadership and Governance, and Lobbying Activity.
+From our analysis, the 50+ variables generally cluster around 9 categories: Consideration, Sharing, Industry Stewardship, Subject Matter Contribution, Organizational Visibility, Policy Positioning, External Engagement, Leadership and Governance, and Lobbying Activity.
 
-The consideration and sharing catagories are "index" variables they represent the components of the individuals perception of the organization as a whole rather than specific activities. 
+The consideration and sharing categories are "index" variables they represent the components of the individuals perception of the organization as a whole rather than specific activities. 
 
 The variables in the "Consideration" cluster are all questions related to whether the respondent takes into account of the opinions of a particular organization when making policy decisions. "Sharing" seems to be a cluster of variables related to whether the respondent will perform some action on behalf of the organization such as disseminate its material, seek out its opinion, or recommend its staff. 
 
-The remaining catagories are "driver" variables - these variables measure the specific activities that organizations engage in that we identified in our interviews. This is a broad description of what each of these catagory clusters seem to relate to:
+The remaining categories are "driver" variables - these variables measure the specific activities that organizations engage in that we identified in our interviews. This is a broad description of what each of these category clusters seem to relate to:
 
  * Industry Stewardship - these drivers are related to an organization's ability to lead, manage, and regulate the members of the industry that it belongs to. 
  
- * Subject Matter Contribution - these drivers have to do with the organization's ability to produce and disseminate quality and pertinate research and information to aid the policy makers in that space.
+ * Subject Matter Contribution - these drivers have to do with the organization's ability to produce and disseminate quality and pertinent research and information to aid the policy makers in that space.
 
  * Organization Visibility - are a cluster of measures that relate to the ability to gain and retain public attention or attention on their issues. 
 
- * Policy Positioning - refer to a driver cluster that speak to the organization's tactics and strategy in manuvering through the polical process during policy fights. 
+ * Policy Positioning - refer to a driver cluster that speaks to the organization's tactics and strategy in maneuvering through the political process during policy fights. 
 
  * External Engagement - contain measures related to an organization's ability to rally support and build alliances.
 
@@ -175,9 +177,9 @@ In the third round of testing we tested another subset of 37 variables. A couple
 
  * We asked respondents to evaluate only corporations, whereas the previous two tests consisted of only associations.
  
- * Certain variables were excluded since corporations did not engage in those activities. These were primarily member related and the industy stewardship variables that are only relevant to associations.
+ * Certain variables were excluded since corporations did not engage in those activities. These were primarily member related and the industry stewardship variables that are only relevant to associations.
  
- * Additional variables were added that only applied to corporations such as the corporate citizenship driver measures. Also, several additional index measures were introduced that originated in National Journal's 2011 Best Brands study. The Best Brands study was an extensive research innitiative that looked at the respected corporate brands in DC at the time. The variables added to this round of testing from the Best Brands included: Respect, Integrity, Influence, Personal Lobbyist, Agreement. 
+ * Additional variables were added that only applied to corporations such as the corporate citizenship driver measures. Also, several additional index measures were introduced that originated in National Journal's 2011 Best Brands study. The Best Brands study was an extensive research initiative that looked at the respected corporate brands in DC at the time. The variables added to this round of testing from the Best Brands included: Respect, Integrity, Influence, Personal Lobbyist, Agreement. 
 
 ```{r message=FALSE, warning=FALSE}
 #NOTE: Make sure to change setwd() to your directory that contains the relevant data files.
@@ -223,15 +225,15 @@ The last round of studies also seems to reveal that there are 4 components of po
 
 ###Developing the Model
 
-Again, the end goal of the entire process is to eliminate variables. We want to capture every possible dimention that impacts perception with as few variables as possible. After conducting these three rounds of testing, we took a wholelistic view of the process in narrowing down our final set of measures. The following are the criterion we used: 
+Again, the end goal of the entire process is to eliminate variables. We want to capture every possible dimension that impacts perception with as few variables as possible. After conducting these three rounds of testing, we took a holistic view of the process in narrowing down our final set of measures. The following are the criterion we used: 
 
 1) Criteria of Similarity
 
-Within each of the clusters, we analyzed the variables that were highly related with each other, these variables were either combined or eliminated.
+Within each of the clusters, we analyzed the variables that were highly related with each other. These variables were either combined or eliminated.
 
-For example, "Industry Enforcer" reads: "enforces industry codes of conduct among its members" and "Industry Conduct Adherance" reads: "promotes high standards in the industry it represents by establishing and adhering to industry codes of conduct." It's not particularily supprising that they turned out to be highly correlated in the data (Graphic 1). Intuitively, organizations which enforce codes of conduct are also the ones that promotes and adheres to those conducts. Hence, these two variables were combined to form "Industy Standards," which read: "promotes high standards by establishing and enforcing industry practices, standards, and/or codes of conduct."
+For example, "Industry Enforcer" reads: "enforces industry codes of conduct among its members" and "Industry Conduct Adherence" reads: "promotes high standards in the industry it represents by establishing and adhering to industry codes of conduct." It's not particularly surprising that they turned out to be highly correlated in the data (Graphic 1). Intuitively, organizations which enforce codes of conduct are also the ones that promote and adhere to those conducts. Hence, these two variables were combined to form "Industry Standards," which read: "promotes high standards by establishing and enforcing industry practices, standards, and/or codes of conduct."
 
-With the same analyses, we also concluded that certain variables could be eliminated all together because they were already captured by another variable or they could be imputed by another variable. As an example, "Interest Group Relations" was eliminated because its highly correlated with "Coalition Building". Both of these variables are trying to capture the organization's ability to create and join factions with other groups, but "Coalition Building" is a bit more broad where as "Interest Group Relations" focuses on interest groups in particular. Hence, we decided to eliminate "Interest Group Relations" for "Coalition Building."
+With the same analyses, we also concluded that certain variables could be eliminated altogether because they were already captured by another variable or they could be imputed by another variable. As an example, "Interest Group Relations" was eliminated because its highly correlated with "Coalition Building". Both of these variables are trying to capture the organization's ability to create and join factions with other groups, but "Coalition Building" is a bit more broad where as "Interest Group Relations" focuses on interest groups in particular. Hence, we decided to eliminate "Interest Group Relations" for "Coalition Building."
 
 2) Criteria of Difference
 
@@ -239,31 +241,31 @@ For variables that were highly related with the rest of the other variables, we 
 
 An example of this is the variable "Personal Lobbyist," which reads: "[organization] has a lobbyist (or other staff resource) whom I know and can call upon if I have questions." Our research interviews have shown that having personal connection can positively shape an individual's views of an organization. However, an organization can only make so many personal connections, certainly not enough to make an impact on the organization's overall policy perception.
 
-The fear with eliminating variable's based on difference is the danger that the variable in question actually belongs to a cluster catagory that was not captured by the exsiting data. In essence, there may be overarching catagories of activities which impact policy perception, but we have failed to capture because the variables in our study is not complete.
+The fear with eliminating variable's based on difference is the danger that the variable in question actually belongs to a cluster category that was not captured by the existing data. In essence, there may be overarching categories of activities which impact policy perception, but we have failed to capture because the variables in our study is not complete.
 
-Incomplete information is always a legitimate concern in research studies. The way we address this issue is through dudiligence in identifying our core variables in the first place. Dudilligence in conducting nearly 400 in depth interviews with policy makers to compile our core variables. If our comilation of variables is complete, clusters that emerged from these variables should be comprehensive. Hence, variables that have weak relationships with any of the existing clusters are more likely to be arbitritions rather than belonging to another relevant cluster catagory not captured by the model. 
+Incomplete information is always a legitimate concern in research studies. The way we address this issue is through due diligence in identifying our core variables in the first place, due diligence in conducting nearly 400 in depth interviews with policy makers to compile our core variables. If our compilation of variables is complete, clusters that emerged from these variables should be comprehensive. Hence, variables that have weak relationships with any of the existing clusters are more likely to be arbitration rather than belonging to another relevant cluster category not captured by the model. 
 
 3) Criteria of Confoundment
 
-The next layer of analysis was looking confounding variables. These variables were either so out of place in the cluster that they were placed in or overly correlated with too many different variables. These variables tended to be questions that were poorly written or overly broad, in wich case should be eliminated. In a small number of cases, after further investgatigation, they were recatagoriezed. 
+The next layer of analysis was looking confounding variables. These variables were either so out of place in the cluster that they were placed in or overly correlated with too many different variables. These variables tended to be questions that were poorly written or overly broad, in which case should be eliminated. In a small number of cases, after further investigation, they were recategorized. 
 
-A good example a confounding variable is "Multilateral Impact," which reads "[the organization] works effectively across the executive, legislative, and regulatory branches." In both the rounds of testing that contained this variable, the data showed that it suffered from a high degree of multi-colinearity. This question is simply too broad. Its essentially just asking about general effectiveness, since effective organizations typically are effective across all branches rather than being effective in one branch, but not another. Further, it doesn't address any specific activity that the organization does; just asks about the general ability of the organization to impact government. Hence, it is a confounding variable in the model and was eleminated.
+A good example a confounding variable is "Multilateral Impact," which reads "[the organization] works effectively across the executive, legislative, and regulatory branches." In both the rounds of testing that contained this variable, the data showed that it suffered from a high degree of multi-collinearity. This question is simply too broad. Its essentially just asking about general effectiveness, since effective organizations typically are effective across all branches rather than being effective in one branch, but not another. Further, it doesn't address any specific activity that the organization does; just asks about the general ability of the organization to impact government. Hence, it is a confounding variable in the model and was eliminated.
 
 4) Criteria of Importance
 
-The last layer of analysis we used is evaluating the improtance of each variable in the model. The analysis we used is a method known as the relative weights analysis. Part two of this model overview will go over this method in much more detail, but here is a short explaination:
+The last layer of analysis we used is evaluating the importance of each variable in the model. The analysis we used is a method known as the relative weights analysis. Part two of this model overview will go over this method in much more detail, but here is a short explanation:
 
-The general idea of this method is to determine each variable's reletive level of contribution to the predictiveness of a multi-variate regression. To elaborate, the driver measures can be thought of as regressor variables in a regression, because they attempt to predict the criterion variable, policy brand perception. The r-squared value reflects the precentage that the regressors (drivers) *explain* the dependent variable (brand perception). The relative weights method allow us to measure, for each regressor, its relative contribution to that *explainability*. The higher the relative weight, the more it contributes to the regressions predictiveness and the important the regressor variabe is to the regression model. 
+The general idea of this method is to determine each variable's relative level of contribution to the predictiveness of a multi-variate regression. To elaborate, the driver measures can be thought of as regressor variables in a regression, because they attempt to predict the criterion variable, policy brand perception. The r-squared value reflects the percentage that the regressors (drivers) *explain* the dependent variable (brand perception). The relative weights method allow us to measure, for each regressor, its relative contribution to that *explainability*. The higher the relative weight, the more it contributes to the regressions predictiveness and the important the regressor variable is to the regression model. 
 
 One question that seems naturally to follow is: if the drivers are the independent variables, and policy brand perception is the dependent variable in the regression, how exactly is policy brand perception calculated? This, again, will be explored in depth in part two of this model overview. As for now, the short answer is: by combining index variables. The index variables are what we have identified to be the components of policy brand perception. Hence, we used a similar statistical method to develop a composite variable, made up of the final index measures, to represent policy brand perception. Much more on this in part 2.
 
 ###Final Measures Developed
 
-As mentioned in the begining, these tests are designed to answer two questions: 1) Which organizational activities policy do influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped? 
+As mentioned in the beginning, these tests are designed to answer two questions: 1) Which organizational activities policy do influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped? 
 
-The following is the final variable set and a visualization of the dimention reduction path for which each was developed.
+The following is the final variable set and a visualization of the dimension reduction path for which each was developed.
 
-The answer to the first question is: we have narrowed it down to these 9 activities relevant to both corporation and assocations:
+The answer to the first question is: we have narrowed it down to these 9 activities relevant to both corporation and associations:
 
  * Bipartisan Collaboration - [The organization's ability to] work collaboratively with policy leaders across the political spectrum.
  
@@ -626,13 +628,13 @@ title("Final Driver Set Developed after 3 Rounds of Studies (pg.3)", line = 2.5)
 
 The answer to the second question is: perception of an organization's policy brand consists of 4 components. The are as follows:
 
- * Respect - "[...]respect for [the organization's] role in the public debate?"
+ * Respect - "[...]respect for [the organization's] role in the public debate."
  
- * Considetation - "[...]genuine consideration [of the organization's] positions on issues?"
+ * Consideration - "[...]genuine consideration [of the organization's] positions on issues."
  
- * Influence - "[organization's] views influencing [policy maker's] views favorably?"
+ * Influence - "[organization's] views influencing [policy maker's] views favorably."
  
- * Sharing - "[the willingness of the policy maker to ] seek out or share the organization's opinion on issues"
+ * Sharing - "[the willingness of the policy maker to ] seek out or share the organization's opinion on issues."
 
 ####Graphic 8: Final Index Measures Developed after 3 Rounds of Studies
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
@@ -989,7 +991,7 @@ Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13,
 First_Round = list(
   Events1 = manifest("Events", x = 0.13, y = 0.805, width = 0.13, height = 0.07, fill = "palegreen3"),
   IndEnforce = manifest("Industry\nEnforcer", x = 0.13, y = 0.73, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndConduct = manifest("Ind. Conduct\nAdherance", x = 0.13, y = 0.655, width = 0.13, height = 0.07, fill = "palegreen3"),
+  IndConduct = manifest("Ind. Conduct\nAdherence", x = 0.13, y = 0.655, width = 0.13, height = 0.07, fill = "palegreen3"),
   IndAmbass = manifest("Industry\nAmbassador", x = 0.13, y = 0.58, width = 0.13, height = 0.07, fill = "palegreen3"),
   IndVoice = manifest("Industry\nVoice", x = 0.13, y = 0.505, width = 0.13, height = 0.07, fill = "palegreen3")
 )  
@@ -1173,7 +1175,12 @@ arrow(from = Third_Round[[4]], to = Influence4, start = "east", end = "west", co
 title("Final Index Measures Developed after 3 Rounds of Studies", line = 2.5)
 ```
 
-*Disclaimer: The views and opinions expressed in this article are those of the authors and do not necessarily reflect the official research findings or position of the National Journal Group. Examples of analysis performed within this article are only examples intended for achedemic purposes only. They are NOT to be utilized in real-world analytic products. If you are interested in learning more about this study or other products at National Journal Research please email research@nationaljournal.com or visit our website at [www.nationaljournal.com/membership/research](http://www.nationaljournal.com/learn-more/).*
+###Program Specifications
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+sessionInfo()
+```
+
+*Disclaimer: The views and opinions expressed in this article are those of the author's alone and do not necessarily reflect the official research findings or position of the National Journal Group. Examples of analysis performed within this article are only examples intended for achedemic purposes only. They are NOT to be utilized in real-world analytic products. If you are interested in learning more about this study or other products at National Journal Research please email research@nationaljournal.com or visit our website at [www.nationaljournal.com/membership/research](http://www.nationaljournal.com/learn-more/).*
 
 
 

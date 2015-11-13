@@ -128,9 +128,7 @@ title("Graphic 2: Relationship Among the 56 Measures (N = 211)", line = 2.5)
 ```
 
 ###Second Round of Testing
-In the second round of testing, we conducted another survey looking at a 20 measure subset. 
-
-The data collected from this survey is in the file named: "AsoRep full launch 7_28_15 BLIND.csv".
+In the second round of testing, we conducted another survey looking at a 20 measure subset. The data collected from this survey is in the file named: "AsoRep full launch 7_28_15 BLIND.csv".
 
 The following is a visualization of the variables in the second round of testing:
 ```{r message=FALSE, warning=FALSE}

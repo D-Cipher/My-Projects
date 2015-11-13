@@ -1,0 +1,84 @@
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from kivy.graphics import Color, Rectangle
+from kivy.core.window import Window
+from kivy.loader import Loader
+from kivy.uix.image import Image
+from kivy.core.image import Image as CoreImage
+
+#Set it as the texture of a Rectangle
+#[16:26] <inclement> But if you just want to display an image, use an Image widget
+
+class BG_Spite(Image):
+    def __init__(self, **kwargs):
+        super(BG_Spite, self).__init__(**kwargs)
+        self.size = self.texture_size
+
+class Card(Widget):
+
+    def __init__(self, col_input = 0, row_input = 0, pos = (100,100), theme = "emj", select = False,
+                 eliminate = False, secret_card = False, back = True, lifespan = None,
+                 animated = False, radius = 40):
+        super(Card, self).__init__()
+        self.pos = pos
+
+
+    def draw(self):
+        card_center = (16, 386)
+        card_size = (80, 85)
+        zoom = .7
+        #position = (100,200)
+
+        #self.pos = position
+        self.texture = CoreImage("images/theme_emoji.jpg"
+                                 ).texture.get_region(card_center[0], card_center[1],
+                                                      card_size[0], card_size[1])
+        self.size = (card_size[0]*zoom, card_size[1]*zoom)
+
+        self.rect_bg = Rectangle(
+                pos=(self.pos[0]-5,self.pos[1]-5), size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.6, 1, .5, .7))
+
+        self.rect_bg = Rectangle(
+                pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+        #Colors for Each Card State:
+        #Normal: Light green = Color(.6, 1, .5, .7), White = Color(1, 1, 1, 1)
+        #Selected: Black = Color(0.1, 0.1, .1, 1), White = Color(1, 1, 1, 1)
+        #Eliminated: Transparent = Color(.5, .5, .5, .5), Transparent = Color(1, 1, 1, .5))
+        #Alternatively Eliminated: Transparent = Color(.5, .5, .5, .5),  Grey overlay = Color(.6, .6, .6, 1)
+        #Secret Card Revealed: Red = Color(.8, 0, 0, 1), Grey overlay = Color(.6, .6, .6, 1)
+        #Color(1, .5, .5, 1)
+
+
+
+#Innitiate Classes
+card1 = Card(pos=(100,100))
+card2 = Card(pos=(100,250))
+
+class Game(Widget):
+    def __init__(self):
+        super(Game, self).__init__()
+        #Background
+        self.background = BG_Spite(source="images/background.png")
+        self.size = self.background.size
+        self.add_widget(self.background)
+
+        #Create Widgets
+        self.add_widget(card1)
+        self.add_widget(card2)
+
+        #Draw on Canvas
+        with self.canvas:
+            card1.draw()
+            card2.draw()
+
+#Launch Game
+class GameApp(App):
+    def build(self):
+        game = Game()
+        Window.size = game.size
+        return game
+
+if __name__ == "__main__":
+    GameApp().run()

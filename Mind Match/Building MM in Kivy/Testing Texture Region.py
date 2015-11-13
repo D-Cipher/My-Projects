@@ -1,0 +1,221 @@
+import random
+import math
+
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from kivy.graphics import Color, Rectangle, Line
+from kivy.core.window import Window
+from kivy.loader import Loader
+from kivy.uix.image import Image
+from kivy.core.image import Image as CoreImage
+
+#Set it as the texture of a Rectangle
+#[16:26] <inclement> But if you just want to display an image, use an Image widget
+
+###=========Helper Functions=============
+def dist_formula(p, q):
+    #Distance Formula
+    return math.sqrt((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2)
+
+###=======Define Class Objects==========
+class BG_Spite(Image):
+    def __init__(self, **kwargs):
+        super(BG_Spite, self).__init__(**kwargs)
+        self.size = self.texture_size
+        #self.size = (200,200) #for testing
+
+class Card(Widget):
+    """
+    Creates the card class object and all of it's properties.
+    Takes coordinates of the card and position
+    and draws the card on the canvas.
+    """
+
+    def __init__(self, col_input = 0, row_input = 0, pos = (100,100), theme = "emj", select = False,
+                 eliminate = False, secret_card = False, back = True, lifespan = None,
+                 animated = False, radius = 38):
+        super(Card, self).__init__()
+
+        #Image Specs
+        self.card_center = (16, 386)
+        self.card_size = (80, 85)
+
+        #Object Properties
+        self.zoom = .7 #Adjusted size: (56, 59.5)
+        self.pos = pos
+
+        self.obj_coord = [self.pos[0]+(self.card_size[0]*self.zoom)/2,
+                          self.pos[1]+(self.card_size[1]*self.zoom)/2]
+
+        self.c_col = col_input
+        self.c_row = row_input
+
+        self.select = select
+        self.eliminate = eliminate
+        self.radius = radius
+
+    def draw(self):
+        #Card Locator
+        card_column = range(17)
+        card_row = range(5)
+        card_loc = (self.card_center[0] + self.card_size[0] * card_column.index(self.c_col)
+                    + math.floor((card_column.index(self.c_col)+1)/2),
+                    self.card_center[1] - self.card_size[1] * card_row.index(self.c_row))
+
+        #Texture Specs
+        self.texture = CoreImage("images/theme_emoji.jpg"
+                                 ).texture.get_region(card_loc[0], card_loc[1],
+                                                      self.card_size[0], self.card_size[1])
+        self.size = (self.card_size[0]*self.zoom, self.card_size[1]*self.zoom)
+
+        #Card Draw
+        if self.select == False:
+            self.rect_bg = Rectangle(
+                pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.6, 1, .5, .7))
+
+            self.rect_bg = Rectangle(
+                pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+        elif self.select == True:
+            self.rect_bg = Rectangle(
+                pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(0.1, 0.1, .1, 1))
+
+            self.rect_bg = Rectangle(
+                pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+        #Line(circle=(self.pos[0]+self.size[0]/2, self.pos[1]+self.size[1]/2, 38)) #for testing
+
+        #Colors for Each Card State:
+        #Normal: Light green = Color(.6, 1, .5, .7), White = Color(1, 1, 1, 1)
+        #Selected: Black = Color(0.1, 0.1, .1, 1), White = Color(1, 1, 1, 1)
+        #Eliminated: Transparent = Color(.5, .5, .5, .5), Transparent = Color(1, 1, 1, .5)) #This probably will not work
+        #Alternatively Eliminated: Transparent = Color(.5, .5, .5, .5),  Grey overlay = Color(.6, .6, .6, 1)
+        #Secret Card Revealed: Red = Color(.8, 0, 0, 1), Grey overlay = Color(.6, .6, .6, 1)
+        #Color(1, .5, .5, 1)
+
+    def selectable(self, click_pos):
+        self.select_logic = (dist_formula(self.obj_coord, click_pos.pos) < self.radius
+                             and self.select == False and self.eliminate == False)
+        if self.select_logic == True:
+            return True
+        else:
+            return False
+
+    def select_click(self, click_pos = None):
+        if click_pos == None:
+            self.select = True
+        else:
+            if self.select_logic == True:
+                self.select = True
+            else:
+                pass
+
+    def deselectable(self, click_pos):
+        self.deselect_logic = (dist_formula(self.obj_coord, click_pos.pos) < self.radius
+                             and self.select == True)
+        if self.deselect_logic == True:
+            return True
+        else:
+            return False
+
+    def deselect_click(self, click_pos = None):
+        if click_pos == None:
+            self.select = False
+        else:
+            if self.deselect_logic == True:
+                self.select = False
+            else:
+                pass
+
+class Guess_Clicker:
+    """
+    Creates multiple Card objects. Takes a list and creates
+    a list of objects and puts them into play.
+    """
+
+    def __init__(self, cards_inplay):
+        self.cards_inplay = cards_inplay
+
+    def __str__(self):
+        return str(self.cards_inplay)
+
+    def click_loop(self, click_pos): #, game): <- later
+        for i in range(len(self.cards_inplay)):
+            if (self.cards_inplay[i].selectable(click_pos) == True): #and
+                #len(game.get_hand_list()) <= 2):
+                self.cards_inplay[i].select_click(click_pos)
+                #game.add_hand(self.cards_inplay[i])
+            elif self.cards_inplay[i].deselectable(click_pos) == True:
+                self.cards_inplay[i].deselect_click(click_pos)
+                #game.remove_hand(self.cards_inplay[i])
+            else:
+                pass
+
+
+###============Innitiate Class Objects==================
+card1 = Card(0, 3, (17, 100), select = False, eliminate = False)
+card2 = Card(8, 1, (112, 100), select = False, eliminate = False)
+card3 = Card(16, 2, (205, 100), select = False, eliminate = False)
+card4 = Card(1, 1, (17, 200-5), select = False, eliminate = False, secret_card = True)
+card5 = Card(8, 2, (112, 200-5), select = False, eliminate = False)
+card6 = Card(6, 1, (205, 200-5), select = False, eliminate = False)
+card7 = Card(5, 3, (17, 300-10), select = False, eliminate = False)
+card8 = Card(9, 2, (112, 300-10), select = False, eliminate = False)
+card9 = Card(16, 1, (205, 300-10), select = False, eliminate = False)
+
+guesser = Guess_Clicker([card1,card2,card3,
+                         card4,card5,card6,
+                         card7,card8,card9])
+
+###============Register Handlers==================
+class Game(Widget):
+    def __init__(self):
+        super(Game, self).__init__()
+        #Background
+        self.background = BG_Spite(source="images/background.png")
+        self.size = self.background.size
+        self.add_widget(self.background)
+
+        #Create Widgets
+        self.add_widget(card1)
+        self.add_widget(card2)
+        self.add_widget(card3)
+        self.add_widget(card4)
+        self.add_widget(card5)
+        self.add_widget(card6)
+        self.add_widget(card7)
+        self.add_widget(card8)
+        self.add_widget(card9)
+
+        #Draw on Canvas
+        self.update()
+
+    def update(self):
+        #Update Canvas
+        with self.canvas:
+            card1.draw()
+            card2.draw()
+            card3.draw()
+            card4.draw()
+            card5.draw()
+            card6.draw()
+            card7.draw()
+            card8.draw()
+            card9.draw()
+
+    def on_touch_down(self, click):
+        guesser.click_loop(click)
+        self.update()
+
+###===========Launch Game==========
+class GameApp(App):
+    def build(self):
+        game = Game()
+        Window.size = game.size
+        return game
+
+if __name__ == "__main__":
+    GameApp().run()

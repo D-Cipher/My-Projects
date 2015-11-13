@@ -1,0 +1,10 @@
+10-16-15 to 10-29-15 Short term plan 1:
+DONE 1. Load images into Kivy
+DONE 2. Draw Cards in Kivy
+PRACTICALLY DONE 3. Getting Clicks to work
+
+Short term plan 2:
+1. Make a simple app of selecting 2 cards.
+2. Get build dozer figured out and working.
+3. Put it on to my phone.
+

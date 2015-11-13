@@ -1,0 +1,147 @@
+import random
+import math
+
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from kivy.graphics import Color, Rectangle, Line
+from kivy.core.window import Window
+from kivy.loader import Loader
+from kivy.uix.image import Image
+from kivy.core.image import Image as CoreImage
+
+#Set it as the texture of a Rectangle
+#[16:26] <inclement> But if you just want to display an image, use an Image widget
+
+###=========Helper Functions=============
+def dist_formula(p, q):
+    #Distance Formula
+    return math.sqrt((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2)
+
+class BG_Spite(Image):
+    def __init__(self, **kwargs):
+        super(BG_Spite, self).__init__(**kwargs)
+        self.size = self.texture_size
+        #self.size = (200,200) #for testing
+
+class Card(Widget):
+    """
+    Creates the card class object and all of it's properties.
+    Takes coordinates of the card and position
+    and draws the card on the canvas.
+    """
+
+    def __init__(self, col_input = 0, row_input = 0, pos = (100,100), theme = "emj", select = False,
+                 eliminate = False, secret_card = False, back = True, lifespan = None,
+                 animated = False, radius = 38):
+        super(Card, self).__init__()
+
+        #Image Card Specs
+        self.card_center = (16, 386)
+        self.card_size = (80, 85)
+        self.zoom = .7 #Adjusted size: (56, 59.5)
+        self.pos = pos
+
+        self.obj_coord = [self.pos[0]+(self.card_size[0]*self.zoom)/2,
+                          self.pos[1]+(self.card_size[1]*self.zoom)/2]
+
+        self.c_col = col_input
+        self.c_row = row_input
+
+        self.select = select
+        self.radius = radius
+
+    def draw(self):
+        #Card Locator
+        card_column = range(17)
+        card_row = range(5)
+        card_loc = (self.card_center[0] + self.card_size[0] * card_column.index(self.c_col)
+                    + math.floor((card_column.index(self.c_col)+1)/2),
+                    self.card_center[1] - self.card_size[1] * card_row.index(self.c_row))
+
+        #Texture Specs
+        self.texture = CoreImage("images/theme_emoji.jpg"
+                                 ).texture.get_region(card_loc[0], card_loc[1],
+                                                      self.card_size[0], self.card_size[1])
+        self.size = (self.card_size[0]*self.zoom, self.card_size[1]*self.zoom)
+
+        #Card Draw
+        if self.select == False:
+            self.rect_bg = Rectangle(
+                pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.6, 1, .5, .7))
+
+            self.rect_bg = Rectangle(
+                pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+        elif self.select == True:
+            self.rect_bg = Rectangle(
+                pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(0.1, 0.1, .1, 1))
+
+            self.rect_bg = Rectangle(
+                pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+        #Line(circle=(self.pos[0]+self.size[0]/2, self.pos[1]+self.size[1]/2, 38)) #for testing
+
+        #Colors for Each Card State:
+        #Normal: Light green = Color(.6, 1, .5, .7), White = Color(1, 1, 1, 1)
+        #Selected: Black = Color(0.1, 0.1, .1, 1), White = Color(1, 1, 1, 1)
+        #Eliminated: Transparent = Color(.5, .5, .5, .5), Transparent = Color(1, 1, 1, .5))
+        #Alternatively Eliminated: Transparent = Color(.5, .5, .5, .5),  Grey overlay = Color(.6, .6, .6, 1)
+        #Secret Card Revealed: Red = Color(.8, 0, 0, 1), Grey overlay = Color(.6, .6, .6, 1)
+        #Color(1, .5, .5, 1)
+        
+    #def selectable(self):
+        #self.select_logic =
+
+    def touch(self, click):
+        select_logic = (dist_formula(self.obj_coord, click.pos) < self.radius)
+        if select_logic == True:
+            self.select = True
+            print(str(click))
+        else:
+            print("Not Clicked")
+
+#Innitiate Classes
+card1 = Card(pos=(100,100))
+card2 = Card(pos=(100,250))
+
+class Game(Widget):
+    def __init__(self):
+        super(Game, self).__init__()
+        #Background
+        self.background = BG_Spite(source="images/background.png")
+        self.size = self.background.size
+        self.add_widget(self.background)
+
+        #Create Widgets
+        self.add_widget(card1)
+        self.add_widget(card2)
+
+        #Draw on Canvas
+        with self.canvas:
+            card1.draw()
+            card2.draw()
+
+
+    def update(self):
+        #Update Canvas
+        with self.canvas:
+            card1.draw()
+            card2.draw()
+
+    def on_touch_down(self, click):
+        card1.touch(click)
+        card2.touch(click)
+        self.update()
+
+#Launch Game
+class GameApp(App):
+    def build(self):
+        game = Game()
+        Window.size = game.size
+        return game
+
+if __name__ == "__main__":
+    GameApp().run()

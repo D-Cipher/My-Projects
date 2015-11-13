@@ -1,7 +1,7 @@
 #The Relationship Between Familiarity With an Organization and Policy Brand Perception
 setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Coh 4 Data BLIND sharable/")
-AllCoh_resplv <- read.csv("Coh1to4 Combined 8_12_15 BLIND.csv")
-AllCoh_orglv <- read.csv("Coh 4 Comp lv Data 8_12_15 BLIND.csv")
+AllCoh_resplv <- read.csv("Coh1to4 Combined 8_25_15 BLIND.csv")
+AllCoh_orglv <- read.csv("Coh 4 Comp lv Data 8_25_15 BLIND.csv")
 require(plyr)
 require(dplyr)
 require(ggplot2)

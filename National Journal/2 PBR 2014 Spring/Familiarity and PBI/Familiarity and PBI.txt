@@ -1,1186 +1,377 @@
-What is Policy Brand? (Part 1)
+Exploring Familiarity and Policy Brand Perception
 ===
-####An overview of Policy Brands Roundtable's research model and its development
+####A short analysis examining the relationship between an organization's familiarity and it's policy brand perception among policy influentials
 
 *by: D'Cypher*
 
-With the decline of tenure for Congressional members and staff, the adoption of new technologies within government, and expectations of data-driven decision-making, there is a striking new importance of developing image, profile, and sentiment. Organizations are realizing that money is only a small part of the equation in affecting policy. Money might be highly effective in an ad hoc basis, but it does not guarantee any long term impact. It is more important for an organization to have a profile that is distinguished, highly thought of, and well respected among the policy making community. 
+Are the most well known organizations the most influential brands in Washington? That is the question we typically receive from our partners. Our partners often characterize themselves as the "little guy" and believe that only the organizations with big brand names, enormous budgets, and an abundance of lobbyists and powerful connections can be effective inside the beltway. Our partners are often left wondering how they can compete in such an environment. However, our research shows that there is an opportunity, and it might not be the case that the well know organizations are the most successful in Washington.
 
-This profile is not necessarily the corporation's consumer-facing image, but what's called the organization's "policy brand". Policy brand refers to the way senior policy professionals perceive an organization's work inside the Beltway-specifically, the degree to which it compels attention and action. That is the key to establishing a lasting presence in the matters of national public policy. 
+The policy community is vast; even if an government affairs office can "buy" the influence of each member of this community for a mere $100, not even the biggest budget in the world could buy all of them. Money is only a small part of the equation in affecting policy. Money might be highly effective in an ad hoc basis, but it does not guarantee any long term impact. It is more important for an organization to have a profile that is distinguished, highly thought of, and well respected among the policy making community. That is they key to establishing a lasting presence in the matters of national public policy. 
 
 ###Synopsis
 
-Policy Brands Roundtable (PBR) is National Journal Research's strategic research initiative designed to understand the perceptions of Washington influentials and their views on the major organizations, industries, and players relevant their policy expertise area. 
+In our research, we found that the big brand names, who are very familiar among policy influentials, are not necessarily the highest performing ones; rather, it is more important that an organization focus on the quality of engagement with the individuals that they work with. However, that is not to say familiarity does not matter, as in certain cases organizations maybe struggling their communication, message, or ability to gain visibility.
 
-The model that PBR is built on revolves around 16 metrics (called "drivers") that measure an organization performance on the distinct roles, attributes, and the visible activities related to government affairs. The model then compares the performance on these metrics against the perception of the organization evaluated against 4 "index" metrics. 
+The Policy Brands Roundtable (PBR) study is National Journal Research's strategic research initiative designed to understand the perceptions of Washington influentials. PBR seeks to understand their views on the major organizations, industries, and players relevant their policy expertise area. Over the course of two years of this study (Fall 2013 to Spring 2015), we've surveyed over 6,000 policy influentials and studied nearly 200 organizations across more than 20 industries. 
 
-After rigorously testing of more than 70 different test metrics over the course of two years, this model was developed, and the first installment of the full study was launched in the fall of 2013. Our ongoing research is currently (Spring 2015) on its fourth installment and continues to further the understanding of the relationship and engagement among organizations and policy makers.
+In the research design, we created a model that measures the policy community's perception of an organization's policy work, reflected what we call the Policy Brand Index score (PBI). Similar to consumer brand, PBI is designed to capture the perception and the overall policy profile of an organization. Further, we also measured each respondent's familiarity with the organization's policy work, measured on a 1 to 5 scale. This reflects how well known the organization is within the policy community. 
 
-This article will focus on the two years leading up to our first full launch. It will provide a detailed overview of the research model that PBR currently uses to capture "policy brand," and describe the major processes and analysis that led up to its conception.
+This article will show how familiarity does not in itself translate to a strong policy brand performance, but rather it is more important for an organization to focus on high quality engagements and cultivate their existing relationships.
 
 ###Data Processing
-The analyses preformed in this project were primarily executed in R. In order to replicate the results that will be described in this overview, please first make sure the following codes run correctly in your R environment.
+The analyses preform in this project were primarily executed in R. In order to replicate the results described in this overview, please first make sure the following codes run correctly in your R environment.
 
-Important note: Please make sure to change all "setwd()" to your working directory which contain the required data files. 
+Important note: Please make sure to change all "setwd()" to your working directory that contain the required data files.
 
-```{r results='hide', message=TRUE, warning=TRUE}
-#Loads the relevant data from the first test study
-setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
-AsoRep_prelaunch <- read.csv("AsoRep pre launch 7_28_15 BLIND.csv")
-Catagories <- read.table("Catagories AsoRep pre launch.txt")
-```
-
-```{r results='hide', message=TRUE, warning=TRUE}
-#Loads the relevant data from the second test study
-setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
-AsoRep_FULLlaunch <- read.csv("AsoRep full launch 7_28_15 BLIND.csv")
-Catagories <- read.table("Catagories AsoRep full launch.txt")
-```
-
-```{r results='hide', message=TRUE, warning=TRUE}
-#Loads the relevant data from the third test study
-setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
-PBRTest_data <- read.csv("PBR Test Data 7_28_15 BLIND.csv")
-Catagories <- read.table("Catagories PBR Test.txt")
-```
-
-###The Goal of Testing
-Over the course of two years, partnering with APCO International, National Journal Research conducted three major rounds of studies that were precursors to the Policy Brands Roundtable initiative. These precursors sought to answer two questions: 1) Which organizational activities do policy influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped?
-
-The first round of testing, we conducted over 380 in depth interviews with policy influentials to try to find out what influentials care about. Based on these interviews, our previous Best Practice research, and other various research studies, we initially identified around 50 core activities and 6 measures of perception. 
-
-While there could be many different roles and duties of an organization's government affairs office, not all of them directly affect their policy brand. For example, an organization could be timely bill payers, always paying their vendors on time or in advance. While this might contribute to an efficient office, which in turn might enhances their ability to lobby effectively, this activity would be an example of something that has a very indirect effect on policy perception. Therefore, "Timely Vendor Payment" would not be within the model.
-
-The challenge is narrowing down from the 50+ core activities identified to ones with the most directly impact policy perception. Hence, goal of this whole process is to reduce the dimensionality of the data so that with only a small number of variables we are able to capture just as much information about policy brand perception as with 50+ variables. 
-
-###First Round of Testing
-In the first round of testing, we conducted a test survey on a sample of influentials measuring their perception of different organizations and asking each respondent to rate those organizations on the various activities we identified.
-
-The data collected for this study is in the file named: "AsoRep pre launch 7_28_15 BLIND.csv".
-
-Using a series of factor analyses, network modeling, and cluster analyses, we attempted to model the relationship among these variables. This is a visualization of cluster analysis that was used to inform the finding: 
-
-```{r message=FALSE, warning=FALSE}
+```{r results='hide', message=FALSE, warning=FALSE}
+#Loads the relevant data, combined data from Fall 2013 to Spring 2015.
 #NOTE: Make sure to change setwd() to your directory that contains the relevant data files.
-setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
-AsoRep_prelaunch <- read.csv("AsoRep pre launch 7_28_15 BLIND.csv")
-Catagories <- read.table("Catagories AsoRep pre launch.txt")
-require(qgraph)
+setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Coh 4 Data BLIND sharable/")
+AllCoh_resplv <- read.csv("Coh1to4 Combined 8_25_15 BLIND.csv")
+AllCoh_orglv <- read.csv("Coh 4 Comp lv Data 8_25_15 BLIND.csv")
+require(plyr)
 require(dplyr)
-require(stringr)
+require(ggplot2)
+require(gridExtra)
+require(scales)
+require(reshape2)
+require(devtools)
+require(proto)
 
-AsoRep_prelaunchCORR <- cor_auto(select(AsoRep_prelaunch, Consideration:Value.Proposition))
+Latestcoh_Orgs <- AllCoh_orglv %>% subset(Latest.Org.Data.CL == 1)
+Latestcoh_Corps <- AllCoh_orglv %>% subset(Asso.CL == 0 & Latest.Org.Data.CL == 1)
+Latestcoh_Asso <- AllCoh_orglv %>% subset(Asso.CL == 1 & Latest.Org.Data.CL == 1)
+c4only_Orgs <- AllCoh_orglv %>% subset(Coh.CL == 4 & Latest.Org.Data.CL == 1)
+c4only_Corps <- AllCoh_orglv %>% subset(Coh.CL == 4 & Asso.CL == 0 & Latest.Org.Data.CL == 1)
+c4only_Asso <- AllCoh_orglv %>% subset(Coh.CL == 4 & Asso.CL == 1 & Latest.Org.Data.CL == 1)
 
-Name_Labels <- gsub("\\.", "\n", c(names(select(AsoRep_prelaunch, Consideration:Value.Proposition))))
-
-Catagory_Labels <- as.character(data.frame(lapply(Catagories[1,],as.character), stringsAsFactors=FALSE))
-
-#Spring Layout Graph 56 Measures
-corGraph <- qgraph(AsoRep_prelaunchCORR, layout = "spring", graph = "cor", posCol = "purple",
-                   labels = Name_Labels, groups = Catagory_Labels,
-                   cut = .75, maximum = 1, minimum = .65, esize = 20, vsize = 7, repulsion = .8, alpha = .05,
-                   label.scale = FALSE, label.cex = .5, borders = FALSE, legend.cex = .33, GLratio = 7,
-                   layoutOffset = c(-.07,-.05), layoutScale = c(1,1))
-title("Graphic 1: Relationship Among the 56 Measures (N = 211)", line = 2.5)
+#R-squared value function
+lm_r2 = function(df, y, x){
+  m = summary(lm(y ~ x, df))$r.squared;
+  r2 <- paste("r^2 = ", format(m, digits = 3));
+  as.character(as.expression(r2));                 
+}
 ```
 
-The 56 variables represent the individual ratings that the respondents gave on the corresponding survey question. For example the survey text for the variable "Consideration" reads: "Do you genuinely consider [the organization]'s positions on issues?" 
-
-For the full list of corresponding survey question text, refer to the file "AsoRep study question text Meta.csv". 
-
-From our analysis, the 50+ variables generally cluster around 9 categories: Consideration, Sharing, Industry Stewardship, Subject Matter Contribution, Organizational Visibility, Policy Positioning, External Engagement, Leadership and Governance, and Lobbying Activity.
-
-The consideration and sharing categories are "index" variables they represent the components of the individuals perception of the organization as a whole rather than specific activities. 
-
-The variables in the "Consideration" cluster are all questions related to whether the respondent takes into account of the opinions of a particular organization when making policy decisions. "Sharing" seems to be a cluster of variables related to whether the respondent will perform some action on behalf of the organization such as disseminate its material, seek out its opinion, or recommend its staff. 
-
-The remaining categories are "driver" variables - these variables measure the specific activities that organizations engage in that we identified in our interviews. This is a broad description of what each of these category clusters seem to relate to:
-
- * Industry Stewardship - these drivers are related to an organization's ability to lead, manage, and regulate the members of the industry that it belongs to. 
- 
- * Subject Matter Contribution - these drivers have to do with the organization's ability to produce and disseminate quality and pertinent research and information to aid the policy makers in that space.
-
- * Organization Visibility - are a cluster of measures that relate to the ability to gain and retain public attention or attention on their issues. 
-
- * Policy Positioning - refer to a driver cluster that speaks to the organization's tactics and strategy in maneuvering through the political process during policy fights. 
-
- * External Engagement - contain measures related to an organization's ability to rally support and build alliances.
-
- * Leadership and Governance - this cluster speak to the organization's influence on government as a whole and at the various levels of government. 
-
- * Lobbying Ability - this cluster relates to the organization's ability to build and leverages those internal relationships to move the levers of government.
-
-The following is another visualization showing the clusters and the network structure among the variables:
-```{r message=FALSE, warning=FALSE}
-#56 Measures Correlation Network Structure Visualized
-corGraph <- qgraph(AsoRep_prelaunchCORR, graph = "cor", posCol = "purple",
-                   labels = Name_Labels, groups = Catagory_Labels,
-                   cut = .75, maximum = 1, minimum = .65, esize = 20, vsize = 7, 
-                   repulsion =.9, alpha = .05,
-                   label.scale = FALSE, label.cex = .5, borders = FALSE, legend.cex = .33, 
-                   GLratio = 7, layoutOffset = c(-.13,-.05), layoutScale = c(1,1))
-title("Graphic 2: Relationship Among the 56 Measures (N = 211)", line = 2.5)
-
-##Printing to a Graphics Device
-#dev.copy(png, file="plot1.png", units="in", width=15, height=12, res=300)
-#dev.off()
-#dev.off(dev.list()["RStudioGD"])
-```
-
-###Second Round of Testing
-In the second round of testing, we conducted another survey looking at a 20 measure subset. 
-
-The data collected from this survey is in the file named: "AsoRep full launch 7_28_15 BLIND.csv".
-
-The following is a visualization of the variables in the second round of testing:
-```{r message=FALSE, warning=FALSE}
-#NOTE: Make sure to change setwd() to your directory that contains the relevant data files.
-setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
-AsoRep_FULLlaunch <- read.csv("AsoRep full launch 7_28_15 BLIND.csv")
-Catagories <- read.table("Catagories AsoRep full launch.txt")
-require(qgraph)
-require(dplyr)
-require(stringr)
-
-AsoRep_FULLlaunchCORR <- cor_auto(select(AsoRep_FULLlaunch, Consideration:Interest.Balance))
-
-Name_Labels <- gsub("\\.", "\n", c(names(select(AsoRep_FULLlaunch, Consideration:Interest.Balance))))
-
-Catagory_Labels <- as.character(data.frame(lapply(Catagories[1,],as.character), stringsAsFactors=FALSE))
-
-#Spring Layout Graph 20 Measures
-corGraph <- qgraph(AsoRep_FULLlaunchCORR, layout = "spring", graph = "cor", posCol = "purple",
-                   labels = Name_Labels, groups = Catagory_Labels,
-                   cut = .75, maximum = 1, minimum = .60, esize = 20, vsize = 8, repulsion = .9, alpha = .05,
-                   label.scale = FALSE, label.cex = .5, borders = FALSE, legend.cex = .33, GLratio = 7,
-                   layoutOffset = c(-.12,-.05), layoutScale = c(1,1))
-title("Graphic 3: Relationship Among the 20 Measures (N = 2250)", line = 2.5)
-
-##Printing to a Graphics Device
-#dev.copy(png, file="plot1.png", units="in", width=12, height=12, res=300)
-#dev.off()
-#dev.off(dev.list()["RStudioGD"])
-```
-
-In this round of tests we followed a similar process as the first round. A couple of the highlighted observations that came out of the first two rounds of testing are:
-
- * The "Consideration" and "Sharing" clusters are quite different from the other groups, as should be expected since they capture perception of an organization as a whole. 
-
- * There are certain variables like "Bipartisan Cooperation" and "Bipartisan Favorability" or "Industry Ambassador" and "Industry Voice" that are so connected that it might be justified to combine them into one variable.
-
- * Then there are variables that seem out of place and unconnected with the other variables, that we either kept for further testing or dropped because that particular variable has very little direct impact on policy perception, upon further analysis.
-
- * The relationship between the variables within "Lobbying Ability"" and "Leadership and Governance" are so interconnected that they can be combined into one cluster. 
-
-###Third Round of Testing
-In the third round of testing we tested another subset of 37 variables. A couple key differences between this study and the previous two are:
-
- * We asked respondents to evaluate only corporations, whereas the previous two tests consisted of only associations.
- 
- * Certain variables were excluded since corporations did not engage in those activities. These were primarily member related and the industry stewardship variables that are only relevant to associations.
- 
- * Additional variables were added that only applied to corporations such as the corporate citizenship driver measures. Also, several additional index measures were introduced that originated in National Journal's 2011 Best Brands study. The Best Brands study was an extensive research initiative that looked at the respected corporate brands in DC at the time. The variables added to this round of testing from the Best Brands included: Respect, Integrity, Influence, Personal Lobbyist, Agreement. 
+The following code preforms several transformation and calculation for the analyses in this overview:
 
 ```{r message=FALSE, warning=FALSE}
-#NOTE: Make sure to change setwd() to your directory that contains the relevant data files.
-setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Precursor BLIND sharable/")
-PBRTest_data <- read.csv("PBR Test Data 7_28_15 BLIND.csv")
-Catagories <- read.table("Catagories PBR Test.txt")
-require(qgraph)
-require(dplyr)
-require(stringr)
+###====Create subset of composite scores and Ns by 3s 4s 5s
+AllCoh_resplv_M <- AllCoh_resplv %>%
+  select(Company.Unique.Code.CYPHER,Composite,Familiarity.Completes.Only)
 
-#There is an issue with NAs in this data set. Mean substitution method was used to mitigate that issue.
-for(i in 1:ncol(PBRTest_data)){
-  PBRTest_data[is.na(PBRTest_data[,i]), i] <- mean(PBRTest_data[,i], na.rm = TRUE)
-}
+AllCoh_resplv_M <- AllCoh_resplv_M %>%
+  mutate(Fam3Composite = ifelse(Familiarity.Completes.Only == 3, 
+                                Composite,NA)) %>%
+  mutate(Fam4Composite = ifelse(Familiarity.Completes.Only == 4, 
+                                Composite,NA)) %>%
+  mutate(Fam5Composite = ifelse(Familiarity.Completes.Only == 5, 
+                                Composite,NA)) %>%
+  mutate(Fam5or4Composite = ifelse(Familiarity.Completes.Only > 3, 
+                                   Composite,NA))
 
-PBRTest_dataCORR <- cor_auto(select(PBRTest_data, Respect:Substantive.Dialogue), forcePD = TRUE)
+#Averageifs and Countifs
+Output_DT<- AllCoh_resplv_M %>%
+  select(Company.Unique.Code.CYPHER,Composite,Fam3Composite,Fam4Composite,Fam5Composite,Fam5or4Composite) %>%
+  group_by(Company.Unique.Code.CYPHER) %>% 
+  summarise_each(funs(Avg=mean(., na.rm=TRUE), 
+                      Ns=sum(!is.na(.))))
 
-Name_Labels <- gsub("\\.", "\n", c(names(select(PBRTest_data, Respect:Substantive.Dialogue))))
+cohL_Orgs_FamCut <- Latestcoh_Orgs %>%
+  select(Company.Unique.Code.CYPHER.CL,Asso.CL,Main.Comparison.CL,Percent.Familiar.CL)
 
-Catagory_Labels <- as.character(data.frame(lapply(Catagories[1,],as.character), stringsAsFactors=FALSE))
+#Index Match (Merge(Select)) - Company Unique Code
+cohL_Orgs_FamCut <- merge(cohL_Orgs_FamCut, Output_DT, by.x = c("Company.Unique.Code.CYPHER.CL"), 
+                          by.y = c("Company.Unique.Code.CYPHER"), all.x = TRUE)
+cohL_Orgs_FamCut$Composite_Avg = cohL_Orgs_FamCut$Composite_Avg * 10
+cohL_Orgs_FamCut$Fam3Composite_Avg = cohL_Orgs_FamCut$Fam3Composite_Avg * 10
+cohL_Orgs_FamCut$Fam4Composite_Avg = cohL_Orgs_FamCut$Fam4Composite_Avg * 10
+cohL_Orgs_FamCut$Fam5Composite_Avg = cohL_Orgs_FamCut$Fam5Composite_Avg * 10
+cohL_Orgs_FamCut$Fam5or4Composite_Avg = cohL_Orgs_FamCut$Fam5or4Composite_Avg * 10
 
-#PBR Test Survey Correlation Network Structure Visualized
-corGraph <- qgraph(PBRTest_dataCORR, graph = "cor", posCol = "purple",
-                   labels = Name_Labels, groups = Catagory_Labels,
-                   cut = .75, maximum = 1, minimum = .60, esize = 20, vsize = 6, repulsion = .9, alpha = .05,
-                   label.scale = FALSE, label.cex = .5, borders = FALSE, legend.cex = .33, GLratio = 7,
-                   layoutOffset = c(-.12,-.14), layoutScale = c(1,1))
-title("Graphic 4: Third Round, Testing 37 Measures (N = 216)", line = 2.5)
+cohL_Orgs_FamCut <- cohL_Orgs_FamCut %>%
+  mutate(Diff.5s.and.3s = Fam5Composite_Avg - Fam3Composite_Avg) %>%
+  mutate(Diff.5s.and.4s = Fam5Composite_Avg - Fam4Composite_Avg) %>%
+  mutate(Diff.4s.and.3s = Fam4Composite_Avg - Fam3Composite_Avg) %>%
+  mutate(Diff.5or4.and.3s = Fam5or4Composite_Avg - Fam3Composite_Avg) %>%
+  mutate(Diff.5or4.and.Composite = Fam5or4Composite_Avg - Composite_Avg) %>%
+  mutate(Diff.3s.and.Composite = Fam3Composite_Avg - Composite_Avg) %>%
+  mutate(AvgAllOrgs = mean(cohL_Orgs_FamCut$Composite_Avg)) %>%
+  mutate(Diff.Composite.and.AvgAllOrgs = Composite_Avg - AvgAllOrgs) %>%
+  mutate(PercntDiff.5or4.and.3s = Diff.5or4.and.3s / (Diff.5or4.and.3s + Composite_Avg)) %>%
+  mutate(PercntDiff.Composite.and.AvgAllOrgs = Diff.Composite.and.AvgAllOrgs / (Diff.Composite.and.AvgAllOrgs + Composite_Avg))
 
-##Printing to a Graphics Device
-#dev.copy(png, file="plot1.png", units="in", width=12, height=15, res=300)
-#dev.off()
-#dev.off(dev.list()["RStudioGD"])
+
+#Cleanup
+rm(Output_DT);rm(AllCoh_resplv_M)
 ```
 
-The results of the third round of study were for the most part consistent with the previous two. The main finding is that there seems to be six clusters of drivers that emerged, four of which are nearly identical to the ones in previous rounds. The other two are characterized as follows:
+Brief note on the data: The two data sheets above contain data the entire data set for all four installments of the Policy Brands Roundtable study (as of Spring 2015). The first data set contains the individual evaluations of each organization. The second data set contains the organization's aggregate scores on each of the measures, which is calculated by averaging across the individual evaluations for each organization. The first data set is meant for analyzing respondent trends a information, whereas the second data set is meant for understanding organizational trends and relationships. 
 
- * Corporate citizenship - which consisted of the measures related to a company's adherence to ethical responsibilities.
+While most of the findings in this overview were discovered in the Spring of 2014, they have been confirmed and updated with the latest data (as of Spring 2015).
 
- * Lobbying Expertise - which is the "Lobbying Ability"" cluster and "Leadership Governance" clusters combined. As shown in the previous two tests the variables in these clusters are so interconnect that they can really be thought of as part of one group.
+###Research Design
 
-The last round of studies also seems to reveal that there are 4 components of policy brand perception: Respect, Influence, Sharing, and Consideration. More on this later.
+In our study, we sampled senior level policy makers, specifically those that have worked on policy relevant to the organizations in our study. Only survey respondents that were familiar enough with a particular organization's policy work in Washington could evaluate that organization. Respondent had to have rated the organization a '3' or greater (scale of 1 to 5) on familiarity to be considered eligible to evaluate that organization. Respondents that indicated less than '3' were considered ineligible and were not allowed to evaluate. 
 
-###Developing the Model
+If a respondent is eligible, he would be allowed to rate the organization on 16 performance metrics (called "drivers") and 4 perception measures (called "indices"). These 4 perception measures are:
 
-Again, the end goal of the entire process is to eliminate variables. We want to capture every possible dimension that impacts perception with as few variables as possible. After conducting these three rounds of testing, we took a holistic view of the process in narrowing down our final set of measures. The following are the criterion we used: 
+ * Respect - respect for the organization's role in the public debate
 
-1) Criteria of Similarity
+ * Consideration - genuine consideration of the organization's positions on issues
 
-Within each of the clusters, we analyzed the variables that were highly related with each other. These variables were either combined or eliminated.
+ * Influence - organization's views influencing policy maker's views favorably
 
-For example, "Industry Enforcer" reads: "enforces industry codes of conduct among its members" and "Industry Conduct Adherence" reads: "promotes high standards in the industry it represents by establishing and adhering to industry codes of conduct." It's not particularly surprising that they turned out to be highly correlated in the data (Graphic 1). Intuitively, organizations which enforce codes of conduct are also the ones that promote and adhere to those conducts. Hence, these two variables were combined to form "Industry Standards," which read: "promotes high standards by establishing and enforcing industry practices, standards, and/or codes of conduct."
+ * Sharing - the willingness of the policy maker to seek out or share the organization's opinion on issues
 
-With the same analyses, we also concluded that certain variables could be eliminated altogether because they were already captured by another variable or they could be imputed by another variable. As an example, "Interest Group Relations" was eliminated because its highly correlated with "Coalition Building". Both of these variables are trying to capture the organization's ability to create and join factions with other groups, but "Coalition Building" is a bit more broad where as "Interest Group Relations" focuses on interest groups in particular. Hence, we decided to eliminate "Interest Group Relations" for "Coalition Building."
+The Policy Brand Index score (PBI) is a composite of these four perception measures. This overview will primarily focus on PBI score and the familiarity rating. For more detailed explanation of the PBI model and how it was developed, please refer to the articles "What is Policy Brand (Part 1)" and "(Part 2)". 
 
-2) Criteria of Difference
+With regard to survey administration, we did our best to make sure that each of the organizations in the study had at least 100 evaluations from different policy influentials, so that there are no issues with low responses or unreliable Policy Brand Scores for any particular organization.
 
-For variables that were highly related with the rest of the other variables, we either investigated further or removed them. The highly unrelated variables, for the most part, are ones that were poorly written questions or so specific or specialized that it did not make sense to use them in the prediction model. 
+The following is a histogram showing the distribution of Ns across all of the organizations studied:
 
-An example of this is the variable "Personal Lobbyist," which reads: "[organization] has a lobbyist (or other staff resource) whom I know and can call upon if I have questions." Our research interviews have shown that having personal connection can positively shape an individual's views of an organization. However, an organization can only make so many personal connections, certainly not enough to make an impact on the organization's overall policy perception.
-
-The fear with eliminating variable's based on difference is the danger that the variable in question actually belongs to a cluster category that was not captured by the existing data. In essence, there may be overarching categories of activities which impact policy perception, but we have failed to capture because the variables in our study is not complete.
-
-Incomplete information is always a legitimate concern in research studies. The way we address this issue is through due diligence in identifying our core variables in the first place, due diligence in conducting nearly 400 in depth interviews with policy makers to compile our core variables. If our compilation of variables is complete, clusters that emerged from these variables should be comprehensive. Hence, variables that have weak relationships with any of the existing clusters are more likely to be arbitration rather than belonging to another relevant cluster category not captured by the model. 
-
-3) Criteria of Confoundment
-
-The next layer of analysis was looking confounding variables. These variables were either so out of place in the cluster that they were placed in or overly correlated with too many different variables. These variables tended to be questions that were poorly written or overly broad, in which case should be eliminated. In a small number of cases, after further investigation, they were recategorized. 
-
-A good example a confounding variable is "Multilateral Impact," which reads "[the organization] works effectively across the executive, legislative, and regulatory branches." In both the rounds of testing that contained this variable, the data showed that it suffered from a high degree of multi-collinearity. This question is simply too broad. Its essentially just asking about general effectiveness, since effective organizations typically are effective across all branches rather than being effective in one branch, but not another. Further, it doesn't address any specific activity that the organization does; just asks about the general ability of the organization to impact government. Hence, it is a confounding variable in the model and was eliminated.
-
-4) Criteria of Importance
-
-The last layer of analysis we used is evaluating the importance of each variable in the model. The analysis we used is a method known as the relative weights analysis. Part two of this model overview will go over this method in much more detail, but here is a short explanation:
-
-The general idea of this method is to determine each variable's relative level of contribution to the predictiveness of a multi-variate regression. To elaborate, the driver measures can be thought of as regressor variables in a regression, because they attempt to predict the criterion variable, policy brand perception. The r-squared value reflects the percentage that the regressors (drivers) *explain* the dependent variable (brand perception). The relative weights method allow us to measure, for each regressor, its relative contribution to that *explainability*. The higher the relative weight, the more it contributes to the regressions predictiveness and the important the regressor variable is to the regression model. 
-
-One question that seems naturally to follow is: if the drivers are the independent variables, and policy brand perception is the dependent variable in the regression, how exactly is policy brand perception calculated? This, again, will be explored in depth in part two of this model overview. As for now, the short answer is: by combining index variables. The index variables are what we have identified to be the components of policy brand perception. Hence, we used a similar statistical method to develop a composite variable, made up of the final index measures, to represent policy brand perception. Much more on this in part 2.
-
-###Final Measures Developed
-
-As mentioned in the beginning, these tests are designed to answer two questions: 1) Which organizational activities policy do influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped? 
-
-The following is the final variable set and a visualization of the dimension reduction path for which each was developed.
-
-The answer to the first question is: we have narrowed it down to these 9 activities relevant to both corporation and associations:
-
- * Bipartisan Collaboration - [The organization's ability to] work collaboratively with policy leaders across the political spectrum.
- 
- * Constructive Arguments - [The organization ability to] provide powerful, constructive arguments that engage peers and advance relevant policy discourse.
- 
- * Compromise - [The organization ability to] negotiate for consensus; balances different views and make reasonable trade-offs on tough issues.
- 
- * Coalition Building - [The organization ability to] develop meaningful coalitions with credible partner organizations and thought leaders.
- 
- * Relevance - [The organization ability to] contextualize its policy positions in relevant terms [and] quantif[y] the effects of its positions.
- 
- * Grassroots - [The organization ability to gain] active support by individual stakeholders (employees, members, and/or the public) who directly contact policy leaders to advance the organization's priorities.
- 
- * Research - [The organization ability to] contribute accurate and reliable new research and data that help to inform policy development.
- 
- * Lobbying Representation - [The organization] has effective lobbying representation; [the ability to] build and maintain direct relationships with policymakers, regulators, and other key individuals.
- 
- * Media Profile - [The organization ability to] successfully leverages media to communicate information about the organization and its policy issues.
-
-####Graphic 5: Final Driver Set Developed After 3 Rounds of Studies (pg.1)
-```{r message=FALSE, warning=FALSE, echo=FALSE}
-#Final Driver Set Developed after 3 Rounds of Studies (pg.1)
-require(pathdiagram)
-par(mar=c(1,.5,.5,.001))
-Headers = list(manifest("First Round", x = 0.135, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-               )
-InvisibleBlock = manifest("", x = 0.61, y = 0.53, width = 0.001, height = 0.08, font = 2, fill = "White")
-
-#===Manifest Variables
-First_Round = list(
-  LobbyingEff = manifest("Lobbying\nEffectiveness", x = 0.13, y = 0.83, width = 0.13, height = 0.07),
-  PolicyCons = manifest("Policy\nConsultant", x = 0.13, y = 0.755, width = 0.13, height = 0.07),
-  CsuiteNetw = manifest("C-suite\nNetworking", x = 0.13, y = 0.68, width = 0.13, height = 0.07),
-  MediaPres1 = manifest("Media\nPresence", x = 0.13, y = 0.605, width = 0.13, height = 0.07),
-  MediaDem = manifest("Media\nDemanded", x = 0.13, y = 0.53, width = 0.13, height = 0.07),
-  DiscusLead = manifest("Discussion\nLeader", x = 0.13, y = 0.455, width = 0.13, height = 0.07),
-  ProactShar = manifest("Proactive\nSharer", x = 0.13, y = 0.38, width = 0.13, height = 0.07),
-  ResearchDev = manifest("Research\nDevelopment", x = 0.13, y = 0.305, width = 0.13, height = 0.07),
-  ReliableInfo = manifest("Reliable\nInfo Source", x = 0.13, y = 0.23, width = 0.13, height = 0.07),
-  InfoAcc = manifest("Info\nAccuracy", x = 0.13, y = 0.155, width = 0.13, height = 0.07)
-)  
-Second_Round = list(
-  LobbyingRep2 = manifest("Lobbying\nRepresentation", x = 0.34, y = 0.755, width = 0.13, height = 0.07),
-  MediaPres2 = manifest("Media\nPresence", x = 0.34, y = 0.605, width = 0.13, height = 0.07),
-  Research2 = manifest("Research", x = 0.34, y = 0.23, width = 0.13, height = 0.07)
-  )
-Third_Round = list(
-  LobbyingRep3 = manifest("Lobbying\nRepresentation", x = 0.55, y = 0.755, width = 0.13, height = 0.07),
-  MediaPres3 = manifest("Media\nPresence", x = 0.55, y = 0.605, width = 0.13, height = 0.07),
-  Discourse = manifest("Positive\nDiscourse", x = 0.55, y = 0.455, width = 0.13, height = 0.07),
-  RegularEng = manifest("Regular\nEngagement", x = 0.55, y = 0.38, width = 0.13, height = 0.07),
-  Research3 = manifest("Research", x = 0.55, y = 0.23, width = 0.13, height = 0.07)
-)
-
-#====latent variables
-LobbyingRep4 = latent("Lobbying\nRepresentation", x = 0.8, y = 0.73, rx = 0.09, ry = 0.065)
-MediaProf = latent("Media\nProfile", x = 0.8, y = 0.58, rx = 0.09, ry = 0.065)
-ConstrArg = latent("Constructive\nArguments", x = 0.8, y = 0.43, rx = 0.09, ry = 0.065)
-Research4 = latent("Research", x = 0.8, y = 0.28, rx = 0.09, ry = 0.065)
-
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
-}
-
-#draw InvisibleBlock
-draw(InvisibleBlock)
-
-# draw latent variables
-draw(LobbyingRep4)
-draw(MediaProf)
-draw(ConstrArg)
-draw(Research4)
-
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-#=====draw Paths
-#Lobbying Representation Path
-for (i in 1:3){
-  arrow(from = First_Round[[i]], to = Second_Round[[1]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west")
-arrow(from = Third_Round[[1]], to = LobbyingRep4, start = "east", end = "west")
-
-#Media Profile Path
-arrow(from = First_Round[[4]], to = Second_Round[[2]], start = "east", end = "west")
-arrow(from = Second_Round[[2]], to = Third_Round[[2]], start = "east", end = "west")
-arrow(from = Third_Round[[2]], to = MediaProf, start = "east", end = "west")
-arrow(from = First_Round[[5]], to = InvisibleBlock, start = "east", end = "west")
-arrow(from = InvisibleBlock, to = MediaProf, start = "east", end = "west")
-
-#Constructive Arguments Path
-arrow(from = First_Round[[6]], to = Third_Round[[3]], start = "east", end = "west")
-arrow(from = First_Round[[7]], to = Third_Round[[4]], start = "east", end = "west")
-arrow(from = Third_Round[[3]], to = ConstrArg, start = "east", end = "west")
-arrow(from = Third_Round[[4]], to = ConstrArg, start = "east", end = "west")
-
-#Research Path
-for (i in 8:10){
-  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[3]], to = Third_Round[[5]], start = "east", end = "west")
-arrow(from = Third_Round[[5]], to = Research4, start = "east", end = "west")
-
-title("Final Driver Set Developed after 3 Rounds of Studies (pg.1)", line = 2.5)
+```{r message=FALSE, warning=FALSE}
+###====Histogram of Ns per Organization 
+ggplot(data = Latestcoh_Orgs, aes(x=Responses.CL)) +
+  geom_histogram(col = "springgreen4", fill = "seagreen3", alpha = .5, size=0, binwidth=10)+
+  xlab("Number of Evaluations Per Organization (Ns)") + 
+  ylab("Number of Organizations") + 
+  theme(legend.position="none") +
+  scale_y_continuous(limits=c(0, 30)) +
+  ggtitle("Nearly Every Organization Has\nClose to 100 Evaluations or More")
 ```
 
-####Graphic 6: Final Driver Set Developed After 3 Rounds of Studies (pg.2)
-```{r message=FALSE, warning=FALSE, echo=FALSE}
-#Final Driver Set Developed after 3 Rounds of Studies (pg.2)
-require(pathdiagram)
-par(mar=c(1,.5,.5,.001))
-Headers = list(manifest("First Round", x = 0.14, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-)
-InvisibleMemberEff = manifest("", x = 0.61, y = 0.5675, width = 0.001, height = 0.08, font = 2, fill = "White")
-InvisibleBlock = manifest("", x = 0.61, y = 0.53, width = 0.001, height = 0.08, font = 2, fill = "White")
+###Policy Brand Perception and Number of People Familiar with the Brand
 
-#===Manifest Variables
-First_Round = list(
-  Coalition1 = manifest("Coalition\nBuilding", x = 0.13, y = 0.83, width = 0.13, height = 0.07),
-  ThoughtLead = manifest("Thought\nLeader", x = 0.13, y = 0.755, width = 0.13, height = 0.07),
-  GrassCamp1 = manifest("Grassroots\nCampaigns", x = 0.13, y = 0.68, width = 0.13, height = 0.07),
-  MemberSupp = manifest("Member\nSupport", x = 0.13, y = 0.605, width = 0.13, height = 0.07),
-  MemberMob = manifest("Member\nMobilization", x = 0.13, y = 0.53, width = 0.13, height = 0.07),
-  FavCompr = manifest("Favors\nCompromise", x = 0.13, y = 0.455, width = 0.13, height = 0.07),
-  BipCoop = manifest("Bipartisan\nCooperation", x = 0.13, y = 0.38, width = 0.13, height = 0.07),
-  BipFav = manifest("Bipartisan\nFavorability", x = 0.13, y = 0.305, width = 0.13, height = 0.07),
-  InterBal = manifest("Interest\nBalance", x = 0.13, y = 0.23, width = 0.13, height = 0.07),
-  LongPos = manifest("Longterm\nPosition", x = 0.13, y = 0.155, width = 0.13, height = 0.07)
-)  
-Second_Round = list(
-  Coalition2 = manifest("Coalition\nBuilding", x = 0.34, y = 0.83, width = 0.13, height = 0.07),
-  GrassCamp2 = manifest("Grassroots\nCampaigns", x = 0.34, y = 0.68, width = 0.13, height = 0.07),
-  MemberEff = manifest("Membership\nEffectiveness", x = 0.34, y = 0.5675, width = 0.13, height = 0.07),
-  BipCollab2 = manifest("Bipartisan\nCollaboration", x = 0.34, y = 0.3225, width = 0.13, height = 0.07)
-)
-Third_Round = list(
-  Coalition3 = manifest("Coalition\nBuilding", x = 0.55, y = 0.83, width = 0.13, height = 0.07),
-  GrassCamp3 = manifest("Grassroots\nCampaigns", x = 0.55, y = 0.68, width = 0.13, height = 0.07),
-  Consensus = manifest("Consensus\nBuilding", x = 0.55, y = 0.4950, width = 0.13, height = 0.07),
-  RiskAssess = manifest("Risk\nAssessment", x = 0.55, y = 0.4205, width = 0.13, height = 0.07),
-  BipCollab3 = manifest("Bipartisan\nCollaboration", x = 0.55, y = 0.3225, width = 0.13, height = 0.07),
-  PosAlign = manifest("Position\nAlignment", x = 0.55, y = 0.23, width = 0.13, height = 0.07),
-  ContextPos = manifest("Contextualize\nPosition", x = 0.55, y = 0.155, width = 0.13, height = 0.07)
-)
+As discussed in the previous section, we are able to gauge an organization's general familiarity among respondents by looking at the percentage of our sample respondents that were eligible to rate the organization. We called this statistic: "Percentage of Total Respondents Familiar with the Organization" or "Percent Familiar" for short. 
 
-ThoughLead3 = manifest("Thought\nLeader", x = 0.55, y = 0.755, width = 0.13, height = 0.07)
+To illustrate: if an organization has a 60% Percent Familiar, that means of all the respondents that were asked (on a 1 to 5 scale) how familiar they were with that organization's policy work, 60% gave it a '3' or better. 
 
-#====latent variables
-Coalition4 = latent("Coalition\nBuilding", x = 0.8, y = 0.77, rx = 0.09, ry = 0.065)
-Grassroots = latent("Grassroots", x = 0.8, y = 0.625, rx = 0.09, ry = 0.065)
-Compromise = latent("Compromise", x = 0.8, y = 0.48, rx = 0.09, ry = 0.065)
-BipCollab4 = latent("Bipartisan\nCollaboration", x = 0.8, y = 0.335, rx = 0.09, ry = 0.065)
-Relevance = latent("Relevance", x = 0.8, y = 0.19, rx = 0.09, ry = 0.065)
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
-}
+The following is a plot of the relationship (or lack thereof) between the Percent Familiar and the Policy Brand Index score:
 
-#draw InvisibleBlock
-draw(InvisibleBlock)
-
-# draw latent variables
-draw(Coalition4)
-draw(Grassroots)
-draw(BipCollab4)
-draw(Compromise)
-draw(Relevance)
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-draw(ThoughLead3)
-
-#=====draw Paths
-#Coalition Building Path
-arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west")
-arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west")
-arrow(from = Third_Round[[1]], to = Coalition4, start = "east", end = "west")
-arrow(from = First_Round[[2]], to = ThoughLead3, start = "east", end = "west")
-arrow(from = ThoughLead3, to = Coalition4, start = "east", end = "west")
-
-#Grassroots Path
-arrow(from = First_Round[[3]], to = Second_Round[[2]], start = "east", end = "west")
-arrow(from = Second_Round[[2]], to = Third_Round[[2]], start = "east", end = "west")
-arrow(from = Third_Round[[2]], to = Grassroots, start = "east", end = "west")
-for (i in 4:5){
-  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[3]], to = InvisibleMemberEff, start = "east", end = "west")
-arrow(from = InvisibleMemberEff, to = Grassroots, start = "east", end = "west")
-#Compromise Path
-for (i in 3:4){
-arrow(from = First_Round[[6]], to = Third_Round[[i]], start = "east", end = "west")
-}
-for (i in 3:4){
-  arrow(from = Third_Round[[i]], to = Compromise, start = "east", end = "west")
-}
-#Bipartisan Collaboration Path
-for (i in 7:8){
-  arrow(from = First_Round[[i]], to = Second_Round[[4]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[4]], to = Third_Round[[5]], start = "east", end = "west")
-arrow(from = Third_Round[[5]], to = BipCollab4, start = "east", end = "west")
-#Relevance Path
-arrow(from = First_Round[[9]], to = Third_Round[[6]], start = "east", end = "west")
-arrow(from = First_Round[[10]], to = Third_Round[[7]], start = "east", end = "west")
-for (i in 6:7){
-  arrow(from = Third_Round[[i]], to = Relevance, start = "east", end = "west")
-}
-title("Final Driver Set Developed after 3 Rounds of Studies (pg.2)", line = 2.5)
+```{r message=FALSE, warning=FALSE}
+###====All Coh: Corps and Asso PBI vs Familiarity
+#Latest data on all Unique Organizations in All four studies
+qplot(Latestcoh_Orgs$Percent.Familiar.CL,Latestcoh_Orgs$Composite.CL, 
+           xlab = "% of Total Respondents Familiar with the Org.", 
+           ylab = "Policy Brand Index Score") + 
+  scale_x_continuous(limits=c(.05, .65), labels = percent) + 
+  scale_y_continuous(limits=c(35, 65)) + 
+  geom_smooth(method = "lm", se=FALSE, aes(group=1)) +
+  geom_point(size = 3, alpha = .3) +
+  annotate("text", label = lm_r2(Latestcoh_Orgs,Latestcoh_Orgs$Composite.CL,
+                                 Latestcoh_Orgs$Percent.Familiar.CL), x = .6, y = 53, size = 2.5) +
+  ggtitle("No Relationship b/w PBI and Organization Familiarity\n(All Organizations, All Four Studies)")
 ```
 
-In addition, we identified 3 actions unique to corporations:
+The following is the same plot, but isolating only organizations from the our latest study (Spring 2015), and splitting out Associations and Corporations:
 
- * C-Suite Engagement - [The organization's ability to] effectively involve its senior-most business executives (e.g. the CEO) in Washington discussions.
- 
- * Ethics - [The organization's ability to] stand for sound ethics, conduct and accountability in its business operations.
- 
- * CSR - [The organization's ability to] demonstrate [a] commitment to furthering meaningful social responsibility.
- 
-We also identified 3 actions unique to associations:
+```{r message=FALSE, warning=FALSE}
+###====Coh4: Corps and Asso PBI vs Familiarity
+#All Coh Corp Scatter
+allcorp_plot = qplot(c4only_Corps$Percent.Familiar.CL,c4only_Corps$Composite.CL, 
+           xlab = "Percent Familiar", 
+           ylab = NULL) + 
+  scale_x_continuous(limits=c(.05, .65), labels = percent) + 
+  scale_y_continuous(limits=c(35, 65), labels = NULL) + 
+  geom_smooth(method = "lm", se=FALSE, aes(group=1)) +
+  geom_point(size = 3, alpha = .3) +
+  annotate("text", label = lm_r2(c4only_Corps,c4only_Corps$Composite.CL,
+                                 c4only_Corps$Percent.Familiar.CL), x = .55, y = 51.5, size = 2.5) +
+  ggtitle("Corporations Only (Spring 2015)\n")
 
- * Industry Standards - [The organization ability to] promote high standards by establishing and enforcing industry practices, standards and/or codes of conduct.
- 
- * Unified Voice - [The organization ability to] represent the voice of the entire industry and/or the interests of all its members to external stakeholders.
- 
- * Events - [The organization ability to] sponsor events and conferences that add its perspective to the policy dialogue.
+#All Coh Asso Scatter
+allasso_plot = qplot(c4only_Asso$Percent.Familiar.CL,c4only_Asso$Composite.CL, 
+           xlab = "Percent Familiar", 
+           ylab = "Policy Brand Index Score") + 
+  scale_x_continuous(limits=c(.05, .65), labels = percent) + 
+  scale_y_continuous(limits=c(35, 65)) + 
+  geom_smooth(method = "lm", se=FALSE, aes(group=1)) +
+  geom_point(size = 3, alpha = .3) +
+  annotate("text", label = lm_r2(c4only_Asso,c4only_Asso$Composite.CL,
+                                 c4only_Asso$Percent.Familiar.CL), x = .58, y = 55.5, size = 2.5) +
+  ggtitle("Associations Only (Spring 2015)\n")
 
-####Graphic 7: Final Driver Set Developed After 3 Rounds of Studies (pg.3)
-```{r message=FALSE, warning=FALSE, echo=FALSE}
-#Final Driver Set Developed after 3 Rounds of Studies (pg.3)
-require(pathdiagram)
+grid.arrange(allasso_plot, allcorp_plot, ncol=2)
 
-par(mar=c(1,.5,.5,.001))
-
-Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-)
-
-#===Manifest Variables
-First_Round = list(
-  Events1 = manifest("Events", x = 0.13, y = 0.805, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndEnforce = manifest("Industry\nEnforcer", x = 0.13, y = 0.73, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndConduct = manifest("Ind. Conduct\nAdherance", x = 0.13, y = 0.655, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndAmbass = manifest("Industry\nAmbassador", x = 0.13, y = 0.58, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndVoice = manifest("Industry\nVoice", x = 0.13, y = 0.505, width = 0.13, height = 0.07, fill = "palegreen3")
-)  
-
-Second_Round = list(
-  Events2 = manifest("Events", x = 0.34, y = 0.805, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndStand2 = manifest("Industry\nStandards", x = 0.34, y = 0.670, width = 0.13, height = 0.07, fill = "palegreen3"),
-  UnifiedVoic2 = manifest("Unified\nVoice", x = 0.34, y = 0.535, width = 0.13, height = 0.07, fill = "palegreen3")
-)
-
-Third_Round = list(
-  CSR3 = manifest("CSR", x = 0.55, y = 0.400, width = 0.13, height = 0.07, fill = "plum3"),
-  Ethics3 = manifest("Ethics", x = 0.55, y = 0.265, width = 0.13, height = 0.07, fill = "plum3"),
-  Csuite3 = manifest("C-Suite\nEngagement", x = 0.55, y = 0.130, width = 0.13, height = 0.07, fill = "plum3")
-)
-
-#====latent variables
-Events4 = latent("Events", x = 0.8, y = 0.805, rx = 0.09, ry = 0.065, fill = "#467d70")
-IndStand4 = latent("Industry\nStandards", x = 0.8, y = 0.670, rx = 0.09, ry = 0.065, fill = "#467d70")
-UnifiedVoic4 = latent("Unified\nVoice", x = 0.8, y = 0.535, rx = 0.09, ry = 0.065, fill = "#467d70")
-CSR4 = latent("CSR", x = 0.8, y = 0.400, rx = 0.09, ry = 0.065, fill = "#7c4f87")
-Ethics4 = latent("Ethics", x = 0.8, y = 0.265, rx = 0.09, ry = 0.065, fill = "#7c4f87")
-Csuite4 = latent("C-Suite\nEngagement", x = 0.8, y = 0.130, rx = 0.09, ry = 0.065, fill = "#7c4f87")
-
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
-}
-
-# draw latent variables
-draw(Events4)
-draw(IndStand4)
-draw(UnifiedVoic4)
-draw(CSR4)
-draw(Ethics4)
-draw(Csuite4)
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
-
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-
-#=====draw Paths
-#Events Path
-arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west", col = "#90b1a9")
-arrow(from = Second_Round[[1]], to = Events4, start = "east", end = "west", col = "#90b1a9")
-
-#Industry Standards Path
-for (i in 2:3){
-  arrow(from = First_Round[[i]], to = Second_Round[[2]], start = "east", end = "west", col = "#90b1a9")
-}
-arrow(from = Second_Round[[2]], to = IndStand4, start = "east", end = "west", col = "#90b1a9")
-
-#Unified Voice Path
-for (i in 4:5){
-  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west", col = "#90b1a9")
-}
-arrow(from = Second_Round[[3]], to = UnifiedVoic4, start = "east", end = "west", col = "#90b1a9")
-
-
-#CSR, Ethics, C-Suite Paths
-arrow(from = Third_Round[[1]], to = CSR4, start = "east", end = "west", col = "#b095b7")
-arrow(from = Third_Round[[2]], to = Ethics4, start = "east", end = "west", col = "#b095b7")
-arrow(from = Third_Round[[3]], to = Csuite4, start = "east", end = "west", col = "#b095b7")
-
-title("Final Driver Set Developed after 3 Rounds of Studies (pg.3)", line = 2.5)
 ```
 
-The answer to the second question is: perception of an organization's policy brand consists of 4 components. The are as follows:
+From these plots, there does not appear to be any direct relationship between organizational familiarity and Policy Brand. An organization that is recognized by many respondents can preform just as well or just as poorly as an organization that is relatively unknown. 
 
- * Respect - "[...]respect for [the organization's] role in the public debate."
- 
- * Consideration - "[...]genuine consideration [of the organization's] positions on issues."
- 
- * Influence - "[organization's] views influencing [policy maker's] views favorably."
- 
- * Sharing - "[the willingness of the policy maker to ] seek out or share the organization's opinion on issues."
+As shown in the Research Design section earlier, the majority of our sampled organization had around 100 to 120 evaluations each. Hence, the findings are not a result of an unreliable number of the evaluations. Further, there does not seem to be any time effect or organization type (whether corporation or association) effect that is confounding the finding. Although, associations seem to have a slightly stronger effect, the r-squared values are so small that it would be a stretch to suggest a relationship.
 
-####Graphic 8: Final Index Measures Developed after 3 Rounds of Studies
-```{r message=FALSE, warning=FALSE, echo=FALSE}
-#Final Index Measures Developed after 3 Rounds of Studies
-require(pathdiagram)
+There is an inherent research design decision that could pose a problem to this particular analysis. It has to do with the assumptions of PBI, specifically the fact that there is an eligibility requirement for evaluating an organization's PBI. Only respondents familiar enough with the organization's policy work are allowed to evaluate that organization. Hence, the views of individuals with below typical familiarity are not captured in the index. 
 
-par(mar=c(1,.5,.5,.001))
+The fear is that a relationship may exist if our PBI score had been designed differently, specifically by allowing individuals that lack familiarity to evaluate the organization. While there isn't a counterfactual to prove or disprove this criticism, further analysis will show that this scenario is unlikely. More on this later.
 
-Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Index Measures", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-)
+###The Simpson's Paradox Between Familiarity and PBI
 
-InvisibleBlock = manifest("", x = 0.61, y = 0.675, width = 0.001, height = 0.08, font = 2, fill = "White")
+While overall organization familiarity does not appear to have any relationship to PBI, the story is not so simple after splitting the data based the spectrum of familiarity. 
 
-#===Manifest Variables
-First_Round = list(
-  Consideration1 = manifest("Consideration", x = 0.14, y = 0.805, width = 0.13, height = 0.07, 
-                            fill="#d199a4"),
-  SeekView = manifest("Seek\nVeiwpoint", x = 0.14, y = 0.675, width = 0.13, height = 0.07, fill="#d199a4"),
-  Disseminat1 = manifest("Dissemination", x = 0.14, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
-  Recommend1 = manifest("Recommend", x = 0.14, y = 0.525, width = 0.13, height = 0.07, fill = "#d199a4"),
-  BestBrandsA = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.395, width = 0.13, height = 0.07, 
-                         font = 1, fill = "White", border = "#d199a4"),
-  BestBrandsB = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.32, width = 0.13, height = 0.07, 
-                         font = 1, fill = "White", border = "#d199a4")
-)  
+The following is a box-plot of organizations' PBI score at each level of familiarity:
 
-Second_Round = list(
-  Consideration2 = manifest("Consideration", x = 0.34, y = 0.805, width = 0.13, height = 0.07, 
-                            fill="#d199a4"),
-  Disseminat2 = manifest("Dissemination", x = 0.34, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
-  Recommend2 = manifest("Recommend", x = 0.34, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4")
-)
+```{r message=FALSE, warning=FALSE}
+###====Organizations' PBI Score at Each Level of Familiarity
+cohL_Orgs_FamCut_MELT <- cohL_Orgs_FamCut %>%
+  select(Company.Unique.Code.CYPHER.CL, Asso.CL, Main.Comparison.CL, 
+         Fam3Composite_Avg, Fam4Composite_Avg, Fam5Composite_Avg, 
+         Fam3Composite_Ns, Fam4Composite_Ns, Fam5Composite_Ns) %>%
+  #melt(id=c("Company.Unique.Code.CYPHER.CL", "Asso.CL", "Main.Comparison.CL"), value.name = "Composite.score") %>%
+  reshape(varying = list(c("Fam3Composite_Avg", "Fam4Composite_Avg", "Fam5Composite_Avg"), 
+                         c("Fam3Composite_Ns", "Fam4Composite_Ns", "Fam5Composite_Ns")), 
+          v.names=c("Composite.score","Fam.Ns"),
+          times = c("Org. PBI for Respondents That \n Gave '3' Ratings on Fam.",
+                    "Org. PBI for Respondents That \n Gave '4' Ratings on Fam.",
+                    "Org. PBI for Respondents That \n Gave '5' Ratings on Fam."),
+          sep = "_", direction = "long") %>%
+  mutate(Fam_score = ifelse(time == "Org. PBI for Respondents That \n Gave '3' Ratings on Fam.","3",
+                            ifelse(time == "Org. PBI for Respondents That \n Gave '4' Ratings on Fam.","4",
+                                   ifelse(time == "Org. PBI for Respondents That \n Gave '5' Ratings on Fam.","5",NA)))) %>%
+  mutate(Facet_Labels = ifelse(Asso.CL == 0, "Corporations", 
+                               ifelse(Asso.CL == 1, "Associations", NA)))
 
-Third_Round = list(
-  Consideration3 = manifest("Consideration", x = 0.55, y = 0.805, width = 0.13, height = 0.07, fill="#d199a4"),
-  Recommend3 = manifest("Recommend", x = 0.55, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4"),
-  Respect3 = manifest("Respect", x = 0.55, y = 0.395, width = 0.13, height = 0.07, fill="#d199a4"),
-  Influence3 = manifest("Influence", x = 0.55, y = 0.32, width = 0.13, height = 0.07, fill="#d199a4")
-)
-
-#====latent variables
-Consideration4 = latent("Consideration", x = 0.8, y = 0.765, rx = 0.09, ry = 0.065, fill="#a12b43")
-Sharing = latent("Sharing", x = 0.8, y = 0.6, rx = 0.09, ry = 0.065, fill="#a12b43")
-Respect4 = latent("Respect", x = 0.8, y = 0.435, rx = 0.09, ry = 0.065, fill="#a12b43")
-Influence4 = latent("Influence", x = 0.8, y = 0.27, rx = 0.09, ry = 0.065, fill="#a12b43")
-
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, .9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
-}
-
-#draw InvisibleBlock
-draw(InvisibleBlock)
-
-# draw latent variables
-draw(Consideration4)
-draw(Sharing)
-draw(Respect4)
-draw(Influence4)
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
-
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-
-#=====draw Paths
-#Consideration Path
-arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[1]], to = Consideration4, start = "east", end = "west", col = "#d199a4")
-
-#Sharing Path
-arrow(from = First_Round[[2]], to = InvisibleBlock, start = "east", end = "west", col = "#d199a4")
-arrow(from = InvisibleBlock, to = Sharing, start = "east", end = "west", col = "#d199a4")
-arrow(from = First_Round[[3]], to = Second_Round[[2]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Second_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
-arrow(from = First_Round[[4]], to = Second_Round[[3]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Second_Round[[3]], to = Third_Round[[2]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
-
-#Respect Path
-arrow(from = First_Round[[5]], to = Third_Round[[3]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[3]], to = Respect4, start = "east", end = "west", col = "#d199a4")
-
-#Influence
-arrow(from = First_Round[[6]], to = Third_Round[[4]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[4]], to = Influence4, start = "east", end = "west", col = "#d199a4")
-
-title("Final Index Measures Developed after 3 Rounds of Studies", line = 2.5)
+#Boxplots of the difference bw 5s,4s,3s
+ggplot(data = cohL_Orgs_FamCut_MELT, aes(x=Fam_score, y=Composite.score))+
+  xlab("Familiarity Rating") + 
+  ylab("Policy Brand Index Score") + 
+  geom_jitter(aes(x=Fam_score, y=Composite.score),
+              position=position_jitter(width=0.1,height=0),
+              alpha=0.6,
+              size=1.5,
+              show_guide=FALSE) +
+  geom_boxplot(aes(fill=Fam_score, color=Fam_score), alpha=I(0.5), width=0.4) +
+  theme(legend.position="none") +
+  facet_grid(. ~ Facet_Labels) +
+  ggtitle("Respondents that Know the\nOrganization Better, Evaluates it Higher")
 ```
 
-###Additional Codes
+After we split the PBI scores for each organization by the respondents *based on their familiarity,* there is a clear trend that the higher familiarity respondents evaluated the organization higher. 
 
-Graphic 5:
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-#Final Driver Set Developed after 3 Rounds of Studies (pg.1)
-require(pathdiagram)
-par(mar=c(1,.5,.5,.001))
-Headers = list(manifest("First Round", x = 0.135, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-               )
-InvisibleBlock = manifest("", x = 0.61, y = 0.53, width = 0.001, height = 0.08, font = 2, fill = "White")
+The series of box-plots describe the range of scores given by respondents that indicated either a '3', '4', or '5' on familiarity for each of the organizations studied. In general, the higher the respondent's familiarity rating the higher they evaluated organizations. In addition, the differences among these groups are all statistically significant. Hence, the insight seems to be that the more familiar a respondent is with an organization's work the higher he tends to rate that organization.
 
-#===Manifest Variables
-First_Round = list(
-  LobbyingEff = manifest("Lobbying\nEffectiveness", x = 0.13, y = 0.83, width = 0.13, height = 0.07),
-  PolicyCons = manifest("Policy\nConsultant", x = 0.13, y = 0.755, width = 0.13, height = 0.07),
-  CsuiteNetw = manifest("C-suite\nNetworking", x = 0.13, y = 0.68, width = 0.13, height = 0.07),
-  MediaPres1 = manifest("Media\nPresence", x = 0.13, y = 0.605, width = 0.13, height = 0.07),
-  MediaDem = manifest("Media\nDemanded", x = 0.13, y = 0.53, width = 0.13, height = 0.07),
-  DiscusLead = manifest("Discussion\nLeader", x = 0.13, y = 0.455, width = 0.13, height = 0.07),
-  ProactShar = manifest("Proactive\nSharer", x = 0.13, y = 0.38, width = 0.13, height = 0.07),
-  ResearchDev = manifest("Research\nDevelopment", x = 0.13, y = 0.305, width = 0.13, height = 0.07),
-  ReliableInfo = manifest("Reliable\nInfo Source", x = 0.13, y = 0.23, width = 0.13, height = 0.07),
-  InfoAcc = manifest("Info\nAccuracy", x = 0.13, y = 0.155, width = 0.13, height = 0.07)
-)  
-Second_Round = list(
-  LobbyingRep2 = manifest("Lobbying\nRepresentation", x = 0.34, y = 0.755, width = 0.13, height = 0.07),
-  MediaPres2 = manifest("Media\nPresence", x = 0.34, y = 0.605, width = 0.13, height = 0.07),
-  Research2 = manifest("Research", x = 0.34, y = 0.23, width = 0.13, height = 0.07)
-  )
-Third_Round = list(
-  LobbyingRep3 = manifest("Lobbying\nRepresentation", x = 0.55, y = 0.755, width = 0.13, height = 0.07),
-  MediaPres3 = manifest("Media\nPresence", x = 0.55, y = 0.605, width = 0.13, height = 0.07),
-  Discourse = manifest("Positive\nDiscourse", x = 0.55, y = 0.455, width = 0.13, height = 0.07),
-  RegularEng = manifest("Regular\nEngagement", x = 0.55, y = 0.38, width = 0.13, height = 0.07),
-  Research3 = manifest("Research", x = 0.55, y = 0.23, width = 0.13, height = 0.07)
-)
+The spread of scores also seems to increase. This suggest that as familiarity increases respondents also breed more extreme views toward an organization. Although they tend to be more positive than lesser familiar respondents.
 
-#====latent variables
-LobbyingRep4 = latent("Lobbying\nRepresentation", x = 0.8, y = 0.73, rx = 0.09, ry = 0.065)
-MediaProf = latent("Media\nProfile", x = 0.8, y = 0.58, rx = 0.09, ry = 0.065)
-ConstrArg = latent("Constructive\nArguments", x = 0.8, y = 0.43, rx = 0.09, ry = 0.065)
-Research4 = latent("Research", x = 0.8, y = 0.28, rx = 0.09, ry = 0.065)
+These findings seem contradictory to the previous analysis that suggests a lack of relationship between how well know an organization is and it's performance. Intuitively, there appears to be a contradiction here because more well known organizations should have more familiar respondents represented. Since those respondents tend to rate higher, it logically should follow that well know organizations would score higher. However, the data does not reflect such logic.
 
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
-}
+This is an empirical case of the effect known as the Simpson's Paradox. This statistical paradox describes a phenomenon in which trends appear when the data is grouped a certain way, but disappears when aggregated or grouped a different way. Often times there is a lurking variable causing of the apparent contradiction.
 
-#draw InvisibleBlock
-draw(InvisibleBlock)
+Just to show that having a higher number of more familiar respondents does not translate to higher PBI, These are three charts of the number of '3s', '4s', and '5s', who gave PBI evaluations, plotted against PBI scores at each level of familiarity: 
 
-# draw latent variables
-draw(LobbyingRep4)
-draw(MediaProf)
-draw(ConstrArg)
-draw(Research4)
-
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-#=====draw Paths
-#Lobbying Representation Path
-for (i in 1:3){
-  arrow(from = First_Round[[i]], to = Second_Round[[1]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west")
-arrow(from = Third_Round[[1]], to = LobbyingRep4, start = "east", end = "west")
-
-#Media Profile Path
-arrow(from = First_Round[[4]], to = Second_Round[[2]], start = "east", end = "west")
-arrow(from = Second_Round[[2]], to = Third_Round[[2]], start = "east", end = "west")
-arrow(from = Third_Round[[2]], to = MediaProf, start = "east", end = "west")
-arrow(from = First_Round[[5]], to = InvisibleBlock, start = "east", end = "west")
-arrow(from = InvisibleBlock, to = MediaProf, start = "east", end = "west")
-
-#Constructive Arguments Path
-arrow(from = First_Round[[6]], to = Third_Round[[3]], start = "east", end = "west")
-arrow(from = First_Round[[7]], to = Third_Round[[4]], start = "east", end = "west")
-arrow(from = Third_Round[[3]], to = ConstrArg, start = "east", end = "west")
-arrow(from = Third_Round[[4]], to = ConstrArg, start = "east", end = "west")
-
-#Research Path
-for (i in 8:10){
-  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[3]], to = Third_Round[[5]], start = "east", end = "west")
-arrow(from = Third_Round[[5]], to = Research4, start = "east", end = "west")
-
-title("Final Driver Set Developed after 3 Rounds of Studies (pg.1)", line = 2.5)
+```{r message=FALSE, warning=FALSE}
+#Plot number of 5s, 4s, 3s vs PBI scores for 5s, 4s, 3s
+ggplot(data = cohL_Orgs_FamCut_MELT, aes(x=Fam.Ns, y=Composite.score))+
+  xlab("Number of Familiarity Rating From Respondents\nWho Also Rated that Organization on PBI") + 
+  ylab("Policy Brand Index Score") + 
+  geom_point(size = 1.5, alpha = .6) + 
+  geom_smooth(method = "lm", se=TRUE, aes(group=1)) +
+  facet_grid(. ~ time) +
+  ggtitle("No Relationship b/w Number of \n High Familiarity Ratings and Higher Scores")
 ```
 
-Graphic 6:
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-#Final Driver Set Developed after 3 Rounds of Studies (pg.2)
-require(pathdiagram)
-par(mar=c(1,.5,.5,.001))
-Headers = list(manifest("First Round", x = 0.14, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-)
-InvisibleMemberEff = manifest("", x = 0.61, y = 0.5675, width = 0.001, height = 0.08, font = 2, fill = "White")
-InvisibleBlock = manifest("", x = 0.61, y = 0.53, width = 0.001, height = 0.08, font = 2, fill = "White")
+The three panels above describe the number of ratings each organization received against it's PBI score at different familiarity levels. For example, the point on the far right of the far right panel represents an organization that had just shy of 80 respondents that gave it '5' on familiarity. Those 80 respondents graded the organization just above 60 out of 100 on PBI. 
 
-#===Manifest Variables
-First_Round = list(
-  Coalition1 = manifest("Coalition\nBuilding", x = 0.13, y = 0.83, width = 0.13, height = 0.07),
-  ThoughtLead = manifest("Thought\nLeader", x = 0.13, y = 0.755, width = 0.13, height = 0.07),
-  GrassCamp1 = manifest("Grassroots\nCampaigns", x = 0.13, y = 0.68, width = 0.13, height = 0.07),
-  MemberSupp = manifest("Member\nSupport", x = 0.13, y = 0.605, width = 0.13, height = 0.07),
-  MemberMob = manifest("Member\nMobilization", x = 0.13, y = 0.53, width = 0.13, height = 0.07),
-  FavCompr = manifest("Favors\nCompromise", x = 0.13, y = 0.455, width = 0.13, height = 0.07),
-  BipCoop = manifest("Bipartisan\nCooperation", x = 0.13, y = 0.38, width = 0.13, height = 0.07),
-  BipFav = manifest("Bipartisan\nFavorability", x = 0.13, y = 0.305, width = 0.13, height = 0.07),
-  InterBal = manifest("Interest\nBalance", x = 0.13, y = 0.23, width = 0.13, height = 0.07),
-  LongPos = manifest("Longterm\nPosition", x = 0.13, y = 0.155, width = 0.13, height = 0.07)
-)  
-Second_Round = list(
-  Coalition2 = manifest("Coalition\nBuilding", x = 0.34, y = 0.83, width = 0.13, height = 0.07),
-  GrassCamp2 = manifest("Grassroots\nCampaigns", x = 0.34, y = 0.68, width = 0.13, height = 0.07),
-  MemberEff = manifest("Membership\nEffectiveness", x = 0.34, y = 0.5675, width = 0.13, height = 0.07),
-  BipCollab2 = manifest("Bipartisan\nCollaboration", x = 0.34, y = 0.3225, width = 0.13, height = 0.07)
-)
-Third_Round = list(
-  Coalition3 = manifest("Coalition\nBuilding", x = 0.55, y = 0.83, width = 0.13, height = 0.07),
-  GrassCamp3 = manifest("Grassroots\nCampaigns", x = 0.55, y = 0.68, width = 0.13, height = 0.07),
-  Consensus = manifest("Consensus\nBuilding", x = 0.55, y = 0.4950, width = 0.13, height = 0.07),
-  RiskAssess = manifest("Risk\nAssessment", x = 0.55, y = 0.4205, width = 0.13, height = 0.07),
-  BipCollab3 = manifest("Bipartisan\nCollaboration", x = 0.55, y = 0.3225, width = 0.13, height = 0.07),
-  PosAlign = manifest("Position\nAlignment", x = 0.55, y = 0.23, width = 0.13, height = 0.07),
-  ContextPos = manifest("Contextualize\nPosition", x = 0.55, y = 0.155, width = 0.13, height = 0.07)
-)
+By splitting out PBI scores and number of familiarity ratings in this way bypasses any potential confounding issues that might exist mentioned in the previous section (the issue regarding eligibility requirements for evaluating PBI). Still, the finding holds, having more very familiar respondents does not equate to higher PBI scores. 
 
-ThoughLead3 = manifest("Thought\nLeader", x = 0.55, y = 0.755, width = 0.13, height = 0.07)
+There is another observation noted in comparing these three panels: the difference in dispersion among the three plots. There is a clear difference in the range of the PBI distribution as we move from '3s' to '4s' to '5s'. The more familiar the respondents are, the greater the increase in spread among PBI evaluations. 
 
-#====latent variables
-Coalition4 = latent("Coalition\nBuilding", x = 0.8, y = 0.77, rx = 0.09, ry = 0.065)
-Grassroots = latent("Grassroots", x = 0.8, y = 0.625, rx = 0.09, ry = 0.065)
-Compromise = latent("Compromise", x = 0.8, y = 0.48, rx = 0.09, ry = 0.065)
-BipCollab4 = latent("Bipartisan\nCollaboration", x = 0.8, y = 0.335, rx = 0.09, ry = 0.065)
-Relevance = latent("Relevance", x = 0.8, y = 0.19, rx = 0.09, ry = 0.065)
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
-}
+Even though in the aggregate, the regression shows a lack of relationship, the difference in the spread of scores becomes evident when the data is split. This reveals a central clue to the lurking variable, which seems to have to do with the magnitude of the disparity between respondents. At the high levels of familiarity respondents seem to have more extreme views, whereas at the typical level of familiarity, respondents evaluations are much less spread. 
 
-#draw InvisibleBlock
-draw(InvisibleBlock)
+###The Familiarity Premium
 
-# draw latent variables
-draw(Coalition4)
-draw(Grassroots)
-draw(BipCollab4)
-draw(Compromise)
-draw(Relevance)
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-draw(ThoughLead3)
+The following is a plot that shows PBI scores compared to the difference in scores between the most familiar and typical familiar respondents:
 
-#=====draw Paths
-#Coalition Building Path
-arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west")
-arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west")
-arrow(from = Third_Round[[1]], to = Coalition4, start = "east", end = "west")
-arrow(from = First_Round[[2]], to = ThoughLead3, start = "east", end = "west")
-arrow(from = ThoughLead3, to = Coalition4, start = "east", end = "west")
+```{r message=FALSE, warning=FALSE}
+#What's really driving the difference b/w 3s,4s,5s 'High Familiarity Premium'
+fam3s_plot <- ggplot(data = cohL_Orgs_FamCut, aes(x=Fam3Composite_Avg, y=Diff.5s.and.3s))+
+  xlab("Org. PBI for '3' Ratings on Familiarity") + 
+  #scale_x_continuous(labels = NULL) +
+  ylab("Diff. b/w 5s and 3s") +
+  geom_point(size = 1.5, alpha = .6) + 
+  geom_smooth(method = "lm", se=FALSE, aes(group=1)) +
+  annotate("text", label = lm_r2(cohL_Orgs_FamCut,cohL_Orgs_FamCut$Diff.5s.and.3s,
+                                 cohL_Orgs_FamCut$Fam3Composite_Avg), x = 38.5, y = 12.6, size = 2.5) +
+  ggtitle("PBI Scores of 5's Seem to be Driving the Difference")
 
-#Grassroots Path
-arrow(from = First_Round[[3]], to = Second_Round[[2]], start = "east", end = "west")
-arrow(from = Second_Round[[2]], to = Third_Round[[2]], start = "east", end = "west")
-arrow(from = Third_Round[[2]], to = Grassroots, start = "east", end = "west")
-for (i in 4:5){
-  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[3]], to = InvisibleMemberEff, start = "east", end = "west")
-arrow(from = InvisibleMemberEff, to = Grassroots, start = "east", end = "west")
-#Compromise Path
-for (i in 3:4){
-arrow(from = First_Round[[6]], to = Third_Round[[i]], start = "east", end = "west")
-}
-for (i in 3:4){
-  arrow(from = Third_Round[[i]], to = Compromise, start = "east", end = "west")
-}
-#Bipartisan Collaboration Path
-for (i in 7:8){
-  arrow(from = First_Round[[i]], to = Second_Round[[4]], start = "east", end = "west")
-}
-arrow(from = Second_Round[[4]], to = Third_Round[[5]], start = "east", end = "west")
-arrow(from = Third_Round[[5]], to = BipCollab4, start = "east", end = "west")
-#Relevance Path
-arrow(from = First_Round[[9]], to = Third_Round[[6]], start = "east", end = "west")
-arrow(from = First_Round[[10]], to = Third_Round[[7]], start = "east", end = "west")
-for (i in 6:7){
-  arrow(from = Third_Round[[i]], to = Relevance, start = "east", end = "west")
-}
-title("Final Driver Set Developed after 3 Rounds of Studies (pg.2)", line = 2.5)
+fam5s_plot <- ggplot(data = cohL_Orgs_FamCut, aes(x=Fam5Composite_Avg, y=Diff.5s.and.3s))+
+  xlab("Org. PBI for '5' Ratings on Familiarity") + 
+  ylab("Diff. b/w 5s and 3s") + 
+  #scale_y_continuous(labels = NULL) +
+  geom_point(size = 1.5, alpha = .6) + 
+  geom_smooth(method = "lm", se=FALSE, aes(group=1)) +
+  annotate("text", label = lm_r2(cohL_Orgs_FamCut,cohL_Orgs_FamCut$Diff.5s.and.3s,
+                                 cohL_Orgs_FamCut$Fam5Composite_Avg), x = 39.3, y = 1.4, size = 2.5)
+
+grid.arrange(fam3s_plot, fam5s_plot, nrow=2)
 ```
 
-Graphic 7:
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-#Final Driver Set Developed after 3 Rounds of Studies (pg.3)
-require(pathdiagram)
+These two graphs show the divide between the respondents at '3' and '5' familiarity. It seems the most familiar respondents have more impact on the disparity between the scores. As shown in the plots the differences are driven by the increase in the most familiar respondents rather than decreases in the typically familiar respondents. The typically familiar respondents remains almost the same as the difference increases. 
 
-par(mar=c(1,.5,.5,.001))
+The lurking variable is the extremeness in the scores among the more the familiar respondents. Specifically, it seems certain organizations are more able than others to breed extreme, but generally positive views among their higher familiar respondents.
 
-Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Driver Set", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-)
+The following is the distribution of PBI compared to the distribution of score differences between the high familiarity (5s and 4s) and typical familiarity (3s) respondents:
 
-#===Manifest Variables
-First_Round = list(
-  Events1 = manifest("Events", x = 0.13, y = 0.805, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndEnforce = manifest("Industry\nEnforcer", x = 0.13, y = 0.73, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndConduct = manifest("Ind. Conduct\nAdherence", x = 0.13, y = 0.655, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndAmbass = manifest("Industry\nAmbassador", x = 0.13, y = 0.58, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndVoice = manifest("Industry\nVoice", x = 0.13, y = 0.505, width = 0.13, height = 0.07, fill = "palegreen3")
-)  
+```{r message=FALSE, warning=FALSE}
+###====High Familiarity Difference vs Composite Score Distribution 
+cohL_Orgs_FamCut_MELT3 <- cohL_Orgs_FamCut %>%
+  select(Company.Unique.Code.CYPHER.CL, Asso.CL, Main.Comparison.CL, 
+         PercntDiff.5or4.and.3s, PercntDiff.Composite.and.AvgAllOrgs, Fam5or4Composite_Ns, Composite_Ns) %>%
+  reshape(varying = list(c("PercntDiff.5or4.and.3s", "PercntDiff.Composite.and.AvgAllOrgs"), 
+                         c("Fam5or4Composite_Ns","Composite_Ns")), 
+          v.names=c("Composite.PercntDiff","Fam.Ns"),
+          times = c("Difference b/w High Familiarity\nand Typical Familiarity",
+                    "Distribution of Overall PBI scores"),
+          sep = "_", direction = "long") %>%
+  mutate(Key = ifelse(time == "Difference b/w High Familiarity\nand Typical Familiarity","Diff. b/w High Familiarity\nand Typical Familiarity",
+                             ifelse(time == "Distribution of Overall PBI scores","Overall PBI",NA))) %>%
+  mutate(Facet_Labels = ifelse(Asso.CL == 0, "Corporations", 
+                               ifelse(Asso.CL == 1, "Associations", NA)))
 
-Second_Round = list(
-  Events2 = manifest("Events", x = 0.34, y = 0.805, width = 0.13, height = 0.07, fill = "palegreen3"),
-  IndStand2 = manifest("Industry\nStandards", x = 0.34, y = 0.670, width = 0.13, height = 0.07, fill = "palegreen3"),
-  UnifiedVoic2 = manifest("Unified\nVoice", x = 0.34, y = 0.535, width = 0.13, height = 0.07, fill = "palegreen3")
-)
-
-Third_Round = list(
-  CSR3 = manifest("CSR", x = 0.55, y = 0.400, width = 0.13, height = 0.07, fill = "plum3"),
-  Ethics3 = manifest("Ethics", x = 0.55, y = 0.265, width = 0.13, height = 0.07, fill = "plum3"),
-  Csuite3 = manifest("C-Suite\nEngagement", x = 0.55, y = 0.130, width = 0.13, height = 0.07, fill = "plum3")
-)
-
-#====latent variables
-Events4 = latent("Events", x = 0.8, y = 0.805, rx = 0.09, ry = 0.065, fill = "#467d70")
-IndStand4 = latent("Industry\nStandards", x = 0.8, y = 0.670, rx = 0.09, ry = 0.065, fill = "#467d70")
-UnifiedVoic4 = latent("Unified\nVoice", x = 0.8, y = 0.535, rx = 0.09, ry = 0.065, fill = "#467d70")
-CSR4 = latent("CSR", x = 0.8, y = 0.400, rx = 0.09, ry = 0.065, fill = "#7c4f87")
-Ethics4 = latent("Ethics", x = 0.8, y = 0.265, rx = 0.09, ry = 0.065, fill = "#7c4f87")
-Csuite4 = latent("C-Suite\nEngagement", x = 0.8, y = 0.130, rx = 0.09, ry = 0.065, fill = "#7c4f87")
-
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, 0.9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
+formatter10 <- function(x){ 
+  x/10 
 }
 
-# draw latent variables
-draw(Events4)
-draw(IndStand4)
-draw(UnifiedVoic4)
-draw(CSR4)
-draw(Ethics4)
-draw(Csuite4)
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
-
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-
-#=====draw Paths
-#Events Path
-arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west", col = "#90b1a9")
-arrow(from = Second_Round[[1]], to = Events4, start = "east", end = "west", col = "#90b1a9")
-
-#Industry Standards Path
-for (i in 2:3){
-  arrow(from = First_Round[[i]], to = Second_Round[[2]], start = "east", end = "west", col = "#90b1a9")
-}
-arrow(from = Second_Round[[2]], to = IndStand4, start = "east", end = "west", col = "#90b1a9")
-
-#Unified Voice Path
-for (i in 4:5){
-  arrow(from = First_Round[[i]], to = Second_Round[[3]], start = "east", end = "west", col = "#90b1a9")
-}
-arrow(from = Second_Round[[3]], to = UnifiedVoic4, start = "east", end = "west", col = "#90b1a9")
-
-
-#CSR, Ethics, C-Suite Paths
-arrow(from = Third_Round[[1]], to = CSR4, start = "east", end = "west", col = "#b095b7")
-arrow(from = Third_Round[[2]], to = Ethics4, start = "east", end = "west", col = "#b095b7")
-arrow(from = Third_Round[[3]], to = Csuite4, start = "east", end = "west", col = "#b095b7")
-
-title("Final Driver Set Developed after 3 Rounds of Studies (pg.3)", line = 2.5)
+#Density Plot: Visualizing High Familiarity Premium (or surplus)
+#Difference between scores of high familiarity and typical familiarity
+ggplot(data = cohL_Orgs_FamCut_MELT3, aes(x=Composite.PercntDiff, group=Key)) +
+  geom_density(aes(fill = Key), colour = "grey", alpha = .5, size=0) +
+  scale_x_continuous(limits=c(-.25, .3), labels = percent) + 
+  scale_y_continuous(labels = formatter10) + 
+  scale_fill_manual(values = c("slategrey","skyblue3")) +
+  xlab("% Difference from the Average Org. PBI Score") + 
+  ylab("Density Distribution") +
+  ggtitle("Distribution of PBI and the Familarity Premium\n")
 ```
 
-Graphic 8:
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-#Final Index Measures Developed after 3 Rounds of Studies
-require(pathdiagram)
+These two density plots show the way in which PBI scores and the familiarity premium are distributed. The familiarity premium measures the difference in scores given by high familiarity respondents and the typical familiarity respondents. 
 
-par(mar=c(1,.5,.5,.001))
+The y-axis is the percentage difference from the average organization's PBI score. Zero in this chart represents the average score on PBI and each point is distance from the average organization's score. 
 
-Headers = list(manifest("First Round", x = 0.13, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Second Round", x = 0.34, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Third Round", x = 0.55, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white"),
-               manifest("Final Index Measures", x = 0.8, y = 0.9, width = 0.13, 
-                        height = 0.035, font = 2, fill = "white")
-)
+The typical organization tends to have a familiarity premium of about 17% above their PBI score. In other words, the average organization's high familiarity respondents evaluate it about 17% better than its actual score. 
 
-InvisibleBlock = manifest("", x = 0.61, y = 0.675, width = 0.001, height = 0.08, font = 2, fill = "White")
+The question is: what does it mean for an organization to have a high familiarity premium?
 
-#===Manifest Variables
-First_Round = list(
-  Consideration1 = manifest("Consideration", x = 0.14, y = 0.805, width = 0.13, height = 0.07, 
-                            fill="#d199a4"),
-  SeekView = manifest("Seek\nVeiwpoint", x = 0.14, y = 0.675, width = 0.13, height = 0.07, fill="#d199a4"),
-  Disseminat1 = manifest("Dissemination", x = 0.14, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
-  Recommend1 = manifest("Recommend", x = 0.14, y = 0.525, width = 0.13, height = 0.07, fill = "#d199a4"),
-  BestBrandsA = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.395, width = 0.13, height = 0.07, 
-                         font = 1, fill = "White", border = "#d199a4"),
-  BestBrandsB = manifest("Best Brands\nStudy (2011)", x = 0.14, y = 0.32, width = 0.13, height = 0.07, 
-                         font = 1, fill = "White", border = "#d199a4")
-)  
+In literal terms, it means: policy influentials that know and engage with an organization regularly will develop a more positive view of that organization; while, policy influential that do not know the organization as well and have little engagement with it, do not have as sharp of an opinion of the organization.
 
-Second_Round = list(
-  Consideration2 = manifest("Consideration", x = 0.34, y = 0.805, width = 0.13, height = 0.07, 
-                            fill="#d199a4"),
-  Disseminat2 = manifest("Dissemination", x = 0.34, y = 0.6, width = 0.13, height = 0.07, fill="#d199a4"),
-  Recommend2 = manifest("Recommend", x = 0.34, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4")
-)
+Although, an organization that has a high familiarity premium equates to better scores among its more familiar respondents, this is not necessary "a good thing." Familiarity premium is similar to untapped potential. Potential is generally advantageous, however, an excess of untapped potential begs the question of "why it remains untapped?" 
 
-Third_Round = list(
-  Consideration3 = manifest("Consideration", x = 0.55, y = 0.805, width = 0.13, height = 0.07, fill="#d199a4"),
-  Recommend3 = manifest("Recommend", x = 0.55, y = 0.525, width = 0.13, height = 0.07, fill="#d199a4"),
-  Respect3 = manifest("Respect", x = 0.55, y = 0.395, width = 0.13, height = 0.07, fill="#d199a4"),
-  Influence3 = manifest("Influence", x = 0.55, y = 0.32, width = 0.13, height = 0.07, fill="#d199a4")
-)
+In the same way, an organization that is revered among policy makers that are highly familiar with it, but remains lukewarm among typically familiar policy makers reflects a missed opportunity. 
 
-#====latent variables
-Consideration4 = latent("Consideration", x = 0.8, y = 0.765, rx = 0.09, ry = 0.065, fill="#a12b43")
-Sharing = latent("Sharing", x = 0.8, y = 0.6, rx = 0.09, ry = 0.065, fill="#a12b43")
-Respect4 = latent("Respect", x = 0.8, y = 0.435, rx = 0.09, ry = 0.065, fill="#a12b43")
-Influence4 = latent("Influence", x = 0.8, y = 0.27, rx = 0.09, ry = 0.065, fill="#a12b43")
+For example, it could be that the particular organization enjoys a small group of "super fans," and no matter what this group of influentials have a quantifiably higher perception of the organization. It could also be that while the organization just does a good job cultivating the relationships that they have, it fails at cultivating new relationships or lacks the expertise in translating their message broadly across the policy community.
 
-#===Draw handlers
-wall(xlim = c(0.1, 0.9), ylim = c(0.1, .9))
-#draw headers
-for (i in seq_along(Headers)) {
-  draw(Headers[[i]])
-}
+The challenges for different organizations vary greatly. Highly visible, well established government affairs offices face different problems compared to newly created shops. Industry differences also require a very different set of engagement strategies. The banking industry faces far more hostility and prejudices than relative newcomers in the policy space, such as the internet companies. There is not a "one-size fits all" answer to why a particular organization has a high or low familiarity premium. Hence, familiarity premium metric cannot prescribe a solution, rather it should be used as an warning indicator of a possible problem or opportunity. It acts as a thermometer where having too high or too low of a surplus suggests that there could be an engagement or messaging issue.
 
-#draw InvisibleBlock
-draw(InvisibleBlock)
+###Conclusion
 
-# draw latent variables
-draw(Consideration4)
-draw(Sharing)
-draw(Respect4)
-draw(Influence4)
-# draw manifest variables
-for (i in seq_along(First_Round)) {
-  draw(First_Round[[i]])
-}
+It's not that organizations with more familiar respondents do better, but rather respondents seem to develop more extreme views toward certain organizations the more familiar they are with them.
 
-for (i in seq_along(Second_Round)) {
-  draw(Second_Round[[i]])
-}
-
-for (i in seq_along(Third_Round)) {
-  draw(Third_Round[[i]])
-}
-
-#=====draw Paths
-#Consideration Path
-arrow(from = First_Round[[1]], to = Second_Round[[1]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Second_Round[[1]], to = Third_Round[[1]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[1]], to = Consideration4, start = "east", end = "west", col = "#d199a4")
-
-#Sharing Path
-arrow(from = First_Round[[2]], to = InvisibleBlock, start = "east", end = "west", col = "#d199a4")
-arrow(from = InvisibleBlock, to = Sharing, start = "east", end = "west", col = "#d199a4")
-arrow(from = First_Round[[3]], to = Second_Round[[2]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Second_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
-arrow(from = First_Round[[4]], to = Second_Round[[3]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Second_Round[[3]], to = Third_Round[[2]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[2]], to = Sharing, start = "east", end = "west", col = "#d199a4")
-
-#Respect Path
-arrow(from = First_Round[[5]], to = Third_Round[[3]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[3]], to = Respect4, start = "east", end = "west", col = "#d199a4")
-
-#Influence
-arrow(from = First_Round[[6]], to = Third_Round[[4]], start = "east", end = "west", col = "#d199a4")
-arrow(from = Third_Round[[4]], to = Influence4, start = "east", end = "west", col = "#d199a4")
-
-title("Final Index Measures Developed after 3 Rounds of Studies", line = 2.5)
-```
+For the organizations that have a large pool of individuals that know them, increasing the number of individuals that know them will not lead to any more increases in their overall performance. They should rather look at the difference between high and low familiar respondents, the familiarity premium. If, for example, the gap between their high familiarity and typical familiarity respondents are significant, there might be a problem with messaging where their message is just not reaching the typical policy influencer. While, for the organizations that have very few individuals that know them, perhaps the root issue is visibility and conclusion should be to increase their overall pool of very familiar influencials. 
 
 ###Program Specifications
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 sessionInfo()
 ```
 
-*Disclaimer: The views and opinions expressed in this article are those of the author's alone and do not necessarily reflect the official research findings or position of the National Journal Group. Examples of analysis performed within this article are only examples intended for achedemic purposes only. They are NOT to be utilized in real-world analytic products. If you are interested in learning more about this study or other products at National Journal Research please email research@nationaljournal.com or visit our website at [www.nationaljournal.com/membership/research](http://www.nationaljournal.com/learn-more/).*
+*Disclaimer: The views and opinions expressed in this article are those of the author's alone and do not necessarily reflect the official research findings or position of the National Journal Group. Examples of analysis performed within this article are only examples intended for achedemic purposes only. They are NOT to be utilized in real-world analytic products. If you are interested in learning more about this study or other products at National Journal Research please email <research@nationaljournal.com> or visit our website at [www.nationaljournal.com/membership/research](http://www.nationaljournal.com/learn-more/).*
 
 
 

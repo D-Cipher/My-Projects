@@ -1,0 +1,1456 @@
+"""
+Mind Match Program - Quizzer Side
+Enjoy the game :)
+Yours, D'Cypher
+
+To do:
+-Instructions changes
+-Change Premise arrows
+-Custom Premise
+-Theme Change Button
+"""
+
+#Import Default Modules
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+    
+import random
+import math
+import time
+
+#Import Dictionary Modules
+import user40_F3sJSVcOQU_7 as premise_dictionary
+
+###========Import Images and Globals=========
+class ImageInfo:
+    def __init__(self, center, size, radius = 0):
+        self.center = center
+        self.size = size
+        self.radius = radius
+
+    def get_center(self):
+        return self.center
+
+    def get_size(self):
+        return self.size
+
+    def get_radius(self):
+        return self.radius
+
+CANVAS_WIDTH = 334
+CANVAS_HEIGHT = 600
+
+iphone_info = ImageInfo([580/2+10, 1200/2+30], [540, 1080])
+iphone_image = simplegui.load_image("https://static-cdn.fullcontact.com/images/website/iphone5.png")
+
+splash_info = ImageInfo([56, 46], [80, 85])
+splash_image = simplegui.load_image("http://commondatastorage.googleapis.com/codeskulptor-assets/lathrop/splash.png")
+
+lock_button_info = ImageInfo([512/2, 512/2], [512, 512])
+lock_button_image = simplegui.load_image("http://open.az/templates/slide/images/closed.png")
+
+lock_buttonRed_info = ImageInfo([512/2, 512/2], [512, 512])
+lock_buttonRed_image = simplegui.load_image("http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/simple-red-square-icons-business/128651-simple-red-square-icon-business-lock6-sc48.png")
+
+logo_info = ImageInfo([175/2, 175/2], [175, 175])
+logo_image = simplegui.load_image("http://a4.mzstatic.com/us/r30/Purple2/v4/62/64/96/6264960b-783f-52d7-5c5c-dc0d7fe5c25d/icon175x175.jpeg")
+
+#Themes
+theme_emoji = simplegui.load_image("https://s3-us-west-1.amazonaws.com/rappler-assets/1014A8772D75442E93D092B9D451652D/img/5CBD86790FEB412C96F9B4E16E1A71CA/twitter-emoji-feature-20140403-1.jpg?AWSAccessKeyId=AKIAJZT25YUX4PJDIYZA&Expires=1712143319&Signature=GAxzBNxHun2708GGo3J1%2FsOYAB4%3D")
+theme_emoji2 = simplegui.load_image("http://getemoji.com/assets/og/mobile.png")
+
+#Card Size and Center
+CARD_SIZE =(80, 85)
+CARD_CENTER = (56, 72)
+
+#Tile Image Card Coordinates
+CARD_COLUMN = range(17)
+CARD_ROW = range(5)
+
+#initialize global variables
+#questions_GLOBAL = 0
+#flags_GLOBAL = 0
+
+#Helper fomula: Distance formula
+def dist_formula(p, q):
+    return math.sqrt((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2)
+
+###=======Define class objects==========
+
+class Premise:
+    """
+    Creates the premise class object and all of it's properties. 
+    Takes a code and looks it up in a dictionary. Draws the 
+    returned value
+    """    
+    
+    def __init__(self, p_code = "p-def", custom_text = "None"):
+        self.p_code = p_code
+        self.custom = custom_text
+        
+    def __str__(self):
+        return str(self.p_code)
+    
+    def get_p_code(self):
+        return self.p_code
+    
+    def change_premise(self, p_code):
+        self.p_code = p_code #Note: Decryptionizer returns a list.
+    
+    def get_premise(self):
+        return premise_dictionary.p_lookup(self.p_code)
+    
+    def change_custom_prem(self, text):
+        self.custom = str(text) #Note: Decryptionizer returns a list.
+    
+    def get_custom_prem(self):
+        return self.custom
+    
+    def draw(self, canvas):
+        if self.p_code == "p-custom":
+            canvas.draw_text(self.get_custom_prem(), [40, 114], 15, "White")
+        else:
+            canvas.draw_text(self.get_premise(), [40, 114], 15, "White")
+    
+class Card:
+    """
+    Creates the card class object and all of it's properties. 
+    Takes coordinates of the card and position 
+    and draws the card on the canvaas.
+    """
+    
+    def __init__(self, col_input = 0, row_input = 0, pos = [100,100], theme = "emj", select = False, 
+                 eliminate = False, secret_card = False, back = True, lifespan = None, 
+                 animated = False, radius = 40):
+        
+        if (col_input in CARD_COLUMN) and (row_input in CARD_ROW):
+            self.c_col = col_input
+            self.c_row = row_input
+        else:
+            self.c_col = None
+            self.c_row = None
+            print ("Invalid card: ", col_input, row_input)
+        
+        self.obj_coord = [pos[0] + CARD_CENTER[0], pos[1] + CARD_CENTER[1]]
+        
+        if lifespan:
+            self.lifespan = lifespan
+        else:
+            self.lifespan = float('inf')
+        
+        self.theme = theme
+        self.animated = animated
+        self.select = select
+        self.eliminate = eliminate
+        self.secret_card = secret_card
+        self.back = back
+        self.radius = radius
+
+    def __str__(self):
+        return str(self.theme) +";"+ str(self.c_col) +";"+ str(self.c_row)
+
+    def get_cardID(self):
+        return tuple([self.c_col,self.c_row])
+    
+    def get_card_string(self):
+        return str(self.theme) +";"+ str(self.c_col) +";"+ str(self.c_row)
+    
+    def get_radius(self):
+        return self.radius
+    
+    def get_lifespan(self):
+        return self.lifespan
+
+    def get_animated(self):
+        return self.animated
+    
+    def get_selected(self):
+        return self.select
+    
+    def get_eliminated(self):
+        return self.eliminate
+    
+    def get_secret_card(self):
+        return self.secret_card
+    
+    def get_theme(self):
+        return self.theme
+    
+    def change_c_col(self, c_col):
+        self.c_col = c_col
+    
+    def change_c_row(self, c_row):
+        self.c_row = c_row
+        
+    def change_theme(self, theme):
+        self.theme = theme
+    
+    def theme_lookup(self):
+        dict_theme = {"emj": theme_emoji, 
+                      "emj2": theme_emoji2}
+        
+        return dict_theme[self.theme]
+    
+    def make_secret(self):
+        self.secret_card = True
+    
+    def make_nonsecret(self):
+        self.secret_card = False
+    
+    def eliminate_card(self):
+        self.eliminate = True
+        if self.select == True:
+            self.select = False
+        else:
+            pass
+        
+    def uneliminate_card(self):
+        self.eliminate = False
+        
+    def flip_card(self):
+        if self.back == True:
+            self.back = False
+        elif self.back == False:
+            self.back = True
+            self.eliminate = False
+            self.select = False
+        else:
+            pass
+    
+    def draw(self, canvas):
+        topleft_x = self.obj_coord[0]-.465*CARD_SIZE[0]
+        topleft_y = self.obj_coord[1]-.45*CARD_SIZE[1]
+        topright_x = self.obj_coord[0]+.465*CARD_SIZE[0]
+        topright_y = self.obj_coord[1]-.45*CARD_SIZE[1]
+        bottomright_x = self.obj_coord[0]+.465*CARD_SIZE[0]
+        bottomright_y = self.obj_coord[1]+.45*CARD_SIZE[1]
+        bottomleft_x = self.obj_coord[0]-.465*CARD_SIZE[0]
+        bottomleft_y = self.obj_coord[1]+.45*CARD_SIZE[1]
+        
+        card_loc = (CARD_CENTER[0] + CARD_SIZE[0] * CARD_COLUMN.index(self.c_col) 
+                    + math.floor((CARD_COLUMN.index(self.c_col)+1)/2), 
+                    CARD_CENTER[1] + CARD_SIZE[1] * CARD_ROW.index(self.c_row))          
+
+        if (self.eliminate == True and self.secret_card == False):
+            canvas.draw_polygon([[topleft_x, topleft_y],
+                                [topright_x, topright_y],
+                                [bottomright_x, bottomright_y],
+                                [bottomleft_x, bottomleft_y]], 2.5, "Grey", "Green")
+        
+        elif (self.eliminate == True and self.secret_card == True):
+            canvas.draw_polygon([[topleft_x, topleft_y],
+                                [topright_x, topright_y],
+                                [bottomright_x, bottomright_y],
+                                [bottomleft_x, bottomleft_y]], 2.5, "Red", "Red")            
+            
+        elif self.eliminate == False:
+            if self.select == True:
+                canvas.draw_polygon([[topleft_x, topleft_y],
+                                     [topright_x, topright_y],
+                                     [bottomright_x, bottomright_y],
+                                     [bottomleft_x, bottomleft_y]], 2.5, "Grey", "Black")
+            elif self.select == False:
+                canvas.draw_polygon([[topleft_x, topleft_y],
+                                     [topright_x, topright_y],
+                                     [bottomright_x, bottomright_y],
+                                     [bottomleft_x, bottomleft_y]], 2.5, "Darkseagreen", "Darkseagreen")
+            else:
+                pass
+        else:
+            pass
+        
+        if self.back == False:
+            canvas.draw_image(self.theme_lookup(), card_loc, CARD_SIZE, self.obj_coord, [.8*CARD_SIZE[0],.8*CARD_SIZE[0]])
+        else:
+            canvas.draw_image(logo_image, logo_info.get_center(), logo_info.get_size(), 
+                              self.obj_coord, [.8*CARD_SIZE[0],.8*CARD_SIZE[0]])
+            
+        if self.eliminate == True:
+            canvas.draw_image(splash_image, splash_info.get_center(), splash_info.get_size(),
+                              self.obj_coord, [.8*CARD_SIZE[0],.8*CARD_SIZE[0]])
+        else:
+            pass
+
+    def selectable(self, click_pos):
+        self.select_logic = (dist_formula(self.obj_coord, click_pos) < self.radius 
+                             and self.select == False and self.eliminate == False)
+        if self.select_logic == True:
+            return True
+        else:
+            return False
+
+    def select_click(self, click_pos = None):
+        if click_pos == None:
+            self.select = True
+        else:
+            if self.select_logic == True:
+                self.select = True
+            else:
+                pass
+
+    def deselectable(self, click_pos):
+        self.deselect_logic = (dist_formula(self.obj_coord, click_pos) < self.radius 
+                             and self.select == True)
+        if self.deselect_logic == True:
+            return True
+        else:
+            return False
+        
+    def deselect_click(self, click_pos = None):
+        if click_pos == None:
+            self.select = False
+        else:
+            if self.deselect_logic == True:
+                self.select = False
+            else:
+                pass
+
+class Setup_Cards_IP:
+    """
+    Creates a quizzer 'game' object class and all its properties.
+    Takes a list of cards and tracks quizzer's hand and unselected cards.
+    """
+    
+    def __init__(self, card_list):
+        self.card_list = card_list
+        self.hand_list = []
+    
+    def __str__(self):
+        hand_string = []
+        
+        if len(self.hand_list) > 0:
+            for i in range(len(self.hand_list)):
+                hand_string.append(str(self.hand_list[i]))
+            return str(hand_string)
+        else:
+            return str(None)
+        #return a string representation of cards in hand
+    
+    def get_card_list(self):
+        return self.card_list
+    
+    def get_hand_list(self):
+        return self.hand_list
+    
+    def new_card_IDs(self):
+        max_len = len(self.card_list) + len(self.hand_list)
+        
+        temp_hand = []
+        final_rand_ls = set([])
+        
+        #Transform cards into tuples and adds to final_rand_ls
+        if len(self.hand_list) > 0:
+            for i in range(len(self.hand_list)):
+                nonrand_item = self.hand_list[i].get_cardID()
+                temp_hand.append(nonrand_item)
+                final_rand_ls.add(nonrand_item)
+        else:
+            pass
+        
+        #Creates the new random cards
+        while (len(final_rand_ls) < max_len): 
+            rand_item = tuple([random.randrange(0,17), 
+                               random.randrange(0,5)])
+            final_rand_ls.add(rand_item)
+            
+        #Removes the cards in hand from final_rand_ls
+        if len(self.hand_list) > 0:
+            for i in range(len(temp_hand)):
+                final_rand_ls.remove(temp_hand[i])
+        else:
+            pass
+        
+        #Changes all cards in play to new IDs
+        new_card_ls = list(final_rand_ls)
+        
+        for i in range(len(self.card_list)):
+            self.card_list[i].change_c_col(new_card_ls[i][0])
+            self.card_list[i].change_c_row(new_card_ls[i][1])
+        
+        #return self.card_list #For Testing
+        #return new_card_ls #For Testing
+    
+    def flip_all(self):
+        for i in range(len(self.card_list)):
+            self.card_list[i].flip_card()
+    
+    def add_hand(self, card):
+        if len(self.card_list) >= 1:
+            self.hand_list.append(card)
+            self.card_list.remove(card)
+        else:
+            pass
+        
+        #print self.card_list ##for testing
+    
+    def remove_hand(self, card):
+        if len(self.hand_list) >= 1:
+            self.hand_list.remove(card)
+            self.card_list.append(card)
+        else:
+            pass
+        
+        #print self.card_list ##for testing
+        
+    def eliminate_hand(self):
+        if len(self.hand_list) >= 1:
+            for i in range(len(self.hand_list)): 
+                self.hand_list[i].eliminate_card()
+        else:
+            pass
+    
+    def new_list(self, card_list):
+        self.card_list = card_list
+        self.hand_list = []
+        for i in range(len(self.card_list)):
+            self.card_list[i].deselect_click()
+            self.card_list[i].uneliminate_card()
+            self.card_list[i].make_nonsecret()
+        self.new_card_IDs()
+
+class Quizzer_Clicker:
+    """
+    Creates multiple Card objects. Takes a list and creates
+    a list of objects and puts them into play.
+    """
+    
+    def __init__(self, cards_inplay):
+        self.cards_inplay = cards_inplay
+                
+    def __str__(self):
+        return str(self.cards_inplay)
+
+    def single_click_loop(self, click_pos, game):
+        if gm_state.get_gmstate() == 1:
+            for i in range(len(self.cards_inplay)):
+                if (self.cards_inplay[i].selectable(click_pos) == True and
+                   len(game.get_hand_list()) <= 0):
+                    self.cards_inplay[i].select_click(click_pos)
+                    game.add_hand(self.cards_inplay[i])
+                elif self.cards_inplay[i].deselectable(click_pos) == True:
+                    self.cards_inplay[i].deselect_click(click_pos)
+                    game.remove_hand(self.cards_inplay[i])
+                elif (self.cards_inplay[i].selectable(click_pos) == True and
+                   len(game.get_hand_list()) > 0):
+                    game.get_hand_list()[0].deselect_click()
+                    game.remove_hand(game.get_hand_list()[0])
+                    self.cards_inplay[i].select_click(click_pos)
+                    game.add_hand(self.cards_inplay[i])
+                else:
+                    pass
+        else:
+            pass
+    
+    def click_loop(self, click_pos, game):
+        if gm_state.get_gmstate() == 2:
+            for i in range(len(self.cards_inplay)):
+                if (self.cards_inplay[i].selectable(click_pos) == True):
+                    self.cards_inplay[i].select_click(click_pos)
+                    game.add_hand(self.cards_inplay[i])
+                elif self.cards_inplay[i].deselectable(click_pos) == True:
+                    self.cards_inplay[i].deselect_click(click_pos)
+                    game.remove_hand(self.cards_inplay[i])
+                else:
+                    pass
+        else:
+            pass
+        
+        #Activate  / deactivate buttons: Select all, More, Theme
+        if (gm_state.get_gmstate() == 2 and 
+            len(game.get_card_list()) <= 0):
+            selectall_button.deactivate()
+            morecards_button.deactivate()
+            theme_button.deactivate()
+        elif (gm_state.get_gmstate() == 2 and 
+              len(game.get_card_list()) > 0):
+            selectall_button.activate()
+            morecards_button.activate()
+            theme_button.activate()
+        else:
+            pass
+        
+        #Activate / deactivate buttons: Next
+        if (gm_state.get_gmstate() == 1 and 
+            len(game.get_hand_list()) >= 1):
+            next_button.activate()
+        elif (gm_state.get_gmstate() == 1 and 
+            len(game.get_hand_list()) < 1):
+            next_button.deactivate()
+        elif (gm_state.get_gmstate() == 2 and 
+            len(game.get_card_list()) <= 0):
+            next_button.activate()
+        elif (gm_state.get_gmstate() == 2 and 
+            len(game.get_card_list()) > 0):
+            next_button.deactivate()
+        else:
+            pass
+    
+    def eliminate_loop(self, game):
+        if (gm_state.get_gmstate() == 1 and 
+            len(game.get_hand_list()) == 1):
+            game.get_hand_list()[0].make_secret()
+            game.eliminate_hand()
+        elif (gm_state.get_gmstate() == 2):
+            game.eliminate_hand()
+        else:
+            pass
+    
+    def selectall_loop(self, game):
+        for i in range(len(self.cards_inplay)):
+            if (self.cards_inplay[i].get_selected() == False and 
+               self.cards_inplay[i].get_eliminated() == False):
+                self.cards_inplay[i].select_click()
+                game.add_hand(self.cards_inplay[i])
+        selectall_button.deactivate()
+        morecards_button.deactivate()
+        theme_button.deactivate()
+        next_button.activate()
+    
+    def repick_loop(self, game):
+        for i in range(len(self.cards_inplay)):
+            game.remove_hand(self.cards_inplay[i])
+            self.cards_inplay[i].deselect_click()
+            self.cards_inplay[i].uneliminate_card()
+            self.cards_inplay[i].make_nonsecret()
+                        
+    def deselectall_loop(self, game): #### MAy not be necessary 
+        #what may be needed insead is a "uneliminate_loop"
+        for i in range(len(self.cards_inplay)):
+            if (self.cards_inplay[i].get_selected() == True and 
+               self.cards_inplay[i].get_eliminated() == False):
+                self.cards_inplay[i].deselect_click()
+                game.remove_hand(self.cards_inplay[i])
+        selectall_button.activate()
+        morecards_button.activate()
+        theme_button.activate()
+        next_button.deactivate()
+        
+    def morecards_loop(self, game):
+        game.new_card_IDs()
+    
+class Theme_Button:
+    """
+    Creates a theme button object and all its properties. 
+    Draws the button at the specified location. 
+    """
+    
+    def __init__(self, location = [0,0], visible = False, 
+         active = False):
+        self.location = location
+        self.visible = visible
+        self.active = active
+    
+    def __str__(self):
+        return str(self.location)
+    
+    def get_visible(self):
+        return self.visible
+    
+    def get_active(self):
+        return self.active
+    
+    def mk_visible(self):
+        self.visible = True
+        
+    def mk_invisible(self):
+        self.visible = False
+        
+    def activate(self):
+        self.active = True
+    
+    def deactivate(self):
+        self.active = False
+    
+    def draw(self, canvas):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        if self.active == True:
+            outline_color = "Yellow"
+            fill_color = "Darkseagreen"
+            text_color = "White"
+        else:
+            outline_color = "Grey"
+            fill_color = "Darkseagreen"
+            text_color = "Grey"
+        
+        if self.visible == True:
+            canvas.draw_polygon([[50+shift_x, 495+shift_y],
+                                [160+shift_x, 495+shift_y],
+                                [160+shift_x, 535+shift_y],
+                                [50+shift_x, 535+shift_y]],
+                                4, outline_color, fill_color)
+            canvas.draw_text("Change Theme",
+                            (56+shift_x, 520+shift_y),
+                            16, text_color)
+        else:
+            pass
+        
+        #Testing click location
+        #canvas.draw_circle([70,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([92,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([117,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([140,515], 22, 1, "Yellow","Yellow")
+
+    def theme_click(self, click_pos, game):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        obj_radius = 22
+        
+        click_logic = ((dist_formula([70+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([92+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([117+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([140+shift_x,515+shift_y], click_pos) < obj_radius) and 
+                       self.get_visible() == True and 
+                       self.get_active() == True)
+        
+        #print check_clicked #For testing
+        
+        if (click_logic == True):
+            print "Theme Change!" #For Testing
+        else:
+            #print "Not Clicked" #for testing
+            pass
+
+class SelectAll_Button:
+    """
+    Creates a select all button object and all its properties. 
+    Draws the button at the specified location. 
+    """
+    
+    def __init__(self, location = [0,0], visible = False, 
+         active = False):
+        self.location = location
+        self.visible = visible
+        self.active = active
+    
+    def __str__(self):
+        return str(self.location)
+    
+    def get_visible(self):
+        return self.visible
+    
+    def get_active(self):
+        return self.active
+    
+    def mk_visible(self):
+        self.visible = True
+        
+    def mk_invisible(self):
+        self.visible = False
+        
+    def activate(self):
+        self.active = True
+    
+    def deactivate(self):
+        self.active = False
+    
+    def draw(self, canvas):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        if self.active == True:
+            outline_color = "Yellow"
+            fill_color = "Darkseagreen"
+            text_color = "White"
+        else:
+            outline_color = "Grey"
+            fill_color = "Darkseagreen"
+            text_color = "Grey"
+        
+        if self.visible == True:
+            canvas.draw_polygon([[175+shift_x, 440+shift_y],
+                                [285+shift_x, 440+shift_y],
+                                [285+shift_x, 480+shift_y],
+                                [175+shift_x, 480+shift_y]],
+                                4, outline_color, fill_color)
+            canvas.draw_text("Select All",
+                            (192+shift_x, 466+shift_y),
+                            20, text_color)
+        else:
+            pass
+        
+        #Testing click location
+        #canvas.draw_circle([195,460], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([217,460], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([242,460], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([265,460], 22, 1, "Yellow","Yellow")
+
+    def selectall_click(self, click_pos, game):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        obj_radius = 22
+        
+        click_logic = ((dist_formula([195+shift_x,460+shift_y], click_pos) < obj_radius or
+                       dist_formula([217+shift_x,460+shift_y], click_pos) < obj_radius or
+                       dist_formula([242+shift_x,460+shift_y], click_pos) < obj_radius or
+                       dist_formula([265+shift_x,460+shift_y], click_pos) < obj_radius) and
+                       self.get_visible() == True and 
+                       self.get_active() == True)
+        
+        #print check_clicked #For testing
+        
+        if (click_logic == True and 
+            len(game.get_card_list()) > 0):
+            quizzer.selectall_loop(game1)
+            #print "Select All!" #For Testing
+        else:
+            #print "Not Clicked" #for testing
+            pass
+
+class MoreCards_Button:
+    """
+    Creates a More Cards button object and all its properties. 
+    Draws the button at the specified location. 
+    """
+    
+    def __init__(self, location = [0,0], visible = False, 
+         active = False):
+        self.location = location
+        self.visible = visible
+        self.active = active
+    
+    def __str__(self):
+        return str(self.location)
+    
+    def get_visible(self):
+        return self.visible
+    
+    def get_active(self):
+        return self.active
+    
+    def mk_visible(self):
+        self.visible = True
+        
+    def mk_invisible(self):
+        self.visible = False
+        
+    def activate(self):
+        self.active = True
+    
+    def deactivate(self):
+        self.active = False
+    
+    def draw(self, canvas):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        if self.active == True:
+            outline_color = "Yellow"
+            fill_color = "Darkseagreen"
+            text_color = "White"
+        else:
+            outline_color = "Grey"
+            fill_color = "Darkseagreen"
+            text_color = "Grey"
+        
+        if self.visible == True:
+            canvas.draw_polygon([[50+shift_x, 440+shift_y],
+                                [160+shift_x, 440+shift_y],
+                                [160+shift_x, 480+shift_y],
+                                [50+shift_x, 480+shift_y]],
+                                4, outline_color, fill_color)
+            canvas.draw_text("More Cards",
+                            (66+shift_x, 465+shift_y),
+                            16, text_color)
+        else:
+            pass
+        
+        #Testing click location
+        #canvas.draw_circle([70,460], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([92,460], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([117,460], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([140,460], 22, 1, "Yellow","Yellow")
+
+    def morecards_click(self, click_pos, game):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        obj_radius = 22
+        
+        click_logic = ((dist_formula([70+shift_x,460+shift_y], click_pos) < obj_radius or
+                       dist_formula([92+shift_x,460+shift_y], click_pos) < obj_radius or
+                       dist_formula([117+shift_x,460+shift_y], click_pos) < obj_radius or
+                       dist_formula([140+shift_x,460+shift_y], click_pos) < obj_radius) and
+                       self.get_visible() == True and 
+                       self.get_active() == True)
+        
+        #print check_clicked #For testing
+        
+        if (click_logic == True and 
+            len(game.get_card_list()) > 0):
+            quizzer.morecards_loop(game)
+            #print "More Cards!" #For Testing
+        else:
+            #print "Not Clicked" #for testing
+            pass
+
+class Next_Button:
+    """
+    Creates a Next button object and all its properties. 
+    Draws the button at the specified location. 
+    """
+    
+    def __init__(self, location = [0,0], visible = False, 
+         active = False):
+        self.location = location
+        self.visible = visible
+        self.active = active
+    
+    def __str__(self):
+        return str(self.location)
+    
+    def get_visible(self):
+        return self.visible
+    
+    def get_active(self):
+        return self.active
+    
+    def mk_visible(self):
+        self.visible = True
+        
+    def mk_invisible(self):
+        self.visible = False
+        
+    def activate(self):
+        self.active = True
+    
+    def deactivate(self):
+        self.active = False
+    
+    def draw(self, canvas):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        if self.active == True:
+            outline_color = "Yellow"
+            fill_color = "Darkseagreen"
+            text_color = "White"
+        else:
+            outline_color = "Grey"
+            fill_color = "Darkseagreen"
+            text_color = "Grey"
+        
+        if self.visible == True:
+            canvas.draw_polygon([[175+shift_x, 495+shift_y],
+                                [285+shift_x, 495+shift_y],
+                                [285+shift_x, 535+shift_y],
+                                [175+shift_x, 535+shift_y]],
+                                4, outline_color, fill_color)
+            canvas.draw_text("Next",
+                            (210+shift_x, 520+shift_y),
+                            20, text_color)
+        else:
+            pass
+        
+        #Testing click location
+        #canvas.draw_circle([195,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([217,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([242,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([265,515], 22, 1, "Yellow","Yellow")
+
+    def next_click(self, click_pos, game):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        obj_radius = 22
+        
+        click_logic = ((dist_formula([195+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([217+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([242+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([265+shift_x,515+shift_y], click_pos) < obj_radius) and
+                       self.get_visible() == True and 
+                       self.get_active() == True)
+        
+        #print check_clicked #For testing
+        
+        if click_logic == True:
+            quizzer.eliminate_loop(game)
+            gm_state.advance_gmstate(game)
+            #print "Next!" #For Testing
+        else:
+            #print "Not Clicked" #for testing
+            pass
+
+class StartGame_Button:
+    """
+    Creates a Start Game button object and all its properties. 
+    Draws the button at the specified location. 
+    """
+    
+    def __init__(self, location = [0,0], visible = False, 
+         active = False):
+        self.location = location
+        self.visible = visible
+        self.active = active
+        self.delay_display = True
+        self.age = 0
+        self.lifespan = 1
+    
+    def __str__(self):
+        return str(self.location)
+    
+    def get_visible(self):
+        return self.visible
+    
+    def get_active(self):
+        return self.active
+    
+    def get_delay_display(self):
+        return self.delay_display
+    
+    def mk_visible(self):
+        self.visible = True
+        
+    def mk_invisible(self):
+        self.visible = False
+        
+    def activate(self, delay_display = True):
+        self.active = True
+        self.delay_display = delay_display
+    
+    def deactivate(self):
+        self.active = False
+    
+    def draw(self, canvas):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        if (self.active == True and 
+            self.delay_display == True):
+            outline_color = "Grey"
+            fill_color = "Darkseagreen"
+            text_color = "Grey"
+            self.time_delay()
+        elif (self.active == True and 
+              self.delay_display == False):
+            outline_color = "Yellow"
+            fill_color = "Darkseagreen"
+            text_color = "White"
+        else:
+            outline_color = "Grey"
+            fill_color = "Darkseagreen"
+            text_color = "Grey"
+            
+        
+        if self.visible == True:
+            canvas.draw_polygon([[175+shift_x, 495+shift_y],
+                                [285+shift_x, 495+shift_y],
+                                [285+shift_x, 535+shift_y],
+                                [175+shift_x, 535+shift_y]],
+                                4, outline_color, fill_color)
+            canvas.draw_text("Start Game!",
+                            (183+shift_x, 520+shift_y),
+                            20, text_color)
+        else:
+            pass
+        
+        #Testing click location
+        #canvas.draw_circle([195,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([217,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([242,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([265,515], 22, 1, "Yellow","Yellow")
+
+    def startgame_click(self, click_pos, game):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        obj_radius = 22
+        
+        click_logic = ((dist_formula([195+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([217+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([242+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([265+shift_x,515+shift_y], click_pos) < obj_radius) and
+                       self.get_visible() == True and 
+                       self.get_active() == True and
+                       self.get_delay_display() == False)
+        
+        #print check_clicked #For testing
+        
+        if click_logic == True:
+            print message_code.encrypt(game.get_hand_list())
+            #print "Start Game!" #For Testing
+        else:
+            #print "Not Clicked" #for testing
+            pass
+        
+    def time_delay(self):
+        self.age += 0.1
+        if self.age > self.lifespan:
+            self.delay_display = False
+            self.age = 0
+        else:
+            pass
+        
+class Repick_Button:
+    """
+    Creates a Repick button object and all its properties. 
+    Draws the button at the specified location. 
+    """
+    
+    def __init__(self, location = [0,0], visible = False, 
+         active = False):
+        self.location = location
+        self.visible = visible
+        self.active = active
+    
+    def __str__(self):
+        return str(self.location)
+    
+    def get_visible(self):
+        return self.visible
+    
+    def get_active(self):
+        return self.active
+    
+    def mk_visible(self):
+        self.visible = True
+        
+    def mk_invisible(self):
+        self.visible = False
+        
+    def activate(self):
+        self.active = True
+    
+    def deactivate(self):
+        self.active = False
+    
+    def draw(self, canvas):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        if self.active == True:
+            outline_color = "Yellow"
+            fill_color = "Darkseagreen"
+            text_color = "White"
+        else:
+            outline_color = "Grey"
+            fill_color = "Darkseagreen"
+            text_color = "Grey"
+        
+        if self.visible == True:
+            canvas.draw_polygon([[50+shift_x, 495+shift_y],
+                                [160+shift_x, 495+shift_y],
+                                [160+shift_x, 535+shift_y],
+                                [50+shift_x, 535+shift_y]],
+                                4, outline_color, fill_color)
+            canvas.draw_text("Repick",
+                            (76+shift_x, 520+shift_y),
+                            20, text_color)
+        else:
+            pass
+        
+        #Testing click location
+        #canvas.draw_circle([70,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([92,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([117,515], 22, 1, "Yellow","Yellow")
+        #canvas.draw_circle([140,515], 22, 1, "Yellow","Yellow")
+
+    def repick_click(self, click_pos, game):
+        shift_x = self.location[0]
+        shift_y = self.location[1]
+        
+        obj_radius = 22
+        
+        click_logic = ((dist_formula([70+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([92+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([117+shift_x,515+shift_y], click_pos) < obj_radius or
+                       dist_formula([140+shift_x,515+shift_y], click_pos) < obj_radius) and 
+                       self.get_visible() == True and 
+                       self.get_active() == True)
+        
+        #print check_clicked #For testing
+        
+        if (click_logic == True):
+            quizzer.repick_loop(game)
+            gm_state.advance_gmstate(game, 1)
+            #print "Repick!" #For Testing
+        else:
+            #print "Not Clicked" #for testing
+            pass
+        
+class Game_State:
+    """
+    Creates a game state object that tracks the three
+    phases of the game, and tracks whether game started or not.
+    State 0: Splash screen
+    State 1: Select secret card.
+    State 2: Select other cards in the deck.
+    State 3: Go Back or Generate the Key to Launch Guesser Side.
+    """
+    
+    def __init__(self, started = False, gmstate = 0):
+        self.started = started
+        self.gmstate = gmstate
+        
+    def __str__(self):
+        return str(self.gmstate)
+    
+    def get_started(self):
+        return self.started
+    
+    def get_gmstate(self):
+        return self.gmstate
+            
+    def advance_gmstate(self, game, specify = None):    
+        if specify != None:
+            self.gmstate = specify
+        elif specify == None:
+            if self.gmstate < 3:
+                self.gmstate += 1
+            else:
+                self.gmstate = 0
+        else:
+            pass
+        
+        if self.gmstate == 1:
+            theme_button.activate()
+            theme_button.mk_visible()
+            selectall_button.deactivate()
+            selectall_button.mk_visible()
+            morecards_button.activate()
+            morecards_button.mk_visible()
+            next_button.deactivate()
+            next_button.mk_visible()
+            startgame_button.deactivate()
+            startgame_button.mk_invisible()
+            repick_button.deactivate()
+            repick_button.mk_invisible()
+        elif self.gmstate == 2:
+            theme_button.activate()
+            theme_button.mk_visible()
+            selectall_button.activate()
+            selectall_button.mk_visible()
+            morecards_button.activate()
+            morecards_button.mk_visible()
+            next_button.deactivate()
+            next_button.mk_visible()
+            startgame_button.deactivate()
+            startgame_button.mk_invisible()
+            repick_button.deactivate()
+            repick_button.mk_invisible()
+        elif self.gmstate == 3:
+            theme_button.deactivate()
+            theme_button.mk_invisible()
+            selectall_button.deactivate()
+            selectall_button.mk_invisible()
+            morecards_button.deactivate()
+            morecards_button.mk_invisible()
+            next_button.deactivate()
+            next_button.mk_invisible()
+            startgame_button.activate(delay_display = True)
+            startgame_button.mk_visible()
+            repick_button.activate()
+            repick_button.mk_visible()
+            
+            #quizzer.deselectall_loop(game)
+        else:
+            theme_button.deactivate()
+            theme_button.mk_invisible()
+            selectall_button.deactivate()
+            selectall_button.mk_invisible()
+            morecards_button.deactivate()
+            morecards_button.mk_invisible()
+            next_button.deactivate()
+            next_button.mk_invisible()
+            startgame_button.deactivate()
+            startgame_button.mk_invisible()
+            repick_button.deactivate()
+            repick_button.mk_invisible()
+        
+    def splash(self, click, game):
+        if self.started == False:
+            self.started = True
+            self.advance_gmstate(game, 1)
+            game.flip_all()
+        else:
+            pass
+
+    def restart(self, game): #not ready
+        self.started = False
+        self.advance_gmstate(game, 0)
+        #game.discard_hand()
+        
+        game.new_list([card1,card2,card3, 
+                      card4,card5,card6,
+                      card7,card8,card9])
+        
+        #premise.change_premise(code[4])
+        #premise.change_custom_prem(code[5])
+        
+        game.flip_all()
+        
+    def new(self, game):
+        self.started = False
+        game.new_list([card1,card2,card3, 
+                      card4,card5,card6,
+                      card7,card8,card9])
+        self.advance_gmstate(game, 0)
+        
+    def draw(self, canvas):
+    
+        if self.gmstate == 1:
+            canvas.draw_text("Instructions: Select your secret card!", [50, 450-23], 15, "White")
+        elif self.gmstate == 2:
+            canvas.draw_text("Now Select Other Cards in Your Deck!", [50, 450-23], 14, "White")
+        elif self.gmstate == 3:
+            canvas.draw_text("Now Lets Get Started!", [50, 450-23], 15, "White")
+        else:
+            pass
+
+class Encryptionizer:
+    """
+    Encryptionizer class that takes a list cards and randomizes and
+    generates an encrypted code.
+    
+    Example: 
+    emj;14;0;emj;7;0;emj;2;3;emj;0;4;emj;15;4;emj;11;2;emj;16;0;emj;0;1;emj;3;1;emj;0;4;p-def;None
+    """
+    
+    def __init__(self, code_string = None):
+        self.code_string = code_string
+    
+    def __str__(self):
+        return str(self.code_string)
+    
+    def get_code_string(self):
+        return self.code_string
+    
+    def encrypt(self, hand): #####################Bookmark
+        if len(hand) <= 0:
+            pass
+        else:
+            
+            #Process hand
+            string_ls = []
+            for i in range(len(hand)):
+                string_ls.append(hand[i].get_card_string())
+            
+            random.shuffle(string_ls)
+            hand_string = str(";".join(string_ls))
+            #return  hand_string #for testing
+            
+            #Process secret card
+            secret_string = None
+            for i in range(len(hand)):
+                if hand[i].get_secret_card() == True:
+                    secret_string = str(hand[i].get_card_string())
+                else:
+                    pass
+            #return secret_string #for testing
+            
+            #Process premise
+            p_string = str(premise.get_p_code())
+            p_cust_string = str(premise.get_custom_prem())
+            
+            #Process Final Code
+            self.code_string = (hand_string + ";" + secret_string + ";" + 
+                                p_string + ";" + p_cust_string)
+            
+            return self.code_string
+        
+###=======Define Event Handlers==========
+def innitiate_game():
+    gm_state.new(game1)
+    
+def print_cd_string(): #For Testing
+    print message_code.encrypt(game1.get_hand_list())
+    
+def advance_state(): #For Testing
+    gm_state.advance_gmstate(game1)
+    print gm_state
+    
+def restart_game():
+    if gm_state.get_started() == True:
+        gm_state.restart(game1)
+    else:
+        pass
+
+###=======Initializes Class Objects==========
+gm_state = Game_State()
+card1 = Card(1, 3, [17, 100], select = False, eliminate = False)
+card2 = Card(8, 1, [112, 100], select = False, eliminate = False)
+card3 = Card(16, 1, [205, 100], select = False, eliminate = False)
+card4 = Card(1, 1, [17, 200-5], select = False, eliminate = False, secret_card = True)
+card5 = Card(8, 2, [112, 200-5], select = False, eliminate = False)
+card6 = Card(6, 1, [205, 200-5], select = False, eliminate = False)
+card7 = Card(5, 3, [17, 300-10], select = False, eliminate = False)
+card8 = Card(9, 2, [112, 300-10], select = False, eliminate = False)
+card9 = Card(16, 1, [205, 300-10], select = False, eliminate = False)
+
+#key = Decryptionizer([card1,card2,card3, 
+                      #card4,card5,card6,
+                      #card7,card8,card9])
+
+premise = Premise()
+
+game1 = Setup_Cards_IP([card1,card2,card3, 
+                      card4,card5,card6,
+                      card7,card8,card9])
+
+quizzer = Quizzer_Clicker([card1,card2,card3,
+                           card4,card5,card6,
+                           card7,card8,card9])
+
+theme_button = Theme_Button([0,0], visible = False, active = False)
+selectall_button = SelectAll_Button([0,0], visible = False, active = False)
+morecards_button = MoreCards_Button([0,0], visible = False, active = False)
+next_button = Next_Button([0,0], visible = False, active = False)
+startgame_button = StartGame_Button([0,0], visible = False, active = False)
+repick_button = Repick_Button([0,0], visible = False, active = False)
+
+message_code = Encryptionizer()
+
+#lock_in = LockIn_Guesser(game1, [167, 475], [512*.2,512*.18])
+
+###=======Register Handlers and Initialize Frame==========
+def draw(canvas):
+    canvas.draw_image(iphone_image, iphone_info.get_center(), iphone_info.get_size(), 
+                      [CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2], [CANVAS_WIDTH, CANVAS_HEIGHT])
+
+    gm_state.draw(canvas)
+    premise.draw(canvas)
+    card1.draw(canvas)
+    card2.draw(canvas)
+    card3.draw(canvas)
+    card4.draw(canvas)
+    card5.draw(canvas)
+    card6.draw(canvas)
+    card7.draw(canvas)
+    card8.draw(canvas)
+    card9.draw(canvas)
+    
+    theme_button.draw(canvas)
+    selectall_button.draw(canvas)
+    morecards_button.draw(canvas)
+    next_button.draw(canvas)
+    startgame_button.draw(canvas)
+    repick_button.draw(canvas)
+    
+    # draw UI
+    #canvas.draw_text("Guess which card I picked:", [40, 109], 20, "White")
+    #canvas.draw_text("Instructions: Select Your Secret Card!", [50, 450-23], 15, "White")
+    #canvas.draw_text("Questions:", [130, 450-23], 15, "White")
+    #canvas.draw_text("Flags:", [235, 450-23], 15, "White")
+    #canvas.draw_text(str(game1.get_guess_count()), [105, 450-23], 15, "White")
+    #canvas.draw_text(str(questions_GLOBAL), [205, 450-23], 15, "White")
+    #canvas.draw_text(str(flags_GLOBAL), [280, 450-23], 15, "White")
+    
+    ##Drawing Different Buttons
+        #canvas.draw_polygon([[topleft_x, topleft_y],
+                             #[topright_x, topright_y],
+                             #[bottomright_x, bottomright_y],
+                             #[bottomleft_x, bottomleft_y]]
+                        #, line_thick, "Outline", "Fill")
+    
+    #Drawing Right Arrow
+    canvas.draw_polygon([[170+95, 95-30],
+                         [200+95, 110-30],
+                         [200+95, 110-30],
+                         [170+95, 125-30]], 1, "Yellow", "Yellow") #Triangle
+    
+    canvas.draw_polygon([[140+95, 100-30],
+                         [170+95, 100-30],
+                         [170+95, 120-30],
+                         [140+95, 120-30]], 1, "Yellow", "Yellow") #Box
+    
+    canvas.draw_polygon([[(170+2)+95, (95+3)-30],
+                         [(200-4)+95, (110)-30],
+                         [(200-4)+95, (110)-30],
+                         [(170+2)+95, (125-3)-30]], 1, "Darkseagreen", "Darkseagreen") #Triangle
+    
+    canvas.draw_polygon([[(140+2)+95, (100+2)-30],
+                         [(170+4)+95, (100+2)-30],
+                         [(170+4)+95, (120-2)-30],
+                         [(140+2)+95, (120-2)-30]], 1, "Darkseagreen", "Darkseagreen") #Box
+    
+    #Drawing Left Arrow
+    canvas.draw_polygon([[70-30, 110-30],
+                         [100-30, 95-30],
+                         [100-30, 125-30],
+                         [70-30, 110-30]], 1, "Yellow", "Yellow") #Triangle
+    
+    canvas.draw_polygon([[40+29, 100-30],
+                         [70+29, 100-30],
+                         [70+29, 120-30],
+                         [40+29, 120-30]], 1, "Yellow", "Yellow") #Box
+    
+    canvas.draw_polygon([[(70+2)-27, (110)-30],
+                         [(100-5)-27, (95+3)-30],
+                         [(100-5)-27, (125-3)-30],
+                         [(70+2)-27, (110)-30]], 1, "Darkseagreen", "Darkseagreen") #Triangle
+    
+    canvas.draw_polygon([[(40-2)+29, (100+2)-30],
+                         [(70-2)+29, (100+2)-30],
+                         [(70-2)+29, (120-2)-30],
+                         [(40-2)+29, (120-2)-30]], 1, "Darkseagreen", "Darkseagreen") #Box
+    
+    
+    #Select All Button
+    #canvas.draw_polygon([[175, 440],
+    #                     [285, 440],
+    #                     [285, 480],
+    #                     [175, 480]], 4, "Yellow", "Darkseagreen")
+    #canvas.draw_text("Select All", (192, 466), 20, "White")
+    
+    #Next Button                    
+    #canvas.draw_polygon([[175, 495],
+    #                     [285, 495],
+    #                     [285, 535],
+    #                     [175, 535]], 4, "Yellow", "Darkseagreen")
+    #canvas.draw_text("Next", (210, 520), 20, "White")
+    
+    #Change Theme
+    #canvas.draw_polygon([[50, 440],
+    #                     [160, 440],
+    #                     [160, 480],
+    #                     [50, 480]], 4, "Yellow", "Darkseagreen")
+    #canvas.draw_text("Change Theme", (56, 465), 16, "White")
+    
+    #More Cards                   
+    #canvas.draw_polygon([[50, 495],
+    #                     [160, 495],
+    #                     [160, 535],
+    #                     [50, 535]], 4, "Yellow", "Darkseagreen")
+    #canvas.draw_text("More Cards", (66, 520), 16, "White")
+    
+def mouse_click(click):
+    if gm_state.get_started() == False:
+        gm_state.splash(click, game1)
+    elif gm_state.get_started() == True:
+        quizzer.single_click_loop(click, game1)
+        quizzer.click_loop(click, game1)
+        theme_button.theme_click(click, game1)
+        selectall_button.selectall_click(click, game1)
+        morecards_button.morecards_click(click, game1)
+        next_button.next_click(click, game1)
+        startgame_button.startgame_click(click, game1)
+        repick_button.repick_click(click, game1)
+    else:
+        pass
+
+#initialize frame
+frame = simplegui.create_frame("Mind Match", CANVAS_WIDTH, CANVAS_HEIGHT)
+frame.set_canvas_background("Green")
+
+#create buttons and canvas callback
+frame.add_button("New Game", restart_game, 200)
+#frame.add_button("Questions +", questions_add, 200)
+#frame.add_button("Questions -", questions_sub, 200)
+#frame.add_button("Flags +", flags_add, 200)
+#frame.add_button("Flags -", flags_sub, 200)
+frame.set_draw_handler(draw)
+frame.set_mouseclick_handler(mouse_click)
+#frame.add_button("Next State", advance_state, 200) #For Testing
+#frame.add_button("Print Cards", print_cd_string, 200) #For Testing
+
+###=======Launch Game==========
+frame.start()
+innitiate_game()
+
+#game1.new_card_IDs()
+

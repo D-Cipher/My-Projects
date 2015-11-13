@@ -4,7 +4,7 @@ Exploring Familiarity and Policy Brand Perception
 
 *by: D'Cypher*
 
-Are the most well known organizations the most influential brands in Washington? That is the question we typically recieve from our partners. Our partners often characterize themselves as the "little guy" and believe that only the organizations with big brand names, enormous budgets, and an abundance of lobbyists and powerful connections can be effective inside the beltway. Our partners are often left wondering how they can compete in such an environment. However, our research shows that there is an oppertunity, and it might not be the case that the well know organizations are the most successful in Washington.
+Are the most well known organizations the most influential brands in Washington? That is the question we typically receive from our partners. Our partners often characterize themselves as the "little guy" and believe that only the organizations with big brand names, enormous budgets, and an abundance of lobbyists and powerful connections can be effective inside the beltway. Our partners are often left wondering how they can compete in such an environment. However, our research shows that there is an opportunity, and it might not be the case that the well know organizations are the most successful in Washington.
 
 The policy community is vast; even if an government affairs office can "buy" the influence of each member of this community for a mere $100, not even the biggest budget in the world could buy all of them. Money is only a small part of the equation in affecting policy. Money might be highly effective in an ad hoc basis, but it does not guarantee any long term impact. It is more important for an organization to have a profile that is distinguished, highly thought of, and well respected among the policy making community. That is they key to establishing a lasting presence in the matters of national public policy. 
 
@@ -16,7 +16,7 @@ The Policy Brands Roundtable (PBR) study is National Journal Research's strategi
 
 In the research design, we created a model that measures the policy community's perception of an organization's policy work, reflected what we call the Policy Brand Index score (PBI). Similar to consumer brand, PBI is designed to capture the perception and the overall policy profile of an organization. Further, we also measured each respondent's familiarity with the organization's policy work, measured on a 1 to 5 scale. This reflects how well known the organization is within the policy community. 
 
-This article will show how familiarity does not in itself translate to a strong policy brand performance, but rather the building strong relationships and having quality engagements with policy makers is much more important.
+This article will show how familiarity does not in itself translate to a strong policy brand performance, but rather it is more important for an organization to focus on high quality engagements and cultivate their existing relationships.
 
 ###Data Processing
 The analyses preform in this project were primarily executed in R. In order to replicate the results described in this overview, please first make sure the following codes run correctly in your R environment.
@@ -27,8 +27,8 @@ Important note: Please make sure to change all "setwd()" to your working directo
 #Loads the relevant data, combined data from Fall 2013 to Spring 2015.
 #NOTE: Make sure to change setwd() to your directory that contains the relevant data files.
 setwd("C:/Users/wcai/Desktop/5 Personal Projects/xSharable BLIND Data/PBR Coh 4 Data BLIND sharable/")
-AllCoh_resplv <- read.csv("Coh1to4 Combined 8_12_15 BLIND.csv")
-AllCoh_orglv <- read.csv("Coh 4 Comp lv Data 8_12_15 BLIND.csv")
+AllCoh_resplv <- read.csv("Coh1to4 Combined 8_25_15 BLIND.csv")
+AllCoh_orglv <- read.csv("Coh 4 Comp lv Data 8_25_15 BLIND.csv")
 require(plyr)
 require(dplyr)
 require(ggplot2)
@@ -112,17 +112,21 @@ While most of the findings in this overview were discovered in the Spring of 201
 
 ###Research Design
 
-In our study, we sampled senior level policy makers, specifically those that have worked on policy relevant to the organizations in our study. Only survey respondents that were familiar enough with a particular organization's policy work in Washington could evaluate that organization. Respondent had to have rated the organization a '3' or greater (scale of 1 to 5) on familiarity to be considered elgible to evaluate that organization. Respondents that indicated less than '3' were considered inelgible and were not allowed to evaluate. 
+In our study, we sampled senior level policy makers, specifically those that have worked on policy relevant to the organizations in our study. Only survey respondents that were familiar enough with a particular organization's policy work in Washington could evaluate that organization. Respondent had to have rated the organization a '3' or greater (scale of 1 to 5) on familiarity to be considered eligible to evaluate that organization. Respondents that indicated less than '3' were considered ineligible and were not allowed to evaluate. 
 
-If a respondent is elgible, he would be allowed to rate the organization on 16 performance metrics (called "drivers") and 4 perception measures (called "indices"). These 4 perception measures are:
+If a respondent is eligible, he would be allowed to rate the organization on 16 performance metrics (called "drivers") and 4 perception measures (called "indices"). These 4 perception measures are:
+
  * Respect - respect for the organization's role in the public debate
+
  * Consideration - genuine consideration of the organization's positions on issues
+
  * Influence - organization's views influencing policy maker's views favorably
+
  * Sharing - the willingness of the policy maker to seek out or share the organization's opinion on issues
 
-The Policy Brand Index score (PBI) is a composite of these four perception measures. This overview will primarily focus on PBI score and the familiarity rating. For more detailed explaination of the PBI model and how it was developed, please refer to the articles "What is Policy Brand (Part 1)" and "(Part 2)". 
+The Policy Brand Index score (PBI) is a composite of these four perception measures. This overview will primarily focus on PBI score and the familiarity rating. For more detailed explanation of the PBI model and how it was developed, please refer to the articles "What is Policy Brand (Part 1)" and "(Part 2)". 
 
-With regard to survey administration, we did our best to make sure that each of the organizations in the study had atleast 100 evaluations from different policy influentials, so that there are no issues with low responses or unreliable Policy Brand Scores for any particular organization.
+With regard to survey administration, we did our best to make sure that each of the organizations in the study had at least 100 evaluations from different policy influentials, so that there are no issues with low responses or unreliable Policy Brand Scores for any particular organization.
 
 The following is a histogram showing the distribution of Ns across all of the organizations studied:
 
@@ -139,9 +143,9 @@ ggplot(data = Latestcoh_Orgs, aes(x=Responses.CL)) +
 
 ###Policy Brand Perception and Number of People Familiar with the Brand
 
-As discussed in the previous section, we are able to gauge an organization's general familiarity among respondents by looking at the percentage of our sample respondents that were elgible to rate the organization. We called this statistic: "Precentage of Total Respondents Familiar with the Organization" or "Percent Familiar" for short. 
+As discussed in the previous section, we are able to gauge an organization's general familiarity among respondents by looking at the percentage of our sample respondents that were eligible to rate the organization. We called this statistic: "Percentage of Total Respondents Familiar with the Organization" or "Percent Familiar" for short. 
 
-To illistrate: if an organization has a 60% Percent Familiar, that means of all the respondents that were asked (on a 1 to 5 scale) how familiar they were with that organization's policy work, 60% gave it a '3' or better. 
+To illustrate: if an organization has a 60% Percent Familiar, that means of all the respondents that were asked (on a 1 to 5 scale) how familiar they were with that organization's policy work, 60% gave it a '3' or better. 
 
 The following is a plot of the relationship (or lack thereof) between the Percent Familiar and the Policy Brand Index score:
 
@@ -160,7 +164,7 @@ qplot(Latestcoh_Orgs$Percent.Familiar.CL,Latestcoh_Orgs$Composite.CL,
   ggtitle("No Relationship b/w PBI and Organization Familiarity\n(All Organizations, All Four Studies)")
 ```
 
-The following is the same plot, but isolating only organizations from the our latest study (Spring 2015), and splitting out Assocations and Corportations:
+The following is the same plot, but isolating only organizations from the our latest study (Spring 2015), and splitting out Associations and Corporations:
 
 ```{r message=FALSE, warning=FALSE}
 ###====Coh4: Corps and Asso PBI vs Familiarity
@@ -192,19 +196,19 @@ grid.arrange(allasso_plot, allcorp_plot, ncol=2)
 
 ```
 
-From these plots, there does not appear to be any direct relationship between organizational familiarity and Policy Brand. An organization that is recongnized by many respondents can preform just as well or just as poorly as an organization that is relatively unknown. 
+From these plots, there does not appear to be any direct relationship between organizational familiarity and Policy Brand. An organization that is recognized by many respondents can preform just as well or just as poorly as an organization that is relatively unknown. 
 
-As shown in the Research Design section earlier, the majority of our sampled organization had around 100 to 120 evaluations each. Hence, the findings are not a result of an unreliable number of the evaluations. Further, there does not seem to be any time effect or organization type (whether corporation or assocation) effect that is confounding the finding. Although, associations seem to have a slightly stronger effect, the r-squared values are so small that it would be a strech to suggest a relationship.
+As shown in the Research Design section earlier, the majority of our sampled organization had around 100 to 120 evaluations each. Hence, the findings are not a result of an unreliable number of the evaluations. Further, there does not seem to be any time effect or organization type (whether corporation or association) effect that is confounding the finding. Although, associations seem to have a slightly stronger effect, the r-squared values are so small that it would be a stretch to suggest a relationship.
 
-There is an inharent research design decision that could pose a problem to this particular analysis. It has to do with the assumptions of PBI, specifically the fact that there is an elgibility requirement for evaluating an organization's PBI. Only respondents familiar enough with the organization's policy work are allowed to evaluate that organization. Hence, the views of individuals with below typical familiarity are not captured in the index. 
+There is an inherent research design decision that could pose a problem to this particular analysis. It has to do with the assumptions of PBI, specifically the fact that there is an eligibility requirement for evaluating an organization's PBI. Only respondents familiar enough with the organization's policy work are allowed to evaluate that organization. Hence, the views of individuals with below typical familiarity are not captured in the index. 
 
-The fear is that a relationship may exist if our PBI score had been designed differently, specifically by allowing individuals that lack familiarity to evaluate the organization. While there isn't a conterfactual to prove or disprove this criticism, further analysis will show that this senario is unlikely. More on this later.
+The fear is that a relationship may exist if our PBI score had been designed differently, specifically by allowing individuals that lack familiarity to evaluate the organization. While there isn't a counterfactual to prove or disprove this criticism, further analysis will show that this scenario is unlikely. More on this later.
 
 ###The Simpson's Paradox Between Familiarity and PBI
 
 While overall organization familiarity does not appear to have any relationship to PBI, the story is not so simple after splitting the data based the spectrum of familiarity. 
 
-The following is a boxplot of organizations' PBI score at each level of familiarity:
+The following is a box-plot of organizations' PBI score at each level of familiarity:
 
 ```{r message=FALSE, warning=FALSE}
 ###====Organizations' PBI Score at Each Level of Familiarity
@@ -245,11 +249,11 @@ After we split the PBI scores for each organization by the respondents *based on
 
 The series of box-plots describe the range of scores given by respondents that indicated either a '3', '4', or '5' on familiarity for each of the organizations studied. In general, the higher the respondent's familiarity rating the higher they evaluated organizations. In addition, the differences among these groups are all statistically significant. Hence, the insight seems to be that the more familiar a respondent is with an organization's work the higher he tends to rate that organization.
 
-The spread of scores also seems to increase. This suggest that as familiarity increases respondents also breed more extreme views toward an organization. Although they tend tp be more positive than lesser familiar respondents.
+The spread of scores also seems to increase. This suggest that as familiarity increases respondents also breed more extreme views toward an organization. Although they tend to be more positive than lesser familiar respondents.
 
-These findings seem contridictory to the previous analysis that suggests a lack of relationship between how well know an organization is and it's performance. Intuitively, there appears to be a contridiction here because more well known organizations should have more familiar respondents represented. Since those respondents tend to rate higher, it logically should follow that well know organizations would score higher. However, the data does not reflect such logic.
+These findings seem contradictory to the previous analysis that suggests a lack of relationship between how well know an organization is and it's performance. Intuitively, there appears to be a contradiction here because more well known organizations should have more familiar respondents represented. Since those respondents tend to rate higher, it logically should follow that well know organizations would score higher. However, the data does not reflect such logic.
 
-This is an emperical case of the effect known as the Simpson's Paradox. This statistical paradox describes a phenomanon in which trends appear when the data is grouped a certain way, but disappears when aggrigated or grouped a different way. Ofter times there is a lurking variable causing of the apparent contridiction.
+This is an empirical case of the effect known as the Simpson's Paradox. This statistical paradox describes a phenomenon in which trends appear when the data is grouped a certain way, but disappears when aggregated or grouped a different way. Often times there is a lurking variable causing of the apparent contradiction.
 
 Just to show that having a higher number of more familiar respondents does not translate to higher PBI, These are three charts of the number of '3s', '4s', and '5s', who gave PBI evaluations, plotted against PBI scores at each level of familiarity: 
 
@@ -264,11 +268,11 @@ ggplot(data = cohL_Orgs_FamCut_MELT, aes(x=Fam.Ns, y=Composite.score))+
   ggtitle("No Relationship b/w Number of \n High Familiarity Ratings and Higher Scores")
 ```
 
-The three pannels above describe the number of ratings each organization recieved against it's PBI score at different familiarity levels. For example, the point on the far right of the far right pannel represents an organization that had just shy of 80 respondents that gave it '5' on familiarity. Those 80 respondents graded the organization just above 60 out of 100 on PBI. 
+The three panels above describe the number of ratings each organization received against it's PBI score at different familiarity levels. For example, the point on the far right of the far right panel represents an organization that had just shy of 80 respondents that gave it '5' on familiarity. Those 80 respondents graded the organization just above 60 out of 100 on PBI. 
 
-By splitting out PBI scores and number of familiarity ratings in this way bypasses any potential confounding issues that might exist mentioned in the previous section (the issue regarding elgibility requirements for evaluating PBI). Still, the finding holds, having more very familiar respondents does not equate to higher PBI scores. 
+By splitting out PBI scores and number of familiarity ratings in this way bypasses any potential confounding issues that might exist mentioned in the previous section (the issue regarding eligibility requirements for evaluating PBI). Still, the finding holds, having more very familiar respondents does not equate to higher PBI scores. 
 
-There is another observation noted in comparing these three pannels: the difference in dispursion among the three plots. There is a clear difference in the range of the PBI distribution as we move from '3s' to '4s' to '5s'. The more familiar the respondents are, the greater the increase in spread among PBI evaluations. 
+There is another observation noted in comparing these three panels: the difference in dispersion among the three plots. There is a clear difference in the range of the PBI distribution as we move from '3s' to '4s' to '5s'. The more familiar the respondents are, the greater the increase in spread among PBI evaluations. 
 
 Even though in the aggregate, the regression shows a lack of relationship, the difference in the spread of scores becomes evident when the data is split. This reveals a central clue to the lurking variable, which seems to have to do with the magnitude of the disparity between respondents. At the high levels of familiarity respondents seem to have more extreme views, whereas at the typical level of familiarity, respondents evaluations are much less spread. 
 
@@ -300,7 +304,7 @@ fam5s_plot <- ggplot(data = cohL_Orgs_FamCut, aes(x=Fam5Composite_Avg, y=Diff.5s
 grid.arrange(fam3s_plot, fam5s_plot, nrow=2)
 ```
 
-These two graphs show the divide between the respondents at '3' and '5' familiarity. It seems the most familiar respondents have more impact on the disparity between the scores. As shown in the plots the differeces are driven by the increase in the most familiar respondents rather than decreases in the typically familiar respondents. The typically familiar respondents remains almost the same as the difference increases. 
+These two graphs show the divide between the respondents at '3' and '5' familiarity. It seems the most familiar respondents have more impact on the disparity between the scores. As shown in the plots the differences are driven by the increase in the most familiar respondents rather than decreases in the typically familiar respondents. The typically familiar respondents remains almost the same as the difference increases. 
 
 The lurking variable is the extremeness in the scores among the more the familiar respondents. Specifically, it seems certain organizations are more able than others to breed extreme, but generally positive views among their higher familiar respondents.
 
@@ -338,7 +342,7 @@ ggplot(data = cohL_Orgs_FamCut_MELT3, aes(x=Composite.PercntDiff, group=Key)) +
   ggtitle("Distribution of PBI and the Familarity Premium\n")
 ```
 
-These two density plots show the way in which PBI scores and the familiarty premium are distributed. The familiarity premium measures the difference in scores given by high familiarity respondents and the typical familiarity respondents. 
+These two density plots show the way in which PBI scores and the familiarity premium are distributed. The familiarity premium measures the difference in scores given by high familiarity respondents and the typical familiarity respondents. 
 
 The y-axis is the percentage difference from the average organization's PBI score. Zero in this chart represents the average score on PBI and each point is distance from the average organization's score. 
 
@@ -346,21 +350,21 @@ The typical organization tends to have a familiarity premium of about 17% above 
 
 The question is: what does it mean for an organization to have a high familiarity premium?
 
-In literal terms, it means: policy influentials that know and engage with an organization regularily will develop a more positive view of that organization; while, policy influential that do not know the organization as well and have little engagement with it, do not have as sharp of an opinion of the organization.
+In literal terms, it means: policy influentials that know and engage with an organization regularly will develop a more positive view of that organization; while, policy influential that do not know the organization as well and have little engagement with it, do not have as sharp of an opinion of the organization.
 
-Although, an organization that has a high familiarity premium equates to better scores among its more familiar respondents, this is not necessary "a good thing." Familiarity premium is similar to untapped potential. Potential is generally adventageous, however, an excess of untapped potential begs the question of "why it remains untapped?" 
+Although, an organization that has a high familiarity premium equates to better scores among its more familiar respondents, this is not necessary "a good thing." Familiarity premium is similar to untapped potential. Potential is generally advantageous, however, an excess of untapped potential begs the question of "why it remains untapped?" 
 
-In the same way, an organization that is reveared among policy makers that are highly familiar with it, but remains lukewarm among typically familiar policy makers reflects a missed oppertunity. 
+In the same way, an organization that is revered among policy makers that are highly familiar with it, but remains lukewarm among typically familiar policy makers reflects a missed opportunity. 
 
-For example, it could be that the particular organization enjoys a small group of "super fans," and no matter what this group of influentials have a quantifiablly higher perception of the organization. It could also be that while the organization just does a good job cultivating the relationships that they have, it fails at cultivating new relationships or lacks the expertise in translating their message boardly across the policy community.
+For example, it could be that the particular organization enjoys a small group of "super fans," and no matter what this group of influentials have a quantifiably higher perception of the organization. It could also be that while the organization just does a good job cultivating the relationships that they have, it fails at cultivating new relationships or lacks the expertise in translating their message broadly across the policy community.
 
-The challenges for different organizations vary greatly. Highly visible, well established government affairs offices face different problems compared to newly created shops. Industry differences also require a very different set of engagement strategies. The banking industry faces far more hostility and prejudices than reletive newcomers in the policy space, such as the internet companies. There is not a "one-size fits all" answer to why a particular organization has a high or low familiarity premium. Hence, familiarity premium metric cannot perscribe a solution, rather it should be used as an warning indicator of a possible problem or oppertunity. It acts as a thermometer where having too high or too low of a suplus suggests that there could be an engagement or messaging issue.
+The challenges for different organizations vary greatly. Highly visible, well established government affairs offices face different problems compared to newly created shops. Industry differences also require a very different set of engagement strategies. The banking industry faces far more hostility and prejudices than relative newcomers in the policy space, such as the internet companies. There is not a "one-size fits all" answer to why a particular organization has a high or low familiarity premium. Hence, familiarity premium metric cannot prescribe a solution, rather it should be used as an warning indicator of a possible problem or opportunity. It acts as a thermometer where having too high or too low of a surplus suggests that there could be an engagement or messaging issue.
 
 ###Conclusion
 
 It's not that organizations with more familiar respondents do better, but rather respondents seem to develop more extreme views toward certain organizations the more familiar they are with them.
 
-For the organizations that have a large pool of individuals that know them, increasing the number of individuals that know them will not lead to any more increases in their overall performance. They should rather look at the difference between high and low familiar respondents, the familiarity premium. If, for example, the gap between their high familiarity and typical familiarity respondents are significant, there might be a problem with messaging where their message is just not reaching the typical policy influencer. While, for the organizations that have very few individuals that know them, perhaps the root issue is visibility and conlcusion should be to increase their overall pool of very familiar influencials. 
+For the organizations that have a large pool of individuals that know them, increasing the number of individuals that know them will not lead to any more increases in their overall performance. They should rather look at the difference between high and low familiar respondents, the familiarity premium. If, for example, the gap between their high familiarity and typical familiarity respondents are significant, there might be a problem with messaging where their message is just not reaching the typical policy influencer. While, for the organizations that have very few individuals that know them, perhaps the root issue is visibility and conclusion should be to increase their overall pool of very familiar influencials. 
 
 ###Program Specifications
 ```{r message=FALSE, warning=FALSE, echo=FALSE}

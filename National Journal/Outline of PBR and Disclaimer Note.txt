@@ -1,9 +1,10 @@
 Cohort 1: What is policy brand? If we had to build a government affairs office what would we focus on?
 ["Model Overview" - part 1] -> DONE
-["Model Overview" - part 2]
+["Model Overview" - part 2] (Composite and driver impact)
 ----[Factor analysis] - to get the composite
 ----[Impact analysis] - importance of each driver and index
 
+["Paper on Relative Weights"]
 
 **While these insights were discovered in the cohort 1 data (fall 2013). They are re-affirmed in cohort 4 (spring 2015)
 using the entire dataset up to spring 2014.
@@ -12,7 +13,8 @@ using the entire dataset up to spring 2014.
 Cohort 2: Demographic factors that impact scores.
 Intro: In this study...
 
-Explore Familiarity and Policy Brand index (need to get the familiarity column in the mastersheet correct)
+Explore Familiarity and Policy Brand index -> DONE
+
 Link between Lobbying Resources and PAC activity to Policy Brand not found.
 
 Democrats vs Republicans perception of policy brand?

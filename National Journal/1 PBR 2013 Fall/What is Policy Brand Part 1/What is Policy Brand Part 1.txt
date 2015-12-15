@@ -2,7 +2,6 @@ What is Policy Brand? (Part 1)
 ===
 ####An overview of Policy Brands Roundtable's research model and its development
 
-*by: D'Cypher*
 
 With the decline of tenure for Congressional members and staff, the adoption of new technologies within government, and expectations of data-driven decision-making, there is a striking new importance of developing image, profile, and sentiment. Organizations are realizing that money is only a small part of the equation in affecting policy. Money might be highly effective in an ad hoc basis, but it does not guarantee any long term impact. It is more important for an organization to have a profile that is distinguished, highly thought of, and well respected among the policy making community. 
 
@@ -45,7 +44,7 @@ Catagories <- read.table("Catagories PBR Test.txt")
 ```
 
 ###The Goal of Testing
-Over the course of two years, partnering with APCO International, National Journal Research conducted three major rounds of studies that were precursors to the Policy Brands Roundtable initiative. These precursors sought to answer two questions: 1) Which organizational activities do policy influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped?
+Over the course of two years, National Journal Research conducted three major rounds of studies that were precursors to the Policy Brands Roundtable initiative. These precursors sought to answer two questions: 1) Which organizational activities do policy influentials care most about? and 2) How is an individual's perception of an organization's policy work shaped?
 
 The first round of testing, we conducted over 380 in depth interviews with policy influentials to try to find out what influentials care about. Based on these interviews, our previous Best Practice research, and other various research studies, we initially identified around 50 core activities and 6 measures of perception. 
 
@@ -128,9 +127,7 @@ title("Graphic 2: Relationship Among the 56 Measures (N = 211)", line = 2.5)
 ```
 
 ###Second Round of Testing
-In the second round of testing, we conducted another survey looking at a 20 measure subset. 
-
-The data collected from this survey is in the file named: "AsoRep full launch 7_28_15 BLIND.csv".
+In the second round of testing, we conducted another survey looking at a 20 measure subset. The data collected from this survey is in the file named: "AsoRep full launch 7_28_15 BLIND.csv".
 
 The following is a visualization of the variables in the second round of testing:
 ```{r message=FALSE, warning=FALSE}
@@ -179,7 +176,9 @@ In the third round of testing we tested another subset of 37 variables. A couple
  
  * Certain variables were excluded since corporations did not engage in those activities. These were primarily member related and the industry stewardship variables that are only relevant to associations.
  
- * Additional variables were added that only applied to corporations such as the corporate citizenship driver measures. Also, several additional index measures were introduced that originated in National Journal's 2011 Best Brands study. The Best Brands study was an extensive research initiative that looked at the respected corporate brands in DC at the time. The variables added to this round of testing from the Best Brands included: Respect, Integrity, Influence, Personal Lobbyist, Agreement. 
+ * Additional variables were added that only applied to corporations such as the corporate citizenship driver measures which originated from the PBR test survey. 
+
+ * Also, several additional index measures were introduced that originated in National Journal’s 2011 Best Brands study. The Best Brands study was an extensive research initiative that looked at the respected corporate brands in DC at the time. The variables added to this round of testing from the Best Brands included: Respect and Influence.
 
 ```{r message=FALSE, warning=FALSE}
 #NOTE: Make sure to change setwd() to your directory that contains the relevant data files.

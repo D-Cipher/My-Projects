@@ -1,0 +1,781 @@
+"""
+Mind Match Program - Guesser Side
+Enjoy the game :)
+Yours, D'Cypher
+
+Example Input Key:
+emj;8;0;emj;4;1;emj;6;3;emj;1;1;emj;9;2;emj;11;1;emj;5;2;emj;8;3;emj;7;2;emj;6;3;p-def;Random Random
+
+"""
+
+import random
+import math
+import kivy
+
+from kivy.app import App
+from kivy.core.window import Window
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from kivy.graphics import Color, Rectangle, Line
+from kivy.loader import Loader
+from kivy.uix.image import Image
+from kivy.core.image import Image as CoreImage
+from kivy.uix.label import Label
+from kivy.logger import Logger
+from kivy.metrics import Metrics
+from kivy.clock import Clock
+
+import premise_dict as premise_dictionary
+
+###============Helper Functions=============
+def dist_formula(p,q):
+    #Distance Formula
+    return math.sqrt((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2)
+
+###============Define Class Objects=============
+class BG_Sprite(Image):
+    """
+    Creates the background image for the Canvas which the game classes will be drawn on.
+    Made to be adjusted for Iphone screen sizes. (Background image of Flappy Birds)
+    """
+    def __init__(self, **kwargs):
+        #super(BG_Sprite, self).__init__(**kwargs) #Does not Account for Screen Adjustment
+        #self.size = self.texture_size #Does not Account for Screen Adjustment
+        #self.size = (200,200) #for testing ONLY
+
+        super(BG_Sprite, self).__init__(allow_stretch=True, **kwargs)
+        self.texture.mag_filter = 'nearest'
+        w, h = self.texture_size
+        self.size = (PARAMS.scale * w, PARAMS.scale * h)
+
+class Premise(Widget):
+    """
+    Creates the premise class object and all of it's properties.
+    Takes a code and looks it up in a dictionary. Draws the
+    returned value
+    """
+
+    def __init__(self, p_code = "p-strangtouch", pos = (17,385),custom_text = "None"):
+        super(Premise, self).__init__()
+
+        self.pos = (pos[0]* PARAMS.scale, pos[1]* PARAMS.scale)
+        self.size = (PARAMS.scale * 210, PARAMS.scale * 50)
+
+        self.p_code = p_code
+        self.custom = custom_text
+
+    def get_p_code(self):
+        return self.p_code
+
+    def change_premise(self, p_code):
+        self.p_code = p_code #Note: Decryptionizer returns a list.
+
+    def get_premise(self):
+        return premise_dictionary.p_lookup(self.p_code)
+
+    def change_custom_prem(self, text):
+        self.custom = str(text) #Note: Decryptionizer returns a list.
+
+    def get_custom_prem(self):
+        return self.custom
+
+    def draw(self):
+        with self.canvas:
+            self.canvas.clear()
+
+            if self.p_code == "p-custom":
+                self.over_label = Label(center=self.center, text=self.get_custom_prem(),
+                                    font_size=14*PARAMS.scale, text_size=self.size, bold=True)
+            else:
+                self.over_label = Label(center=self.center, text=self.get_premise(),
+                                    font_size=14*PARAMS.scale, text_size=self.size, bold=True)
+
+class Card(Widget):
+    """
+    Creates the card class object and all of it's properties.
+    Takes coordinates of the card and position and draws the card on the canvas.
+
+    Uses a texture lookup from a sprite sheet. The texture is lookup based on the coordinates,
+    then uses ".texture.get_region" to set as the texture of a Rectangle.
+    """
+    def __init__(self, col_input = 0, row_input = 0, pos = (100,100), theme = "emj", select = False,
+                 eliminate = False, secret_card = False, back = True, lifespan = None,
+                 animated = False, radius = 45):
+        super(Card, self).__init__()
+
+        # Image Specs
+        self.card_center = (16, 386)
+        self.card_size = (80, 85)
+
+        #Object Properties
+        self.zoom = .7  * PARAMS.scale #Adjusted size: (56, 59.5)
+        self.pos = (pos[0]* PARAMS.scale, pos[1]* PARAMS.scale)
+        self.obj_coord = [self.pos[0] +(self.card_size[0]*self.zoom)/2,
+                          self.pos[1] +(self.card_size[1]*self.zoom)/2]
+
+        self.c_col = col_input
+        self.c_row = row_input
+
+        self.select = select
+        self.eliminate = eliminate
+        self.radius = radius
+
+        self.theme = theme
+        self.secret_card = secret_card
+        self.back = back
+
+    def get_cardID(self):
+        return tuple([self.c_col,self.c_row])
+
+    def get_card_string(self):
+        return str(self.theme) +";"+ str(self.c_col) +";"+ str(self.c_row)
+
+    def get_radius(self):
+        return self.radius
+
+    def get_selected(self):
+        return self.select
+
+    def get_eliminated(self):
+        return self.eliminate
+
+    def get_secret_card(self):
+        return self.secret_card
+
+    def get_theme(self):
+        return self.theme
+
+    def change_c_col(self, c_col):
+        self.c_col = c_col
+
+    def change_c_row(self, c_row):
+        self.c_row = c_row
+
+    def change_theme(self, theme):
+        self.theme = theme
+
+    def theme_lookup(self):
+        dict_theme = {"emj": "images/theme_emoji.jpg",
+                      "emj2": "images/mobile.png"}
+
+        return dict_theme[self.theme]
+
+    def make_secret(self):
+        self.secret_card = True
+
+    def make_nonsecret(self):
+        self.secret_card = False
+
+    def eliminate_card(self):
+        self.eliminate = True
+        if self.select == True:
+            self.select = False
+        else:
+            pass
+
+    def uneliminate_card(self):
+        self.eliminate = False
+
+    def flip_card(self):
+        if self.back == True:
+            self.back = False
+        elif self.back == False:
+            self.back = True
+            self.eliminate = False
+            self.select = False
+        else:
+            pass
+
+    def draw(self):
+        #Card Locator
+        card_column = range(17)
+        card_row = range(5)
+        card_loc = (self.card_center[0] + self.card_size[0] * card_column.index(self.c_col)
+                    + math.floor((card_column.index(self.c_col)+1)/2),
+                    self.card_center[1] - self.card_size[1] * card_row.index(self.c_row))
+
+        #Texture Specs
+        if self.back == False:
+            self.texture = CoreImage(self.theme_lookup()
+                                     ).texture.get_region(card_loc[0], card_loc[1],
+                                                          self.card_size[0], self.card_size[1])
+            self.size = (self.card_size[0]*self.zoom, self.card_size[1]*self.zoom)
+        else:
+            self.texture = CoreImage("images/logo.jpeg"
+                                     ).texture.get_region(0, 0, 175, 175)
+            self.size = (self.card_size[0]*self.zoom, self.card_size[1]*self.zoom)
+
+        #Canvas Draw
+        with self.canvas:
+            self.canvas.clear()
+
+            if (self.eliminate == True and self.secret_card == True): #Secret Card Revealed
+                self.rect_bg = Rectangle(
+                    pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                    size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.8, 0, 0, 1))
+
+                self.rect_bg = Rectangle(
+                    pos=self.pos, size=self.size, texture=self.texture, color=Color(.8, .8, .8, 1))
+
+            elif (self.eliminate == True and self.secret_card == False): #Non Secret Card Eliminated
+                self.rect_bg = Rectangle(
+                    pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                    size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.4, .4, .4, .5))
+
+                self.rect_bg = Rectangle(
+                    pos=self.pos, size=self.size, texture=self.texture, color=Color(.6, .6, .6, .7))
+
+            elif self.eliminate == False:
+                if self.select == True: #Selected
+                    self.rect_bg = Rectangle(
+                        pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                        size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(0.1, 0.1, .1, 1))
+
+                    self.rect_bg = Rectangle(
+                        pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+                elif self.select == False: #Normal
+                    self.rect_bg = Rectangle(
+                        pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                        size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.6, 1, .5, .7))
+
+                    self.rect_bg = Rectangle(
+                        pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+            #Line(circle=(self.pos[0]+self.size[0]/2, self.pos[1]+self.size[1]/2, 45)) #for testing
+
+        #-----------------NOTES-----------------------
+        #Colors for Each Card State:
+        #Normal: Light green = Color(.6, 1, .5, .7), White = Color(1, 1, 1, 1)
+        #Selected: Black = Color(0.1, 0.1, .1, 1), White = Color(1, 1, 1, 1)
+        #Eliminated: Transparent Dark grey = Color(.4, .4, .4, .5), Transparent Light grey = Color(.6, .6, .6, .7))
+        #Secret Card Revealed: Red = Color(.8, 0, 0, 1), Grey overlay = Color(.6, .6, .6, 1)
+        #Color(1, .5, .5, 1)
+
+    def selectable(self, click_pos):
+        self.select_logic = (dist_formula(self.obj_coord, click_pos.pos) < self.radius
+                             and self.select == False and self.eliminate == False)
+        if self.select_logic == True:
+            return True
+        else:
+            return False
+
+    def select_click(self, click_pos = None):
+        if click_pos == None:
+            self.select = True
+        else:
+            if self.select_logic == True:
+                self.select = True
+            else:
+                pass
+
+    def deselectable(self, click_pos):
+        self.deselect_logic = (dist_formula(self.obj_coord, click_pos.pos) < self.radius
+                             and self.select == True)
+        if self.deselect_logic == True:
+            return True
+        else:
+            return False
+
+    def deselect_click(self, click_pos = None):
+        if click_pos == None:
+            self.select = False
+        else:
+            if self.deselect_logic == True:
+                self.select = False
+            else:
+                pass
+
+class Guess_Clicker(object):
+    """
+    This is where all of the click logic for the cards resides. The rules of clicking is that the
+    player is allowed to select up to 3 cards at a time.
+
+    Basically takes a card list and tracks of when cards are removed from the list and placed into
+    a players hand and when cards are then removed from the players hand and placed back into the card list.
+
+    """
+
+    def __init__(self, card_list):
+        self.card_list = card_list
+        self.cards_in_game = []
+
+        for i in range(len(self.card_list)):
+            self.cards_in_game.append(self.card_list[i])
+
+        self.hand_list = []
+        self.guess_count = 0
+
+    def __str__(self):
+        return str(self.card_list + "," + self.hand_list)
+
+    def get_card_list(self):
+        return self.card_list
+
+    def get_cards_in_game(self):
+        return self.cards_in_game
+
+    def get_hand_list(self):
+        return self.hand_list
+
+    def get_guess_count(self):
+        return self.guess_count
+
+    def flip_all(self):
+        for i in range(len(self.card_list)):
+            self.card_list[i].flip_card()
+
+    def add_hand(self, card):
+        if len(self.card_list) >= 1:
+            self.hand_list.append(card)
+            self.card_list.remove(card)
+        else:
+            pass
+
+        #print(self.card_list) ##for testing
+
+    def remove_hand(self, card):
+        if len(self.hand_list) >= 1:
+            self.hand_list.remove(card)
+            self.card_list.append(card)
+        else:
+            pass
+
+        #print(self.card_list) ##for testing
+
+    def discard_hand(self):
+        if len(self.hand_list) >= 1:
+            self.guess_count += len(self.hand_list)
+            for i in range(len(self.hand_list)):
+                if self.hand_list[i].get_secret_card() == True:
+                    self.card_list = []
+                    self.hand_list[i].eliminate_card()
+                else:
+                    self.hand_list[i].eliminate_card()
+            self.hand_list = []
+        else:
+            pass
+
+    def new_list(self, card_list):
+        self.card_list = card_list
+        self.cards_in_game = self.card_list
+        self.hand_list = []
+        self.guess_count = 0
+
+    def click_loop(self, click_pos):
+        for i in range(len(self.cards_in_game)):
+            if (self.cards_in_game[i].selectable(click_pos) == True and
+                        len(self.get_hand_list()) <= 2):
+                self.cards_in_game[i].select_click(click_pos)
+                self.add_hand(self.cards_in_game[i])
+
+            elif self.cards_in_game[i].deselectable(click_pos) == True:
+                self.cards_in_game[i].deselect_click(click_pos)
+                self.remove_hand(self.cards_in_game[i])
+            else:
+                pass
+
+    def splash(self, click_pos, start_game_class):
+        if start_game_class.started == False:
+            start_game_class.started = True
+            self.flip_all()
+        else:
+            pass
+
+class LockIn_Guesser(Widget):
+    """
+    Creates the lockin button for the Guesser class object and
+    all of it's properties. Takes game and coordinates and
+    modifies properties of the card object.
+    """
+    def __init__(self, guesser, pos = (99, 115),
+                 card_match = False, eliminate = False, animated = False,
+                 radius = 27, lifespan = 1):
+        super(LockIn_Guesser, self).__init__()
+
+        self.guesser = guesser
+        self.pos = (pos[0]* PARAMS.scale, pos[1]* PARAMS.scale)
+
+        self.card_match = card_match
+        self.eliminate = eliminate
+        self.animated = animated
+        self.radius = radius
+
+        self.age = 0
+        self.lifespan = lifespan
+
+    def get_radius(self):
+        return self.radius
+
+    def get_lifespan(self):
+        return self.lifespan
+
+    def get_animated(self):
+        return self.animated
+
+    def draw(self):
+        image_left_corner = (80, 80)
+        image_size = (360, 360)
+        zoom = .15 * PARAMS.scale
+
+        #Canvas Draw
+        with self.canvas:
+            self.canvas.clear()
+
+            if self.animated == True:
+                self.texture = CoreImage("images/red_lockin.png"
+                                ).texture.get_region(image_left_corner[0], image_left_corner[1],
+                                                     image_size[0], image_size[1])
+                self.size = (image_size[0]*zoom, image_size[1]*zoom)
+
+                self.rect_bg = Rectangle(
+                        pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+            else:
+                self.texture = CoreImage("images/black_lockin.png"
+                                ).texture.get_region(image_left_corner[0], image_left_corner[1],
+                                                     image_size[0], image_size[1])
+                self.size = (image_size[0]*zoom, image_size[1]*zoom)
+
+                self.rect_bg = Rectangle(
+                        pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+
+            #Line(circle=(self.pos[0]+self.size[0]/2, self.pos[1]+self.size[0]/2, 27)) #for testing
+
+    def select_click(self, click_pos):
+
+        self.center = (self.pos[0]+self.size[0]/2, self.pos[1]+self.size[0]/2)
+
+        if (len(self.guesser.get_hand_list()) >= 1 and
+                    self.card_match == False):
+            self.eliminate = False
+        else:
+            self.eliminate = True
+
+        self.select_logic = (dist_formula(self.center, click_pos.pos) < self.radius
+                             and self.eliminate == False)
+
+        if self.select_logic == True:
+            self.animated = True
+            self.guesser.discard_hand()
+            #print("Clicked!") #For Testing
+        else:
+            self.animate = False
+            pass
+
+    def update(self):
+
+        if self.animated == True:
+            self.age += .7
+        else:
+            pass
+
+        if self.age > self.lifespan:
+            self.animated = False
+            self.age = 0
+        else:
+            pass
+
+class Decryptionizer(object):
+    """
+    Decryptionizer class that takes a list cards and modifies them
+    based on and encrypted code which it decyphers and reveals coordinates,
+    then changes card images to reflect those coordinates.
+    """
+
+    def __init__(self, card_list):
+        self.card_list = card_list
+
+    def get_card_list(self):
+        return self.card_list
+
+    def new_card_list(self, new_list):
+        self.card_list = new_list
+
+    def decrypt(self):
+        cypher = list(input("Input Key:").split(";"))
+        if (cypher == ['None']
+            or cypher == ['']):
+            cypher = ["emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,
+                      "emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,
+                      "p-custom","Error: The input key is missing."]
+            print ("Error: The input key is missing.")
+        elif (len(cypher) != 32):
+            cypher = ["emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,
+                      "emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,"emj",0,0,
+                      "p-custom","Error: The input key is invalid."]
+            print ("Error: The input key is invalid.")
+        else:
+            pass
+
+        #Seperate out premise.
+        premise_id = []
+        premise_custom = []
+
+        premise_id.append(cypher[-2])
+        premise_custom.append(cypher[-1])
+        cypher.pop(-1)
+        cypher.pop(-1)
+
+        #Seperate out coordinates and theme in cypher.
+        theme_list = []
+        secret_theme = []
+
+        cypher_int = []
+        for i in range(len(cypher)):
+            if i % 3 == 0:
+                theme_list.append(cypher[i])
+            else:
+                cypher_int.append(cypher[i])
+
+        secret_theme.append(theme_list[-1])
+        theme_list.pop(-1)
+
+        #Converts cypher into integers
+        coord_list = []
+        for i in range(len(cypher_int)):
+            coord_list.append(int(cypher_int[i]))
+
+        #Decyphers secret code and removes from cypher_int
+        secret_code = []
+        secret_code.append(coord_list[-2])
+        secret_code.append(coord_list[-1])
+        coord_list.pop(-1)
+        coord_list.pop(-1)
+
+        #Decyphers main code and removes from cypher_int
+        coord_x = []
+        coord_y = []
+        decypted_code = []
+
+        for i in range(len(coord_list)):
+            if i % 2 == 0:
+                coord_x.append(coord_list[i])
+            elif i % 2 == 1:
+                coord_y.append(coord_list[i])
+            else:
+                pass
+
+        for i in range(len(coord_x)):
+            individual_coord = []
+            individual_coord.append(coord_x[i])
+            individual_coord.append(coord_y[i])
+            decypted_code.append(individual_coord)
+
+        return [decypted_code, secret_code, theme_list,
+                secret_theme, premise_id[0], premise_custom[0]]
+
+    def modify_cards(self, decypted_code, secret_code, theme_list, secret_theme):
+        for i in range(len(self.card_list)):
+            self.card_list[i].change_c_col(decypted_code[i][0])
+            self.card_list[i].change_c_row(decypted_code[i][1])
+
+        for i in range(len(self.card_list)):
+            if (self.card_list[i].get_cardID() == tuple(secret_code) and
+                        self.card_list[i].get_theme() == str(secret_theme[0])):
+                self.card_list[i].make_secret()
+            else:
+                self.card_list[i].make_nonsecret()
+
+        for i in range(len(self.card_list)):
+            self.card_list[i].change_theme(theme_list[i])
+
+class Start_Game(object):
+    """
+    Creates a Start Game object class that initates
+    a new game for the Guesser.
+    """
+
+    def __init__(self, key, premise, card_list):
+
+        self.key = key
+        self.premise = premise
+        self.card_list = card_list
+
+        self.started = False
+
+        self.key.new_card_list(self.card_list)
+
+        code = self.key.decrypt()
+
+        self.key.modify_cards(code[0],code[1],code[2],code[3])
+
+        self.premise.change_premise(code[4])
+        self.premise.change_custom_prem(code[5])
+
+    def get_started(self):
+        return self.started
+
+    def restart(self, guesser, key, card_list):
+        #global questions_GLOBAL, flags_GLOBAL
+        #questions_GLOBAL = 0
+        #flags_GLOBAL = 0
+
+        self.started = False
+
+        key.new_card_list(card_list)
+
+        code = key.decrypt()
+
+        key.modify_cards(code[0],code[1],code[2],code[3])
+
+        guesser.new_list(key.get_card_list())
+
+        #self.premise.change_premise(code[4])
+        #premise.change_custom_prem(code[5])
+
+        game.flip_all()
+
+    def new(self, card_list):
+        #global questions_GLOBAL, flags_GLOBAL
+        #questions_GLOBAL = 0
+        #flags_GLOBAL = 0
+
+        self.started = False
+
+        self.key.new_card_list(card_list)
+
+        code = self.key.decrypt()
+
+        self.key.modify_cards(code[0],code[1],code[2],code[3])
+
+        self.guesser.new_list(self.get_card_list())
+
+        #self.premise.change_premise(code[4])
+        #premise.change_custom_prem(code[5])
+
+class Blank(Widget):
+    """
+    Creates a frame that contains the game, like a viewport. The game will only
+    care about anything inside the viewport and nothing outside it.
+    """
+    def __init__(self, pos, size):
+        super(Blank, self).__init__()
+        with self.canvas:
+            Color(0, 0, 0)
+            Rectangle(pos=pos, size=size)
+            Color(1, 1, 1)
+
+###============Register Handlers==================
+class Game(Widget):
+    """
+    Creates the game, essentially compile and innitates all of the class objects, draws,
+    updates everything upon interaction.
+    """
+    def __init__(self):
+        super(Game, self).__init__()
+
+        #Background
+        self.background = BG_Sprite(source="images/background.png")
+        self.size = self.background.size
+        self.add_widget(self.background)
+
+        #Innitialize Class Objects
+        self.premise = Premise()
+        self.card1 = Card(0, 3, (25-2, 190-40), select = False, eliminate = False, theme = "emj2")
+        self.card2 = Card(8, 1, (100-2, 190-40), select = False, eliminate = False)
+        self.card3 = Card(16, 2, (175-2, 190-40), select = False, eliminate = False)
+        self.card4 = Card(1, 1, (25-2, 270-40), select = False, eliminate = False, secret_card = True)
+        self.card5 = Card(8, 2, (100-2, 270-40), select = False, eliminate = False)
+        self.card6 = Card(6, 1, (175-2, 270-40), select = False, eliminate = False)
+        self.card7 = Card(5, 3, (25-2, 350-40), select = False, eliminate = False)
+        self.card8 = Card(9, 2, (100-2, 350-40), select = False, eliminate = False)
+        self.card9 = Card(16, 1, (175-2, 350-40), select = False, eliminate = False)
+
+        self.key = Decryptionizer([self.card1,self.card2,self.card3,
+                                   self.card4,self.card5,self.card6,
+                                   self.card7,self.card8,self.card9])
+
+        self.start_game = Start_Game(self.key, self.premise, self.key.get_card_list())
+
+        self.guesser = Guess_Clicker(self.key.get_card_list())
+
+        self.lock_in = LockIn_Guesser(self.guesser, pos = (99, 115-40))
+
+        #Create Widgets
+        self.add_widget(self.premise)
+        self.add_widget(self.card1)
+        self.add_widget(self.card2)
+        self.add_widget(self.card3)
+        self.add_widget(self.card4)
+        self.add_widget(self.card5)
+        self.add_widget(self.card6)
+        self.add_widget(self.card7)
+        self.add_widget(self.card8)
+        self.add_widget(self.card9)
+        self.add_widget(self.lock_in)
+
+        #Animation Update
+        Clock.schedule_interval(self.animated_update, .06)
+
+        #Initial Draw on Canvas
+        self.update()
+        self.premise.draw()
+
+        #Blank Rectangle viewport
+        self.add_widget(Blank(*PARAMS.blank_rect))
+
+    def update(self):
+        #Updates Canvas
+        self.card1.draw()
+        self.card2.draw()
+        self.card3.draw()
+        self.card4.draw()
+        self.card5.draw()
+        self.card6.draw()
+        self.card7.draw()
+        self.card8.draw()
+        self.card9.draw()
+        self.lock_in.draw()
+
+    def on_touch_down(self, click):
+        if self.start_game.get_started() == False:
+            self.guesser.splash(click, self.start_game)
+            self.update()
+        elif self.start_game.get_started() == True:
+            self.guesser.click_loop(click)
+            self.lock_in.select_click(click)
+            self.update()
+        else:
+            pass
+
+    def animated_update(self, dt):
+        self.lock_in.update()
+        #self.update() #This works too but redraws the entire canvas on clock interval.
+        self.lock_in.draw()
+        #print("time") #for testing
+
+###===========Launch Game==========
+class GameApp(App):
+    """
+    Builds the Game!
+    """
+    def build(self):
+        Window.size = (256, 454.4) #For Testing
+        PARAMS.init() #Initializes Screen Adjustment
+        game = Game()
+        return game
+
+###============Globals=============
+class params(object):
+    """
+    Adjusts for different screen sizes.
+    """
+    def init(self):
+        self.bg_width, self.bg_height = 256, 454.4
+        self.width, self.height = Window.size
+        self.center = Window.center
+        ws = float(self.width) / self.bg_width
+        hs = float(self.height) / self.bg_height
+        self.scale = min(ws, hs)
+        Logger.info('size=%r; dpi=%r; density=%r; SCALE=%r',
+            Window.size, Metrics.dpi, Metrics.density, self.scale)
+        if ws > hs:
+            gap = self.width - (self.bg_width * hs)
+            self.blank_rect = ((self.width - gap, 0), (gap, self.height))
+        else:
+            gap = self.height - (self.bg_height * ws)
+            self.blank_rect = ((0, self.height - gap), (self.width, gap))
+PARAMS = params()
+
+if __name__ == "__main__":
+    GameApp().run()

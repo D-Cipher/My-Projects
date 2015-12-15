@@ -1,0 +1,42 @@
+Short Term plans
+
+10-16-15 to 10-29-15:
+DONE 1. Load images into Kivy
+DONE 2. Draw Cards in Kivy
+DONE 3. Getting Clicks to work
+
+11-1-15 to 11-16-15:
+DONE 1. Make a simple app of selecting 2 cards.
+DONE 2. Get KIVY-IOS figured out and working.
+PRACTICALLY DONE 3. Put it on to my phone.
+
+
+11-16-15 to 11-23-15:
+DONE 1. Make App screen size friendly at least for iphone
+DONE 2. Convert remaining Guesser side code into Kivy.
+	-Get all the card logic working
+	-Get locking button working
+	-Get remaining code to work.
+
+11-23-15 to 12-9-15:
+DONE 1. Convert Quizzer side.
+DONE 2. Encryptionizer
+3. Get everything working on the mac
+
+12/12/15 to 12/17/15:
+1. Research Sockets
+-build simple chat (the low quality youtube video)
+-do the 4-5 example videos on sockets youtube
+2. Figure out a way to test sending and recieving messages on ipone
+-this may involve 2 iphones
+-this may involve 2 instances of xcode
+3. Build a prototype of a simple game with Sockets
+4. week 3-4 in courseara.
+
+Mid Term Goal:
+-Sign up for coursera and look up udacity and other socket / networking classes
+-Learn How to Use sockets or whatever to build a network game
+-Build a network game before returning from Vacation
+-Do more coder bytes over vacation.
+-Get tinder clone working in the simulator
+-Might need to learn xcode

@@ -10,8 +10,6 @@ from kivy.loader import Loader
 from kivy.uix.image import Image
 from kivy.core.image import Image as CoreImage
 
-#Set it as the texture of a Rectangle
-#[16:26] <inclement> But if you just want to display an image, use an Image widget
 
 ###=========Helper Functions=============
 def dist_formula(p, q):
@@ -65,35 +63,26 @@ class Card(Widget):
                                                       self.card_size[0], self.card_size[1])
         self.size = (self.card_size[0]*self.zoom, self.card_size[1]*self.zoom)
 
-        #Card Draw
-        if self.select == False:
-            self.rect_bg = Rectangle(
-                pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
-                size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.6, 1, .5, .7))
+        #Canvas Draw
+        with self.canvas:
+            self.canvas.clear()
+            if self.select == False:
+                self.rect_bg = Rectangle(
+                    pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                    size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(.6, 1, .5, .7))
 
-            self.rect_bg = Rectangle(
-                pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+                self.rect_bg = Rectangle(
+                    pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
 
-        elif self.select == True:
-            self.rect_bg = Rectangle(
-                pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
-                size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(0.1, 0.1, .1, 1))
+            elif self.select == True:
+                self.rect_bg = Rectangle(
+                    pos=(self.pos[0]-(self.size[0]/10),self.pos[1]-(self.size[0]/10)),
+                    size=(self.size[0]*1.2,self.size[1]*1.2), color=Color(0.1, 0.1, .1, 1))
 
-            self.rect_bg = Rectangle(
-                pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
-
-        #Line(circle=(self.pos[0]+self.size[0]/2, self.pos[1]+self.size[1]/2, 38)) #for testing
-
-        #Colors for Each Card State:
-        #Normal: Light green = Color(.6, 1, .5, .7), White = Color(1, 1, 1, 1)
-        #Selected: Black = Color(0.1, 0.1, .1, 1), White = Color(1, 1, 1, 1)
-        #Eliminated: Transparent = Color(.5, .5, .5, .5), Transparent = Color(1, 1, 1, .5))
-        #Alternatively Eliminated: Transparent = Color(.5, .5, .5, .5),  Grey overlay = Color(.6, .6, .6, 1)
-        #Secret Card Revealed: Red = Color(.8, 0, 0, 1), Grey overlay = Color(.6, .6, .6, 1)
-        #Color(1, .5, .5, 1)
-        
-    #def selectable(self):
-        #self.select_logic =
+                self.rect_bg = Rectangle(
+                    pos=self.pos, size=self.size, texture=self.texture, color=Color(1, 1, 1, 1))
+            else:
+                pass
 
     def touch(self, click):
         select_logic = (dist_formula(self.obj_coord, click.pos) < self.radius)
@@ -103,37 +92,34 @@ class Card(Widget):
         else:
             print("Not Clicked")
 
-#Innitiate Classes
-card1 = Card(pos=(100,100))
-card2 = Card(pos=(100,250))
-
 class Game(Widget):
     def __init__(self):
         super(Game, self).__init__()
+
         #Background
         self.background = BG_Spite(source="images/background.png")
         self.size = self.background.size
         self.add_widget(self.background)
 
+        #Initiate Classes
+        self.card1 = Card(pos=(100,100))
+        self.card2 = Card(pos=(100,250))
+
         #Create Widgets
-        self.add_widget(card1)
-        self.add_widget(card2)
+        self.add_widget(self.card1)
+        self.add_widget(self.card2)
 
-        #Draw on Canvas
-        with self.canvas:
-            card1.draw()
-            card2.draw()
-
+        #Initial Draw on Canvas
+        self.update()
 
     def update(self):
         #Update Canvas
-        with self.canvas:
-            card1.draw()
-            card2.draw()
+        self.card1.draw()
+        self.card2.draw()
 
     def on_touch_down(self, click):
-        card1.touch(click)
-        card2.touch(click)
+        self.card1.touch(click)
+        self.card2.touch(click)
         self.update()
 
 #Launch Game

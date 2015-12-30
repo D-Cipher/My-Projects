@@ -605,44 +605,6 @@ class Start_Game(object):
     def get_started(self):
         return self.started
 
-    def restart(self, guesser, key, card_list):
-        #global questions_GLOBAL, flags_GLOBAL
-        #questions_GLOBAL = 0
-        #flags_GLOBAL = 0
-
-        self.started = False
-
-        key.new_card_list(card_list)
-
-        code = key.decrypt()
-
-        key.modify_cards(code[0],code[1],code[2],code[3])
-
-        guesser.new_list(key.get_card_list())
-
-        #self.premise.change_premise(code[4])
-        #premise.change_custom_prem(code[5])
-
-        game.flip_all()
-
-    def new(self, card_list):
-        #global questions_GLOBAL, flags_GLOBAL
-        #questions_GLOBAL = 0
-        #flags_GLOBAL = 0
-
-        self.started = False
-
-        self.key.new_card_list(card_list)
-
-        code = self.key.decrypt()
-
-        self.key.modify_cards(code[0],code[1],code[2],code[3])
-
-        self.guesser.new_list(self.get_card_list())
-
-        #self.premise.change_premise(code[4])
-        #premise.change_custom_prem(code[5])
-
 class Blank(Widget):
     """
     Creates a frame that contains the game, like a viewport. The game will only

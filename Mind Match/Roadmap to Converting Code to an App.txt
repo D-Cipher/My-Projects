@@ -23,10 +23,10 @@ DONE 1. Convert Quizzer side.
 DONE 2. Encryptionizer
 3. Get everything working on the mac
 
-12/12/15 to 12/17/15:
-1. Research Sockets
--build simple chat (the low quality youtube video)
--do the 4-5 example videos on sockets youtube
+12/12/15 to 12/19/15:
+DONE 1. Research Sockets
+DONE -build simple chat (the low quality youtube video)
+DONE -do the 4-5 example videos on sockets youtube
 2. Figure out a way to test sending and recieving messages on ipone
 -this may involve 2 iphones
 -this may involve 2 instances of xcode
@@ -34,6 +34,7 @@ DONE 2. Encryptionizer
 4. week 3-4 in courseara.
 
 Mid Term Goal:
+-Test out the xcode for Tinder Clone on Github.
 -Sign up for coursera and look up udacity and other socket / networking classes
 -Learn How to Use sockets or whatever to build a network game
 -Build a network game before returning from Vacation

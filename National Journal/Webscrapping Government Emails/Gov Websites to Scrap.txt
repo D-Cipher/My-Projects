@@ -1,0 +1,36 @@
+HHS
+Link: http://directory.psc.gov/employee.htm\
+
+DOD
+Link: http://www.slideshare.net/TheOccultTruthDotCom/159146855-usdepartmentofdefenseemployeeemaildirectory
+
+DOE
+Link: http://energy.gov/phonebook/a
+-have to search one letter at a time
+
+NOAA
+Link: https://nsd.rdc.noaa.gov/nsd/search
+-have to search by 2 letter combinations
+
+DOT
+Link: https://www.transportation.gov/government/government-affairs/staff-directory
+
+EPA 
+Link: http://cfpub.epa.gov/locator/
+-no email provided
+
+NIH
+Link: https://ned.nih.gov/search/search.aspx
+Link2: http://www.nimh.nih.gov/about/staff-directories/alphabetical-listing-of-all-staff.shtml
+
+NRC
+NSC
+OMB
+PTO
+SEC
+STATE
+TREAS
+USDA
+USTR
+WHO
+

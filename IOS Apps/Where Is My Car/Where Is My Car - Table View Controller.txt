@@ -92,7 +92,7 @@ class TableViewController: UITableViewController {
         
         NSUserDefaults.standardUserDefaults().setObject(self.savedArray, forKey: "savedArray")
         
-        print(self.savedArray)
+        //print(self.savedArray)
         
     }
     

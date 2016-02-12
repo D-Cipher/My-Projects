@@ -71,6 +71,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         } else { //If user is viewing a saved place
             
+            self.mapView.showsUserLocation = true
+            
             self.statusOutlet.text = String(self.savedArray[activePlace_GLOBAL]["name"]!!)
             
             //Get selected latitude and longitude

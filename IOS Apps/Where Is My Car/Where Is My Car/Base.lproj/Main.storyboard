@@ -24,7 +24,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50m-SX-N0R">
                                 <rect key="frame" x="0.0" y="551" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem image="Navigation-30x30.png" id="1xg-bw-Udn"/>
+                                    <barButtonItem enabled="NO" image="Navigation-30x30.png" id="1xg-bw-Udn"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ZGo-wL-3EQ"/>
                                     <barButtonItem image="Bookmark-add-32x32.png" id="Fmp-b0-aML">
                                         <connections>
@@ -39,20 +39,41 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" onImage="Bluetooth30x30.png" translatesAutoresizingMaskIntoConstraints="NO" id="hgU-YL-JHB">
+                                <rect key="frame" x="10" y="69" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="DLX-95-6EZ"/>
+                                    <constraint firstAttribute="height" constant="31" id="vbf-sf-cTt"/>
+                                </constraints>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZk-4J-EdA">
+                                <rect key="frame" x="11" y="97" width="74" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="LmB-Ye-ezE"/>
+                                    <constraint firstAttribute="height" constant="21" id="Z4L-N7-Mpn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="50m-SX-N0R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="0hf-nj-rbe"/>
+                            <constraint firstItem="oZk-4J-EdA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="33" id="1ok-mW-7MI"/>
+                            <constraint firstItem="hgU-YL-JHB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="26d-TD-GQT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RlP-9u-Uw9" secondAttribute="trailing" constant="36" id="4Aq-3e-QPd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KJi-Wb-KKY" secondAttribute="trailing" constant="-20" id="9XM-yW-gYP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="50m-SX-N0R" secondAttribute="bottom" constant="5" id="F7L-vN-6jK"/>
                             <constraint firstItem="KJi-Wb-KKY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Jot-4L-FPi"/>
                             <constraint firstItem="KJi-Wb-KKY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="QKP-8K-STR"/>
+                            <constraint firstItem="oZk-4J-EdA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-9" id="Rad-bj-gvz"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KJi-Wb-KKY" secondAttribute="bottom" constant="49" id="V3v-8T-5dy"/>
                             <constraint firstItem="50m-SX-N0R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nNb-FP-GiJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="50m-SX-N0R" secondAttribute="trailing" constant="-20" id="nlY-BV-H64"/>
                             <constraint firstItem="RlP-9u-Uw9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="37" id="qx5-VC-DGt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RlP-9u-Uw9" secondAttribute="bottom" constant="8" id="uYv-4M-gfM"/>
+                            <constraint firstItem="hgU-YL-JHB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-10" id="wkL-B1-joC"/>
                             <constraint firstItem="RlP-9u-Uw9" firstAttribute="top" secondItem="KJi-Wb-KKY" secondAttribute="bottom" constant="5" id="xA7-Jr-58C"/>
                         </constraints>
                     </view>
@@ -73,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030" y="383"/>
+            <point key="canvasLocation" x="946" y="353"/>
         </scene>
         <!--Recent Locations-->
         <scene sceneID="KvP-7w-bte">
@@ -210,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EUP-8w-qjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030" y="1066"/>
+            <point key="canvasLocation" x="946" y="1066"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V0S-Mj-xKi">
@@ -230,12 +251,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Bluetooth30x30.png" width="30" height="30"/>
         <image name="Bookmark-add-32x32.png" width="32" height="32"/>
         <image name="Help30x30.png" width="30" height="30"/>
         <image name="Navigation-30x30.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="q4y-cl-Opz"/>
-        <segue reference="CzC-mB-cCx"/>
+        <segue reference="sD2-Aw-hwT"/>
     </inferredMetricsTieBreakers>
 </document>

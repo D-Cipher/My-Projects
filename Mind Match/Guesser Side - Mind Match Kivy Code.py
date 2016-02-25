@@ -4,7 +4,7 @@ Enjoy the game :)
 Yours, D'Cypher
 
 Example Input Key:
-emj;8;0;emj;4;1;emj;6;3;emj;1;1;emj;9;2;emj;11;1;emj;5;2;emj;8;3;emj;7;2;emj;6;3;p-def;Random Random
+"emj;8;0;emj;4;1;emj;6;3;emj;1;1;emj;9;2;emj;11;1;emj;5;2;emj;8;3;emj;7;2;emj;6;3;p-def;Random Random"
 
 """
 

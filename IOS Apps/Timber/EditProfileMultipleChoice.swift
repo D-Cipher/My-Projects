@@ -10,7 +10,9 @@ import UIKit
 
 class EditProfileMultipleChoice: UITableViewController {
     
-    var multiChoiceOptions: [String] = ["test1","test2","test3","test4","test5"]
+    @IBOutlet var headerTitle: UINavigationItem!
+    
+    var multiChoiceOptions: [String] = ["placeholder"]
     
     var selectedChoiceIndex:Int?
     
@@ -24,6 +26,12 @@ class EditProfileMultipleChoice: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if multiChoiceOptions[0] == "Single" {
+            self.headerTitle.title = "Relationship Status"
+        } else if multiChoiceOptions[0] == "Men" {
+            self.headerTitle.title = "Interested In"
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

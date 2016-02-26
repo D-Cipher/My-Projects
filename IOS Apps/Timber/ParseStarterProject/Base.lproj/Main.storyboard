@@ -339,9 +339,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="j7P-mH-oeh" kind="show" identifier="relationshipStatusSegue" id="7U8-dz-wTS"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="HgU-Uh-8X5" detailTextLabel="wBr-lL-D3u" style="IBUITableViewCellStyleValue1" id="Igr-BQ-kUZ">
                                         <rect key="frame" x="0.0" y="467" width="414" height="44"/>
@@ -366,9 +363,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="j7P-mH-oeh" kind="show" identifier="interestedInSegue" id="M1Y-iD-HPc"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -441,7 +435,9 @@
                     <navigationItem key="navigationItem" title="Edit" id="fvx-H1-Xyi"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="interestedInDetail" destination="wBr-lL-D3u" id="fB3-mG-8PV"/>
                         <outlet property="relationshipStatusDetail" destination="0Zb-x9-nhz" id="CHY-yo-cFX"/>
+                        <segue destination="j7P-mH-oeh" kind="show" identifier="MultipleChoiceSegue" id="kYr-Wx-Sze"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ly6-Ns-mst" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -474,7 +470,11 @@
                             <outlet property="delegate" destination="j7P-mH-oeh" id="6Df-Yf-PX7"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="ADw-PF-iP6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="headerTitle" destination="ADw-PF-iP6" id="44f-Sd-v0r"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSN-Ld-DNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5WA-qN-zaf" userLabel="Exit" sceneMemberID="exit"/>
@@ -515,7 +515,4 @@
         <image name="Timber_logo.png" width="430" height="156"/>
         <image name="loginFB.png" width="492" height="108"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="7U8-dz-wTS"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -67,9 +67,9 @@ class PlayViewController: UIViewController {
                                     var interestedIn_guess = ""
                                     
                                     if result["gender"] as! String == "male" {
-                                        interestedIn_guess = "women"
+                                        interestedIn_guess = "Women"
                                     } else if result["gender"] as! String == "female" {
-                                        interestedIn_guess = "men"
+                                        interestedIn_guess = "Men"
                                     }
                                     
                                     //Save and Update Parse data

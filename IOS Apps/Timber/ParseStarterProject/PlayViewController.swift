@@ -59,7 +59,7 @@ class PlayViewController: UIViewController {
                                     //Save to phone storage
                                     NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData")
                                     
-                                    print(self.userProfileData)
+                                    //print(self.userProfileData)
                                     
                                 } else {
                                     print("New User")
@@ -95,7 +95,7 @@ class PlayViewController: UIViewController {
                                     //Save to phone storage
                                     NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData")
                                     
-                                    print(self.userProfileData)
+                                    //print(self.userProfileData)
                                 }
                             } else {
                                 print("error")
@@ -143,9 +143,6 @@ class PlayViewController: UIViewController {
         //if user exists in parse then save userprofiledata to perm data
         //if perm data is not empty then
         
-        
-        
-
     }
 
     override func didReceiveMemoryWarning() {

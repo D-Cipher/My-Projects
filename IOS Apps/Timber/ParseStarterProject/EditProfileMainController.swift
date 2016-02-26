@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Parse
 
 class EditProfileMainController: UITableViewController {
     
+    var userProfileData = Dictionary<String,String>()
 
     @IBOutlet var relationshipStatusDetail: UILabel!
     
@@ -44,12 +46,17 @@ class EditProfileMainController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if NSUserDefaults().objectForKey("userProfileData") != nil {
+            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,String>
+            
+            self.relationshipStatusVar = self.userProfileData["relationship_status"]
+            
+            self.interestedInVar = self.userProfileData["interested_in"]
+        }
+        
+        //print(self.userProfileData)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -85,9 +92,34 @@ class EditProfileMainController: UITableViewController {
                 
                 if EditProfileMultipleChoice.headerTitle.title == "Relationship Status" {
                     relationshipStatusVar = selectedChoice
+                    self.userProfileData["relationship_status"] = relationshipStatusVar
                 } else if EditProfileMultipleChoice.headerTitle.title == "Interested In" {
                     interestedInVar = selectedChoice
+                    self.userProfileData["interested_in"] = interestedInVar
                 }
+                
+                //Save to phone storage
+                NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData")
+                
+                //Save to parse
+                let query = PFQuery(className: "_User")
+                
+                query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+                    if error != nil {
+                        
+                    } else if let object = object {
+                        //Save and Update Parse data
+                        
+                        //PFUser.currentUser()?["location"] = "N/A" //Get from geolocation
+                        //PFUser.currentUser()?["about"] = "N/A"
+                        PFUser.currentUser()?["relationship_status"] = self.relationshipStatusVar
+                        PFUser.currentUser()?["interested_in"] = self.interestedInVar
+                        
+                        PFUser.currentUser()?.save()
+                        
+                        
+                    }
+                })
                 
         }
         

@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController {
             print("error")
         }
         
-        print(self.userProfileData)
+        //print(self.userProfileData)
 
     }
 

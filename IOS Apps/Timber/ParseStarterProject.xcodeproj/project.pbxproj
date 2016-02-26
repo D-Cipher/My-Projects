@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		34009D411C7DFF8800BBC60B /* EditProfileMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34009D401C7DFF8800BBC60B /* EditProfileMultipleChoice.swift */; };
 		34009D431C7E22CC00BBC60B /* EditProfileMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */; };
 		344196BF1C7CCB32004195DB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196BE1C7CCB32004195DB /* ProfileViewController.swift */; };
 		344196C11C7CD081004195DB /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196C01C7CD081004195DB /* PlayViewController.swift */; };
+		347C4DCA1C80E413009DD861 /* EditProfileMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */; };
 		34C91B201C7377D500384C49 /* loginFB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C91B1F1C7377D500384C49 /* loginFB.png */; };
 		34C91B261C73A50400384C49 /* Timber_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C91B251C73A50400384C49 /* Timber_logo.png */; };
 		34DCB6591C71268C00573704 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34DCB6571C71268C00573704 /* FBSDKCoreKit.framework */; };
@@ -31,10 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		34009D401C7DFF8800BBC60B /* EditProfileMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileMultipleChoice.swift; path = ../EditProfileMultipleChoice.swift; sourceTree = "<group>"; };
 		34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMainController.swift; sourceTree = "<group>"; };
 		344196BE1C7CCB32004195DB /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		344196C01C7CD081004195DB /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMultipleChoice.swift; sourceTree = "<group>"; };
 		34C91B1F1C7377D500384C49 /* loginFB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginFB.png; sourceTree = SOURCE_ROOT; };
 		34C91B251C73A50400384C49 /* Timber_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timber_logo.png; sourceTree = "<group>"; };
 		34DCB6571C71268C00573704 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ParseStarterProject/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 				344196C01C7CD081004195DB /* PlayViewController.swift */,
 				344196BE1C7CCB32004195DB /* ProfileViewController.swift */,
 				34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */,
-				34009D401C7DFF8800BBC60B /* EditProfileMultipleChoice.swift */,
+				347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
@@ -240,8 +240,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				347C4DCA1C80E413009DD861 /* EditProfileMultipleChoice.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
-				34009D411C7DFF8800BBC60B /* EditProfileMultipleChoice.swift in Sources */,
 				344196C11C7CD081004195DB /* PlayViewController.swift in Sources */,
 				344196BF1C7CCB32004195DB /* ProfileViewController.swift in Sources */,
 				34009D431C7E22CC00BBC60B /* EditProfileMainController.swift in Sources */,

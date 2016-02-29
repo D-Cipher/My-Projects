@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		34009D431C7E22CC00BBC60B /* EditProfileMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */; };
+		3402C92A1C828496004D281F /* EditProfilePictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3402C9291C828496004D281F /* EditProfilePictures.swift */; };
+		3402C92C1C829D17004D281F /* placeholder-camera-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 3402C92B1C829D16004D281F /* placeholder-camera-green.png */; };
 		344196BF1C7CCB32004195DB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196BE1C7CCB32004195DB /* ProfileViewController.swift */; };
 		344196C11C7CD081004195DB /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196C01C7CD081004195DB /* PlayViewController.swift */; };
 		347C4DCA1C80E413009DD861 /* EditProfileMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */; };
+		34B3A9F91C83A63B0083B52B /* EditProfileUploadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B3A9F81C83A63B0083B52B /* EditProfileUploadImage.swift */; };
 		34C91B201C7377D500384C49 /* loginFB.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C91B1F1C7377D500384C49 /* loginFB.png */; };
 		34C91B261C73A50400384C49 /* Timber_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C91B251C73A50400384C49 /* Timber_logo.png */; };
 		34DCB6591C71268C00573704 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34DCB6571C71268C00573704 /* FBSDKCoreKit.framework */; };
@@ -32,15 +35,18 @@
 
 /* Begin PBXFileReference section */
 		34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMainController.swift; sourceTree = "<group>"; };
+		3402C9291C828496004D281F /* EditProfilePictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfilePictures.swift; sourceTree = "<group>"; };
+		3402C92B1C829D16004D281F /* placeholder-camera-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-camera-green.png"; sourceTree = "<group>"; };
 		344196BE1C7CCB32004195DB /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		344196C01C7CD081004195DB /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMultipleChoice.swift; sourceTree = "<group>"; };
+		34B3A9F81C83A63B0083B52B /* EditProfileUploadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileUploadImage.swift; sourceTree = "<group>"; };
 		34C91B1F1C7377D500384C49 /* loginFB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginFB.png; sourceTree = SOURCE_ROOT; };
 		34C91B251C73A50400384C49 /* Timber_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timber_logo.png; sourceTree = "<group>"; };
 		34DCB6571C71268C00573704 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ParseStarterProject/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		34DCB6581C71268C00573704 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ParseStarterProject/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		34DCB65B1C712C5800573704 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
-		81BA81451A49DA1800E65899 /* ParseStarterProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParseStarterProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81BA81451A49DA1800E65899 /* mm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81BA814C1A49DA1800E65899 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +97,7 @@
 		81BA81461A49DA1800E65899 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				81BA81451A49DA1800E65899 /* ParseStarterProject.app */,
+				81BA81451A49DA1800E65899 /* mm.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				34C91B1F1C7377D500384C49 /* loginFB.png */,
+				3402C92B1C829D16004D281F /* placeholder-camera-green.png */,
 				34C91B251C73A50400384C49 /* Timber_logo.png */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
@@ -107,6 +114,8 @@
 				344196BE1C7CCB32004195DB /* ProfileViewController.swift */,
 				34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */,
 				347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */,
+				3402C9291C828496004D281F /* EditProfilePictures.swift */,
+				34B3A9F81C83A63B0083B52B /* EditProfileUploadImage.swift */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
@@ -152,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		81BA81441A49DA1800E65899 /* ParseStarterProject */ = {
+		81BA81441A49DA1800E65899 /* mm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "ParseStarterProject" */;
+			buildConfigurationList = 81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "mm" */;
 			buildPhases = (
 				81BA81411A49DA1800E65899 /* Sources */,
 				81BA81421A49DA1800E65899 /* Frameworks */,
@@ -165,9 +174,9 @@
 			);
 			dependencies = (
 			);
-			name = ParseStarterProject;
+			name = mm;
 			productName = ParseStarterProject;
-			productReference = 81BA81451A49DA1800E65899 /* ParseStarterProject.app */;
+			productReference = 81BA81451A49DA1800E65899 /* mm.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +195,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "ParseStarterProject" */;
+			buildConfigurationList = 81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "mm" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -199,7 +208,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				81BA81441A49DA1800E65899 /* ParseStarterProject */,
+				81BA81441A49DA1800E65899 /* mm */,
 			);
 		};
 /* End PBXProject section */
@@ -212,6 +221,7 @@
 				34C91B261C73A50400384C49 /* Timber_logo.png in Resources */,
 				81BA81501A49DA1800E65899 /* Main.storyboard in Resources */,
 				34C91B201C7377D500384C49 /* loginFB.png in Resources */,
+				3402C92C1C829D17004D281F /* placeholder-camera-green.png in Resources */,
 				81BA81521A49DA1800E65899 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,7 +254,9 @@
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				344196C11C7CD081004195DB /* PlayViewController.swift in Sources */,
 				344196BF1C7CCB32004195DB /* ProfileViewController.swift in Sources */,
+				3402C92A1C828496004D281F /* EditProfilePictures.swift in Sources */,
 				34009D431C7E22CC00BBC60B /* EditProfileMainController.swift in Sources */,
+				34B3A9F91C83A63B0083B52B /* EditProfileUploadImage.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,8 +371,8 @@
 				);
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.timber.appdem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.motm.appdem;
+				PRODUCT_NAME = mm;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";
 			};
@@ -382,8 +394,8 @@
 				);
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.timber.appdem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.motm.appdem;
+				PRODUCT_NAME = mm;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";
 			};
@@ -392,7 +404,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "ParseStarterProject" */ = {
+		81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "mm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				81BA81621A49DA1800E65899 /* Debug */,
@@ -401,7 +413,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "ParseStarterProject" */ = {
+		81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "mm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				81BA81651A49DA1800E65899 /* Debug */,

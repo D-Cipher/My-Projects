@@ -11,7 +11,7 @@ import Parse
 
 class EditProfileMainController: UITableViewController {
     
-    var userProfileData = Dictionary<String,String>()
+    var userProfileData = Dictionary<String,AnyObject>()
 
     @IBOutlet var relationshipStatusDetail: UILabel!
     
@@ -48,11 +48,11 @@ class EditProfileMainController: UITableViewController {
         super.viewDidLoad()
         
         if NSUserDefaults().objectForKey("userProfileData") != nil {
-            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,String>
+            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
             
-            self.relationshipStatusVar = self.userProfileData["relationship_status"]
+            self.relationshipStatusVar = self.userProfileData["relationship_status"] as? String
             
-            self.interestedInVar = self.userProfileData["interested_in"]
+            self.interestedInVar = self.userProfileData["interested_in"]as? String
         }
         
         //print(self.userProfileData)
@@ -61,7 +61,11 @@ class EditProfileMainController: UITableViewController {
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            //print("profile_pic")
+            self.performSegueWithIdentifier("EditPictureSegue", sender: self)
+            
+        } else if indexPath.section == 2 && indexPath.row == 0 {
             //print("relationship_status")
             
             currentSelectedChoice = relationshipStatusVar
@@ -101,26 +105,26 @@ class EditProfileMainController: UITableViewController {
                 //Save to phone storage
                 NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData")
                 
-                //Save to parse
-                let query = PFQuery(className: "_User")
-                
-                query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
-                    if error != nil {
-                        
-                    } else if let object = object {
-                        //Save and Update Parse data
-                        
-                        //PFUser.currentUser()?["location"] = "N/A" //Get from geolocation
-                        //PFUser.currentUser()?["about"] = "N/A"
-                        PFUser.currentUser()?["relationship_status"] = self.relationshipStatusVar
-                        PFUser.currentUser()?["interested_in"] = self.interestedInVar
-                        
-                        PFUser.currentUser()?.save()
-                        
-                        
-                    }
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
+                    //Save to parse
+                    let query = PFQuery(className: "_User")
+                    
+                    query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+                        if error != nil {
+                            print(error)
+                        } else if let object = object {
+                            //Save and Update Parse data
+                            
+                            //PFUser.currentUser()?["location"] = "N/A" //Get from geolocation
+                            //PFUser.currentUser()?["about"] = "N/A"
+                            PFUser.currentUser()?["relationship_status"] = self.relationshipStatusVar
+                            PFUser.currentUser()?["interested_in"] = self.interestedInVar
+                            
+                            PFUser.currentUser()?.save()
+                        }
+                    })
+
                 })
-                
         }
         
     }

@@ -37,7 +37,7 @@
 	<key>FacebookAppID</key>
 	<string>527132770791563</string>
 	<key>FacebookDisplayName</key>
-	<string>Timber</string>
+	<string>Meeting of the Minds</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -49,6 +49,8 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>akamaihd.net</key>

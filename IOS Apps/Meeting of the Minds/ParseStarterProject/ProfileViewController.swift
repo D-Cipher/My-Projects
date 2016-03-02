@@ -11,7 +11,9 @@ import Parse
 
 class ProfileViewController: UIViewController {
     
-    var userProfileData = Dictionary<String,String>()
+    var userProfileData = Dictionary<String,AnyObject>()
+    
+    var userProfileImages = Dictionary<String,AnyObject>()
     
     @IBAction func editProfileButton(sender: AnyObject) {
         self.performSegueWithIdentifier("editProfileSegue", sender: self)

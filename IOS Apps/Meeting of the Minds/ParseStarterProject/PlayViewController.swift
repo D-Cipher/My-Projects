@@ -85,12 +85,12 @@ class PlayViewController: UIViewController {
                                         //print(self.userProfileData)
                                         
                                         //Updates User Pictures on Phone Storage from Parse
-                                        self.userProfileImages = ["image_0":NSData(),"image_1":NSData(),"image_2":NSData(),"image_3":NSData(),"image_4":NSData(), "image_order":["image_1","image_2","image_3","image_4"]] // dont forget
+                                        self.userProfileImages = ["image_0":NSData(),"image_1":NSData(),"image_2":NSData(),"image_3":NSData(),"image_4":NSData(), "image_order":[String(),String(),String(),String()]] // dont forget to make pull from parse
                                         
                                         //Get image order from Parse:
-                                        //if PFUser.currentUser()?["image_order"] != nil {
-                                        //    self.userProfileImages["image_order"] = PFUser.currentUser()?["image_order"]
-                                        //}
+                                        if PFUser.currentUser()?["image_order"] != nil {
+                                            self.userProfileImages["image_order"] = PFUser.currentUser()?["image_order"]
+                                        }
                                         
                                         //Get image_0 to image_4 from Parse:
                                         let image_str = ["image_0","image_1","image_2","image_3","image_4"]
@@ -103,10 +103,15 @@ class PlayViewController: UIViewController {
                                                             self.userProfileImages[image_str[index]] = imageData
                                                             
                                                             NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
-                                                            print("Profile Updated")
+                                                            //print("Profile Updated")
                                                         }
                                                     }
                                                 })
+                                            } else if PFUser.currentUser()?[image_str[index]] == nil {
+                                                
+                                                self.userProfileImages[image_str[index]] = nil
+                                                
+                                                NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
                                             }
                                             
                                         }
@@ -134,6 +139,8 @@ class PlayViewController: UIViewController {
                                         PFUser.currentUser()?["about"] = "N/A"
                                         PFUser.currentUser()?["relationship_status"] = "N/A"
                                         PFUser.currentUser()?["interested_in"] = interestedIn_guess
+                                        
+                                        PFUser.currentUser()?["image_order"] = ["image_1","image_2","image_3","image_4"]
                                         
                                         PFUser.currentUser()?.save()
                                         

@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let vlight_grey = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1.0)
+        let vlight_grey = UIColor(red: 0.97, green: 0.95, blue: 0.95, alpha: 1.0)
         
         //App Skin Customization
         UINavigationBar.appearance().barTintColor = UIColor.blackColor()

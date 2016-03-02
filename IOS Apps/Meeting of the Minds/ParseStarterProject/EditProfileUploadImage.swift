@@ -16,8 +16,19 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     var userProfileData = Dictionary<String,AnyObject>()
     
     var userProfileImages = Dictionary<String,AnyObject>()
+    
+    var currentImage_str: String = ""
 
     @IBOutlet var imageOutlet: UIImageView!
+    
+    @IBOutlet var deleteButtonOutlet: UIBarButtonItem!
+    
+    @IBAction func deleteButton(sender: AnyObject) {
+        self.imageOutlet.image = UIImage(named: "placeholder-camera-green.png")
+        self.saveNewImage()
+        
+    }
+    
     
     @IBAction func chooseImageButton(sender: AnyObject) {
         
@@ -27,7 +38,6 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         image.allowsEditing = true
         self.presentViewController(image, animated: true, completion: nil)
-        
     }
     
     func activityIndFunc(status: Int = 0) {
@@ -51,16 +61,16 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        //print("image selected")
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-        imageOutlet.image = image
-        
+    func saveNewImage() {
         if imageOutlet.image != nil && self.imageOutlet.image != UIImage(named: "placeholder-camera-green.png") {
             //Turn on Spinner
             //self.activityIndFunc(1)
+            
+            if let imageData = UIImagePNGRepresentation(self.imageOutlet.image!){
+                self.userProfileImages[currentImage_str] = imageData
+                NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
+                print("saved New Image")
+            }
             
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
                 //Upload Image To Parse
@@ -76,7 +86,38 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                     } else if let object = object {
                         //Save and Update Parse data
                         
-                        PFUser.currentUser()?["image_0"] = imageFile
+                        PFUser.currentUser()?[self.currentImage_str] = imageFile
+                        
+                        PFUser.currentUser()?.save()
+                        
+                        //Turn off Spinner
+                        //self.activityIndFunc(0)
+                        
+                    }
+                })
+            })
+            
+        } else if self.imageOutlet.image == UIImage(named: "placeholder-camera-green.png") {
+            
+            self.userProfileImages[currentImage_str] = nil
+            
+            NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
+            
+            print("deleted")
+            
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
+                //Upload Image To Parse
+                let query = PFQuery(className: "_User")
+                
+                query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+                    if error != nil {
+                        print(error)
+                    } else if let object = object {
+                        //Save and Update Parse data
+                        
+                        PFUser.currentUser()?.removeObjectForKey(self.currentImage_str)
+                        
+                        //PFUser.currentUser()?[self.currentImage_str]?.removeObject(anObject: AnyObject)
                         
                         PFUser.currentUser()?.save()
                         
@@ -91,33 +132,52 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         
     }
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        //print("image selected")
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        self.imageOutlet.image = image
+        
+        self.saveNewImage()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if currentImage_str == "image_0" {
+            self.deleteButtonOutlet.enabled = false
+        } else {
+            self.deleteButtonOutlet.enabled = true
+        }
         
         if NSUserDefaults().objectForKey("userProfileImages") != nil {
             self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
             
-            self.imageOutlet.image = UIImage(data: (self.userProfileImages["image_0"] as? NSData)!)
+            if self.userProfileImages[currentImage_str] != nil{
+                self.imageOutlet.image = UIImage(data: (self.userProfileImages[currentImage_str] as? NSData)!)
+            } else {
+                self.imageOutlet.image = UIImage(named: "placeholder-camera-green.png")
+            }
             
         }
 
         // Do any additional setup after loading the view.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillDisappear(animated : Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            
+        }
     }
-    */
 
 }

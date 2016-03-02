@@ -241,6 +241,30 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="avU-xk-2eT" id="7Hh-96-Cyj">
                                             <rect key="frame" x="0.0" y="0.0" width="381" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="rdr-cY-X1l">
+                                                    <rect key="frame" x="15" y="38" width="206" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-camera-green.png" translatesAutoresizingMaskIntoConstraints="NO" id="gpo-5P-uET">
+                                                    <rect key="frame" x="291" y="5" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="gpo-5P-uET" secondAttribute="height" multiplier="1:1" id="eXE-kq-kvs"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rdr-cY-X1l" firstAttribute="leading" secondItem="7Hh-96-Cyj" secondAttribute="leadingMargin" constant="7" id="CWK-PG-Pcc"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="gpo-5P-uET" secondAttribute="bottom" constant="-4" id="FOL-nr-sDQ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="rdr-cY-X1l" secondAttribute="bottom" constant="29" id="GVu-Gl-RR1"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gpo-5P-uET" secondAttribute="trailing" constant="-8" id="JTz-pt-Clo"/>
+                                                <constraint firstItem="gpo-5P-uET" firstAttribute="leading" secondItem="rdr-cY-X1l" secondAttribute="trailing" constant="70" id="Jgm-ql-vc4"/>
+                                                <constraint firstItem="gpo-5P-uET" firstAttribute="top" secondItem="7Hh-96-Cyj" secondAttribute="topMargin" constant="-3" id="cZO-wE-O3O"/>
+                                                <constraint firstItem="rdr-cY-X1l" firstAttribute="top" secondItem="7Hh-96-Cyj" secondAttribute="topMargin" constant="30" id="chB-os-DSm"/>
+                                                <constraint firstItem="gpo-5P-uET" firstAttribute="leading" secondItem="rdr-cY-X1l" secondAttribute="trailing" constant="70" id="mqz-qY-qwg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -310,9 +334,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Washington University St. Louis" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sor-If-p0I">
-                                                    <rect key="frame" x="170" y="12" width="229" height="20"/>
+                                                    <rect key="frame" x="182" y="13" width="217" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -452,7 +476,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="interestedInDetail" destination="wBr-lL-D3u" id="fB3-mG-8PV"/>
+                        <outlet property="profilePicOutlet" destination="gpo-5P-uET" id="XZS-6n-Qdr"/>
                         <outlet property="relationshipStatusDetail" destination="0Zb-x9-nhz" id="CHY-yo-cFX"/>
+                        <outlet property="userNameLabel" destination="rdr-cY-X1l" id="NFW-jm-Ovb"/>
                         <segue destination="j7P-mH-oeh" kind="show" identifier="MultipleChoiceSegue" id="kYr-Wx-Sze"/>
                         <segue destination="wLC-jv-7W6" kind="show" identifier="EditPictureSegue" id="XGD-Kg-aio"/>
                     </connections>
@@ -473,11 +499,11 @@
                         <sections>
                             <tableViewSection headerTitle="Profile Picture" id="hpZ-rw-Ovl">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="imageCell_0" rowHeight="100" id="a5r-vy-eHx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell_0" rowHeight="100" id="a5r-vy-eHx">
                                         <rect key="frame" x="0.0" y="114" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a5r-vy-eHx" id="lnj-Eg-9U7">
-                                            <rect key="frame" x="0.0" y="0.0" width="381" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-camera-green.png" translatesAutoresizingMaskIntoConstraints="NO" id="g4e-pj-2iJ">
@@ -488,20 +514,17 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="g4e-pj-2iJ" firstAttribute="leading" secondItem="lnj-Eg-9U7" secondAttribute="leadingMargin" constant="151" id="ThD-c5-OR2"/>
                                                 <constraint firstItem="g4e-pj-2iJ" firstAttribute="top" secondItem="lnj-Eg-9U7" secondAttribute="topMargin" constant="-3" id="cVw-26-O4i"/>
+                                                <constraint firstItem="g4e-pj-2iJ" firstAttribute="centerX" secondItem="lnj-Eg-9U7" secondAttribute="centerX" constant="-3" id="kVA-MJ-s4P"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="g4e-pj-2iJ" secondAttribute="bottom" constant="-4" id="sy7-ox-1sW"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="aAl-We-SGo" kind="show" id="zAk-H1-iq0"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="FDX-J2-OWW">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="imageCell_1" rowHeight="100" id="xqy-m4-uvr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="100" id="xqy-m4-uvr">
                                         <rect key="frame" x="0.0" y="250" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xqy-m4-uvr" id="e1F-ZH-Xjo">
@@ -516,13 +539,13 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="KBN-jD-SOb" firstAttribute="leading" secondItem="e1F-ZH-Xjo" secondAttribute="leadingMargin" constant="151" id="4Jj-bA-LJv"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="KBN-jD-SOb" secondAttribute="bottom" constant="-4" id="9Uc-G2-zHO"/>
+                                                <constraint firstItem="KBN-jD-SOb" firstAttribute="centerX" secondItem="e1F-ZH-Xjo" secondAttribute="centerX" constant="14" id="LIM-vx-CnP"/>
                                                 <constraint firstItem="KBN-jD-SOb" firstAttribute="top" secondItem="e1F-ZH-Xjo" secondAttribute="topMargin" constant="-3" id="kKr-Sz-UNE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="imageCell_2" rowHeight="100" id="Dta-Xg-GsT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="100" id="Dta-Xg-GsT">
                                         <rect key="frame" x="0.0" y="350" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dta-Xg-GsT" id="LoA-l4-weF">
@@ -538,12 +561,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Ylk-9y-6nq" firstAttribute="top" secondItem="LoA-l4-weF" secondAttribute="topMargin" constant="-3" id="Bxc-Qk-8cj"/>
-                                                <constraint firstItem="Ylk-9y-6nq" firstAttribute="leading" secondItem="LoA-l4-weF" secondAttribute="leadingMargin" constant="151" id="JUK-ow-Pyy"/>
+                                                <constraint firstItem="Ylk-9y-6nq" firstAttribute="centerX" secondItem="LoA-l4-weF" secondAttribute="centerX" constant="14" id="eDV-b3-iXC"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ylk-9y-6nq" secondAttribute="bottom" constant="-4" id="mdC-pg-eOP"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="imageCell_3" rowHeight="100" id="Lnm-7H-gT6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="100" id="Lnm-7H-gT6">
                                         <rect key="frame" x="0.0" y="450" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lnm-7H-gT6" id="b65-hF-eRH">
@@ -558,13 +581,13 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="N9V-PU-IKE" firstAttribute="leading" secondItem="b65-hF-eRH" secondAttribute="leadingMargin" constant="151" id="O47-HZ-mdr"/>
                                                 <constraint firstItem="N9V-PU-IKE" firstAttribute="top" secondItem="b65-hF-eRH" secondAttribute="topMargin" constant="-3" id="XAh-ez-0xY"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="N9V-PU-IKE" secondAttribute="bottom" constant="-4" id="sUc-0y-y21"/>
+                                                <constraint firstItem="N9V-PU-IKE" firstAttribute="centerX" secondItem="b65-hF-eRH" secondAttribute="centerX" constant="14" id="upN-ic-VtQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="imageCell_4" rowHeight="100" id="g4c-7N-ifg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="100" id="g4c-7N-ifg">
                                         <rect key="frame" x="0.0" y="550" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g4c-7N-ifg" id="oCK-tM-hHY">
@@ -579,9 +602,9 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="SdQ-OI-A63" firstAttribute="centerX" secondItem="oCK-tM-hHY" secondAttribute="centerX" constant="14" id="4Wl-Ie-lrt"/>
                                                 <constraint firstItem="SdQ-OI-A63" firstAttribute="top" secondItem="oCK-tM-hHY" secondAttribute="topMargin" constant="-3" id="OO9-GA-rZz"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="SdQ-OI-A63" secondAttribute="bottom" constant="-4" id="Q2a-eW-cnh"/>
-                                                <constraint firstItem="SdQ-OI-A63" firstAttribute="leading" secondItem="oCK-tM-hHY" secondAttribute="leadingMargin" constant="151" id="rvC-VE-FwQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -603,16 +626,19 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="image0_view" destination="g4e-pj-2iJ" id="sNq-6r-XmR"/>
-                        <outlet property="image1_view" destination="KBN-jD-SOb" id="TYn-q0-SkG"/>
-                        <outlet property="image2_view" destination="N9V-PU-IKE" id="kGV-NQ-ys7"/>
-                        <outlet property="image3_view" destination="Ylk-9y-6nq" id="cnd-F6-Gp8"/>
-                        <outlet property="image4_view" destination="SdQ-OI-A63" id="MPY-d2-nNU"/>
+                        <outlet property="imageA_view" destination="KBN-jD-SOb" id="wAp-pX-XmZ"/>
+                        <outlet property="imageB_view" destination="Ylk-9y-6nq" id="fWL-Me-Szn"/>
+                        <outlet property="imageC_view" destination="N9V-PU-IKE" id="QHn-un-oe3"/>
+                        <outlet property="imageD_view" destination="SdQ-OI-A63" id="eEi-P0-XlW"/>
                         <outlet property="reorderOutlet" destination="AhV-Ke-AEO" id="cd1-Y7-W7h"/>
+                        <segue destination="aAl-We-SGo" kind="show" identifier="UploadImageSegue" id="wFU-8I-RVA"/>
+                        <segue destination="0aZ-zA-ZFd" kind="unwind" unwindAction="unwindFromEditProfileMultipleChoice:" id="RSp-8e-8CN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mwV-s6-S6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="0aZ-zA-ZFd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="1403"/>
+            <point key="canvasLocation" x="-51" y="1403"/>
         </scene>
         <!--Edit Profile Upload Image-->
         <scene sceneID="X0T-fC-cZl">
@@ -627,13 +653,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-camera-green.png" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-1d-bzn">
-                                <rect key="frame" x="0.0" y="64" width="414" height="414"/>
+                                <rect key="frame" x="0.0" y="129" width="414" height="414"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pRN-1d-bzn" secondAttribute="height" multiplier="1:1" id="o20-Tc-bZ8"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q5-6x-RNA">
-                                <rect key="frame" x="158" y="493" width="99" height="30"/>
+                                <rect key="frame" x="158" y="558" width="99" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="gI8-Vb-aE0"/>
                                     <constraint firstAttribute="width" constant="99" id="rMx-7n-2u8"/>
@@ -644,20 +670,25 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="pRN-1d-bzn" secondAttribute="trailing" constant="-20" id="JSt-Sq-ye0"/>
                             <constraint firstItem="6q5-6x-RNA" firstAttribute="centerX" secondItem="bkH-hb-7WO" secondAttribute="centerX" id="cFX-23-NE1"/>
                             <constraint firstItem="6q5-6x-RNA" firstAttribute="top" secondItem="pRN-1d-bzn" secondAttribute="bottom" constant="15" id="gyY-kv-Ffb"/>
                             <constraint firstItem="pRN-1d-bzn" firstAttribute="leading" secondItem="bkH-hb-7WO" secondAttribute="leadingMargin" constant="-20" id="jjb-e3-ov0"/>
-                            <constraint firstItem="pRN-1d-bzn" firstAttribute="top" secondItem="p10-bt-RAU" secondAttribute="bottom" id="nrG-b4-KG5"/>
+                            <constraint firstItem="pRN-1d-bzn" firstAttribute="top" secondItem="p10-bt-RAU" secondAttribute="bottom" constant="65" id="nrG-b4-KG5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5nz-Vp-EqX">
-                        <barButtonItem key="rightBarButtonItem" title="Delete" id="oaD-d4-aDA"/>
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="oaD-d4-aDA">
+                            <connections>
+                                <action selector="deleteButton:" destination="aAl-We-SGo" id="mzK-DF-YSj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="deleteButtonOutlet" destination="oaD-d4-aDA" id="a6s-Kp-EXq"/>
                         <outlet property="imageOutlet" destination="pRN-1d-bzn" id="Jmh-40-lYa"/>
                     </connections>
                 </viewController>
@@ -700,7 +731,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSN-Ld-DNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5WA-qN-zaf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-487" y="2189"/>
+            <point key="canvasLocation" x="-487" y="2188"/>
         </scene>
         <!--Profile-->
         <scene sceneID="zRy-Kx-5ko">

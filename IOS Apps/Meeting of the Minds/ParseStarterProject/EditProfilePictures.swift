@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import Parse
 
 class EditProfilePictures: UITableViewController {
 
     @IBOutlet var image0_view: UIImageView!
-    @IBOutlet var image1_view: UIImageView!
-    @IBOutlet var image2_view: UIImageView!
-    @IBOutlet var image3_view: UIImageView!
-    @IBOutlet var image4_view: UIImageView!
+    @IBOutlet var imageA_view: UIImageView!
+    @IBOutlet var imageB_view: UIImageView!
+    @IBOutlet var imageC_view: UIImageView!
+    @IBOutlet var imageD_view: UIImageView!
     
-    var addPic_ls: [AnyObject] = ["image_1","image_2","image_3","image_4"]
+    var userProfileData = Dictionary<String,AnyObject>()
+    
+    var userProfileImages = Dictionary<String,AnyObject>()
+    
+    var updateCurrentImage_str: String = ""
+    
+    var image_order: [AnyObject] = []
     
     @IBOutlet var reorderOutlet: UIBarButtonItem!
     
@@ -28,20 +35,96 @@ class EditProfilePictures: UITableViewController {
             
         } else if self.tableView.editing == true {
             self.tableView.setEditing(false, animated: true)
+            self.saveImageOrderData()
             reorderOutlet.title = "Reorder"
+            print(image_order)
         }
         
     }
     
+    func saveImageOrderData() {
+        //Save Perm storage and Save to Parse
+        self.userProfileImages["image_order"] = self.image_order
+        NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
+        print("saved")
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
+            
+            let query = PFQuery(className: "_User")
+            
+            query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let object = object {
+                    PFUser.currentUser()?["image_order"] = self.image_order
+                    PFUser.currentUser()?.save()
+                }
+            })
+            
+        })
+    }
+    
+    func updateProfileImages(){
+        //Load Images
+        if NSUserDefaults().objectForKey("userProfileImages") != nil {
+            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
+            
+            self.image_order = (self.userProfileImages["image_order"] as? Array)!
+            print(self.image_order)
+            
+            if self.userProfileImages["image_0"] != nil {
+                self.image0_view.image = UIImage(data: (self.userProfileImages["image_0"] as? NSData)!)
+            } else {
+                self.image0_view.image = UIImage(named: "placeholder-camera-green.png")
+            }
+            
+            if self.userProfileImages[self.image_order[0] as! String] != nil {
+                self.imageA_view.image = UIImage(data: (self.userProfileImages[self.image_order[0] as! String] as? NSData)!)
+            } else {
+                self.imageA_view.image = UIImage(named: "placeholder-camera-green.png")
+            }
+            
+            if self.userProfileImages[self.image_order[1] as! String] != nil {
+                self.imageB_view.image = UIImage(data: (self.userProfileImages[self.image_order[1] as! String] as? NSData)!)
+            } else {
+                self.imageB_view.image = UIImage(named: "placeholder-camera-green.png")
+            }
+            
+            if self.userProfileImages[self.image_order[2] as! String] != nil {
+                self.imageC_view.image = UIImage(data: (self.userProfileImages[self.image_order[2] as! String] as? NSData)!)
+            } else {
+                self.imageC_view.image = UIImage(named: "placeholder-camera-green.png")
+            }
+            
+            if self.userProfileImages[self.image_order[3] as! String] != nil {
+                self.imageD_view.image = UIImage(data: (self.userProfileImages[self.image_order[3] as! String] as? NSData)!)
+            } else {    
+                self.imageD_view.image = UIImage(named: "placeholder-camera-green.png")
+            }
+            
+        }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Auto set Row height for screen size
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
         
+        self.tableView.editing = false
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //Round out corner of images
+        self.image0_view.layer.masksToBounds = true
+        self.image0_view.layer.cornerRadius = CGRectGetWidth(self.image0_view.frame)/6.0
+        self.imageA_view.layer.masksToBounds = true
+        self.imageA_view.layer.cornerRadius = CGRectGetWidth(self.imageA_view.frame)/6.0
+        self.imageB_view.layer.masksToBounds = true
+        self.imageB_view.layer.cornerRadius = CGRectGetWidth(self.imageB_view.frame)/6.0
+        self.imageC_view.layer.masksToBounds = true
+        self.imageC_view.layer.cornerRadius = CGRectGetWidth(self.imageC_view.frame)/6.0
+        self.imageD_view.layer.masksToBounds = true
+        self.imageD_view.layer.cornerRadius = CGRectGetWidth(self.imageD_view.frame)/6.0
         
     }
 
@@ -126,10 +209,11 @@ class EditProfilePictures: UITableViewController {
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         
-        let movedObject = self.addPic_ls[sourceIndexPath.row]
-        addPic_ls.removeAtIndex(sourceIndexPath.row)
-        addPic_ls.insert(movedObject, atIndex: destinationIndexPath.row)
-        //NSLog("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(data)")
+        let movedObject = self.image_order[sourceIndexPath.row]
+        image_order.removeAtIndex(sourceIndexPath.row)
+        image_order.insert(movedObject, atIndex: destinationIndexPath.row)
+        
+        //NSLog("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(self.image_order)")
         // To check for correctness enable:  self.tableView.reloadData()
         
     }
@@ -137,7 +221,65 @@ class EditProfilePictures: UITableViewController {
     //Track User's selected row
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         
+        if indexPath.section == 0 && indexPath.row == 0 {
+            //print("image_0")
+            self.performSegueWithIdentifier("UploadImageSegue", sender: "image_0")
+            
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            //print(self.image_order[0])
+            self.performSegueWithIdentifier("UploadImageSegue", sender: self.image_order[0])
+            
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            //print(self.image_order[1])
+            self.performSegueWithIdentifier("UploadImageSegue", sender: self.image_order[1])
+            
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            //print(self.image_order[2])
+            self.performSegueWithIdentifier("UploadImageSegue", sender: self.image_order[2])
+            
+        } else if indexPath.section == 1 && indexPath.row == 3 {
+            //print(self.image_order[3])
+            self.performSegueWithIdentifier("UploadImageSegue", sender: self.image_order[3])
+            
+        }
+
         return indexPath
+    }
+    
+    //Segue From EditProfileUploadImage
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tableView.reloadData()
+        
+        self.updateProfileImages()
+        
+    }
+    
+    //Segue Back to EditProfileMainController
+    override func viewWillDisappear(animated : Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            
+            self.saveImageOrderData()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //print("test")
+        
+        self.saveImageOrderData()
+        
+        if segue.identifier == "UploadImageSegue" {
+            if let EditProfileUploadImage = segue.destinationViewController as? EditProfileUploadImage {
+                EditProfileUploadImage.currentImage_str = (sender as? String)!
+                
+            }
+            
+        }
+        
+        
     }
 
 }

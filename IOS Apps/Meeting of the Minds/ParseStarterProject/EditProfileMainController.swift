@@ -12,7 +12,13 @@ import Parse
 class EditProfileMainController: UITableViewController {
     
     var userProfileData = Dictionary<String,AnyObject>()
+    
+    var userProfileImages = Dictionary<String,AnyObject>()
 
+    @IBOutlet var profilePicOutlet: UIImageView!
+    
+    @IBOutlet var userNameLabel: UILabel!
+    
     @IBOutlet var relationshipStatusDetail: UILabel!
     
     @IBOutlet var interestedInDetail: UILabel!
@@ -47,12 +53,26 @@ class EditProfileMainController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Round out corner of images
+        self.profilePicOutlet.layer.masksToBounds = true
+        self.profilePicOutlet.layer.cornerRadius = CGRectGetWidth(self.profilePicOutlet.frame)/6.0
+        
         if NSUserDefaults().objectForKey("userProfileData") != nil {
             self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
             
             self.relationshipStatusVar = self.userProfileData["relationship_status"] as? String
             
-            self.interestedInVar = self.userProfileData["interested_in"]as? String
+            self.interestedInVar = self.userProfileData["interested_in"] as? String
+            
+            self.userNameLabel.text = self.userProfileData["first_name"] as? String
+        }
+        
+        if NSUserDefaults().objectForKey("userProfileImages") != nil {
+            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
+            
+            if self.userProfileImages["image_0"] != nil {
+                self.profilePicOutlet.image = UIImage(data: (self.userProfileImages["image_0"] as? NSData)!)
+            }
         }
         
         //print(self.userProfileData)

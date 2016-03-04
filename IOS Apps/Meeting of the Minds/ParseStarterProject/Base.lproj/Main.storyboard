@@ -245,7 +245,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="rdr-cY-X1l">
                                                     <rect key="frame" x="15" y="38" width="206" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-camera-green.png" translatesAutoresizingMaskIntoConstraints="NO" id="gpo-5P-uET">
@@ -348,7 +348,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Private" id="uHO-N2-y02">
+                            <tableViewSection headerTitle="Private Info" id="uHO-N2-y02">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="RFF-Td-KQA" detailTextLabel="0Zb-x9-nhz" style="IBUITableViewCellStyleValue1" id="5zb-eC-Lw6">
                                         <rect key="frame" x="0.0" y="433" width="414" height="44"/>
@@ -651,46 +651,10 @@
                     <view key="view" contentMode="scaleToFill" id="bkH-hb-7WO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-camera-green.png" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-1d-bzn">
-                                <rect key="frame" x="0.0" y="129" width="414" height="414"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="pRN-1d-bzn" secondAttribute="height" multiplier="1:1" id="o20-Tc-bZ8"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q5-6x-RNA">
-                                <rect key="frame" x="158" y="558" width="99" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="gI8-Vb-aE0"/>
-                                    <constraint firstAttribute="width" constant="99" id="rMx-7n-2u8"/>
-                                </constraints>
-                                <state key="normal" title="Choose Image"/>
-                                <connections>
-                                    <action selector="chooseImageButton:" destination="aAl-We-SGo" eventType="touchUpInside" id="sCl-Tj-U9G"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="pRN-1d-bzn" secondAttribute="trailing" constant="-20" id="JSt-Sq-ye0"/>
-                            <constraint firstItem="6q5-6x-RNA" firstAttribute="centerX" secondItem="bkH-hb-7WO" secondAttribute="centerX" id="cFX-23-NE1"/>
-                            <constraint firstItem="6q5-6x-RNA" firstAttribute="top" secondItem="pRN-1d-bzn" secondAttribute="bottom" constant="15" id="gyY-kv-Ffb"/>
-                            <constraint firstItem="pRN-1d-bzn" firstAttribute="leading" secondItem="bkH-hb-7WO" secondAttribute="leadingMargin" constant="-20" id="jjb-e3-ov0"/>
-                            <constraint firstItem="pRN-1d-bzn" firstAttribute="top" secondItem="p10-bt-RAU" secondAttribute="bottom" constant="65" id="nrG-b4-KG5"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="5nz-Vp-EqX">
-                        <barButtonItem key="rightBarButtonItem" title="Delete" id="oaD-d4-aDA">
-                            <connections>
-                                <action selector="deleteButton:" destination="aAl-We-SGo" id="mzK-DF-YSj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="5nz-Vp-EqX"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <connections>
-                        <outlet property="deleteButtonOutlet" destination="oaD-d4-aDA" id="a6s-Kp-EXq"/>
-                        <outlet property="imageOutlet" destination="pRN-1d-bzn" id="Jmh-40-lYa"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbE-K2-ylo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

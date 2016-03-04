@@ -18,27 +18,10 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     var userProfileImages = Dictionary<String,AnyObject>()
     
     var currentImage_str: String = ""
-
-    @IBOutlet var imageOutlet: UIImageView!
     
-    @IBOutlet var deleteButtonOutlet: UIBarButtonItem!
+    var imageView: UIImageView!
     
-    @IBAction func deleteButton(sender: AnyObject) {
-        self.imageOutlet.image = UIImage(named: "placeholder-camera-green.png")
-        self.saveNewImage()
-        
-    }
-    
-    
-    @IBAction func chooseImageButton(sender: AnyObject) {
-        
-        //Pick Image from Phone --- Later replace with from FB
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        image.allowsEditing = true
-        self.presentViewController(image, animated: true, completion: nil)
-    }
+    var scrollView: UIScrollView! // scroll view
     
     func activityIndFunc(status: Int = 0) {
         
@@ -62,11 +45,12 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     }
     
     func saveNewImage() {
-        if imageOutlet.image != nil && self.imageOutlet.image != UIImage(named: "placeholder-camera-green.png") {
+        
+        if imageView.image != nil && self.imageView.image != UIImage(named: "placeholder-camera-green.png") {
             //Turn on Spinner
             //self.activityIndFunc(1)
             
-            if let imageData = UIImagePNGRepresentation(self.imageOutlet.image!){
+            if let imageData = UIImagePNGRepresentation(self.imageView.image!){
                 self.userProfileImages[currentImage_str] = imageData
                 NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
                 print("saved New Image")
@@ -76,7 +60,7 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                 //Upload Image To Parse
                 let query = PFQuery(className: "_User")
                 
-                let imageData = UIImagePNGRepresentation(self.imageOutlet.image!)
+                let imageData = UIImagePNGRepresentation(self.imageView.image!)
                 
                 let imageFile = PFFile(name: "image.png", data: imageData!)
                 
@@ -97,7 +81,7 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                 })
             })
             
-        } else if self.imageOutlet.image == UIImage(named: "placeholder-camera-green.png") {
+        } else if self.imageView.image == UIImage(named: "placeholder-camera-green.png") {
             
             self.userProfileImages[currentImage_str] = nil
             
@@ -137,33 +121,88 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        self.imageOutlet.image = image
+        self.imageView.image = image
         
         self.saveNewImage()
+    }
+    
+    func initiateImageScrollView() {
+        setUpScrollView()
         
+        scrollView.delegate = self
+        
+        setZoomScaleFor(scrollView.bounds.size)
+        scrollView.zoomScale = scrollView.minimumZoomScale
+        
+        recenterImage()
+    }
+    
+    //Toolbar and buttons
+    func initiateToolbar(sender: Int = 1) {
+        let toolbar = UIToolbar()
+        toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)
+        toolbar.sizeToFit()
+        toolbar.barStyle = UIBarStyle.Default
+        toolbar.translucent = true
+        
+        let deleteButton_var = UIBarButtonItem(title: " Delete", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteButton")
+        let changeButton_var = UIBarButtonItem(title: "Change ", style: UIBarButtonItemStyle.Plain, target: self, action: "changeButton")
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        
+        if sender == 0 {
+            deleteButton_var.enabled = false
+        } else if sender == 1 {
+            deleteButton_var.enabled = true
+        }
+        
+        toolbar.setItems([deleteButton_var, flexibleSpace, changeButton_var], animated: false)
+        toolbar.userInteractionEnabled = true
+        toolbar.backgroundColor = UIColor.blackColor()
+        toolbar.barTintColor = UIColor.blackColor()
+        self.view.addSubview(toolbar)
+    }
+    
+    func deleteButton(){
+        print("test")
+        
+        self.imageView.image = UIImage(named: "placeholder-camera-green.png")
+        self.saveNewImage()
+    }
+    
+    func changeButton(){
+        //print("test")
+        
+        //Pick Image from Phone --- Later replace with from FB
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        image.allowsEditing = true
+        self.presentViewController(image, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if currentImage_str == "image_0" {
-            self.deleteButtonOutlet.enabled = false
-        } else {
-            self.deleteButtonOutlet.enabled = true
-        }
-        
         if NSUserDefaults().objectForKey("userProfileImages") != nil {
             self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
             
             if self.userProfileImages[currentImage_str] != nil{
-                self.imageOutlet.image = UIImage(data: (self.userProfileImages[currentImage_str] as? NSData)!)
+                self.imageView = UIImageView(image: UIImage(data: (self.userProfileImages[currentImage_str] as? NSData)!))
+                
             } else {
-                self.imageOutlet.image = UIImage(named: "placeholder-camera-green.png")
+                self.imageView = UIImageView(image: UIImage(named: "placeholder-camera-green"))
             }
             
         }
-
-        // Do any additional setup after loading the view.
+        
+        self.initiateImageScrollView()
+        
+        if currentImage_str == "image_0" {
+            self.initiateToolbar(0)
+        } else {
+            self.initiateToolbar(1)
+        }
+        
     }
     
 
@@ -171,13 +210,62 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func viewWillDisappear(animated : Bool) {
-        super.viewWillDisappear(animated)
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
-        if (self.isMovingFromParentViewController()){
-            
+        setZoomScaleFor(scrollView.bounds.size)
+        
+        if scrollView.zoomScale < scrollView.minimumZoomScale {
+            scrollView.zoomScale = scrollView.minimumZoomScale
         }
+        
+        recenterImage()
     }
+    
+    // MARK: - Set up scroll view
+    
+    private func setUpScrollView() {
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        scrollView.backgroundColor = UIColor.blackColor()
+        scrollView.contentSize = imageView.bounds.size
+        
+        scrollView.addSubview(imageView)
+        view.addSubview(scrollView)
+    }
+    
+    private func setZoomScaleFor(scrollViewSize: CGSize) {
+        let imageSize = imageView.bounds.size
+        let widthScale = scrollViewSize.width / imageSize.width
+        let heightScale = scrollViewSize.height / imageSize.height
+        let minimumScale = min(widthScale, heightScale)
+        
+        // set up zooming properties for the scroll view
+        scrollView.minimumZoomScale = minimumScale
+        scrollView.maximumZoomScale = 3.0
+    }
+    
+    private func recenterImage() {
+        let scrollViewSize = scrollView.bounds.size
+        let imageViewSize = imageView.frame.size
+        let horizontalSpace = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2.0 : 0
+        let verticalSpace = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2.0 : 0
+        
+        scrollView.contentInset = UIEdgeInsets(top: verticalSpace, left: horizontalSpace, bottom: verticalSpace, right: horizontalSpace)
+    }
+    
+}
+
+extension EditProfileUploadImage : UIScrollViewDelegate {
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
+    
+    /*
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+    self.recenterImage()
+    }
+    */
 
 }

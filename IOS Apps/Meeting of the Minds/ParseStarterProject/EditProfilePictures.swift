@@ -269,8 +269,6 @@ class EditProfilePictures: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //print("test")
         
-        self.saveImageOrderData()
-        
         if segue.identifier == "UploadImageSegue" {
             if let EditProfileUploadImage = segue.destinationViewController as? EditProfileUploadImage {
                 EditProfileUploadImage.currentImage_str = (sender as? String)!

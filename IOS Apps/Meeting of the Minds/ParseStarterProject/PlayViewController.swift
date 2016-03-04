@@ -39,6 +39,7 @@ class PlayViewController: UIViewController {
     }
     func updateUserProfileData() {
         
+        
         //Gets information about the user from Facebook.
         let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, gender, locale"])
         
@@ -84,8 +85,15 @@ class PlayViewController: UIViewController {
                                         
                                         //print(self.userProfileData)
                                         
-                                        //Updates User Pictures on Phone Storage from Parse
-                                        self.userProfileImages = ["image_0":NSData(),"image_1":NSData(),"image_2":NSData(),"image_3":NSData(),"image_4":NSData(), "image_order":[String(),String(),String(),String()]] // dont forget to make pull from parse
+                                        
+                                        //====Updates User Pictures on Phone Storage from Parse
+                                        self.userProfileImages = ["image_0":NSData(),"image_1":NSData(),"image_2":NSData(),"image_3":NSData(),"image_4":NSData(),"image_order":["image_1","image_2","image_3","image_4"]]
+                                        
+                                        self.userProfileImages["image_0"] = nil
+                                        self.userProfileImages["image_1"] = nil
+                                        self.userProfileImages["image_2"] = nil
+                                        self.userProfileImages["image_3"] = nil
+                                        self.userProfileImages["image_4"] = nil
                                         
                                         //Get image order from Parse:
                                         if PFUser.currentUser()?["image_order"] != nil {
@@ -162,16 +170,23 @@ class PlayViewController: UIViewController {
                                         if let fbpicUrl = NSURL(string: facebookProfilePictureUrl) {
                                             if let data = NSData(contentsOfURL: fbpicUrl) {
                                                 
+                                                self.userProfileImages = ["image_0":NSData(),"image_1":NSData(),"image_2":NSData(),"image_3":NSData(),"image_4":NSData(),"image_order":["image_1","image_2","image_3","image_4"]]
+                                                
+                                                self.userProfileImages["image_0"] = nil
+                                                self.userProfileImages["image_1"] = nil
+                                                self.userProfileImages["image_2"] = nil
+                                                self.userProfileImages["image_3"] = nil
+                                                self.userProfileImages["image_4"] = nil
+                                                
                                                 //Save Image File to Parse
                                                 let imageFile: PFFile = PFFile(data: data)
                                                 PFUser.currentUser()?["image_0"] = imageFile
                                                 PFUser.currentUser()?.save()
                                                 
                                                 //Set userProfileImage
-                                                
                                                 if let imageData = UIImagePNGRepresentation(UIImage(data: data)!){
                                                     
-                                                    self.userProfileImages = ["image_0":imageData,"image_1":NSData(),"image_2":NSData(),"image_3":NSData(),"image_4":NSData(),"image_order":["image_1","image_2","image_3","image_4"]]
+                                                    self.userProfileImages["image_0"] = imageData
                                                     
                                                     NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
                                                 }

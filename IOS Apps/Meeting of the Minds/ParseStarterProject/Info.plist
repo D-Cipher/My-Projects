@@ -37,7 +37,7 @@
 	<key>FacebookAppID</key>
 	<string>527132770791563</string>
 	<key>FacebookDisplayName</key>
-	<string>Meeting of the Minds</string>
+	<string>Hello World,</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

@@ -126,17 +126,6 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         self.saveNewImage()
     }
     
-    func initiateImageScrollView() {
-        setUpScrollView()
-        
-        scrollView.delegate = self
-        
-        setZoomScaleFor(scrollView.bounds.size)
-        scrollView.zoomScale = scrollView.minimumZoomScale
-        
-        recenterImage()
-    }
-    
     //Toolbar and buttons
     func initiateToolbar(sender: Int = 1) {
         let toolbar = UIToolbar()
@@ -163,7 +152,7 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     }
     
     func deleteButton(){
-        print("test")
+        //print("test")
         
         self.imageView.image = UIImage(named: "placeholder-camera-green.png")
         self.saveNewImage()
@@ -195,7 +184,11 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
             
         }
         
-        self.initiateImageScrollView()
+        
+        self.setUpScrollView()
+        
+        self.recenterImage()
+        
         
         if currentImage_str == "image_0" {
             self.initiateToolbar(0)
@@ -233,6 +226,11 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         
         scrollView.addSubview(imageView)
         view.addSubview(scrollView)
+        
+        scrollView.delegate = self
+        
+        setZoomScaleFor(scrollView.bounds.size)
+        scrollView.zoomScale = scrollView.minimumZoomScale
     }
     
     private func setZoomScaleFor(scrollViewSize: CGSize) {

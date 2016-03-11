@@ -467,9 +467,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit" id="fvx-H1-Xyi">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="RCR-cV-lir">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="RCR-cV-lir">
                             <connections>
-                                <segue destination="oaP-zW-Av5" kind="unwind" unwindAction="unwindFromEditProfileMain:" id="51I-sH-FKL"/>
+                                <segue destination="oaP-zW-Av5" kind="unwind" unwindAction="unwindToProfileView:" id="2we-WY-tto"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -486,7 +486,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ly6-Ns-mst" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="oaP-zW-Av5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-487" y="1403"/>
+            <point key="canvasLocation" x="-934" y="2192"/>
         </scene>
         <!--Pictures-->
         <scene sceneID="Emz-kd-xUS">
@@ -638,7 +638,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mwV-s6-S6m" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="0aZ-zA-ZFd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-51" y="1403"/>
+            <point key="canvasLocation" x="-487" y="2192"/>
         </scene>
         <!--Edit Profile Upload Image-->
         <scene sceneID="X0T-fC-cZl">
@@ -658,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbE-K2-ylo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="1403"/>
+            <point key="canvasLocation" x="-24" y="2192"/>
         </scene>
         <!--Edit Profile Multiple Choice-->
         <scene sceneID="dZl-hl-KLc">
@@ -677,7 +677,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="5WA-qN-zaf" kind="unwind" identifier="saveChoiceUnwind" unwindAction="unwindFromEditProfileMultipleChoice:" id="BpW-ED-FV4"/>
+                                    <segue destination="5WA-qN-zaf" kind="unwind" identifier="saveChoiceUnwind" unwindAction="unwindToEditProfileMain:" id="MbF-2C-3AI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -695,7 +695,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSN-Ld-DNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5WA-qN-zaf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-487" y="2188"/>
+            <point key="canvasLocation" x="-934" y="2990"/>
         </scene>
         <!--Profile-->
         <scene sceneID="zRy-Kx-5ko">
@@ -708,7 +708,24 @@
                     <view key="view" contentMode="scaleToFill" id="InU-lv-P7O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeh-Gs-oID">
+                                <rect key="frame" x="162" y="121" width="90" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dpE-5O-luR"/>
+                                    <constraint firstAttribute="width" constant="90" id="tZb-Cz-M0L"/>
+                                </constraints>
+                                <state key="normal" title="Public Profile"/>
+                                <connections>
+                                    <segue destination="S7S-VK-lC6" kind="presentation" id="lma-b6-zly"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jeh-Gs-oID" firstAttribute="top" secondItem="7bN-tU-zQY" secondAttribute="bottom" constant="57" id="h90-6r-G3I"/>
+                            <constraint firstItem="jeh-Gs-oID" firstAttribute="centerX" secondItem="InU-lv-P7O" secondAttribute="centerX" id="o1M-TN-KLE"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="nII-KO-SlA">
                         <barButtonItem key="rightBarButtonItem" title="Edit (gear)" id="irx-2d-HSL">
@@ -727,6 +744,51 @@
             <point key="canvasLocation" x="-1465" y="1403"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="Kwu-Mq-tmn">
+            <objects>
+                <navigationController id="S7S-VK-lC6" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WHj-kt-Pkn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6ne-H0-isi" kind="relationship" relationship="rootViewController" id="wi8-RE-ciI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pt9-YC-gTS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-934" y="1403"/>
+        </scene>
+        <!--Public Profile-->
+        <scene sceneID="ZSh-Dl-DDy">
+            <objects>
+                <viewController id="6ne-H0-isi" customClass="PublicProfileController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zAq-Ur-0vc"/>
+                        <viewControllerLayoutGuide type="bottom" id="KFs-Ae-h2f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="laW-vA-fqs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Public Profile" id="7Fw-Y2-6zc">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="0mL-bU-LlC">
+                            <connections>
+                                <segue destination="XTV-zF-wYR" kind="unwind" unwindAction="unwindToProfileView:" id="WrP-uC-HhY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Button" id="Qqb-bu-qlb"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YcC-Bh-ISs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XTV-zF-wYR" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-487" y="1403"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="MXP-Nx-ltW">
             <objects>
                 <navigationController id="flI-oq-gSH" sceneMemberID="viewController">
@@ -741,7 +803,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rrl-yY-PbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-934" y="1403"/>
+            <point key="canvasLocation" x="-1465" y="2192"/>
         </scene>
     </scenes>
     <resources>

@@ -27,9 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         let vlight_grey = UIColor(red: 0.97, green: 0.95, blue: 0.95, alpha: 1.0)
+        let col_blkchalk = UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1.0)
         
         //App Skin Customization
-        UINavigationBar.appearance().barTintColor = UIColor.blackColor()
+        UINavigationBar.appearance().barTintColor = col_blkchalk
+        UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().tintColor = UIColor.whiteColor() //Nav bar back button to white
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()

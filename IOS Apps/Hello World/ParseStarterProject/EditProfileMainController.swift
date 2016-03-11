@@ -109,7 +109,7 @@ class EditProfileMainController: UITableViewController {
     }
     
     //Unwind Multiple Choice Segue
-    @IBAction func unwindFromEditProfileMultipleChoice(segue:UIStoryboardSegue) {
+    @IBAction func unwindToEditProfileMain(segue:UIStoryboardSegue) {
         
         if let EditProfileMultipleChoice = segue.sourceViewController as? EditProfileMultipleChoice,
             selectedChoice = EditProfileMultipleChoice.selectedChoice {

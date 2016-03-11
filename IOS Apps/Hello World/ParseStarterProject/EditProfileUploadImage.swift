@@ -21,7 +21,15 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     
     var imageView: UIImageView!
     
-    var scrollView: UIScrollView! // scroll view
+    var scrollView: UIScrollView!
+    
+    var navBar_adjust = Float()
+    
+    var deleteButton_var = UIBarButtonItem!()
+    
+    var changeButton_var = UIBarButtonItem!()
+    
+    var addChangeBtn_status = "Change "
     
     func activityIndFunc(status: Int = 0) {
         
@@ -124,24 +132,29 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         self.imageView.image = image
         
         self.saveNewImage()
+        
+        self.changeButton_var.title = "Change "
     }
     
     //Toolbar and buttons
     func initiateToolbar(sender: Int = 1) {
+        
+        self.navBar_adjust = Float(self.navigationController!.navigationBar.frame.size.height) + Float(self.navigationController!.navigationBar.frame.size.height)/2.2
+        
         let toolbar = UIToolbar()
-        toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)
+        toolbar.frame = CGRectMake(0, self.view.frame.size.height - 44.0 - CGFloat(self.navBar_adjust), self.view.frame.size.width, 44.0)
         toolbar.sizeToFit()
         toolbar.barStyle = UIBarStyle.Default
         toolbar.translucent = true
         
-        let deleteButton_var = UIBarButtonItem(title: " Delete", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteButton")
-        let changeButton_var = UIBarButtonItem(title: "Change ", style: UIBarButtonItemStyle.Plain, target: self, action: "changeButton")
+        self.deleteButton_var = UIBarButtonItem(title: " Delete", style: UIBarButtonItemStyle.Plain, target: self, action: "deleteButton")
+        self.changeButton_var = UIBarButtonItem(title: self.addChangeBtn_status, style: UIBarButtonItemStyle.Plain, target: self, action: "changeButton")
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         
         if sender == 0 {
-            deleteButton_var.enabled = false
+            self.deleteButton_var.enabled = false
         } else if sender == 1 {
-            deleteButton_var.enabled = true
+            self.deleteButton_var.enabled = true
         }
         
         toolbar.setItems([deleteButton_var, flexibleSpace, changeButton_var], animated: false)
@@ -153,9 +166,30 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     
     func deleteButton(){
         //print("test")
+        if self.changeButton_var.title != "Add " {
+            let alertMsg = ["Caution", "You are about to delete this picture."]
+            
+            let alert = UIAlertController(title: alertMsg[0], message: alertMsg[1], preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                print("OK")
+                
+                self.imageView.image = UIImage(named: "placeholder-camera-green.png")
+                self.saveNewImage()
+                
+                self.changeButton_var.title = "Add "
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) -> Void in
+                
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
         
-        self.imageView.image = UIImage(named: "placeholder-camera-green.png")
-        self.saveNewImage()
+        
     }
     
     func changeButton(){
@@ -178,8 +212,13 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
             if self.userProfileImages[currentImage_str] != nil{
                 self.imageView = UIImageView(image: UIImage(data: (self.userProfileImages[currentImage_str] as? NSData)!))
                 
+                self.addChangeBtn_status = "Change "
+                
             } else {
                 self.imageView = UIImageView(image: UIImage(named: "placeholder-camera-green"))
+                
+                self.addChangeBtn_status = "Add "
+                
             }
             
         }
@@ -219,7 +258,10 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     // MARK: - Set up scroll view
     
     private func setUpScrollView() {
-        scrollView = UIScrollView(frame: view.bounds)
+        
+        self.navBar_adjust = Float(self.navigationController!.navigationBar.frame.size.height) + Float(self.navigationController!.navigationBar.frame.size.height)/2.2
+        
+        scrollView = UIScrollView(frame: CGRect(x: view.bounds.origin.x, y: view.bounds.origin.y - CGFloat(self.navBar_adjust) + 34, width: view.bounds.width, height: view.bounds.height))
         scrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         scrollView.backgroundColor = UIColor.blackColor()
         scrollView.contentSize = imageView.bounds.size
@@ -247,8 +289,8 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     private func recenterImage() {
         let scrollViewSize = scrollView.bounds.size
         let imageViewSize = imageView.frame.size
-        let horizontalSpace = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2.0 : 0
-        let verticalSpace = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2.0 : 0
+        let horizontalSpace = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
+        let verticalSpace = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
         
         scrollView.contentInset = UIEdgeInsets(top: verticalSpace, left: horizontalSpace, bottom: verticalSpace, right: horizontalSpace)
     }

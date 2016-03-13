@@ -18,6 +18,12 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
     
     var userProfileImages = Dictionary<String,AnyObject>()
     
+    var image_order: [String] = []
+    
+    var currentImg_str: String = "image_0"
+    
+    var pageImages_str: [String] = []
+    
     var pageImages: [UIImage] = []
     
     var pageViews: [UIImageView?] = []
@@ -35,9 +41,35 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         return label.frame.height
     }
     
-    func buttonAction(sender:UIButton!)
-    {
-        print("Button tapped")
+    func magnifierButton(sender:UIButton!) {
+        //print("Button tapped")
+        
+        self.performSegueWithIdentifier("UserMagnifierSegue", sender: self.currentImg_str)
+        
+    }
+    
+    func barButtonItem(sender:UIButton!) {
+        //print("Button tapped")
+        
+        self.performSegueWithIdentifier("GearSegue", sender: self)
+        
+    }
+    
+    func initiateBarButtonItem(){
+        let btnName = UIButton()
+        
+        let origImage = UIImage(named: "Settings30x30.png")
+        let tintedImage = origImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        
+        btnName.setImage(tintedImage, forState: .Normal)
+        btnName.frame = CGRectMake(0, 0, 30, 30)
+        btnName.addTarget(self, action: "barButtonItem:", forControlEvents: .TouchUpInside)
+        
+        //.... Set Right/Left Bar Button item
+        let rightBarButton = UIBarButtonItem()
+        rightBarButton.customView = btnName
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        
     }
     
     override func viewDidLoad() {
@@ -46,6 +78,7 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         //self.navigationController!.navigationBar.translucent = true
         //self.navigationController!.navigationBar.barTintColor = UIColor.redColor() // for testing
         
+        //Load Perm Storage Data
         if NSUserDefaults().objectForKey("userProfileImages") == nil {
             
             self.userProfileImages = ["image_0":NSData(),"image_1":NSData(),"image_2":NSData(),"image_3":NSData(),"image_4":NSData()]
@@ -64,13 +97,20 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         }
         
         //Set up pageImages
-        let image_str: [String] = ["image_0","image_1","image_2","image_3","image_4"]
+        var image_str: [String] = ["image_0"]
+        
+        self.image_order = self.userProfileImages["image_order"] as! Array
+        
+        for image_n in self.image_order {
+            image_str.append(image_n)
+        }
         
         for img_name in image_str {
             
             if (self.userProfileImages[img_name] != nil) {
                 
                 self.pageImages.append(UIImage(data: (self.userProfileImages[img_name] as? NSData)!)!)
+                self.pageImages_str.append(img_name)
             }
             
         }
@@ -78,6 +118,8 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         self.setUpScrollView()
         
         self.initiateImageScroll()
+        
+        self.initiateBarButtonItem()
         
     }
     
@@ -133,14 +175,15 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         let magBtn_w = CGFloat(20)
         let magBtn_h = CGFloat(20)
         
-        let origImage = UIImage(named: "magnifier30x30.png")
+        let origImage = UIImage(named: "Magnifier30x30.png")
         let tintedImage = origImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         let magButton = UIButton(frame: CGRectMake(magBtn_x, magBtn_y, magBtn_w, magBtn_h))
         magButton.setImage(tintedImage, forState: .Normal)
         magButton.tintColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
-        magButton.addTarget(self, action: "buttonAction:", forControlEvents: .TouchUpInside)
+        magButton.addTarget(self, action: "magnifierButton:", forControlEvents: .TouchUpInside)
         
         view.addSubview(magButton)
+        
         
         //print(self.pictureScroll.frame.height)
         //print(CGFloat(self.navBar_adjust) + self.pictureScroll.frame.height)
@@ -328,6 +371,9 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         
         pageControl.currentPage = page
         
+        self.currentImg_str = self.pageImages_str[page]
+        //print(self.currentImg_str)
+        
         let firstPage = page - 1
         let lastPage = page + 1
         
@@ -345,6 +391,37 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView){
-        loadVisiblePages()
+        self.loadVisiblePages()
+    }
+    
+    /*
+    //Segue From EditProfileUploadImage
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.getPermStorage()
+        
+        self.pageImages[pageControl.currentPage] = UIImage(data: (self.userProfileImages[self.currentImg_str] as? NSData)!)!
+        
+        self.setUpScrollView()
+        
+        self.initiateImageScroll()
+        
+    }
+    */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //print("test")
+        
+        if segue.identifier == "UserMagnifierSegue" {
+            if let EditProfileUploadImage = segue.destinationViewController as? EditProfileUploadImage {
+                EditProfileUploadImage.fromSegue = segue.identifier!
+                EditProfileUploadImage.currentImage_str = (sender as? String)!
+                
+            }
+            
+        }
+        
+        
     }
 }

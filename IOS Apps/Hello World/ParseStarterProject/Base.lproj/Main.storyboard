@@ -658,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbE-K2-ylo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-24" y="2192"/>
+            <point key="canvasLocation" x="-30" y="2192"/>
         </scene>
         <!--Edit Profile Multiple Choice-->
         <scene sceneID="dZl-hl-KLc">
@@ -728,7 +728,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="nII-KO-SlA">
-                        <barButtonItem key="rightBarButtonItem" title="Edit (gear)" id="irx-2d-HSL">
+                        <barButtonItem key="rightBarButtonItem" image="Settings30x30.png" id="irx-2d-HSL">
                             <connections>
                                 <action selector="editProfileButton:" destination="0bC-wj-FpD" id="8GM-EJ-upJ"/>
                             </connections>
@@ -779,9 +779,12 @@
                                 <segue destination="XTV-zF-wYR" kind="unwind" unwindAction="unwindToProfileView:" id="WrP-uC-HhY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Button" id="Qqb-bu-qlb"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <segue destination="aAl-We-SGo" kind="show" identifier="UserMagnifierSegue" id="d6Q-w2-RQT"/>
+                        <segue destination="flI-oq-gSH" kind="presentation" identifier="GearSegue" id="sRX-7D-cBF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YcC-Bh-ISs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="XTV-zF-wYR" userLabel="Exit" sceneMemberID="exit"/>
@@ -807,8 +810,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Settings30x30.png" width="30" height="30"/>
         <image name="Timber_logo.png" width="430" height="156"/>
         <image name="loginFB.png" width="492" height="108"/>
         <image name="placeholder-camera-green.png" width="1000" height="1000"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="dDr-5u-J3L"/>
+        <segue reference="d6Q-w2-RQT"/>
+    </inferredMetricsTieBreakers>
 </document>

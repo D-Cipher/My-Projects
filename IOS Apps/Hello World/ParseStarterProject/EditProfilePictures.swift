@@ -271,6 +271,7 @@ class EditProfilePictures: UITableViewController {
         
         if segue.identifier == "UploadImageSegue" {
             if let EditProfileUploadImage = segue.destinationViewController as? EditProfileUploadImage {
+                EditProfileUploadImage.fromSegue = segue.identifier!
                 EditProfileUploadImage.currentImage_str = (sender as? String)!
                 
             }

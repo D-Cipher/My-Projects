@@ -17,6 +17,8 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     
     var userProfileImages = Dictionary<String,AnyObject>()
     
+    var fromSegue: String = ""
+    
     var currentImage_str: String = ""
     
     var imageView: UIImageView!
@@ -95,7 +97,7 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
             
             NSUserDefaults.standardUserDefaults().setObject(self.userProfileImages, forKey: "userProfileImages")
             
-            print("deleted")
+            //print("deleted")
             
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
                 //Upload Image To Parse
@@ -151,17 +153,23 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         self.changeButton_var = UIBarButtonItem(title: self.addChangeBtn_status, style: UIBarButtonItemStyle.Plain, target: self, action: "changeButton")
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         
-        if sender == 0 {
-            self.deleteButton_var.enabled = false
-        } else if sender == 1 {
-            self.deleteButton_var.enabled = true
-        }
-        
         toolbar.setItems([deleteButton_var, flexibleSpace, changeButton_var], animated: false)
         toolbar.userInteractionEnabled = true
         toolbar.backgroundColor = UIColor.blackColor()
         toolbar.barTintColor = UIColor.blackColor()
-        self.view.addSubview(toolbar)
+        
+        
+        if sender == 0 {
+            self.deleteButton_var.enabled = false
+            self.view.addSubview(toolbar)
+        
+        } else if sender == 1 {
+            self.deleteButton_var.enabled = true
+            self.view.addSubview(toolbar)
+        
+        } else if sender == 2 {
+            
+        }
     }
     
     func deleteButton(){
@@ -228,11 +236,14 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
         
         self.recenterImage()
         
-        
-        if currentImage_str == "image_0" {
-            self.initiateToolbar(0)
-        } else {
-            self.initiateToolbar(1)
+        if fromSegue == "UploadImageSegue" {
+            if currentImage_str == "image_0" {
+                self.initiateToolbar(0)
+            } else {
+                self.initiateToolbar(1)
+            }
+        } else if fromSegue == "UserMagnifierSegue" {
+            self.initiateToolbar(2)
         }
         
     }

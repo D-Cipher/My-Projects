@@ -10,8 +10,9 @@
 		34009D431C7E22CC00BBC60B /* EditProfileMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */; };
 		3402C92A1C828496004D281F /* EditProfilePictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3402C9291C828496004D281F /* EditProfilePictures.swift */; };
 		3402C92C1C829D17004D281F /* placeholder-camera-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 3402C92B1C829D16004D281F /* placeholder-camera-green.png */; };
+		340612031C95362000E126BE /* Magnifier30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 340612021C95362000E126BE /* Magnifier30x30.png */; };
+		340612051C95362800E126BE /* Settings30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 340612041C95362800E126BE /* Settings30x30.png */; };
 		3431AFFD1C93113300138CAE /* PublicProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3431AFFC1C93113300138CAE /* PublicProfileController.swift */; };
-		3431AFFF1C931A0100138CAE /* magnifier30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3431AFFE1C931A0100138CAE /* magnifier30x30.png */; };
 		344196BF1C7CCB32004195DB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196BE1C7CCB32004195DB /* ProfileViewController.swift */; };
 		344196C11C7CD081004195DB /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196C01C7CD081004195DB /* PlayViewController.swift */; };
 		347C4DCA1C80E413009DD861 /* EditProfileMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */; };
@@ -39,8 +40,9 @@
 		34009D421C7E22CC00BBC60B /* EditProfileMainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMainController.swift; sourceTree = "<group>"; };
 		3402C9291C828496004D281F /* EditProfilePictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfilePictures.swift; sourceTree = "<group>"; };
 		3402C92B1C829D16004D281F /* placeholder-camera-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-camera-green.png"; sourceTree = "<group>"; };
+		340612021C95362000E126BE /* Magnifier30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Magnifier30x30.png; sourceTree = "<group>"; };
+		340612041C95362800E126BE /* Settings30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings30x30.png; sourceTree = "<group>"; };
 		3431AFFC1C93113300138CAE /* PublicProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileController.swift; sourceTree = "<group>"; };
-		3431AFFE1C931A0100138CAE /* magnifier30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifier30x30.png; sourceTree = "<group>"; };
 		344196BE1C7CCB32004195DB /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		344196C01C7CD081004195DB /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMultipleChoice.swift; sourceTree = "<group>"; };
@@ -95,7 +97,8 @@
 				34C91B1F1C7377D500384C49 /* loginFB.png */,
 				3402C92B1C829D16004D281F /* placeholder-camera-green.png */,
 				34C91B251C73A50400384C49 /* Timber_logo.png */,
-				3431AFFE1C931A0100138CAE /* magnifier30x30.png */,
+				340612021C95362000E126BE /* Magnifier30x30.png */,
+				340612041C95362800E126BE /* Settings30x30.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -240,12 +243,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				340612051C95362800E126BE /* Settings30x30.png in Resources */,
 				34C91B261C73A50400384C49 /* Timber_logo.png in Resources */,
 				81BA81501A49DA1800E65899 /* Main.storyboard in Resources */,
 				34C91B201C7377D500384C49 /* loginFB.png in Resources */,
 				3402C92C1C829D17004D281F /* placeholder-camera-green.png in Resources */,
 				81BA81521A49DA1800E65899 /* Images.xcassets in Resources */,
-				3431AFFF1C931A0100138CAE /* magnifier30x30.png in Resources */,
+				340612031C95362000E126BE /* Magnifier30x30.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

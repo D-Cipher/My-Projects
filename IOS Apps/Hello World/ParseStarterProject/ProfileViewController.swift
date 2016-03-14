@@ -15,21 +15,25 @@ class ProfileViewController: UIViewController {
     
     var userProfileImages = Dictionary<String,AnyObject>()
     
+    @IBOutlet var profilePicOutlet: UIImageView!
+    
+    @IBOutlet var bgPicOutlet: UIImageView!
+
     @IBAction func editProfileButton(sender: AnyObject) {
         self.performSegueWithIdentifier("editProfileSegue", sender: self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if NSUserDefaults().objectForKey("userProfileData") != nil {
-            
-            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,String>
-        } else {
-            print("error")
+            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
         }
         
-        //print(self.userProfileData)
+        if NSUserDefaults().objectForKey("userProfileImages") != nil {
+            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
+        }
+
 
     }
 

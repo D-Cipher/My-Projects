@@ -21,11 +21,15 @@ class EditProfileMainController: UITableViewController {
     
     @IBOutlet var relationshipStatusDetail: UILabel!
     
-    @IBOutlet var interestedInDetail: UILabel!
+    @IBOutlet var sexualIdDetail: UILabel!
+    
+    @IBOutlet var racialIdDetail: UILabel!
+    
+    @IBOutlet var collegeDetail: UILabel!
     
     var currentSelectedChoice:String? = "N/A"
     
-    var relationshipStatusVar:String? = "N/A" {
+    var relationshipStatusVar:String? = "Single" {
         didSet {
             
             relationshipStatusDetail.text? = relationshipStatusVar!
@@ -33,11 +37,18 @@ class EditProfileMainController: UITableViewController {
         }
     }
     
-    var interestedInVar:String? = "Women" {
+    var sexualIdVar:String? = "Straight" {
         didSet {
             
-            interestedInDetail.text? = interestedInVar!
+            sexualIdDetail.text? = sexualIdVar!
             
+        }
+    }
+    
+    var racialIdVar:String? = "N/A" {
+        didSet {
+            
+            racialIdDetail.text? = racialIdVar!
         }
     }
     
@@ -49,9 +60,27 @@ class EditProfileMainController: UITableViewController {
     deinit {
         //print("deinit PlayerDetailsViewController")
     }
+    
+    func updateUserProfilePic() {
+        if NSUserDefaults().objectForKey("userProfileImages") != nil {
+            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
+            
+            if self.userProfileImages["image_0"] != nil {
+                self.profilePicOutlet.image = UIImage(data: (self.userProfileImages["image_0"] as? NSData)!)
+            }
+        }
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*
+        //Adjust text size
+        let font_ratio = self.view.frame.size.width / 375.0
+        self.collegeDetail.font = UIFont(name: "HelveticaNeue", size: 15 * font_ratio)
+        */
+        
         
         //Round out corner of images
         self.profilePicOutlet.layer.masksToBounds = true
@@ -62,18 +91,14 @@ class EditProfileMainController: UITableViewController {
             
             self.relationshipStatusVar = self.userProfileData["relationship_status"] as? String
             
-            self.interestedInVar = self.userProfileData["interested_in"] as? String
+            self.sexualIdVar = self.userProfileData["sexual_id"] as? String
+            
+            self.racialIdVar = self.userProfileData["racial_id"] as? String
             
             self.userNameLabel.text = self.userProfileData["first_name"] as? String
         }
         
-        if NSUserDefaults().objectForKey("userProfileImages") != nil {
-            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
-            
-            if self.userProfileImages["image_0"] != nil {
-                self.profilePicOutlet.image = UIImage(data: (self.userProfileImages["image_0"] as? NSData)!)
-            }
-        }
+        self.updateUserProfilePic()
         
         //print(self.userProfileData)
 
@@ -84,20 +109,31 @@ class EditProfileMainController: UITableViewController {
         if indexPath.section == 0 && indexPath.row == 0 {
             //print("profile_pic")
             self.performSegueWithIdentifier("EditPictureSegue", sender: self)
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            self.performSegueWithIdentifier("AgeSwitchSegue", sender: self)
             
         } else if indexPath.section == 2 && indexPath.row == 0 {
+            //print("racial_id")
+            
+            currentSelectedChoice = racialIdVar
+            
+            performSegueWithIdentifier("MultipleChoiceSegue", sender: ["White","Black","Hispanic","Asian","Other","N/A"])
+            
+        } else if indexPath.section == 2 && indexPath.row == 1 {
+            //print("interested_in")
+            
+            currentSelectedChoice = sexualIdVar
+            
+            performSegueWithIdentifier("MultipleChoiceSegue", sender: ["Straight","Gay","Bi","N/A"])
+            
+        } else if indexPath.section == 2 && indexPath.row == 2 {
             //print("relationship_status")
             
             currentSelectedChoice = relationshipStatusVar
             
             performSegueWithIdentifier("MultipleChoiceSegue", sender: ["Single","In Relationship","N/A"])
-            
-        } else if indexPath.section == 2 && indexPath.row == 1 {
-            //print("interested_in")
-            
-            currentSelectedChoice = interestedInVar
-            
-            performSegueWithIdentifier("MultipleChoiceSegue", sender: ["Men","Women","Both","N/A"])
+        } else if indexPath.section == 3 && indexPath.row == 0 {
+            //print("Hello World")
         }
         
         return indexPath
@@ -117,9 +153,12 @@ class EditProfileMainController: UITableViewController {
                 if EditProfileMultipleChoice.headerTitle.title == "Relationship Status" {
                     relationshipStatusVar = selectedChoice
                     self.userProfileData["relationship_status"] = relationshipStatusVar
-                } else if EditProfileMultipleChoice.headerTitle.title == "Interested In" {
-                    interestedInVar = selectedChoice
-                    self.userProfileData["interested_in"] = interestedInVar
+                } else if EditProfileMultipleChoice.headerTitle.title == "Sexual Identity" {
+                    sexualIdVar = selectedChoice
+                    self.userProfileData["sexual_id"] = sexualIdVar
+                } else if EditProfileMultipleChoice.headerTitle.title == "Racial Identity" {
+                    racialIdVar = selectedChoice
+                    self.userProfileData["racial_id"] = racialIdVar
                 }
                 
                 //Save to phone storage
@@ -138,7 +177,8 @@ class EditProfileMainController: UITableViewController {
                             //PFUser.currentUser()?["location"] = "N/A" //Get from geolocation
                             //PFUser.currentUser()?["about"] = "N/A"
                             PFUser.currentUser()?["relationship_status"] = self.relationshipStatusVar
-                            PFUser.currentUser()?["interested_in"] = self.interestedInVar
+                            PFUser.currentUser()?["sexual_id"] = self.sexualIdVar
+                            PFUser.currentUser()?["racial_id"] = self.racialIdVar
                             
                             PFUser.currentUser()?.save()
                         }
@@ -146,6 +186,13 @@ class EditProfileMainController: UITableViewController {
 
                 })
         }
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.updateUserProfilePic()
         
     }
     

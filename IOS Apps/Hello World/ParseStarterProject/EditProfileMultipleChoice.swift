@@ -29,8 +29,10 @@ class EditProfileMultipleChoice: UITableViewController {
         
         if multiChoiceOptions[0] == "Single" {
             self.headerTitle.title = "Relationship Status"
-        } else if multiChoiceOptions[0] == "Men" {
-            self.headerTitle.title = "Interested In"
+        } else if multiChoiceOptions[0] == "Straight" {
+            self.headerTitle.title = "Sexual Identity"
+        } else if multiChoiceOptions[0] == "White" {
+            self.headerTitle.title = "Racial Identity"
         }
         
         // Uncomment the following line to preserve selection between presentations

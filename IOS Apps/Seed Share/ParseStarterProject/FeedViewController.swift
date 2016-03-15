@@ -143,7 +143,6 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         //Make rowHeight Adjust to screen size
         if tableViewOutlet != nil {
@@ -163,7 +162,6 @@ class FeedViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        
         
     }
     

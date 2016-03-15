@@ -167,7 +167,9 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         self.pageControl.currentPageIndicatorTintColor = salmon_color
         */
         
-        view.addSubview(pageControl)
+        if pageImages_str.count > 1 {
+            view.addSubview(pageControl)
+        }
         
         //====Adds Magnifier Button
         let magBtn_x = picScr_w - picScr_w * 0.1

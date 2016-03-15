@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  ProfileTabController.swift
 //  ParseStarterProject
 //
 //  Created by Tingbo Chen on 2/23/16.
@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class ProfileViewController: UITableViewController {
+class ProfileTabController: UITableViewController {
     
     var userProfileData = Dictionary<String,AnyObject>()
     
@@ -40,6 +40,17 @@ class ProfileViewController: UITableViewController {
     @IBAction func editProfileButton(sender: AnyObject) {
         self.performSegueWithIdentifier("editProfileSegue", sender: self)
     }
+    
+    
+    func updateUserProfilePic() {
+        if NSUserDefaults().objectForKey("userProfileImages") != nil {
+            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
+            
+            if self.userProfileImages["image_0"] != nil {
+                self.profileImageOutlet.image = UIImage(data: (self.userProfileImages["image_0"] as? NSData)!)
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +61,7 @@ class ProfileViewController: UITableViewController {
             self.userNameLabel.text = self.userProfileData["name"] as? String
         }
         
-        if NSUserDefaults().objectForKey("userProfileImages") != nil {
-            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
-            
-            if self.userProfileImages["image_0"] != nil {
-                self.profileImageOutlet.image = UIImage(data: (self.userProfileImages["image_0"] as? NSData)!)
-            }
-        }
+        self.updateUserProfilePic()
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
@@ -130,6 +135,14 @@ class ProfileViewController: UITableViewController {
         
         return indexPath
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.updateUserProfilePic()
+        
+    }
+    
     
     @IBAction func unwindToProfileView(segue:UIStoryboardSegue) {
         

@@ -19,6 +19,8 @@ class EditProfileMainController: UITableViewController {
     
     @IBOutlet var userNameLabel: UILabel!
     
+    @IBOutlet var ageDetail: UILabel!
+    
     @IBOutlet var relationshipStatusDetail: UILabel!
     
     @IBOutlet var sexualIdDetail: UILabel!
@@ -61,7 +63,25 @@ class EditProfileMainController: UITableViewController {
         //print("deinit PlayerDetailsViewController")
     }
     
-    func updateUserProfilePic() {
+    func updateUserProfileDetails() {
+        if NSUserDefaults().objectForKey("userProfileData") != nil {
+            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
+            
+            self.relationshipStatusVar = self.userProfileData["relationship_status"] as? String
+            
+            self.sexualIdVar = self.userProfileData["sexual_id"] as? String
+            
+            self.racialIdVar = self.userProfileData["racial_id"] as? String
+            
+            self.userNameLabel.text = self.userProfileData["first_name"] as? String
+            
+            if self.userProfileData["age_show"] as? String == "true" {
+                self.ageDetail.text = self.userProfileData["age"] as? String
+            } else if self.userProfileData["age_show"] as? String == "false" {
+                self.ageDetail.text = "Custom"
+            }
+        }
+        
         if NSUserDefaults().objectForKey("userProfileImages") != nil {
             self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
             
@@ -86,19 +106,7 @@ class EditProfileMainController: UITableViewController {
         self.profilePicOutlet.layer.masksToBounds = true
         self.profilePicOutlet.layer.cornerRadius = CGRectGetWidth(self.profilePicOutlet.frame)/6.0
         
-        if NSUserDefaults().objectForKey("userProfileData") != nil {
-            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
-            
-            self.relationshipStatusVar = self.userProfileData["relationship_status"] as? String
-            
-            self.sexualIdVar = self.userProfileData["sexual_id"] as? String
-            
-            self.racialIdVar = self.userProfileData["racial_id"] as? String
-            
-            self.userNameLabel.text = self.userProfileData["first_name"] as? String
-        }
-        
-        self.updateUserProfilePic()
+        self.updateUserProfileDetails()
         
         //print(self.userProfileData)
 
@@ -134,6 +142,8 @@ class EditProfileMainController: UITableViewController {
             performSegueWithIdentifier("MultipleChoiceSegue", sender: ["Single","In Relationship","N/A"])
         } else if indexPath.section == 3 && indexPath.row == 0 {
             //print("Hello World")
+            
+            performSegueWithIdentifier("aboutTextFieldSegue", sender: self)
         }
         
         return indexPath
@@ -161,38 +171,40 @@ class EditProfileMainController: UITableViewController {
                     self.userProfileData["racial_id"] = racialIdVar
                 }
                 
-                //Save to phone storage
-                NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData")
-                
-                dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
-                    //Save to parse
-                    let query = PFQuery(className: "_User")
-                    
-                    query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
-                        if error != nil {
-                            print(error)
-                        } else if let object = object {
-                            //Save and Update Parse data
-                            
-                            //PFUser.currentUser()?["location"] = "N/A" //Get from geolocation
-                            //PFUser.currentUser()?["about"] = "N/A"
-                            PFUser.currentUser()?["relationship_status"] = self.relationshipStatusVar
-                            PFUser.currentUser()?["sexual_id"] = self.sexualIdVar
-                            PFUser.currentUser()?["racial_id"] = self.racialIdVar
-                            
-                            PFUser.currentUser()?.save()
-                        }
-                    })
-
-                })
         }
+        
+        //Save to phone storage
+        NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData")
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
+            //Save to parse
+            let query = PFQuery(className: "_User")
+            
+            query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let object = object {
+                    //Save and Update Parse data
+                    
+                    //PFUser.currentUser()?["location"] = "N/A" //Get from geolocation
+                    //PFUser.currentUser()?["about"] = "N/A"
+                    PFUser.currentUser()?["relationship_status"] = self.relationshipStatusVar
+                    PFUser.currentUser()?["sexual_id"] = self.sexualIdVar
+                    PFUser.currentUser()?["racial_id"] = self.racialIdVar
+                    
+                    PFUser.currentUser()?.save()
+                }
+            })
+            
+        })
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.updateUserProfilePic()
+        self.updateUserProfileDetails()
+
         
     }
     

@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().tintColor = UIColor.whiteColor() //Nav bar back button to white
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
-        UIApplication.sharedApplication().statusBarStyle = .LightContent //changes the status bar showing carrier, time, battery
+        UIApplication.sharedApplication().statusBarStyle = .LightContent //changes the status bar showing carrier, time, battery. Remember: add "View controller-based status bar appearance" to info.plist with Bool "No"
         UITabBar.appearance().barTintColor = vlight_grey
         UITabBar.appearance().tintColor = UIColor.greenColor()
         

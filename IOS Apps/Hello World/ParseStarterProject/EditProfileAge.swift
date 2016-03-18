@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Parse
 
 class EditProfileAge: UIViewController, UITextViewDelegate {
+    
+    var userProfileData = Dictionary<String,AnyObject>()
     
     @IBOutlet var addMessageField: UITextView!
     
@@ -26,6 +29,52 @@ class EditProfileAge: UIViewController, UITextViewDelegate {
         }
         
     }
+    
+    func saveAgeStatusData() {
+        //Save Perm storage and Save to Parse
+        
+        if showAgeSwitchOutlet.on == true {
+            self.userProfileData["age_show"] = "true"
+        } else if showAgeSwitchOutlet.on == false {
+            self.userProfileData["age_show"] = "false"
+        }
+        
+        if addMessageField.text == "Sorry, but you will have to ask me for my age." || addMessageField.text.isEmpty {
+            self.userProfileData["age_msg"] = "Default"
+        } else {
+            self.userProfileData["age_msg"] = addMessageField.text
+        }
+        
+        NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData")
+        print("saved")
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
+            
+            let query = PFQuery(className: "_User")
+            
+            query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let object = object {
+                    if self.showAgeSwitchOutlet.on == true {
+                        PFUser.currentUser()?["age_show"] = "true"
+                    } else if self.showAgeSwitchOutlet.on == false {
+                        PFUser.currentUser()?["age_show"] = "false"
+                    }
+                    
+                    if self.addMessageField.text == "Sorry, but you will have to ask me for my age." || self.addMessageField.text.isEmpty {
+                        PFUser.currentUser()?["age_msg"] = "Default"
+                    } else {
+                        PFUser.currentUser()?["age_msg"] = self.addMessageField.text
+                    }
+                    
+                    PFUser.currentUser()?.save()
+                }
+            })
+            
+        })
+    }
+    
     func textBoxSpecs(status: Int = 0) {
         
         let boarderGray = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.3)
@@ -48,11 +97,37 @@ class EditProfileAge: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if NSUserDefaults().objectForKey("userProfileData") != nil {
+            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
+            
+            //self.age_var = self.userProfileData["age"] as? String
+            
+            //self.ageShow_var = self.userProfileData["age_show"] as? String
+            
+            //self.ageMsg_var = self.userProfileData["age_msg"] as? String
+            
+        }
+        
+        //print(userProfileData)
+        
         self.addMessageField.delegate = self
         
-        addMessageField.text = ""
-        customAgeLabel.hidden = true
-        addMessageField.hidden = true
+        //Set up switch and text field
+        if self.userProfileData["age_msg"] as! String == "Default" {
+            addMessageField.text = ""
+        } else {
+            addMessageField.text = self.userProfileData["age_msg"] as! String
+        }
+        
+        if self.userProfileData["age_show"] as! String == "true" {
+            showAgeSwitchOutlet.on = true
+            customAgeLabel.hidden = true
+            addMessageField.hidden = true
+        } else if self.userProfileData["age_show"] as! String == "false" {
+            showAgeSwitchOutlet.on = false
+            customAgeLabel.hidden = false
+            addMessageField.hidden = false
+        }
         
         self.textBoxSpecs(0)
         
@@ -87,5 +162,16 @@ class EditProfileAge: UIViewController, UITextViewDelegate {
         }
         return true
     }
+    
+    //Segue Back to EditProfileMainController
+    override func viewWillDisappear(animated : Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            
+            self.saveAgeStatusData()
+        }
+    }
+
 
 }

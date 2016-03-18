@@ -499,6 +499,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="ageDetail" destination="Y70-7L-IwC" id="INF-6c-1AB"/>
                         <outlet property="collegeDetail" destination="sor-If-p0I" id="y3x-WY-H3i"/>
                         <outlet property="profilePicOutlet" destination="gpo-5P-uET" id="XZS-6n-Qdr"/>
                         <outlet property="racialIdDetail" destination="uOI-2C-bRC" id="GWH-M5-LXp"/>
@@ -508,6 +509,7 @@
                         <segue destination="j7P-mH-oeh" kind="show" identifier="MultipleChoiceSegue" id="kYr-Wx-Sze"/>
                         <segue destination="wLC-jv-7W6" kind="show" identifier="EditPictureSegue" id="XGD-Kg-aio"/>
                         <segue destination="BCn-Td-Y8W" kind="show" identifier="AgeSwitchSegue" id="qIz-kO-Lbd"/>
+                        <segue destination="fdT-YF-EF6" kind="show" identifier="aboutTextFieldSegue" id="3MG-x2-yNu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ly6-Ns-mst" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -687,7 +689,7 @@
             </objects>
             <point key="canvasLocation" x="-30" y="2192"/>
         </scene>
-        <!--Title-->
+        <!--Age-->
         <scene sceneID="EIV-cE-iSZ">
             <objects>
                 <viewController id="BCn-Td-Y8W" customClass="EditProfileAge" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
@@ -738,7 +740,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -753,17 +755,70 @@
                             <constraint firstItem="pmg-Ke-BwY" firstAttribute="top" secondItem="CZu-5C-nBR" secondAttribute="bottom" constant="6" id="p1z-6e-9NY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="Ab5-jN-nv3"/>
+                    <navigationItem key="navigationItem" title="Age" id="Ab5-jN-nv3"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="addMessageField" destination="pmg-Ke-BwY" id="C2b-d8-Xve"/>
                         <outlet property="customAgeLabel" destination="CZu-5C-nBR" id="Yyr-kN-aub"/>
                         <outlet property="showAgeSwitchOutlet" destination="sJY-lL-Wav" id="n0b-VM-bap"/>
+                        <segue destination="8nq-29-wSU" kind="unwind" identifier="saveAgeStatusUnwind" unwindAction="unwindToEditProfileMain:" id="Ie5-KX-ggs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hRE-Rn-RyY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8nq-29-wSU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-487" y="2990"/>
+        </scene>
+        <!--Edit Profile Text Field-->
+        <scene sceneID="33R-pk-WfP">
+            <objects>
+                <viewController id="fdT-YF-EF6" customClass="EditProfileTextField" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1OR-Dm-dtE"/>
+                        <viewControllerLayoutGuide type="bottom" id="meq-OZ-7nX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7fe-c0-aXE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur" translatesAutoresizingMaskIntoConstraints="NO" id="zih-QX-Pps">
+                                <rect key="frame" x="72" y="133" width="270" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="GGv-XE-nF3"/>
+                                    <constraint firstAttribute="width" constant="270" id="S9o-fT-hQg"/>
+                                </constraints>
+                                <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmH-bi-kiR">
+                                <rect key="frame" x="82" y="88" width="250" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="bmB-Bo-Drg"/>
+                                    <constraint firstAttribute="height" constant="42" id="g6O-8z-97i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zih-QX-Pps" firstAttribute="centerX" secondItem="7fe-c0-aXE" secondAttribute="centerX" id="Jyo-fD-kXC"/>
+                            <constraint firstItem="zih-QX-Pps" firstAttribute="top" secondItem="dmH-bi-kiR" secondAttribute="bottom" constant="3" id="cQ4-0g-9bh"/>
+                            <constraint firstItem="dmH-bi-kiR" firstAttribute="centerX" secondItem="7fe-c0-aXE" secondAttribute="centerX" id="iEJ-gM-aQa"/>
+                            <constraint firstItem="dmH-bi-kiR" firstAttribute="top" secondItem="1OR-Dm-dtE" secondAttribute="bottom" constant="24" id="rbl-9Q-xGD"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="addMessageField" destination="zih-QX-Pps" id="NiK-AV-nJc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="69U-2e-NZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-30" y="2990"/>
         </scene>
         <!--Edit Profile Multiple Choice-->
         <scene sceneID="dZl-hl-KLc">

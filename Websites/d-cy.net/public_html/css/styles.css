@@ -1,3 +1,5 @@
+/*===== Style sheet =====*/
+
 @charset "UTF-8";
 html {
     font-size: 17px;
@@ -21,6 +23,8 @@ body {
     -o-text-size-adjust: 100%;
     text-size-adjust: 100%;
 }
+
+/*===== Navigation Bar and Footer =====*/
 
 .nav {
     margin: 1rem 0 2rem;
@@ -95,6 +99,7 @@ body {
     color: #534540;
 }
 
+/*===== Widgets =====*/
 @media screen and (max-width: 667px) {
     .foot-blog {
         padding: 0 1rem 7.5rem;
@@ -223,43 +228,100 @@ body {
     color: #534540;
 }
 
-.aboutme-profile {
+/*===== About Page =====*/
+
+.aboutme-container {
     width: 200px;
     float: left;
 }
 
-.code_icon {
-    margin-top: .7rem;
-    margin-right: .8rem;
+.aboutme-container a:hover > .aboutme-main-img {
+    opacity: 0;
+}
+
+.aboutme-container a:hover > .aboutme-alt-img {
+    /* opacity: 1; */
+}
+
+.aboutme-main-img {
+    width: 200px;
+    transition: 1s;
+    position: absolute;
+}
+
+.aboutme-alt-img {
+    width: 200px;
+    transition: 1s;
+    position: absolute;
+    /* opacity: 0; */
+}
+
+.rlogo-adjust-div {
+    margin-top: 1.3rem;
+    margin-right: 1.2rem;
     padding: 0;
-    height: 70px;
+    height: 65px;
+    width: 0px;
     float: left;
 }
 
-.blog-post-list {
-    margin: 3rem auto 0;
+.codeicon-container {
+    margin-top: 1.3rem;
+    margin-right: 1.4rem;
     padding: 0;
-    max-width: 42.5rem;
+    height: 65px;
+    width: 65px;
+    float: left;
 }
 
-.blog-post-list ul {
+.codeicon-container a:hover > .codeicon-main-img {
+    opacity: 0;
+}
+
+.codeicon-container a:hover > .codeicon-alt-img {
+    opacity: 1;
+}
+
+.codeicon-main-img {
+    height: 65px;
+    transition: 1s;
+    position: absolute;
+}
+
+.codeicon-alt-img {
+    height: 65px;
+    transition: 1s;
+    position: absolute;
+    opacity: 0;
+}
+
+.block-post-list {
+    margin-top: 3rem;
+    margin-right: auto;
+    margin-bottom: 0rem;
+    margin-left: auto;
+    padding: 0;
+    max-width: 46rem;
+}
+
+.block-post-list ul {
     margin-left: -2.5rem;
     list-style-type: none;
 }
 
-.blog-post-list ul li {
-    margin: 0.5rem -2rem 0 12.0rem;
+.block-post-list ul li {
+    margin: 1rem -2rem 0 13.5rem;
     padding: 0 1rem;
 }
 
-.blog-post-title {
+.block-post-title {
     margin: 0 0 0.25rem;
     display: block;
     font: 700 1.5rem "Lato", Helvetica, sans-serif;
     line-height: 2rem;
 }
 
-.blog-post-title a {
+.block-post-title a {
     color: #534540;
     text-decoration: none;
     -webkit-transition: 0.25s;
@@ -269,29 +331,49 @@ body {
     transition: 0.25s;
 }
 
-.blog-post-title a:hover {
+.block-post-title a:hover {
     color: #00b27f;
 }
 
-.blog-post-date {
+.block-post-detail {
     color: #988f8c;
     font: 300 1rem "Lato", Helvetica, sans-serif;
     padding: 0;
     margin: 0;
 }
 
-.blog-pagination {
+.block-post-hidden {
+    color: #fbfbfb;
+    font: 300 1rem "Lato", Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.newer {
+    float: left;
+    width: 25%;
+}
+
+.older {
+    float: right;
+    width: 25%;
+}
+
+
+/*===== Paging Button Config =====*/
+
+.block-pagination {
     margin: 3rem auto;
     padding-bottom: 2rem;
     max-width: 35rem;
 }
 
-.blog-button-group {
+.block-button-group {
     padding: 0 1rem;
     font: 500 0.9rem "Lato", Helvetica, sans-serif;
 }
 
-.blog-button-group a {
+.block-button-group a {
     text-align: center;
     cursor: pointer;
     font-size: 0.85rem;
@@ -313,20 +395,12 @@ body {
     border-radius: 5px;
 }
 
-.blog-button-group a:hover {
+.block-button-group a:hover {
     background-color: #534540;
     color: #fbfbfb;
 }
 
-.newer {
-    float: left;
-    width: 25%;
-}
-
-.older {
-    float: right;
-    width: 25%;
-}
+/*===== Apps Project Section =====*/
 
 .project-section {
     margin: 3rem auto 4rem;
@@ -667,5 +741,3 @@ pre {
 .frank:hover {
     color: #00b27f;
 }
-
-

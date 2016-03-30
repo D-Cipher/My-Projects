@@ -47,5 +47,41 @@
 </ul>
 </nav>
 
+<section class="contact-section">
+
+<form class="email" name="contactForm" action="/" onsubmit="return validateForm()" method="post">
+
+<div>
+<img class="contact-avatar" src="http://d-cy.net/img/profile_pic/profile_avatar_sm.png" alt="Time Machine">
+
+<ul>
+<li>
+  <div class="email-discrip">To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+  <p class="email-link">cy@d-cy.net</p>
+</li>
+
+<li>
+  <div class="contact-discrip">E-mail:&nbsp;</div>
+  <input type="text" name="email" />
+</li>
+
+<li>
+  <div class="contact-discrip">Subject:</div>
+  <input type="text" name="subject" />
+</li>
+</ul>
+</div>
+
+<div>
+<textarea name="message"></textarea>
+<input class="send" type="submit" value="Send">
+</div>
+
+</form>
+</section>
+
+
+<script src="alert.js"></script>
+
 </body>
 </html>

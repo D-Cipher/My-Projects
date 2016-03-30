@@ -741,3 +741,102 @@ pre {
 .frank:hover {
     color: #00b27f;
 }
+
+/*===== Contact Page =====*/
+
+.email-discrip {
+    float: left;
+    margin-right: 2rem;
+    margin-top: 0.9rem;
+}
+
+.email-link {
+    font: 300 0.9rem "Lato", Helvetica, sans-serif;
+}
+
+.email-link a {
+    color: #988f8c;
+    text-decoration: none;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -ms-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+}
+
+.email-link a:hover {
+    color: #534540;
+}
+
+.contact-section {
+    margin-top: 3rem;
+    margin-right: auto;
+    margin-bottom: 0rem;
+    margin-left: auto;
+    padding: 0;
+    max-width: 36rem;
+}
+
+.contact-section ul {
+    margin-left: -2.5rem;
+    list-style-type: none;
+}
+
+.contact-section ul li {
+    margin: 0;
+    padding-top: 0.2rem;
+}
+
+.contact-discrip {
+    float: left;
+    margin-right: 2rem;
+    margin-top: 0.2rem;
+
+}
+
+.contact-avatar {
+    width: 150px;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    padding: 0px;
+    float: left;
+}
+
+form {
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+
+form.email input, form.email textarea {
+    font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 20px 0;
+}
+
+form.email input {
+    background: #f5f5f5;
+    padding: 5px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    width: 17.3rem;
+}
+
+form.email textarea {
+    background: #f5f5f5;
+    padding: 5px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    width: 550px;
+    height: 150px;
+}
+
+form.email input.send {
+    color: #fff;
+    background: #222;
+    border: #000;
+    padding: 10px 25px 10px 25px;
+    cursor: pointer;
+}
+
+/*====Update=====*/

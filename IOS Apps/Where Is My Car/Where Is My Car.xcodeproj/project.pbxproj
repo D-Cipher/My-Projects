@@ -12,7 +12,9 @@
 		343991EB1C6CFAD000BAA72A /* Bookmark-add-32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 343991EA1C6CFAD000BAA72A /* Bookmark-add-32x32.png */; };
 		343991ED1C6CFCBE00BAA72A /* Navigation-30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 343991EC1C6CFCBE00BAA72A /* Navigation-30x30.png */; };
 		343991F11C6D00F000BAA72A /* Help30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 343991F01C6D00F000BAA72A /* Help30x30.png */; };
+		343CD6E31CAC304D007EB023 /* Settings30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 343CD6E21CAC304D007EB023 /* Settings30x30.png */; };
 		344F890C1C4DD6ED0099F7AD /* RecentLocController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F890B1C4DD6ED0099F7AD /* RecentLocController.swift */; };
+		34D3CB371CAC08DF00048325 /* AddList30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D3CB361CAC08DF00048325 /* AddList30x30.png */; };
 		34DCD50B1C6D25BF00F88E29 /* RenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DCD50A1C6D25BF00F88E29 /* RenameViewController.swift */; };
 		34F6288B1C48571500393412 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F6288A1C48571500393412 /* AppDelegate.swift */; };
 		34F6288D1C48571500393412 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F6288C1C48571500393412 /* MapViewController.swift */; };
@@ -28,7 +30,9 @@
 		343991EA1C6CFAD000BAA72A /* Bookmark-add-32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bookmark-add-32x32.png"; sourceTree = "<group>"; };
 		343991EC1C6CFCBE00BAA72A /* Navigation-30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Navigation-30x30.png"; sourceTree = "<group>"; };
 		343991F01C6D00F000BAA72A /* Help30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Help30x30.png; sourceTree = "<group>"; };
+		343CD6E21CAC304D007EB023 /* Settings30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings30x30.png; sourceTree = "<group>"; };
 		344F890B1C4DD6ED0099F7AD /* RecentLocController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentLocController.swift; sourceTree = "<group>"; };
+		34D3CB361CAC08DF00048325 /* AddList30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddList30x30.png; sourceTree = "<group>"; };
 		34DCD50A1C6D25BF00F88E29 /* RenameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenameViewController.swift; sourceTree = "<group>"; };
 		34F628871C48571500393412 /* Where Is My Car.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Where Is My Car.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34F6288A1C48571500393412 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				343991EC1C6CFCBE00BAA72A /* Navigation-30x30.png */,
 				343991EA1C6CFAD000BAA72A /* Bookmark-add-32x32.png */,
 				343991F01C6D00F000BAA72A /* Help30x30.png */,
+				34D3CB361CAC08DF00048325 /* AddList30x30.png */,
+				343CD6E21CAC304D007EB023 /* Settings30x30.png */,
 				34F6288A1C48571500393412 /* AppDelegate.swift */,
 				34F6288C1C48571500393412 /* MapViewController.swift */,
 				344F890B1C4DD6ED0099F7AD /* RecentLocController.swift */,
@@ -152,7 +158,9 @@
 				34F628951C48571500393412 /* LaunchScreen.storyboard in Resources */,
 				343991F11C6D00F000BAA72A /* Help30x30.png in Resources */,
 				343991ED1C6CFCBE00BAA72A /* Navigation-30x30.png in Resources */,
+				343CD6E31CAC304D007EB023 /* Settings30x30.png in Resources */,
 				34F628921C48571500393412 /* Assets.xcassets in Resources */,
+				34D3CB371CAC08DF00048325 /* AddList30x30.png in Resources */,
 				343991EB1C6CFAD000BAA72A /* Bookmark-add-32x32.png in Resources */,
 				34F628901C48571500393412 /* Main.storyboard in Resources */,
 			);

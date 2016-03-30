@@ -44,7 +44,9 @@ class RenameViewController: UIViewController, UITextFieldDelegate {
             //self.dismissViewControllerAnimated(true, completion: nil)
             
             if status == 1 {
-                self.navigationController?.popViewControllerAnimated(true)
+                //self.navigationController?.popViewControllerAnimated(true) //to go back to previous segue
+                self.performSegueWithIdentifier("unwindToBookmarkedController", sender: self)
+                
             }
 
         }))
@@ -67,14 +69,14 @@ class RenameViewController: UIViewController, UITextFieldDelegate {
             
             self.alertFunc(["Successfully Bookmarked", "Your location has been bookmarked."], status: 1)
             
-            //Segue back to map view controller
-            
         } else if self.tempBmArray.count > 0 && inputFieldOutlet.text == "" {
             
             self.alertFunc(["Please name bookmark", "Bookmarked location name cannot be blank."], status: 0)
             
         } else {
-            self.navigationController?.popViewControllerAnimated(true)
+            //self.navigationController?.popViewControllerAnimated(true)
+            
+            self.performSegueWithIdentifier("unwindToBookmarkedController", sender: self)
         }
 
     }

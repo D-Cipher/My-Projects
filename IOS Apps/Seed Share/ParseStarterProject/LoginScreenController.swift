@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UINavigationControl
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    var currentCredentials: [AnyObject] = []
+    var userProfileData = Dictionary<String,AnyObject>()
 
     @IBOutlet var welcomeOutlet: UILabel!
     
@@ -88,10 +88,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UINavigationControl
                         //Remember me - save to perm storage
                         if self.rememberOutlet.on == true {
                             
-                            self.currentCredentials = []
-                            self.currentCredentials.append(self.textFieldMid.text!)
-                            self.currentCredentials.append(self.textFieldBot.text!)
-                            NSUserDefaults.standardUserDefaults().setObject(self.currentCredentials, forKey: "savedArray") //Saving new savedArray
+                            self.userProfileData = Dictionary<String,AnyObject>()
+                            self.userProfileData["name"] = self.textFieldMid.text!
+                            self.userProfileData["pass"] = self.textFieldBot.text!
+                            NSUserDefaults.standardUserDefaults().setObject(self.userProfileData, forKey: "userProfileData") //Saving new savedArray
                         }
                         
                         self.activityIndFunc(0) //Turn off Act Indicator
@@ -224,12 +224,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UINavigationControl
         textFieldTop.hidden = true
         
         //Access Perm Storage
-        if NSUserDefaults().objectForKey("savedArray") != nil {
-            self.currentCredentials = NSUserDefaults().objectForKey("savedArray")! as! NSArray as [AnyObject] //Converting back to Array
+        if NSUserDefaults().objectForKey("userProfileData") != nil {
+            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
             
-            textFieldMid.text = currentCredentials[0] as? String
             
-            textFieldBot.text = currentCredentials[1] as? String
+            self.textFieldMid.text = self.userProfileData["name"] as? String
+            
+            self.textFieldBot.text = self.userProfileData["pass"] as? String
             
             //print(currentCredentials)
         }
@@ -283,6 +284,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UINavigationControl
         }
         
         return true
+    }
+    
+    @IBAction func unwindToLoginScreen(segue:UIStoryboardSegue) {
+        
     }
 }
 

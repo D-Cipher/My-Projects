@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qYs-H8-j7S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aTM-xM-dUe">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="r8u-4M-OI5">
+            <objects>
+                <navigationController id="GVL-a4-dQv" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gTO-i0-ztp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Nw9-0t-JLp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YMA-8z-Eto" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="951" y="353"/>
+        </scene>
         <!--MapView-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -39,7 +55,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" onImage="Bluetooth30x30.png" translatesAutoresizingMaskIntoConstraints="NO" id="hgU-YL-JHB">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hgU-YL-JHB">
                                 <rect key="frame" x="10" y="69" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="49" id="DLX-95-6EZ"/>
@@ -78,7 +94,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title=" " id="ax9-sV-dgl">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="Txs-C1-dC3">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="HXH-y3-Am5">
+                            <connections>
+                                <action selector="backButton:" destination="BYZ-38-t0r" id="eiz-y5-BjA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="AddList30x30.png" id="Txs-C1-dC3">
                             <connections>
                                 <action selector="saveButtonAction:" destination="BYZ-38-t0r" id="1zn-sF-sbE"/>
                             </connections>
@@ -90,13 +111,16 @@
                         <outlet property="saveButtonOutlet" destination="Txs-C1-dC3" id="u9D-5P-TkO"/>
                         <outlet property="statusOutlet" destination="RlP-9u-Uw9" id="4Kn-qD-fL3"/>
                         <segue destination="6OD-aM-XLT" kind="show" identifier="renameSegue" id="2cU-Kl-asv"/>
+                        <segue destination="doK-2R-lHh" kind="unwind" identifier="unwindToBookmarkedController" unwindAction="unwindToBookmarkedController:" id="zsk-7X-1hb"/>
+                        <segue destination="doK-2R-lHh" kind="unwind" identifier="unwindToRecentLocController" unwindAction="unwindToRecentLocController:" id="5g8-K4-bPf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="doK-2R-lHh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="946" y="353"/>
+            <point key="canvasLocation" x="1670" y="353"/>
         </scene>
-        <!--Recent Locations-->
+        <!--Location Log-->
         <scene sceneID="KvP-7w-bte">
             <objects>
                 <tableViewController id="E4F-AO-Gac" customClass="TableViewController" customModule="Where_Is_My_Car" customModuleProvider="target" sceneMemberID="viewController">
@@ -113,7 +137,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="recentPlaceSegue" id="sD2-Aw-hwT"/>
+                                    <segue destination="GVL-a4-dQv" kind="presentation" identifier="recentPlaceSegue" id="E4K-DD-VvG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -122,21 +146,14 @@
                             <outlet property="delegate" destination="E4F-AO-Gac" id="4qX-H0-Cfj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recent Locations" id="4BH-he-TU8">
-                        <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="m7G-OW-DSf">
-                            <connections>
-                                <segue destination="2YI-vg-3El" kind="show" id="eRs-CY-FEz"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Location Log" id="4BH-he-TU8">
+                        <barButtonItem key="leftBarButtonItem" image="Settings30x30.png" id="PNX-1c-Vfx"/>
                         <barButtonItem key="rightBarButtonItem" title="New" id="uA8-ak-hxR">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" identifier="newPlaceSegue" id="hYc-O0-1ia"/>
+                                <segue destination="GVL-a4-dQv" kind="presentation" identifier="newPlaceSegue" id="5Yu-Hj-HHg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="2YI-vg-3El" kind="show" id="q4y-cl-Opz"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uht-8g-9pD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -159,7 +176,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="bmPlaceSegue" id="CzC-mB-cCx"/>
+                                    <segue destination="GVL-a4-dQv" kind="presentation" identifier="bmPlaceSegue" id="OmO-8v-rHT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -169,12 +186,24 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Bookmarked Places" id="0sX-2v-vf6">
-                        <barButtonItem key="rightBarButtonItem" image="Help30x30.png" id="rXB-1P-TiX"/>
+                        <barButtonItem key="leftBarButtonItem" title="Reorder" id="yaC-Oq-qad">
+                            <connections>
+                                <action selector="reorderButton:" destination="2YI-vg-3El" id="yZF-Xl-9nO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="rXB-1P-TiX">
+                            <connections>
+                                <segue destination="GVL-a4-dQv" kind="presentation" identifier="newPlaceSegue2" id="OfD-Ow-67j"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="reorderOutlet" destination="yaC-Oq-qad" id="Ibm-aw-tL3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8fS-YP-aAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="292" y="1066"/>
+            <point key="canvasLocation" x="292" y="1018"/>
         </scene>
         <!--Rename View Controller-->
         <scene sceneID="Xni-7D-3kk">
@@ -227,16 +256,19 @@
                     </view>
                     <connections>
                         <outlet property="inputFieldOutlet" destination="THU-pe-n5J" id="6BS-O3-Si7"/>
+                        <segue destination="EKE-3G-n8H" kind="unwind" identifier="unwindToBookmarkedController" unwindAction="unwindToBookmarkedController:" id="Ghu-Hc-4Ke"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EUP-8w-qjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EKE-3G-n8H" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="946" y="1066"/>
+            <point key="canvasLocation" x="951" y="1018"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V0S-Mj-xKi">
             <objects>
                 <navigationController id="qYs-H8-j7S" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="wPn-sX-Drz"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gRd-yy-bPG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -249,15 +281,49 @@
             </objects>
             <point key="canvasLocation" x="-358" y="353"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yuE-ZB-gF4">
+            <objects>
+                <navigationController id="tv4-nm-xhT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="9CX-VL-eUx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1OH-D2-xjA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2YI-vg-3El" kind="relationship" relationship="rootViewController" id="06r-ap-Xvu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mcd-Hr-grs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-358" y="1018"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="GQ9-8s-IX9">
+            <objects>
+                <tabBarController id="aTM-xM-dUe" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="fLN-QZ-2wf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="qYs-H8-j7S" kind="relationship" relationship="viewControllers" id="Nhb-CE-CeF"/>
+                        <segue destination="tv4-nm-xhT" kind="relationship" relationship="viewControllers" id="aw8-D1-uOi"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lMR-EJ-zSn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1081" y="353"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Bluetooth30x30.png" width="30" height="30"/>
+        <image name="AddList30x30.png" width="30" height="30"/>
         <image name="Bookmark-add-32x32.png" width="32" height="32"/>
-        <image name="Help30x30.png" width="30" height="30"/>
         <image name="Navigation-30x30.png" width="30" height="30"/>
+        <image name="Settings30x30.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="q4y-cl-Opz"/>
-        <segue reference="sD2-Aw-hwT"/>
+        <segue reference="E4K-DD-VvG"/>
     </inferredMetricsTieBreakers>
 </document>

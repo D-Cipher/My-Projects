@@ -12,7 +12,7 @@ import Parse
 class FeedViewController: UIViewController {
     
     @IBOutlet var tableViewOutlet: UITableView!
-    
+
     let viewTransitionDelegate = TransitionDelegate()
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -90,52 +90,61 @@ class FeedViewController: UIViewController {
         //Extract Followers from Parse
         let getFollowedUsersQuery = PFQuery(className: "follower_class")
         
-        getFollowedUsersQuery.whereKey("follower", equalTo: PFUser.currentUser()!.objectId!)
-        getFollowedUsersQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let objects = objects {
-                
-                for object in objects {
-                    let followedUser = object["following"] as! String
+        self.activityIndFunc(1)
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { () -> Void in
+            
+            getFollowedUsersQuery.whereKey("follower", equalTo: PFUser.currentUser()!.objectId!)
+            getFollowedUsersQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+                if let objects = objects {
                     
-                    //Download all images from the user:
-                    let query = PFQuery(className: "Posts")
-                    
-                    query.whereKey("userID", equalTo: followedUser)
-                    
-                    query.orderByDescending("updatedAt")
-                    
-                    query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                    for object in objects {
+                        let followedUser = object["following"] as! String
                         
-                        if let objects = objects {
-                            for object in objects {
+                        //Download all images from the user:
+                        let query = PFQuery(className: "Posts")
+                        
+                        query.whereKey("userID", equalTo: followedUser)
+                        
+                        query.orderByDescending("updatedAt")
+                        
+                        query.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                            
+                            if let objects = objects {
+                                for object in objects {
+                                    
+                                    self.date_ls.append(object["date"] as! String)
+                                    self.message_ls.append(object["message"] as! String)
+                                    self.user_ls.append(self.userID_dict[object["userID"] as! String]!)
+                                    self.image_ls.append(object["imageFile"] as! PFFile)
+                                    
+                                }
                                 
-                                self.date_ls.append(object["date"] as! String)
-                                self.message_ls.append(object["message"] as! String)
-                                self.user_ls.append(self.userID_dict[object["userID"] as! String]!)
-                                self.image_ls.append(object["imageFile"] as! PFFile)
+                                self.tableViewOutlet.reloadData()
+                                self.refresher.endRefreshing()
                                 
+                                self.activityIndFunc(0)
+                                
+                                //print(self.user_ls)
+                                //print(self.date_ls)
+                                //print(self.NSDate_ls)
+                                //print(self.image_ls)
+                                //print(self.uiImage_ls)
+                                
+                            } else {
+                                print(error)
+                                self.refresher.endRefreshing()
+                                self.activityIndFunc(0)
                             }
                             
-                            self.tableViewOutlet.reloadData()
-                            self.refresher.endRefreshing()
-                            
-                            //print(self.user_ls)
-                            //print(self.date_ls)
-                            //print(self.NSDate_ls)
-                            //print(self.image_ls)
-                            //print(self.uiImage_ls)
-                            
-                        } else {
-                            print(error)
-                            self.refresher.endRefreshing()
-                        }
+                        })
                         
-                    })
+                    }
                     
                 }
-                
             }
         }
+        
     }
     
     
@@ -143,6 +152,7 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         //Make rowHeight Adjust to screen size
         if tableViewOutlet != nil {
@@ -162,6 +172,7 @@ class FeedViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
         
     }
     
@@ -239,10 +250,12 @@ class FeedViewController: UIViewController {
             
         //view.addSubview(overlay!)
         
+        
         let destinationViewController = segue.destinationViewController as! DetailedFeedController
         destinationViewController.imageToDisplay = self.uiImage_ls[(self.tableViewOutlet.indexPathForSelectedRow?.row)!]
         destinationViewController.transitioningDelegate = viewTransitionDelegate
         destinationViewController.modalPresentationStyle = .Custom
+ 
         
         //if segue.identifier == "feedCellSegue" {
             

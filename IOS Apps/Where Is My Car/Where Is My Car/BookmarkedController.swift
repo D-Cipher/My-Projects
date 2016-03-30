@@ -12,9 +12,32 @@ import UIKit
 
 class BookmarkedController: UITableViewController {
     
-    var bm_loc: [AnyObject] = []
+    var bmLocName: [AnyObject] = []
     
-    var bookmarkedArray: [AnyObject] = []
+    var bmLocData: [AnyObject] = []
+    
+    @IBOutlet var reorderOutlet: UIBarButtonItem!
+    
+    @IBAction func reorderButton(sender: AnyObject) {
+        
+        if self.tableView.editing == false {
+            self.tableView.setEditing(true, animated: true)
+            reorderOutlet.title = "Done"
+            
+        } else if self.tableView.editing == true {
+            self.tableView.setEditing(false, animated: true)
+            
+            //Saves reordered data
+            NSUserDefaults.standardUserDefaults().setObject(self.bmLocData, forKey: "bookmarkedArray")
+            
+            reorderOutlet.title = "Edit"
+        }
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSUserDefaults.standardUserDefaults().setObject(self.bmLocData, forKey: "bookmarkedArray")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +46,21 @@ class BookmarkedController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         
+        //Set Reorder button
+        self.tableView.editing = false
+        reorderOutlet.title = "Edit"
+        
+        //Retrieve Saved Data
         if NSUserDefaults().objectForKey("bookmarkedArray") != nil {
-            self.bookmarkedArray = NSUserDefaults().objectForKey("bookmarkedArray")! as! NSArray as [AnyObject] //Converting back to Array
+            self.bmLocData = NSUserDefaults().objectForKey("bookmarkedArray")! as! NSArray as [AnyObject] //Converting back to Array
         }
         
-        if self.bookmarkedArray.count > 0{
-            self.bm_loc = []
+        
+        if self.bmLocData.count > 0{
+            self.bmLocName = []
             
-            for (index,_) in self.bookmarkedArray.enumerate(){
-                self.bm_loc.append(self.bookmarkedArray[index]["name"]!!)
+            for (index,_) in self.bmLocData.enumerate(){
+                self.bmLocName.append(self.bmLocData[index]["name"]!!)
             }
             
             self.tableView.reloadData()
@@ -54,20 +83,14 @@ class BookmarkedController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.bm_loc.count
+        return self.bmLocName.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        /*
-        IMPORTANT!!! Must change the "reuseIdentifier" to "Cell" in:
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-        AND click on Prototype Cells then "Show Attributes Inspector" (in the left bar) then type Cell in the Identifier box.
-        Took me 5 hours to figure this out!!!
-        */
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell_Bookmarks", forIndexPath: indexPath)
         
-        cell.textLabel?.text = bm_loc[indexPath.row] as? String
+        cell.textLabel?.text = bmLocName[indexPath.row] as? String
         
         return cell
     }
@@ -81,7 +104,7 @@ class BookmarkedController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            bm_loc.removeAtIndex(indexPath.row)
+            bmLocName.removeAtIndex(indexPath.row)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
@@ -90,13 +113,56 @@ class BookmarkedController: UITableViewController {
         }
         
         //Removes Location and Saves
-        self.bookmarkedArray.removeAtIndex(indexPath.row)
+        self.bmLocData.removeAtIndex(indexPath.row)
         
-        NSUserDefaults.standardUserDefaults().setObject(self.bookmarkedArray, forKey: "bookmarkedArray")
+        NSUserDefaults.standardUserDefaults().setObject(self.bmLocData, forKey: "bookmarkedArray")
         
         //print(self.savedArray)
         
     }
+    
+    // Overrides to support moving cells in table
+    /*
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .None
+    }
+    
+    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    */
+    
+    override func tableView(tableView: UITableView, targetIndexPathForMoveFromRowAtIndexPath sourceIndexPath: NSIndexPath, toProposedIndexPath proposedDestinationIndexPath: NSIndexPath) -> NSIndexPath {
+        
+        //Prevents moving across sections
+        if proposedDestinationIndexPath.section != sourceIndexPath.section {
+            return sourceIndexPath
+        } else {
+            return proposedDestinationIndexPath
+        }
+        
+    }
+    
+    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return indexPath.section == 0
+    }
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        
+        let movedName = bmLocName[sourceIndexPath.row]
+        let movedData = bmLocData[sourceIndexPath.row]
+        
+        //Move bmLocName
+        bmLocName.removeAtIndex(sourceIndexPath.row)
+        bmLocName.insert(movedName, atIndex: destinationIndexPath.row)
+        
+        //Move bmLocData
+        bmLocData.removeAtIndex(sourceIndexPath.row)
+        bmLocData.insert(movedData, atIndex: destinationIndexPath.row)
+        
+    }
+    
+    
     
     //Track User's selected row
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -105,6 +171,9 @@ class BookmarkedController: UITableViewController {
         
         return indexPath
     }
+    
+    
+    
     
     /*
     // Override to support rearranging the table view.
@@ -118,6 +187,10 @@ class BookmarkedController: UITableViewController {
     return true
     }
     */
+    
+    @IBAction func unwindToBookmarkedController(segue:UIStoryboardSegue) {
+        
+    }
     
     // MARK: - Navigation
     

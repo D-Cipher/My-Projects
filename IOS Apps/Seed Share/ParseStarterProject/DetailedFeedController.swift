@@ -14,6 +14,8 @@ class DetailedFeedController: UIViewController, UINavigationControllerDelegate, 
     
     var cellContent: [AnyObject] = []
     
+    var userProfileData = Dictionary<String,AnyObject>()
+    
     @IBOutlet var postButtonOutlet: UIButton!
     
     @IBOutlet var commentTableView: UITableView!
@@ -34,10 +36,12 @@ class DetailedFeedController: UIViewController, UINavigationControllerDelegate, 
     @IBAction func commentPost(sender: AnyObject) {
         if self.addMessageField.text != "" && self.addMessageField.text != "Add comment" {
             
+            let commentMsg = "@" + (self.userProfileData["name"] as? String)! + ": " + self.addMessageField.text
+            
             if self.cellContent.count > 0 {
-                self.cellContent.insert(self.addMessageField.text, atIndex: 0)
+                self.cellContent.insert(commentMsg, atIndex: 0)
             } else {
-                self.cellContent.append(self.addMessageField.text)
+                self.cellContent.append(commentMsg)
             }
             
             self.addMessageField.text = ""
@@ -72,6 +76,17 @@ class DetailedFeedController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if NSUserDefaults().objectForKey("userProfileData") != nil {
+            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
+            
+        }
+        
+        //Swipe Right
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:")
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        //Messsage Setup
         self.addMessageField.text = ""
         
         self.textBoxSpecs(0)
@@ -86,6 +101,28 @@ class DetailedFeedController: UIViewController, UINavigationControllerDelegate, 
         
         
     }
+    
+    func swiped(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            switch swipeGesture.direction {
+                
+            case UISwipeGestureRecognizerDirection.Right:
+                //print("Swiped Right")
+                
+                dismissViewControllerAnimated(true, completion: { () -> Void in
+                    //FeedViewController().viewDidLoad()
+                    //print("test")
+                })
+                
+            default:
+                break
+                
+            }
+        }
+    }
+
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

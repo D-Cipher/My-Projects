@@ -59,12 +59,6 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        /*
-        IMPORTANT!!! Must change the "reuseIdentifier" to "Cell" in:
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-        AND click on Prototype Cells then "Show Attributes Inspector" (in the left bar) then type Cell in the Identifier box.
-        Took me 5 hours to figure this out!!!
-        */
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
@@ -120,6 +114,10 @@ class TableViewController: UITableViewController {
         return true
     }
     */
+    
+    @IBAction func unwindToRecentLocController(segue:UIStoryboardSegue) {
+        
+    }
 
     // MARK: - Navigation
 

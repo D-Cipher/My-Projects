@@ -16,11 +16,20 @@
 		3417B1BA1C767E0E000EB827 /* TransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3417B1B51C767E0E000EB827 /* TransitionDelegate.swift */; };
 		3417B1BB1C767E0E000EB827 /* TransitionDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3417B1B61C767E0E000EB827 /* TransitionDismissalAnimator.swift */; };
 		3417B1BC1C767E0E000EB827 /* TransitionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3417B1B71C767E0E000EB827 /* TransitionPresentationAnimator.swift */; };
+		343AB1A01CAB0CF800E0AE60 /* EditProfileUploadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343AB19F1CAB0CF800E0AE60 /* EditProfileUploadImage.swift */; };
+		343AB1A21CAB42F600E0AE60 /* cancel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 343AB1A11CAB42F600E0AE60 /* cancel_icon.png */; };
 		345F33601C6850F70003D89E /* UploadImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345F335F1C6850F70003D89E /* UploadImageController.swift */; };
 		347227511C6673260054B2DB /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347227501C6673260054B2DB /* FollowingViewController.swift */; };
 		34754ACF1C77928D00F81BBF /* seed_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 34754ACE1C77928D00F81BBF /* seed_icon.png */; };
 		348BBE161C759A5E00AC6A09 /* seedshare2.png in Resources */ = {isa = PBXBuildFile; fileRef = 348BBE151C759A5E00AC6A09 /* seedshare2.png */; };
 		34EF4B7A1C6A98C20086E427 /* placeholder-camera-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EF4B791C6A98C20086E427 /* placeholder-camera-green.png */; };
+		34FA37041CAAC17600E1F17A /* ProfileTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA37031CAAC17600E1F17A /* ProfileTabController.swift */; };
+		34FBE0E21CA994A800126E99 /* AlienFilled30x30green.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FBE0DD1CA994A800126E99 /* AlienFilled30x30green.png */; };
+		34FBE0E31CA994A800126E99 /* Match30x30orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FBE0DE1CA994A800126E99 /* Match30x30orange.png */; };
+		34FBE0E41CA994A800126E99 /* QRcode30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FBE0DF1CA994A800126E99 /* QRcode30x30.png */; };
+		34FBE0E51CA994A800126E99 /* Settings30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FBE0E01CA994A800126E99 /* Settings30x30.png */; };
+		34FBE0E61CA994A800126E99 /* Wrench30x30blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FBE0E11CA994A800126E99 /* Wrench30x30blue.png */; };
+		34FBE0E81CA994C400126E99 /* blacktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34FBE0E71CA994C400126E99 /* blacktexture.png */; };
 		34FE33D91C6AC5550040E9D3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FE33D81C6AC5550040E9D3 /* FeedViewController.swift */; };
 		34FE33DB1C6AF1C60040E9D3 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FE33DA1C6AF1C60040E9D3 /* Cell.swift */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
@@ -48,11 +57,20 @@
 		3417B1B51C767E0E000EB827 /* TransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionDelegate.swift; path = "Transition Controllers/TransitionDelegate.swift"; sourceTree = "<group>"; };
 		3417B1B61C767E0E000EB827 /* TransitionDismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionDismissalAnimator.swift; path = "Transition Controllers/TransitionDismissalAnimator.swift"; sourceTree = "<group>"; };
 		3417B1B71C767E0E000EB827 /* TransitionPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionPresentationAnimator.swift; path = "Transition Controllers/TransitionPresentationAnimator.swift"; sourceTree = "<group>"; };
+		343AB19F1CAB0CF800E0AE60 /* EditProfileUploadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileUploadImage.swift; sourceTree = "<group>"; };
+		343AB1A11CAB42F600E0AE60 /* cancel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_icon.png; sourceTree = "<group>"; };
 		345F335F1C6850F70003D89E /* UploadImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageController.swift; sourceTree = "<group>"; };
 		347227501C6673260054B2DB /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		34754ACE1C77928D00F81BBF /* seed_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seed_icon.png; sourceTree = "<group>"; };
 		348BBE151C759A5E00AC6A09 /* seedshare2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seedshare2.png; sourceTree = "<group>"; };
 		34EF4B791C6A98C20086E427 /* placeholder-camera-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-camera-green.png"; sourceTree = "<group>"; };
+		34FA37031CAAC17600E1F17A /* ProfileTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTabController.swift; sourceTree = "<group>"; };
+		34FBE0DD1CA994A800126E99 /* AlienFilled30x30green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlienFilled30x30green.png; sourceTree = "<group>"; };
+		34FBE0DE1CA994A800126E99 /* Match30x30orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Match30x30orange.png; sourceTree = "<group>"; };
+		34FBE0DF1CA994A800126E99 /* QRcode30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QRcode30x30.png; sourceTree = "<group>"; };
+		34FBE0E01CA994A800126E99 /* Settings30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings30x30.png; sourceTree = "<group>"; };
+		34FBE0E11CA994A800126E99 /* Wrench30x30blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wrench30x30blue.png; sourceTree = "<group>"; };
+		34FBE0E71CA994C400126E99 /* blacktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacktexture.png; sourceTree = "<group>"; };
 		34FE33D81C6AC5550040E9D3 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		34FE33DA1C6AF1C60040E9D3 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* Seed Share.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seed Share.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +111,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34FBE0DC1CA9939D00126E99 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				343AB1A11CAB42F600E0AE60 /* cancel_icon.png */,
+				34754ACE1C77928D00F81BBF /* seed_icon.png */,
+				348BBE151C759A5E00AC6A09 /* seedshare2.png */,
+				34EF4B791C6A98C20086E427 /* placeholder-camera-green.png */,
+				3417412E1C651E2E007571A2 /* People-Icon-32x32.png */,
+				341741321C6522B7007571A2 /* Instagram-Filled-30x30.png */,
+				341741341C6523FD007571A2 /* RSS-Filled-30x30.png */,
+				34FBE0DD1CA994A800126E99 /* AlienFilled30x30green.png */,
+				34FBE0DE1CA994A800126E99 /* Match30x30orange.png */,
+				34FBE0DF1CA994A800126E99 /* QRcode30x30.png */,
+				34FBE0E01CA994A800126E99 /* Settings30x30.png */,
+				34FBE0E11CA994A800126E99 /* Wrench30x30blue.png */,
+				34FBE0E71CA994C400126E99 /* blacktexture.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
@@ -113,23 +151,20 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
+				34FBE0DC1CA9939D00126E99 /* Images */,
 				3417B1B31C767E0E000EB827 /* SlideInDismissalAnimator.swift */,
 				3417B1B41C767E0E000EB827 /* SlideInPresentationAnimator.swift */,
 				3417B1B51C767E0E000EB827 /* TransitionDelegate.swift */,
 				3417B1B61C767E0E000EB827 /* TransitionDismissalAnimator.swift */,
 				3417B1B71C767E0E000EB827 /* TransitionPresentationAnimator.swift */,
-				34754ACE1C77928D00F81BBF /* seed_icon.png */,
-				348BBE151C759A5E00AC6A09 /* seedshare2.png */,
-				34EF4B791C6A98C20086E427 /* placeholder-camera-green.png */,
-				3417412E1C651E2E007571A2 /* People-Icon-32x32.png */,
-				341741321C6522B7007571A2 /* Instagram-Filled-30x30.png */,
-				341741341C6523FD007571A2 /* RSS-Filled-30x30.png */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* LoginScreenController.swift */,
+				34FA37031CAAC17600E1F17A /* ProfileTabController.swift */,
 				347227501C6673260054B2DB /* FollowingViewController.swift */,
 				345F335F1C6850F70003D89E /* UploadImageController.swift */,
 				34FE33D81C6AC5550040E9D3 /* FeedViewController.swift */,
 				3417B1AF1C767CEC000EB827 /* DetailedFeedController.swift */,
+				343AB19F1CAB0CF800E0AE60 /* EditProfileUploadImage.swift */,
 				34FE33DA1C6AF1C60040E9D3 /* Cell.swift */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
@@ -232,12 +267,19 @@
 			files = (
 				81BA81501A49DA1800E65899 /* Main.storyboard in Resources */,
 				34754ACF1C77928D00F81BBF /* seed_icon.png in Resources */,
+				34FBE0E61CA994A800126E99 /* Wrench30x30blue.png in Resources */,
 				341741351C6523FD007571A2 /* RSS-Filled-30x30.png in Resources */,
+				34FBE0E41CA994A800126E99 /* QRcode30x30.png in Resources */,
 				34EF4B7A1C6A98C20086E427 /* placeholder-camera-green.png in Resources */,
 				341741331C6522B7007571A2 /* Instagram-Filled-30x30.png in Resources */,
+				343AB1A21CAB42F600E0AE60 /* cancel_icon.png in Resources */,
 				348BBE161C759A5E00AC6A09 /* seedshare2.png in Resources */,
+				34FBE0E21CA994A800126E99 /* AlienFilled30x30green.png in Resources */,
 				3417412F1C651E2E007571A2 /* People-Icon-32x32.png in Resources */,
+				34FBE0E31CA994A800126E99 /* Match30x30orange.png in Resources */,
+				34FBE0E81CA994C400126E99 /* blacktexture.png in Resources */,
 				81BA81521A49DA1800E65899 /* Images.xcassets in Resources */,
+				34FBE0E51CA994A800126E99 /* Settings30x30.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +309,9 @@
 			files = (
 				3417B1BB1C767E0E000EB827 /* TransitionDismissalAnimator.swift in Sources */,
 				347227511C6673260054B2DB /* FollowingViewController.swift in Sources */,
+				34FA37041CAAC17600E1F17A /* ProfileTabController.swift in Sources */,
 				3417B1BA1C767E0E000EB827 /* TransitionDelegate.swift in Sources */,
+				343AB1A01CAB0CF800E0AE60 /* EditProfileUploadImage.swift in Sources */,
 				3417B1B91C767E0E000EB827 /* SlideInPresentationAnimator.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* LoginScreenController.swift in Sources */,
 				34FE33D91C6AC5550040E9D3 /* FeedViewController.swift in Sources */,

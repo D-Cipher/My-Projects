@@ -19,6 +19,12 @@ class UploadImageController: UIViewController, UINavigationControllerDelegate, U
     
     @IBOutlet var addMessageField: UITextView!
     
+    @IBOutlet var cancelButton: UIButton!
+    
+    @IBAction func cancelButtonAction(sender: AnyObject) {
+        self.ImageOutlet.image = UIImage(named: "placeholder-camera-green.png")
+    }
+    
     func activityIndFunc(status: Int = 0) {
         
         if status == 1 {
@@ -111,43 +117,60 @@ class UploadImageController: UIViewController, UINavigationControllerDelegate, U
     @IBAction func postButton(sender: AnyObject) {
         
         if ImageOutlet.image != nil && self.ImageOutlet.image != UIImage(named: "placeholder-camera-green.png") {
-            //Turn on Spinner
-            self.activityIndFunc(1)
             
-            //Upload Image To Parse
-            let post = PFObject(className: "Posts")
+            let postWarning = ["Are you sure?", "Are you sure you want to post?"]
             
-            if addMessageField.text == "Add message" {
-                post["message"] = ""
-            } else {
-                post["message"] = addMessageField.text
-            }
+            let alert = UIAlertController(title: postWarning[0], message: postWarning[1], preferredStyle: UIAlertControllerStyle.Alert)
             
-            post["userID"] = PFUser.currentUser()!.objectId!
-            
-            post["date"] = self.dateString()
-
-            let imageData = UIImagePNGRepresentation(ImageOutlet.image!)
-            
-            let imageFile = PFFile(name: "image.png", data: imageData!)
-            
-            post["imageFile"] = imageFile
-            
-            post.saveInBackgroundWithBlock { (success, error) -> Void in
-                if error == nil {
-                    //print("success")
-                    self.activityIndFunc(0)
-                    
-                    //Post Success Alert
-                    //self.alertFunc(["Upload Successful", "Your post has been updated."])
-                    
-                    self.placeholdPicReset(1)
-                    
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                print("OK")
+                
+                //Turn on Spinner
+                self.activityIndFunc(1)
+                
+                //Upload Image To Parse
+                let post = PFObject(className: "Posts")
+                
+                if self.addMessageField.text == "Add message" {
+                    post["message"] = ""
                 } else {
-                    
-                    self.alertFunc(["Upload Unsuccessful", String(error)])
+                    post["message"] = self.addMessageField.text
                 }
-            }
+                
+                post["userID"] = PFUser.currentUser()!.objectId!
+                
+                post["date"] = self.dateString()
+                
+                let imageData = UIImagePNGRepresentation(self.ImageOutlet.image!)
+                
+                let imageFile = PFFile(name: "image.png", data: imageData!)
+                
+                post["imageFile"] = imageFile
+                
+                post.saveInBackgroundWithBlock { (success, error) -> Void in
+                    if error == nil {
+                        //print("success")
+                        self.activityIndFunc(0)
+                        
+                        //Post Success Alert
+                        //self.alertFunc(["Upload Successful", "Your post has been updated."])
+                        
+                        self.placeholdPicReset(1)
+                        
+                    } else {
+                        
+                        self.alertFunc(["Upload Unsuccessful", String(error)])
+                        self.activityIndFunc(0)
+                    }
+                }
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) -> Void in
+                
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
             
         } else {
             //Please select Image Alert

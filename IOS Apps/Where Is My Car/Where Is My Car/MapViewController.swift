@@ -48,13 +48,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             let temptext = self.places_dict["name"]
             
-            self.statusOutlet.text = ("Saved: " + temptext!)
+            self.statusOutlet.text = ("Logged: " + temptext!)
             
             //print(self.savedArray) //for testing
         }
         
         //print(self.places_dict)
-        print(fromSegue_Global)
+        //print(fromSegue_Global)
     }
     
     @IBAction func renameSegueAction(sender: AnyObject) {
@@ -78,6 +78,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.performSegueWithIdentifier("renameSegue", sender: self)
     }
     
+    @IBAction func backButton(sender: AnyObject) {
+        if fromSegue_Global == "newPlaceSegue" || fromSegue_Global == "recentPlaceSegue" {
+            self.performSegueWithIdentifier("unwindToRecentLocController", sender: self)
+            
+        } else if fromSegue_Global == "newPlaceSegue2" || fromSegue_Global == "bmPlaceSegue" {
+            self.performSegueWithIdentifier("unwindToBookmarkedController", sender: self)
+        }
+        
+    }
     func getPermData() {
         //Gets the Saved Data
         if NSUserDefaults().objectForKey("savedArray") != nil {
@@ -96,7 +105,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func placeInitialPin() {
         
-        if fromSegue_Global == "newPlaceSegue" { //If user is adding a new place
+        if fromSegue_Global == "newPlaceSegue" || fromSegue_Global == "newPlaceSegue2" { //If user is adding a new place
+            print(fromSegue_Global)
             self.saveButtonOutlet.enabled = true
             self.renameButtonOutlet.enabled = true
             
@@ -135,7 +145,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         } else if fromSegue_Global == "bmPlaceSegue" { //If user is looking at a bookmarked place
             
             self.saveButtonOutlet.enabled = false
-            self.renameButtonOutlet.enabled = false
+            self.renameButtonOutlet.enabled = true
             
             self.mapView.showsUserLocation = true
             
@@ -219,9 +229,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         
         //Activate Saved Button and Rename Segue button
-        if fromSegue_Global != "bmPlaceSegue" {
+        //if fromSegue_Global != "bmPlaceSegue" {
             self.saveButtonOutlet.enabled = true
-        }
+        //}
         self.renameButtonOutlet.enabled = true
         
         //Date Extraction

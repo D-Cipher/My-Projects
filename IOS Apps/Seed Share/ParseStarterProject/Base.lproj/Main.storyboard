@@ -334,7 +334,7 @@
                                     <constraint firstAttribute="width" constant="35" id="BdV-sZ-Zkz"/>
                                     <constraint firstAttribute="height" constant="33" id="nvH-7B-50Y"/>
                                 </constraints>
-                                <state key="normal" image="cancel.png"/>
+                                <state key="normal" image="cancel_icon.png"/>
                                 <connections>
                                     <action selector="cancelButtonAction:" destination="zF3-Le-Rr1" eventType="touchUpInside" id="LAp-PE-zui"/>
                                 </connections>
@@ -984,7 +984,7 @@
         <image name="RSS-Filled-30x30.png" width="30" height="30"/>
         <image name="Wrench30x30blue.png" width="30" height="30"/>
         <image name="blacktexture.png" width="691" height="389"/>
-        <image name="cancel.png" width="52" height="52"/>
+        <image name="cancel_icon.png" width="52" height="52"/>
         <image name="placeholder-camera-green.png" width="1000" height="1000"/>
         <image name="seedshare2.png" width="260" height="105"/>
     </resources>

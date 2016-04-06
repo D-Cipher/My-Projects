@@ -379,7 +379,8 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         let firstPage = page - 1
         let lastPage = page + 1
         
-        for var index = 0; index < firstPage; ++index {
+        for index in 0.stride(to: firstPage, by: 1) {
+            //converted from C-style loop: "for var index = 0; index < firstPage; index += 1 {"
             purgePage(index)
         }
         
@@ -387,7 +388,8 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
             loadPage(index)
         }
         
-        for var index = lastPage + 1; index < pageImages.count; ++index {
+        for index in (lastPage + 1).stride(to: pageImages.count, by: -1) {
+            //converted from C-style loop: "for var index = lastPage + 1; index < pageImages.count; index += 1 {"
             purgePage(index)
         }
     }

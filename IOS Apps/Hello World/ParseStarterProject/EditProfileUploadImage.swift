@@ -11,8 +11,6 @@ import Parse
 
 class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
     var userProfileData = Dictionary<String,AnyObject>()
     
     var userProfileImages = Dictionary<String,AnyObject>()
@@ -33,32 +31,12 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     
     var addChangeBtn_status = "Change "
     
-    func activityIndFunc(status: Int = 0) {
-        
-        if status == 1 {
-            //Show Activity Indicator
-            activityIndicator = UIActivityIndicatorView(frame: self.view.frame)
-            activityIndicator.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
-            activityIndicator.center = self.view.center
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-            view.addSubview(activityIndicator)
-            
-            activityIndicator.startAnimating()
-            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-            
-        } else if status == 0 {
-            self.activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
-        }
-        
-    }
-    
     func saveNewImage() {
         
         if imageView.image != nil && self.imageView.image != UIImage(named: "placeholder-camera-green.png") {
-            //Turn on Spinner
-            //self.activityIndFunc(1)
+            
+            //Turn ON Spinner
+            self.activityIndFunc(1, warningMsg: "Saving...")
             
             if let imageData = UIImagePNGRepresentation(self.imageView.image!){
                 self.userProfileImages[currentImage_str] = imageData
@@ -66,7 +44,7 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                 print("saved New Image")
             }
             
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), { () -> Void in
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
                 //Upload Image To Parse
                 let query = PFQuery(className: "_User")
                 
@@ -77,6 +55,9 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                 query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
                     if error != nil {
                         print(error)
+                        
+                        self.activityIndFunc(0) //Turn OFF Spinner (Failed)
+                        
                     } else if let object = object {
                         //Save and Update Parse data
                         
@@ -84,8 +65,8 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                         
                         PFUser.currentUser()?.save()
                         
-                        //Turn off Spinner
-                        //self.activityIndFunc(0)
+                        self.activityIndFunc(0) //Turn OFF Spinner (Success)
+                        
                         
                     }
                 })
@@ -106,6 +87,7 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                 query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
                     if error != nil {
                         print(error)
+                        
                     } else if let object = object {
                         //Save and Update Parse data
                         
@@ -114,9 +96,6 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
                         //PFUser.currentUser()?[self.currentImage_str]?.removeObject(anObject: AnyObject)
                         
                         PFUser.currentUser()?.save()
-                        
-                        //Turn off Spinner
-                        //self.activityIndFunc(0)
                         
                     }
                 })

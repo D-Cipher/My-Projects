@@ -18,6 +18,7 @@
 		3431AFFD1C93113300138CAE /* PublicProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3431AFFC1C93113300138CAE /* PublicProfileController.swift */; };
 		344196BF1C7CCB32004195DB /* ProfileTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196BE1C7CCB32004195DB /* ProfileTabController.swift */; };
 		344196C11C7CD081004195DB /* ChatTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196C01C7CD081004195DB /* ChatTabController.swift */; };
+		347A6C9C1CB56DEA000A245B /* ViewController+ActivityInd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347A6C9B1CB56DEA000A245B /* ViewController+ActivityInd.swift */; };
 		347C4DCA1C80E413009DD861 /* EditProfileMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */; };
 		34A711131C96657E00C11A9B /* blacktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A711121C96657E00C11A9B /* blacktexture.png */; };
 		34A711181C96696100C11A9B /* AlienFilled30x30green.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A711141C96696100C11A9B /* AlienFilled30x30green.png */; };
@@ -56,6 +57,7 @@
 		3431AFFC1C93113300138CAE /* PublicProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileController.swift; sourceTree = "<group>"; };
 		344196BE1C7CCB32004195DB /* ProfileTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTabController.swift; sourceTree = "<group>"; };
 		344196C01C7CD081004195DB /* ChatTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTabController.swift; sourceTree = "<group>"; };
+		347A6C9B1CB56DEA000A245B /* ViewController+ActivityInd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+ActivityInd.swift"; sourceTree = "<group>"; };
 		347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMultipleChoice.swift; sourceTree = "<group>"; };
 		34A711121C96657E00C11A9B /* blacktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacktexture.png; sourceTree = "<group>"; };
 		34A711141C96696100C11A9B /* AlienFilled30x30green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlienFilled30x30green.png; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 			name = "Edit Profile";
 			sourceTree = "<group>";
 		};
+		347A6C981CB567F0000A245B /* Addons and Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				347A6C9B1CB56DEA000A245B /* ViewController+ActivityInd.swift */,
+			);
+			name = "Addons and Extensions";
+			sourceTree = "<group>";
+		};
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +168,7 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
+				347A6C981CB567F0000A245B /* Addons and Extensions */,
 				3431AFFA1C93094A00138CAE /* Images */,
 				3431AFFB1C9309BD00138CAE /* Edit Profile */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
@@ -312,6 +323,7 @@
 				344196C11C7CD081004195DB /* ChatTabController.swift in Sources */,
 				3401CC2B1C979BC5006D6A65 /* EditProfileAge.swift in Sources */,
 				3431AFFD1C93113300138CAE /* PublicProfileController.swift in Sources */,
+				347A6C9C1CB56DEA000A245B /* ViewController+ActivityInd.swift in Sources */,
 				340B2B8B1C989FE30032C656 /* EditProfileTextField.swift in Sources */,
 				344196BF1C7CCB32004195DB /* ProfileTabController.swift in Sources */,
 				3402C92A1C828496004D281F /* EditProfilePictures.swift in Sources */,

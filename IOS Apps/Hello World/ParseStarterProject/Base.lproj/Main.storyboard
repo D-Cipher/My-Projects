@@ -44,7 +44,7 @@
             </objects>
             <point key="canvasLocation" x="-934" y="-966"/>
         </scene>
-        <!--Chat Tab Controller-->
+        <!--Title-->
         <scene sceneID="K98-D0-gfr">
             <objects>
                 <viewController id="5mN-bK-dQA" customClass="ChatTabController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
@@ -55,30 +55,57 @@
                     <view key="view" contentMode="scaleToFill" id="kGD-uw-Yoi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJJ-68-pQE">
-                                <rect key="frame" x="49" y="102" width="115" height="30"/>
-                                <state key="normal" title="Print Saved Data"/>
-                                <connections>
-                                    <action selector="printSavedData:" destination="5mN-bK-dQA" eventType="touchUpInside" id="98H-T4-65S"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ud-PT-tgr">
-                                <rect key="frame" x="45" y="155" width="123" height="30"/>
-                                <state key="normal" title="Get Perm Storage"/>
-                                <connections>
-                                    <action selector="printPermStorage:" destination="5mN-bK-dQA" eventType="touchUpInside" id="Npe-DS-rei"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ohk-aR-pg7"/>
+                    <navigationItem key="navigationItem" title="Title" id="QU8-Mo-5eG">
+                        <barButtonItem key="rightBarButtonItem" title="Chat" id="3Iy-7X-9C9">
+                            <connections>
+                                <segue destination="Buh-5x-FWF" kind="presentation" identifier="MsgSegue" id="vxs-k6-x7C"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZb-zp-XVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-487" y="-966"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ga2-j1-RY6">
+            <objects>
+                <navigationController id="Buh-5x-FWF" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aUI-EB-JJU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4no-e7-gUO" kind="relationship" relationship="rootViewController" id="ERT-QR-b7n"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HbB-Mq-03n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-52" y="-971"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="Sn5-Uo-Xrt">
+            <objects>
+                <viewController id="4no-e7-gUO" customClass="MessageViewController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BZ2-hr-dd2"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y0v-S6-uvC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5us-gg-6LA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="Vav-sJ-NPO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j4Z-lg-Onk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="396" y="-966"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Opj-uA-62T">
@@ -101,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="-1465" y="-186"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>

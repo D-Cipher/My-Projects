@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import Foundation
+import CoreData
 
 class ChatTabController: UIViewController {
     
@@ -16,30 +17,8 @@ class ChatTabController: UIViewController {
     
     var userProfileImages = Dictionary<String,AnyObject>()
     
-    @IBAction func printSavedData(sender: AnyObject) { // For Testing
-        print(userProfileData)
-        //print(userProfileImages)
-    }
+    var context: NSManagedObjectContext?
 
-    @IBAction func printPermStorage(sender: AnyObject) { // For Testing
-        
-        if NSUserDefaults().objectForKey("userProfileData") != nil {
-            self.userProfileData = NSUserDefaults().objectForKey("userProfileData")! as! NSDictionary as! Dictionary<String,AnyObject>
-            print("data exits")
-            
-        }
-        
-        if NSUserDefaults().objectForKey("userProfileImages") != nil {
-            self.userProfileImages = NSUserDefaults().objectForKey("userProfileImages")! as! NSDictionary as! Dictionary<String,AnyObject>
-            print("pics exist")
-            
-        }
-        
-        
-    }
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,15 +33,16 @@ class ChatTabController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "MsgSegue" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let msgVC = nav.topViewController as! MessageViewController
+            msgVC.context = context
+        }
+        
+        
     }
-    */
+    
 
 }

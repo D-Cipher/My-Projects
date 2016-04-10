@@ -5,9 +5,9 @@
 //
 
 import UIKit
-
 import Bolts
 import Parse
+import CoreData
 
 // If you want to use any of the UI components, uncomment this line
 // import ParseUI
@@ -38,6 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent //changes the status bar showing carrier, time, battery. Remember: add "View controller-based status bar appearance" to info.plist with Bool "No"
         UITabBar.appearance().barTintColor = vlight_grey
         UITabBar.appearance().tintColor = UIColor.greenColor()
+        
+        
+        //Core Data: Setup Context
+        let root = window!.rootViewController as! LoginViewController
+        let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        context.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
+        root.context = context
+        
         
         // Enable storing and querying data from Local Datastore. 
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.

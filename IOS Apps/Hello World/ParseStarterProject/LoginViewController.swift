@@ -7,12 +7,15 @@
 import UIKit
 import Parse
 import FBSDKCoreKit
+import CoreData
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     var userProfileData = Dictionary<String,AnyObject>()
     
     var userProfileImages = Dictionary<String,AnyObject>()
+    
+    var context: NSManagedObjectContext? //Core Data Context
     
     private func existingUserUpdate(fb_result: Dictionary<String,AnyObject>, parse_object: PFObject) {
         
@@ -273,25 +276,33 @@ class ViewController: UIViewController {
         
     }
     
-    //override func viewWillAppear(animated: Bool) {
-    
-    //}
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        //PFUser.logOut() //For testing
-        
+    override func viewWillAppear(animated: Bool) {
         if let username = PFUser.currentUser()?.username {
             
             self.initiateUserData()
             
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        //PFUser.logOut() //For testing
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let tab = segue.destinationViewController as! UITabBarController
+        let nav = tab.viewControllers![0] as! UINavigationController
+        let chatTabVC = nav.topViewController as! ChatTabController
+        
+        chatTabVC.context = context
+        
     }
     
 }

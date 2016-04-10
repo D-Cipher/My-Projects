@@ -27,6 +27,43 @@
             <point key="canvasLocation" x="-487" y="-186"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="yF6-UL-glh">
+            <objects>
+                <navigationController id="6Fb-Bo-gf4" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="t0W-2M-OOC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SQf-5O-qxL" kind="relationship" relationship="rootViewController" id="0qQ-pn-Wza"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5HM-cN-Ltd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-42" y="-966"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="QPI-3G-Eqa">
+            <objects>
+                <viewController id="SQf-5O-qxL" customClass="ContactsViewController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xKg-1Y-C08"/>
+                        <viewControllerLayoutGuide type="bottom" id="t88-6T-pEb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RYz-JV-Xgt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Contacts" id="Rl2-ML-v15"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="72f-M7-cSs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="402" y="-966"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="rm8-s0-uEF">
             <objects>
                 <navigationController id="pnF-fv-lIv" sceneMemberID="viewController">
@@ -44,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="-934" y="-966"/>
         </scene>
-        <!--Title-->
+        <!--Chat Tab-->
         <scene sceneID="K98-D0-gfr">
             <objects>
                 <viewController id="5mN-bK-dQA" customClass="ChatTabController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
@@ -57,8 +94,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="QU8-Mo-5eG"/>
+                    <navigationItem key="navigationItem" title="Chat Tab" id="QU8-Mo-5eG"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <segue destination="6Fb-Bo-gf4" kind="presentation" identifier="contactSegue" id="nNl-uM-aIh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZb-zp-XVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -79,9 +119,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbB-Mq-03n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-52" y="-971"/>
+            <point key="canvasLocation" x="-934" y="-1758"/>
         </scene>
-        <!--Title-->
+        <!--Messages-->
         <scene sceneID="Sn5-Uo-Xrt">
             <objects>
                 <viewController id="4no-e7-gUO" customClass="MessageViewController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
@@ -94,12 +134,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="Vav-sJ-NPO"/>
+                    <navigationItem key="navigationItem" title="Messages" id="Vav-sJ-NPO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4Z-lg-Onk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="-966"/>
+            <point key="canvasLocation" x="-487" y="-1758"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Opj-uA-62T">

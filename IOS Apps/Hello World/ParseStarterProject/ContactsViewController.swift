@@ -1,57 +1,43 @@
 //
-//  ChatTabController.swift
-//  ParseStarterProject
+//  ContactsViewController.swift
+//  Hello World
 //
-//  Created by Tingbo Chen on 2/23/16.
+//  Created by Tingbo Chen on 4/10/16.
 //  Copyright © 2016 Parse. All rights reserved.
 //
 
 import UIKit
-import Parse
-import Foundation
 import CoreData
 
-class ChatTabController: UIViewController {
-    
-    var context: NSManagedObjectContext?
+class ContactsViewController: UIViewController {
 
+    var context: NSManagedObjectContext?
+    
     private var fetchedResultsController: NSFetchedResultsController?
     
     private let tableView = UITableView(frame: CGRectZero, style: .Plain)
     
-    private let cellIdentifier = "MessageCell"
+    private let cellIdentifier = "ContactCell"
     
-    func fakeData(){ //For testing
-        guard let context = context else {return}
-        let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat
+    func backButton() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let cell = cell as! ChatCell
-        guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else {return}
-        
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "MM/dd/YY"
-        cell.nameLabel.text = "Eliot"
-        cell.dateLabel.text = formatter.stringFromDate(NSDate())
-        cell.messageLabel.text = "Hey!!!"
-    }
-    
-    func contactSegueAction() {
-        self.performSegueWithIdentifier("contactSegue", sender: self)
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else {return}
+        cell.textLabel?.text = contact.fullName
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Set up Nav Bar
-        title = "Chats"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "contact_book"), style: .Plain, target: self, action: "contactSegueAction")
+        title = "Friends"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "backButton")
         automaticallyAdjustsScrollViewInsets = false
         
-        //Set up Chat Table
-        tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        //Set up Contacts Table
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
@@ -66,22 +52,19 @@ class ChatTabController: UIViewController {
         
         NSLayoutConstraint.activateConstraints(tableViewConstraints)
         
-        //Set up Core Data Fetching Context
         if let context = context {
-            let request = NSFetchRequest(entityName: "Chat")
-            request.sortDescriptors = [NSSortDescriptor(key: "lastMessageTime", ascending: false)]
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            let request = NSFetchRequest(entityName: "Contact")
+            request.sortDescriptors = [ NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewChatViewController")
             
-            fetchedResultsController?.delegate = self //set up extention for fetched results controller
+            fetchedResultsController?.delegate = self
             
             do {
                 try fetchedResultsController?.performFetch()
             } catch {
-                print("error fetching")
+                print("Error Fetching")
             }
         }
-        
-        fakeData() //For testing
         
     }
 
@@ -89,79 +72,63 @@ class ChatTabController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        let nav = segue.destinationViewController as! UINavigationController
-        let contactsVC = nav.topViewController as! ContactsViewController
-        contactsVC.context = context
-        /*
-        if segue.identifier == "MsgSegue" {
-            let nav = segue.destinationViewController as! UINavigationController
-            let msgVC = nav.topViewController as! MessageViewController
-            msgVC.context = context
-        } else if segue.identifier == "contactSegue" {
-            
-        }
-        */
-    }
+
 }
 
-extension ChatTabController: UITableViewDataSource {
+extension ContactsViewController: UITableViewDataSource {
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return fetchedResultsController?.sections?.count ?? 0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController?.sections else {return 0}
-        
         let currentSection = sections[section]
         return currentSection.numberOfObjects
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        
         configureCell(cell, atIndexPath: indexPath)
-        
         return cell
     }
-}
-
-extension ChatTabController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController?.sections else {return nil}
+        let currentSection = sections[section]
+        return currentSection.name
     }
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else {return}
-        
-    }
 }
 
-extension ChatTabController: NSFetchedResultsControllerDelegate {
+extension ContactsViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else {return}
+    }
+    
+}
+
+extension ContactsViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         tableView.beginUpdates()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        
         switch type {
         case .Insert: tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        
         case .Delete: tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            
         default: break
         }
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
         switch type {
             
         case .Insert: tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)

@@ -46,6 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         context.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
         root.context = context
         
+        //Init Fake Contact Data
+        fakeData(context)
+        
         
         // Enable storing and querying data from Local Datastore. 
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
@@ -150,4 +153,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
     }
+    
+    //Create some fake contacts
+    func fakeData(context: NSManagedObjectContext) {
+        let dataSeeded = NSUserDefaults.standardUserDefaults().boolForKey("dataSeeded")
+        guard !dataSeeded else {return}
+        
+        let people = [("Alice", "Dong"), ("Carmen", "Cheng"), ("Umi", "Zhou")]
+        
+        for person in people {
+            let contact = NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: context) as! Contact
+            
+            contact.firstName = person.0
+            contact.lastName = person.1
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error Saving")
+        }
+        
+        NSUserDefaults.standardUserDefaults().setObject(true, forKey: "dataSeeded")
+        
+    }
+    
 }

@@ -16,7 +16,7 @@
     </entity>
     <elements>
         <element name="Chat" positionX="-63" positionY="9" width="128" height="75"/>
-        <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Contact" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="Message" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

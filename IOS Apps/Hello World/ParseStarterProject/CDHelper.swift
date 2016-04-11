@@ -9,6 +9,15 @@
 import Foundation
 import CoreData
 
+ /*/====Extension====//
+ Name: TableView Fetched Results Delegate
+ File: TableViewFetchedResultsDelegate.swift
+ Used in: ChatTabController, ContactsViewController
+ 
+ ===Description===
+ Helper addon file that manages core data.
+ */
+
 class CDHelper {
     
     static let sharedInstance = CDHelper()

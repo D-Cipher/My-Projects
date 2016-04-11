@@ -11,11 +11,13 @@ import Parse
 import Foundation
 import CoreData
 
-class ChatTabController: UIViewController {
+class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer {
     
     var context: NSManagedObjectContext?
 
     private var fetchedResultsController: NSFetchedResultsController?
+    
+    private var fetchedResultsDelegate: NSFetchedResultsControllerDelegate?
     
     private let tableView = UITableView(frame: CGRectZero, style: .Plain)
     
@@ -52,19 +54,10 @@ class ChatTabController: UIViewController {
         //Set up Chat Table
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        view.addSubview(tableView)
         
-        let tableViewConstraints: [NSLayoutConstraint] = [
-            tableView.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
-            tableView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
-            tableView.bottomAnchor.constraintEqualToAnchor(bottomLayoutGuide.topAnchor)
-        ]
-        
-        NSLayoutConstraint.activateConstraints(tableViewConstraints)
+        fillWithView(tableView)
         
         //Set up Core Data Fetching Context
         if let context = context {
@@ -72,7 +65,9 @@ class ChatTabController: UIViewController {
             request.sortDescriptors = [NSSortDescriptor(key: "lastMessageTime", ascending: false)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
             
-            fetchedResultsController?.delegate = self //set up extention for fetched results controller
+            //Setup the FetchedResultsDelegate with the TableViewFetchedResultsDelegate
+            fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: tableView, displayer: self)
+            fetchedResultsController?.delegate = fetchedResultsDelegate
             
             do {
                 try fetchedResultsController?.performFetch()
@@ -91,19 +86,17 @@ class ChatTabController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        let nav = segue.destinationViewController as! UINavigationController
-        let contactsVC = nav.topViewController as! ContactsViewController
-        contactsVC.context = context
-        /*
+
         if segue.identifier == "MsgSegue" {
             let nav = segue.destinationViewController as! UINavigationController
             let msgVC = nav.topViewController as! MessageViewController
             msgVC.context = context
         } else if segue.identifier == "contactSegue" {
-            
+            let nav = segue.destinationViewController as! UINavigationController
+            let contactsVC = nav.topViewController as! ContactsViewController
+            contactsVC.context = context
         }
-        */
+
     }
 }
 
@@ -142,46 +135,5 @@ extension ChatTabController: UITableViewDelegate {
         
         guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else {return}
         
-    }
-}
-
-extension ChatTabController: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        tableView.beginUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        switch type {
-        case .Insert: tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        
-        case .Delete: tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            
-        default: break
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-            
-        case .Insert: tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        
-        case .Update:
-            let cell = tableView.cellForRowAtIndexPath(indexPath!)
-            configureCell(cell!, atIndexPath: indexPath!)
-            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            
-        }
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        tableView.endUpdates()
     }
 }

@@ -29,6 +29,7 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        
         let cell = cell as! ChatCell
         guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else {return}
         
@@ -65,11 +66,14 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
     
     func created(chat chat: Chat, inContext context: NSManagedObjectContext) {
         
+        guard let contact = chat.participants?.anyObject() as? Contact else {return}
+        
         //Initiate Message View Controller
         let vc = MessageViewController()
         vc.context = context
         vc.chat = chat
         vc.hidesBottomBarWhenPushed = true
+        vc.title = contact.fullName
         navigationController?.pushViewController(vc, animated:true)
         
     }
@@ -85,6 +89,7 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
         //Set up Chat Table
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableHeaderView = createHeader() //Add header to table
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -107,7 +112,7 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
             }
         }
         
-        fakeData() //For testing
+        //fakeData()
         
     }
 
@@ -140,6 +145,62 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
         }
 
     }
+    
+    private func createHeader() -> UIView {
+        
+        let header = UIView()
+        let newGroupButton = UIButton()
+        
+        newGroupButton.translatesAutoresizingMaskIntoConstraints = false
+        header.addSubview(newGroupButton)
+        
+        newGroupButton.setTitle("New Group", forState: .Normal)
+        newGroupButton.setTitleColor(view.tintColor, forState: .Normal)
+        newGroupButton.addTarget(self, action: "pressedNewGroup", forControlEvents: .TouchUpInside)
+        
+        let border = UIView()
+        border.translatesAutoresizingMaskIntoConstraints = false
+        header.addSubview(border)
+        border.backgroundColor = UIColor.lightGrayColor()
+        
+        let constraints: [NSLayoutConstraint] = [
+            
+            newGroupButton.heightAnchor.constraintEqualToAnchor(header.heightAnchor),
+            newGroupButton.trailingAnchor.constraintEqualToAnchor(header.trailingAnchor, constant: -10),
+            border.heightAnchor.constraintEqualToConstant(1),
+            border.leadingAnchor.constraintEqualToAnchor(header.leadingAnchor),
+            border.trailingAnchor.constraintEqualToAnchor(header.trailingAnchor),
+            border.bottomAnchor.constraintEqualToAnchor(header.bottomAnchor)
+        
+        ]
+        
+        NSLayoutConstraint.activateConstraints(constraints)
+        
+        header.setNeedsLayout()
+        header.layoutIfNeeded()
+        
+        let height = header.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        
+        var frame = header.frame
+        frame.size.height = height
+        header.frame = frame
+        
+        return header
+    }
+    
+    func pressedNewGroup() {
+        //Initiates a New Group View Controller
+        let vc = NewGroupViewController()
+        let chatContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        chatContext.parentContext = context
+        vc.context = chatContext
+        vc.chatCreationDelegate = self
+        vc.hidesBottomBarWhenPushed = true
+        let navVC = UINavigationController(rootViewController: vc)
+        presentViewController(navVC, animated: true, completion: nil)
+        
+    }
+    
 }
 
 extension ChatTabController: UITableViewDataSource {
@@ -177,11 +238,14 @@ extension ChatTabController: UITableViewDelegate {
         
         guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else {return}
         
+        guard let contact = chat.participants?.anyObject() as? Contact else {return}
+        
         //Initiate Message View Controller
         let vc = MessageViewController()
         vc.context = context
         vc.chat = chat
         vc.hidesBottomBarWhenPushed = true
+        vc.title = contact.fullName
         navigationController?.pushViewController(vc, animated:true)
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

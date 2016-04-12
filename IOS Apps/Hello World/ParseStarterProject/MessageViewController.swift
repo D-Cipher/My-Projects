@@ -25,16 +25,27 @@ class MessageViewController: UIViewController {
     
     var context: NSManagedObjectContext? //Core Data Context
     
+    //Use chat entity to add chats to MessageViewController
+    var chat: Chat?
+    
+    private enum Error: ErrorType {
+        case NoChat
+        case NoContext
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Get saved messages from core data
         do {
+            guard let chat = chat else {throw Error.NoChat}
+            guard let context = context else {throw Error.NoContext}
+            
             let request = NSFetchRequest(entityName: "Message")
             
             request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
             
-            if let result = try context?.executeFetchRequest(request) as? [Message] {
+            if let result = try context.executeFetchRequest(request) as? [Message] {
                 for message in result {
                     addMessage(message)
                 }
@@ -43,7 +54,9 @@ class MessageViewController: UIViewController {
         } catch {
             print("fetch error")
         }
-
+        
+        automaticallyAdjustsScrollViewInsets = false
+        
         //Create Message Field Area and Message Field and sendButton
         let newMessageArea = UIView()
         newMessageArea.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
@@ -114,12 +127,15 @@ class MessageViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 44
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 25
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
         let tableViewConstraints: [NSLayoutConstraint] = [
             
-            tableView.topAnchor.constraintEqualToAnchor(view.topAnchor),
+            tableView.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
             tableView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
             tableView.bottomAnchor.constraintEqualToAnchor(newMessageArea.topAnchor)
@@ -140,8 +156,13 @@ class MessageViewController: UIViewController {
          */
         
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag //Close keyboard on drag
-        
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None //Removes all separators
+        
+         //Listen to changes in context
+        if let mainContext = context?.parentContext ?? context {
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextUpdated:"), name: NSManagedObjectContextObjectsDidChangeNotification, object: mainContext)
+         }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -181,6 +202,9 @@ class MessageViewController: UIViewController {
     func pressedSend(button: UIButton) {
         guard let text = newMessageField.text where text.characters.count > 0 else {return}
         
+        //Check temp context
+        checkTemporaryContext()
+        
         //Initialize message using core data:
         guard let context = context else {return}
         guard let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: context) as? Message else {return}
@@ -188,8 +212,11 @@ class MessageViewController: UIViewController {
         message.text = text
         message.isIncoming = false
         message.timestamp = NSDate()
-        addMessage(message)
+        message.chat = chat
+        chat?.lastMessageTime = message.timestamp
         
+        //addMessage(message)
+
         //Save new message to core data
         do {
             try context.save()
@@ -198,11 +225,7 @@ class MessageViewController: UIViewController {
             return
         }
         
-        
         newMessageField.text = ""
-        
-        tableView.reloadData()
-        tableView.scrollToBottom(false)
         
         /*
          //For testing message text
@@ -230,7 +253,40 @@ class MessageViewController: UIViewController {
         
         sections[startDay] = messages
     }
+
     
+    //Check for context and update message
+    func contextUpdated(notification: NSNotification) {
+        guard let set = (notification.userInfo![NSInsertedObjectsKey] as? NSSet) else {return}
+        let objects = set.allObjects
+        
+        for obj in objects {
+            guard let message = obj as? Message else {continue}
+            
+            if message.chat?.objectID == chat?.objectID {
+                addMessage(message)
+            }
+        }
+        
+        tableView.reloadData()
+        tableView.scrollToBottom(false)
+    }
+    
+    func checkTemporaryContext() {
+        if let mainContext = context?.parentContext, chat = chat {
+            
+            let tempContext = context
+            context = mainContext
+            
+            do {
+                try tempContext?.save()
+            } catch {
+                print("Error saving tempContext")
+            }
+            self.chat = mainContext.objectWithID(chat.objectID) as? Chat
+        }
+    }
+ 
     //Test action
     func someAction(button: UIButton) {
         print("test")
@@ -239,6 +295,10 @@ class MessageViewController: UIViewController {
     //Hides keyboard on tap (Not Used)
     func handleSingleTap(recongnizer: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    deinit { //Remove NSNotifications
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     

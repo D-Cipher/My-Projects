@@ -13,6 +13,8 @@ class ContactsViewController: UIViewController, TableViewFetchedResultsDisplayer
 
     var context: NSManagedObjectContext?
     
+    var chatCreationDelegate: ChatCreationDelegate?
+    
     private var fetchedResultsController: NSFetchedResultsController?
     
     private var fetchedResultsDelegate: NSFetchedResultsControllerDelegate?
@@ -102,6 +104,16 @@ extension ContactsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else {return}
+        
+        //Add contact as a participant in the chat instance
+        guard let context = context else {return}
+        guard let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat else {return}
+        
+        chat.add(participant: contact)
+        
+        chatCreationDelegate?.created(chat: chat, inContext: context)
+        dismissViewControllerAnimated(false, completion: nil)
+        
     }
     
 }

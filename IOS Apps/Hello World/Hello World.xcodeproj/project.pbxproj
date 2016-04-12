@@ -22,10 +22,12 @@
 		340B2B8B1C989FE30032C656 /* EditProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B2B8A1C989FE30032C656 /* EditProfileTextField.swift */; };
 		341DDDAA1CBBE5C6009D505B /* TableViewFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DDDA91CBBE5C6009D505B /* TableViewFetchedResultsDelegate.swift */; };
 		341DDDAC1CBBF23D009D505B /* UIViewController+FillWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DDDAB1CBBF23D009D505B /* UIViewController+FillWithView.swift */; };
+		341DDDB31CBC4962009D505B /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DDDB11CBC4962009D505B /* Contact+CoreDataProperties.swift */; };
+		341DDDB41CBC4962009D505B /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DDDB21CBC4962009D505B /* Chat+CoreDataProperties.swift */; };
+		341DDDB61CBC4CF8009D505B /* ChatCreationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DDDB51CBC4CF8009D505B /* ChatCreationDelegate.swift */; };
 		3431AFFD1C93113300138CAE /* PublicProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3431AFFC1C93113300138CAE /* PublicProfileController.swift */; };
 		344196BF1C7CCB32004195DB /* ProfileTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196BE1C7CCB32004195DB /* ProfileTabController.swift */; };
 		344196C11C7CD081004195DB /* ChatTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344196C01C7CD081004195DB /* ChatTabController.swift */; };
-		3446C4D41CBA8EA4007AC330 /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446C4D11CBA8EA4007AC330 /* Chat+CoreDataProperties.swift */; };
 		3446C4D51CBA8EA4007AC330 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446C4D21CBA8EA4007AC330 /* Chat.swift */; };
 		3446C4D81CBA8EF3007AC330 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446C4D71CBA8EF3007AC330 /* Message+CoreDataProperties.swift */; };
 		3446C4DB1CBA95F1007AC330 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3446C4DA1CBA95F1007AC330 /* ChatCell.swift */; };
@@ -36,7 +38,6 @@
 		34A711191C96696100C11A9B /* Match30x30orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A711151C96696100C11A9B /* Match30x30orange.png */; };
 		34A7111A1C96696100C11A9B /* QRcode30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A711161C96696100C11A9B /* QRcode30x30.png */; };
 		34A7111B1C96696100C11A9B /* Wrench30x30blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 34A711171C96696100C11A9B /* Wrench30x30blue.png */; };
-		34AF0BD21CBAE841005652EA /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AF0BD01CBAE841005652EA /* Contact+CoreDataProperties.swift */; };
 		34AF0BD31CBAE841005652EA /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AF0BD11CBAE841005652EA /* Contact.swift */; };
 		34AF0BD51CBAF483005652EA /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AF0BD41CBAF483005652EA /* ContactsViewController.swift */; };
 		34B3A9F91C83A63B0083B52B /* EditProfileUploadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B3A9F81C83A63B0083B52B /* EditProfileUploadImage.swift */; };
@@ -77,10 +78,12 @@
 		340B2B8A1C989FE30032C656 /* EditProfileTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileTextField.swift; sourceTree = "<group>"; };
 		341DDDA91CBBE5C6009D505B /* TableViewFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		341DDDAB1CBBF23D009D505B /* UIViewController+FillWithView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+FillWithView.swift"; sourceTree = "<group>"; };
+		341DDDB11CBC4962009D505B /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		341DDDB21CBC4962009D505B /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		341DDDB51CBC4CF8009D505B /* ChatCreationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCreationDelegate.swift; sourceTree = "<group>"; };
 		3431AFFC1C93113300138CAE /* PublicProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileController.swift; sourceTree = "<group>"; };
 		344196BE1C7CCB32004195DB /* ProfileTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTabController.swift; sourceTree = "<group>"; };
 		344196C01C7CD081004195DB /* ChatTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTabController.swift; sourceTree = "<group>"; };
-		3446C4D11CBA8EA4007AC330 /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3446C4D21CBA8EA4007AC330 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		3446C4D71CBA8EF3007AC330 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3446C4DA1CBA95F1007AC330 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -91,7 +94,6 @@
 		34A711151C96696100C11A9B /* Match30x30orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Match30x30orange.png; sourceTree = "<group>"; };
 		34A711161C96696100C11A9B /* QRcode30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QRcode30x30.png; sourceTree = "<group>"; };
 		34A711171C96696100C11A9B /* Wrench30x30blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wrench30x30blue.png; sourceTree = "<group>"; };
-		34AF0BD01CBAE841005652EA /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		34AF0BD11CBAE841005652EA /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		34AF0BD41CBAF483005652EA /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		34B3A9F81C83A63B0083B52B /* EditProfileUploadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileUploadImage.swift; sourceTree = "<group>"; };
@@ -146,11 +148,11 @@
 			children = (
 				34AF0BD41CBAF483005652EA /* ContactsViewController.swift */,
 				34AF0BD11CBAE841005652EA /* Contact.swift */,
-				34AF0BD01CBAE841005652EA /* Contact+CoreDataProperties.swift */,
+				341DDDB11CBC4962009D505B /* Contact+CoreDataProperties.swift */,
 				344196C01C7CD081004195DB /* ChatTabController.swift */,
 				3446C4DA1CBA95F1007AC330 /* ChatCell.swift */,
 				3446C4D21CBA8EA4007AC330 /* Chat.swift */,
-				3446C4D11CBA8EA4007AC330 /* Chat+CoreDataProperties.swift */,
+				341DDDB21CBC4962009D505B /* Chat+CoreDataProperties.swift */,
 				3404049E1CB6D1BA003764FE /* MessageViewController.swift */,
 				340404A31CB6D38A003764FE /* MessageCell.swift */,
 				34C84F8F1CB9D28000C3B21F /* Message.swift */,
@@ -198,6 +200,7 @@
 				341DDDAB1CBBF23D009D505B /* UIViewController+FillWithView.swift */,
 				340404A51CB6D3D5003764FE /* UITableView+Scroll.swift */,
 				341DDDA91CBBE5C6009D505B /* TableViewFetchedResultsDelegate.swift */,
+				341DDDB51CBC4CF8009D505B /* ChatCreationDelegate.swift */,
 				340404A91CB6E6FD003764FE /* CDHelper.swift */,
 			);
 			name = "Addons and Extensions";
@@ -223,11 +226,11 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
+				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				347A6C981CB567F0000A245B /* Addons and Extensions */,
 				3431AFFA1C93094A00138CAE /* Images */,
 				3431AFFB1C9309BD00138CAE /* Edit Profile */,
 				340404A01CB6D21E003764FE /* Chatting Controllers */,
-				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* LoginViewController.swift */,
 				344196BE1C7CCB32004195DB /* ProfileTabController.swift */,
 				3431AFFC1C93113300138CAE /* PublicProfileController.swift */,
@@ -380,14 +383,13 @@
 				81BA814D1A49DA1800E65899 /* LoginViewController.swift in Sources */,
 				344196C11C7CD081004195DB /* ChatTabController.swift in Sources */,
 				3401CC2B1C979BC5006D6A65 /* EditProfileAge.swift in Sources */,
+				341DDDB61CBC4CF8009D505B /* ChatCreationDelegate.swift in Sources */,
 				341DDDAA1CBBE5C6009D505B /* TableViewFetchedResultsDelegate.swift in Sources */,
 				34C84F8D1CB9CECF00C3B21F /* Model.xcdatamodeld in Sources */,
 				3431AFFD1C93113300138CAE /* PublicProfileController.swift in Sources */,
-				3446C4D41CBA8EA4007AC330 /* Chat+CoreDataProperties.swift in Sources */,
 				34C84F911CB9D28000C3B21F /* Message.swift in Sources */,
 				341DDDAC1CBBF23D009D505B /* UIViewController+FillWithView.swift in Sources */,
 				347A6C9C1CB56DEA000A245B /* UIViewController+ActivityInd.swift in Sources */,
-				34AF0BD21CBAE841005652EA /* Contact+CoreDataProperties.swift in Sources */,
 				340404AA1CB6E6FD003764FE /* CDHelper.swift in Sources */,
 				34AF0BD31CBAE841005652EA /* Contact.swift in Sources */,
 				3446C4D81CBA8EF3007AC330 /* Message+CoreDataProperties.swift in Sources */,
@@ -395,8 +397,10 @@
 				3446C4DB1CBA95F1007AC330 /* ChatCell.swift in Sources */,
 				344196BF1C7CCB32004195DB /* ProfileTabController.swift in Sources */,
 				3402C92A1C828496004D281F /* EditProfilePictures.swift in Sources */,
+				341DDDB41CBC4962009D505B /* Chat+CoreDataProperties.swift in Sources */,
 				34009D431C7E22CC00BBC60B /* EditProfileMainController.swift in Sources */,
 				340404A41CB6D38A003764FE /* MessageCell.swift in Sources */,
+				341DDDB31CBC4962009D505B /* Contact+CoreDataProperties.swift in Sources */,
 				3446C4D51CBA8EA4007AC330 /* Chat.swift in Sources */,
 				34B3A9F91C83A63B0083B52B /* EditProfileUploadImage.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,

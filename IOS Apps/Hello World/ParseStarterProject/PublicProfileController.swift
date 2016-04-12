@@ -51,6 +51,7 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
     func barButtonItem(sender:UIButton!) {
         //print("Button tapped")
         
+        ///dismissViewControllerAnimated(false, completion: nil)
         self.performSegueWithIdentifier("GearSegue", sender: self)
         
     }

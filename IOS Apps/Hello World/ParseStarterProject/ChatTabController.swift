@@ -11,7 +11,7 @@ import Parse
 import Foundation
 import CoreData
 
-class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer {
+class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, ChatCreationDelegate {
     
     var context: NSManagedObjectContext?
 
@@ -43,12 +43,39 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer {
         self.performSegueWithIdentifier("contactSegue", sender: self)
     }
     
+    /*func newChat() {
+        let vc = ContactsViewController()
+        
+        //vc.context = context //Replaced with Child Context
+
+        //Add Child Context
+        let chatContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        chatContext.parentContext = context
+        vc.context = chatContext
+        
+        vc.chatCreationDelegate = self
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        presentViewController(navVC, animated: true, completion: nil)
+    }*/
+    
+    func created(chat chat: Chat, inContext context: NSManagedObjectContext) {
+        
+        let vc = MessageViewController()
+        vc.context = context
+        vc.chat = chat
+        vc.hidesBottomBarWhenPushed = true
+        
+        navigationController?.pushViewController(vc, animated:true)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Set up Nav Bar
         title = "Chats"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "contact_book"), style: .Plain, target: self, action: "contactSegueAction")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "contact_book"), style: .Plain, target: self, action: "contactSegueAction") //"newChat"
         automaticallyAdjustsScrollViewInsets = false
         
         //Set up Chat Table
@@ -86,15 +113,26 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
+        
+        /*
         if segue.identifier == "MsgSegue" {
             let nav = segue.destinationViewController as! UINavigationController
             let msgVC = nav.topViewController as! MessageViewController
             msgVC.context = context
-        } else if segue.identifier == "contactSegue" {
+            
+        }
+        */
+
+        if segue.identifier == "contactSegue" {
             let nav = segue.destinationViewController as! UINavigationController
             let contactsVC = nav.topViewController as! ContactsViewController
-            contactsVC.context = context
+            
+            //Add Child Context
+            let chatContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+            chatContext.parentContext = context
+            contactsVC.context = chatContext
+            
+            contactsVC.chatCreationDelegate = self
         }
 
     }

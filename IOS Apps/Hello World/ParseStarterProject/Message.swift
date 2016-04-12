@@ -13,12 +13,7 @@ import CoreData
 class Message: NSManagedObject {
 
     var isIncoming: Bool {
-        get {
-            guard let incoming = incoming else {return false}
-            return incoming.boolValue
-        } set (incoming) {
-            self.incoming = incoming
-        }
+        return sender != nil
     }
 
 }

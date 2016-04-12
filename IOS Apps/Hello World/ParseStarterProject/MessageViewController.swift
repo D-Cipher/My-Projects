@@ -43,6 +43,9 @@ class MessageViewController: UIViewController {
             
             let request = NSFetchRequest(entityName: "Message")
             
+            //constrain the request to get back only message instances that relates to the current chat attribute
+            request.predicate = NSPredicate(format: "chat=%@", chat)
+            
             request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: false)]
             
             if let result = try context.executeFetchRequest(request) as? [Message] {
@@ -210,7 +213,6 @@ class MessageViewController: UIViewController {
         guard let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: context) as? Message else {return}
         
         message.text = text
-        message.isIncoming = false
         message.timestamp = NSDate()
         message.chat = chat
         chat?.lastMessageTime = message.timestamp
@@ -330,9 +332,9 @@ extension MessageViewController: UITableViewDataSource {
         cell.messageLabel.text = message.text
         cell.messageLabel.textAlignment = .Left
         
-        if message.incoming == true {
+        if message.isIncoming == true {
             cell.messageLabel.textColor = UIColor.blackColor()
-        } else if message.incoming == false {
+        } else if message.isIncoming == false {
             cell.messageLabel.textColor = UIColor.whiteColor()
         }
         

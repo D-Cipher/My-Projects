@@ -78,14 +78,14 @@
 		340B2B8A1C989FE30032C656 /* EditProfileTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileTextField.swift; sourceTree = "<group>"; };
 		341DDDA91CBBE5C6009D505B /* TableViewFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		341DDDAB1CBBF23D009D505B /* UIViewController+FillWithView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+FillWithView.swift"; sourceTree = "<group>"; };
-		341DDDB11CBC4962009D505B /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		341DDDB11CBC4962009D505B /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Contact+CoreDataProperties.swift"; path = "ParseStarterProject/Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		341DDDB21CBC4962009D505B /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		341DDDB51CBC4CF8009D505B /* ChatCreationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCreationDelegate.swift; sourceTree = "<group>"; };
 		3431AFFC1C93113300138CAE /* PublicProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicProfileController.swift; sourceTree = "<group>"; };
 		344196BE1C7CCB32004195DB /* ProfileTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTabController.swift; sourceTree = "<group>"; };
 		344196C01C7CD081004195DB /* ChatTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTabController.swift; sourceTree = "<group>"; };
 		3446C4D21CBA8EA4007AC330 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
-		3446C4D71CBA8EF3007AC330 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3446C4D71CBA8EF3007AC330 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "ParseStarterProject/Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3446C4DA1CBA95F1007AC330 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		347A6C9B1CB56DEA000A245B /* UIViewController+ActivityInd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityInd.swift"; sourceTree = "<group>"; };
 		347C4DC91C80E413009DD861 /* EditProfileMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileMultipleChoice.swift; sourceTree = "<group>"; };
@@ -94,11 +94,11 @@
 		34A711151C96696100C11A9B /* Match30x30orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Match30x30orange.png; sourceTree = "<group>"; };
 		34A711161C96696100C11A9B /* QRcode30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QRcode30x30.png; sourceTree = "<group>"; };
 		34A711171C96696100C11A9B /* Wrench30x30blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wrench30x30blue.png; sourceTree = "<group>"; };
-		34AF0BD11CBAE841005652EA /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		34AF0BD11CBAE841005652EA /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = ParseStarterProject/Contact.swift; sourceTree = "<group>"; };
 		34AF0BD41CBAF483005652EA /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		34B3A9F81C83A63B0083B52B /* EditProfileUploadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileUploadImage.swift; sourceTree = "<group>"; };
 		34C84F8C1CB9CECF00C3B21F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		34C84F8F1CB9D28000C3B21F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		34C84F8F1CB9D28000C3B21F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = ParseStarterProject/Message.swift; sourceTree = "<group>"; };
 		34C91B1F1C7377D500384C49 /* loginFB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginFB.png; sourceTree = SOURCE_ROOT; };
 		34C91B251C73A50400384C49 /* Timber_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Timber_logo.png; sourceTree = "<group>"; };
 		34DCB6571C71268C00573704 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ParseStarterProject/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -147,16 +147,12 @@
 			isa = PBXGroup;
 			children = (
 				34AF0BD41CBAF483005652EA /* ContactsViewController.swift */,
-				34AF0BD11CBAE841005652EA /* Contact.swift */,
-				341DDDB11CBC4962009D505B /* Contact+CoreDataProperties.swift */,
 				344196C01C7CD081004195DB /* ChatTabController.swift */,
 				3446C4DA1CBA95F1007AC330 /* ChatCell.swift */,
 				3446C4D21CBA8EA4007AC330 /* Chat.swift */,
 				341DDDB21CBC4962009D505B /* Chat+CoreDataProperties.swift */,
 				3404049E1CB6D1BA003764FE /* MessageViewController.swift */,
 				340404A31CB6D38A003764FE /* MessageCell.swift */,
-				34C84F8F1CB9D28000C3B21F /* Message.swift */,
-				3446C4D71CBA8EF3007AC330 /* Message+CoreDataProperties.swift */,
 			);
 			name = "Chatting Controllers";
 			sourceTree = "<group>";
@@ -209,6 +205,10 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
+				34AF0BD11CBAE841005652EA /* Contact.swift */,
+				341DDDB11CBC4962009D505B /* Contact+CoreDataProperties.swift */,
+				34C84F8F1CB9D28000C3B21F /* Message.swift */,
+				3446C4D71CBA8EF3007AC330 /* Message+CoreDataProperties.swift */,
 				81BA81471A49DA1800E65899 /* ParseStarterProject */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
 				81BA81461A49DA1800E65899 /* Products */,

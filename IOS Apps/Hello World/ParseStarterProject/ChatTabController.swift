@@ -32,11 +32,15 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
         let cell = cell as! ChatCell
         guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else {return}
         
+        guard let contact = chat.participants?.anyObject() as? Contact else {return}
+        
+        guard let lastMessage = chat.lastMessage, timestamp = lastMessage.timestamp, text = lastMessage.text else {return}
+        
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM/dd/YY"
-        cell.nameLabel.text = "Eliot"
-        cell.dateLabel.text = formatter.stringFromDate(NSDate())
-        cell.messageLabel.text = "Hey!!!"
+        cell.nameLabel.text = contact.fullName
+        cell.dateLabel.text = formatter.stringFromDate(timestamp)
+        cell.messageLabel.text = text
     }
     
     func contactSegueAction() {
@@ -61,11 +65,11 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
     
     func created(chat chat: Chat, inContext context: NSManagedObjectContext) {
         
+        //Initiate Message View Controller
         let vc = MessageViewController()
         vc.context = context
         vc.chat = chat
         vc.hidesBottomBarWhenPushed = true
-        
         navigationController?.pushViewController(vc, animated:true)
         
     }
@@ -172,6 +176,15 @@ extension ChatTabController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         guard let chat = fetchedResultsController?.objectAtIndexPath(indexPath) as? Chat else {return}
+        
+        //Initiate Message View Controller
+        let vc = MessageViewController()
+        vc.context = context
+        vc.chat = chat
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated:true)
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
     }
 }

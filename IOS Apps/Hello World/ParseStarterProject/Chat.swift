@@ -15,7 +15,7 @@ class Chat: NSManagedObject {
     //Adding a computed property to grab the last message in instance
     var lastMessage: Message? {
         let request = NSFetchRequest(entityName: "Message")
-        request.predicate = NSPredicate(format: "chat = %@",  argumentArray: nil)
+        request.predicate = NSPredicate(format: "chat = %@", self)
         request.sortDescriptors = [NSSortDescriptor(key:"timestamp", ascending: false)]
         request.fetchLimit = 1
         

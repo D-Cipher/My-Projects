@@ -48,14 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         context.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
         root.context = context
         
-        //Init Contact Data
+        //====Initiate Contact Data====
         //fakeData(context)
         let contactsContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         contactsContext.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
-        contactImporter = ContactImporter(context: context)
+        contactImporter = ContactImporter(context: contactsContext)
         importContacts(contactsContext)
         contactImporter?.listenForChanges()
-        
+        //==========
         
         // Enable storing and querying data from Local Datastore. 
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
@@ -187,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     */
     
-    //Import Local Contacts
+    //=====Import Local Contacts=====
     func importContacts(context: NSManagedObjectContext) {
         let dataSeeded = NSUserDefaults.standardUserDefaults().boolForKey("dataSeeded")
         guard !dataSeeded else {return}
@@ -196,5 +196,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "dataSeeded")
     }
+    //===============
     
 }

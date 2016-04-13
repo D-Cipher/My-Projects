@@ -19,6 +19,7 @@
 		3404103D1C95B18C00FC7259 /* hill-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3404103C1C95B18B00FC7259 /* hill-background.png */; };
 		340612031C95362000E126BE /* Magnifier30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 340612021C95362000E126BE /* Magnifier30x30.png */; };
 		340612051C95362800E126BE /* Settings30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 340612041C95362800E126BE /* Settings30x30.png */; };
+		340919801CBEEC2500404131 /* ContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409197F1CBEEC2500404131 /* ContextViewController.swift */; };
 		340B2B8B1C989FE30032C656 /* EditProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B2B8A1C989FE30032C656 /* EditProfileTextField.swift */; };
 		3417C9601CBD911D000C5770 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3417C95F1CBD911D000C5770 /* NewGroupViewController.swift */; };
 		3417C9621CBDB843000C5770 /* AddGroupParticipantsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3417C9611CBDB843000C5770 /* AddGroupParticipantsController.swift */; };
@@ -80,6 +81,7 @@
 		3404103C1C95B18B00FC7259 /* hill-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hill-background.png"; sourceTree = "<group>"; };
 		340612021C95362000E126BE /* Magnifier30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Magnifier30x30.png; sourceTree = "<group>"; };
 		340612041C95362800E126BE /* Settings30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings30x30.png; sourceTree = "<group>"; };
+		3409197F1CBEEC2500404131 /* ContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextViewController.swift; sourceTree = "<group>"; };
 		340B2B8A1C989FE30032C656 /* EditProfileTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileTextField.swift; sourceTree = "<group>"; };
 		3417C95F1CBD911D000C5770 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		3417C9611CBDB843000C5770 /* AddGroupParticipantsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupParticipantsController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				340404A51CB6D3D5003764FE /* UITableView+Scroll.swift */,
 				341DDDA91CBBE5C6009D505B /* TableViewFetchedResultsDelegate.swift */,
 				341DDDB51CBC4CF8009D505B /* ChatCreationDelegate.swift */,
+				3409197F1CBEEC2500404131 /* ContextViewController.swift */,
 				340404A91CB6E6FD003764FE /* CDHelper.swift */,
 			);
 			name = "Addons and Extensions";
@@ -429,6 +432,7 @@
 				340404AA1CB6E6FD003764FE /* CDHelper.swift in Sources */,
 				34AF0BD31CBAE841005652EA /* Contact.swift in Sources */,
 				3446C4D81CBA8EF3007AC330 /* Message+CoreDataProperties.swift in Sources */,
+				340919801CBEEC2500404131 /* ContextViewController.swift in Sources */,
 				340B2B8B1C989FE30032C656 /* EditProfileTextField.swift in Sources */,
 				3446C4DB1CBA95F1007AC330 /* ChatCell.swift in Sources */,
 				344196BF1C7CCB32004195DB /* ProfileTabController.swift in Sources */,

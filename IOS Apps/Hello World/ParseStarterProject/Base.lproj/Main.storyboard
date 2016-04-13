@@ -63,11 +63,11 @@
             </objects>
             <point key="canvasLocation" x="402" y="-966"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Chat-->
         <scene sceneID="rm8-s0-uEF">
             <objects>
                 <navigationController id="pnF-fv-lIv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Dbs-x9-xbM"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="chat_icon" id="Dbs-x9-xbM"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qMt-65-kxf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1258,6 +1258,7 @@
         <image name="Timber_logo.png" width="430" height="156"/>
         <image name="Wrench30x30blue.png" width="30" height="30"/>
         <image name="blacktexture.png" width="691" height="389"/>
+        <image name="chat_icon" width="33" height="22"/>
         <image name="loginFB.png" width="492" height="108"/>
         <image name="placeholder-camera-green.png" width="1000" height="1000"/>
     </resources>

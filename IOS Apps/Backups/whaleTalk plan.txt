@@ -1,0 +1,8 @@
+Milestones Following Elliot's app:
+
+1) Lecture 28: full chat and saving chat instances have been made. Created a clone of Hello World up to this point
+
+2) Lecture 50: When elliot builds the "contacts" tab bar, lets break off into 2 projects: (1) Hello World which we will put on pause until learning firebase; (2) Pen-pals which we will continue with following the lectures.
+---Decided: use the main project to continue following elliot, and make a clone to keep as the backup for this point. 
+
+3) About Lecture 85: After learning firebase + coredata then continue to follow with Pen-pals, and pick back up Hello World.

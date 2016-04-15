@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Favorites Tab Controller-->
         <scene sceneID="Kix-cL-6IM">
             <objects>
-                <viewController id="tZ3-Wh-psH" sceneMemberID="viewController">
+                <viewController id="tZ3-Wh-psH" customClass="FavoritesTabController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="H2d-kT-sdW"/>
                         <viewControllerLayoutGuide type="bottom" id="31Y-vI-adN"/>
@@ -214,7 +214,7 @@
         <scene sceneID="zUE-f1-uEm">
             <objects>
                 <navigationController id="trc-O8-Tsp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="i4A-Do-LXR"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="i4A-Do-LXR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qds-3m-GHM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -228,11 +228,11 @@
             </objects>
             <point key="canvasLocation" x="-934" y="-186"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Contacts-->
         <scene sceneID="o75-eS-TIy">
             <objects>
                 <navigationController id="afg-FE-J0t" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="tHe-te-4fw"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="contact_icon" id="tHe-te-4fw"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3ud-qy-qCb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -264,10 +264,10 @@
             </objects>
             <point key="canvasLocation" x="-1465" y="606"/>
         </scene>
-        <!--View Controller-->
+        <!--Contacts Tab Controller-->
         <scene sceneID="0hb-ft-Vli">
             <objects>
-                <viewController id="umC-J3-R4j" sceneMemberID="viewController">
+                <viewController id="umC-J3-R4j" customClass="ContactsTabController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s6I-qh-bcL"/>
                         <viewControllerLayoutGuide type="bottom" id="v37-jc-Nf1"/>
@@ -1259,6 +1259,7 @@
         <image name="Wrench30x30blue.png" width="30" height="30"/>
         <image name="blacktexture.png" width="691" height="389"/>
         <image name="chat_icon" width="33" height="22"/>
+        <image name="contact_icon" width="25" height="25"/>
         <image name="loginFB.png" width="492" height="108"/>
         <image name="placeholder-camera-green.png" width="1000" height="1000"/>
     </resources>

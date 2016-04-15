@@ -82,7 +82,7 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
         super.viewDidLoad()
         
         //Set up Nav Bar
-        title = "Chats"
+        navigationController?.navigationBar.topItem?.title = "Chats"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "contact_book"), style: .Plain, target: self, action: "contactSegueAction") //"newChat"
         automaticallyAdjustsScrollViewInsets = false
         
@@ -154,7 +154,7 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
         newGroupButton.translatesAutoresizingMaskIntoConstraints = false
         header.addSubview(newGroupButton)
         
-        newGroupButton.setTitle("New Group", forState: .Normal)
+        newGroupButton.setTitle("Group", forState: .Normal)
         newGroupButton.setTitleColor(view.tintColor, forState: .Normal)
         newGroupButton.addTarget(self, action: "pressedNewGroup", forControlEvents: .TouchUpInside)
         

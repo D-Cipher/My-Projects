@@ -2,7 +2,7 @@
 //  PhoneNumber+CoreDataProperties.swift
 //  Hello World
 //
-//  Created by Tingbo Chen on 4/13/16.
+//  Created by Tingbo Chen on 4/15/16.
 //  Copyright © 2016 Parse. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,6 +15,8 @@ import CoreData
 extension PhoneNumber {
 
     @NSManaged var value: String?
+    @NSManaged var kind: String?
+    @NSManaged var registered: Bool
     @NSManaged var contact: Contact?
 
 }

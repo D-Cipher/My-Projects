@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private var contactImporter: ContactImporter? //Contact Importer Attribute
+    
+    private var contactsSyncer: Syncer? //Implement Syncer
 
     //--------------------------------------
     // MARK: - UIApplicationDelegate
@@ -28,10 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //====App Skin Customization====
         let vlight_grey = UIColor(red: 0.97, green: 0.95, blue: 0.95, alpha: 1.0)
         let col_blkchalk = UIColor(red: 35/255, green: 35/255, blue: 35/255, alpha: 1.0)
-        
-        //App Skin Customization
         UINavigationBar.appearance().barTintColor = col_blkchalk
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -42,24 +43,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor.greenColor()
         
         
-        //Core Data: Setup Context
+        //====Setup Main Context=====
         let root = window!.rootViewController as! LoginViewController
-        let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        context.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
-        root.context = context
+        let mainContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        mainContext.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
+        root.context = mainContext
         
-        //====Initiate Contact Data====
+        
+        //====Setup Contact Data Context====
         //fakeData(context)
         let contactsContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         contactsContext.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
+        
+        contactsSyncer = Syncer(mainContext: mainContext, backgroundContext: contactsContext)
+        
         contactImporter = ContactImporter(context: contactsContext)
         importContacts(contactsContext)
         contactImporter?.listenForChanges()
-        //==========
         
-        // Enable storing and querying data from Local Datastore. 
-        // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
-        Parse.enableLocalDatastore()
+        
+        //====Set up Parse=====
+        Parse.enableLocalDatastore() //Enable storing and querying data from Local Datastore. Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
 
         Parse.setApplicationId("pylRald7yYLGVt0Swqo9rIQBMxQIf7XnwlgCc89P",
             clientKey: "8tqC7IscC9XeOXX8JGHMMMSsMuzxJb5eTCXQKvBd")
@@ -70,8 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let defaultACL = PFACL();
 
-        // If you would like all objects to be private by default, remove this line.
-        defaultACL.setPublicReadAccess(true)
+        defaultACL.setPublicReadAccess(true) //If you would like all objects to be private by default, remove this line.
 
         PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
 
@@ -104,10 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
-    //--------------------------------------
-    // MARK: Push Notifications
-    //--------------------------------------
-
+    //====Parse Push Notifications=====
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
@@ -137,33 +137,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    ///////////////////////////////////////////////////////////
-    // Uncomment this method if you want to use Push Notifications with Background App Refresh
-    ///////////////////////////////////////////////////////////
-    // func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-    //     if application.applicationState == UIApplicationState.Inactive {
-    //         PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-    //     }
-    // }
-
-    //--------------------------------------
-    // MARK: Facebook SDK Integration
-    //--------------------------------------
+    //====Push Notification with Background App Refresh====
+    //Uncomment this method if you want to use Push Notifications with Background App Refresh
+    /*func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+         if application.applicationState == UIApplicationState.Inactive {
+             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+         }
+    }*/
     
+    
+    //=====Facebook SDK Integration=====
     func application(application: UIApplication,
         openURL url: NSURL,
         sourceApplication: String?,
         annotation: AnyObject) -> Bool {
             return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
-    
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
     }
     
-    /*
-    //Create some fake contacts
-    func fakeData(context: NSManagedObjectContext) {
+    
+    //=====Create Some Fake Contacts=====
+    /*func fakeData(context: NSManagedObjectContext) {
         let dataSeeded = NSUserDefaults.standardUserDefaults().boolForKey("dataSeeded")
         guard !dataSeeded else {return}
         
@@ -184,8 +180,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "dataSeeded")
         
-    }
-    */
+    } */
+ 
     
     //=====Import Local Contacts=====
     func importContacts(context: NSManagedObjectContext) {
@@ -196,6 +192,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "dataSeeded")
     }
-    //===============
     
 }

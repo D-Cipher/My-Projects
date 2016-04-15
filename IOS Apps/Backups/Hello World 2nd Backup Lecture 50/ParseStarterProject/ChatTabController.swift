@@ -11,7 +11,7 @@ import Parse
 import Foundation
 import CoreData
 
-class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, ChatCreationDelegate {
+class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, ChatCreationDelegate, ContextViewController {
     
     var context: NSManagedObjectContext?
 

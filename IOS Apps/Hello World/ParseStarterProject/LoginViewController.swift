@@ -298,11 +298,17 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let tab = segue.destinationViewController as! UITabBarController
-        let nav = tab.viewControllers![0] as! UINavigationController
-        let chatTabVC = nav.topViewController as! ChatTabController
+        let nav_0 = tab.viewControllers![0] as! UINavigationController
+        let nav_1 = tab.viewControllers![1] as! UINavigationController
+        let nav_2 = tab.viewControllers![2] as! UINavigationController
+        
+        let chatTabVC = nav_0.topViewController as! ChatTabController
+        let favoritesTabVC = nav_1.topViewController as! FavoritesTabController
+        let contactsTabVC = nav_2.topViewController as! ContactsTabController
         
         chatTabVC.context = context
-        
+        favoritesTabVC.context = context
+        contactsTabVC.context = context
     }
     
 }

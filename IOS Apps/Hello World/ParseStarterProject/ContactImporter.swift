@@ -96,6 +96,11 @@ class ContactImporter: NSObject {
                                 phoneNumber.contact = contact
                                 
                             }
+                            
+                            //Adds insterted contact into favorites
+                            if contact.inserted{
+                                contact.favorite = true
+                            }
                         })
                         
                         try self.context.save()

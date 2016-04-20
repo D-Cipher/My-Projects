@@ -25,9 +25,9 @@ class EditProfileUploadImage: UIViewController,UINavigationControllerDelegate, U
     
     var navBar_adjust = Float()
     
-    var deleteButton_var = UIBarButtonItem!()
+    var deleteButton_var = UIBarButtonItem()
     
-    var changeButton_var = UIBarButtonItem!()
+    var changeButton_var = UIBarButtonItem()
     
     var addChangeBtn_status = "Change "
     

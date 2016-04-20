@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import Foundation
 import CoreData
+import Firebase
 
 class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, ChatCreationDelegate, ContextViewController {
     
@@ -22,6 +23,8 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
     private let tableView = UITableView(frame: CGRectZero, style: .Plain)
     
     private let cellIdentifier = "MessageCell"
+    
+    let firebaseEliot = Firebase(url: "https://eliotwhaletalk.firebaseio.com")
     
     func fakeData(){ //For testing
         guard let context = context else {return}
@@ -121,17 +124,10 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        /*
-        if segue.identifier == "MsgSegue" {
-            let nav = segue.destinationViewController as! UINavigationController
-            let msgVC = nav.topViewController as! MessageViewController
-            msgVC.context = context
-            
-        }
-        */
-
         if segue.identifier == "contactSegue" {
             let nav = segue.destinationViewController as! UINavigationController
             let contactsVC = nav.topViewController as! ContactsViewController

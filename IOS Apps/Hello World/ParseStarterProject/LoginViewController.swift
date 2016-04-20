@@ -8,8 +8,11 @@ import UIKit
 import Parse
 import FBSDKCoreKit
 import CoreData
+import Firebase
 
 class LoginViewController: UIViewController {
+    
+    let firebase = Firebase(url: "https://dcy-helloworld.firebaseio.com/")
     
     var userProfileData = Dictionary<String,AnyObject>()
     
@@ -17,9 +20,25 @@ class LoginViewController: UIViewController {
     
     var context: NSManagedObjectContext? //Core Data Context
     
+    var contactImporter: ContactImporter? //Contact Importer
+    
+    var remoteStore: RemoteStore? //Remote Store
+    
+    private func remoteStoreUpdate(id_input: String) {
+        //Remote Store
+        self.remoteStore?.signUp(facebookID: id_input, success: {
+            self.remoteStore?.startSyncing()
+            self.contactImporter?.fetch()
+            self.contactImporter?.listenForChanges()
+            
+            }, error: {
+                errorString in
+        })
+    }
+    
     private func existingUserUpdate(fb_result: Dictionary<String,AnyObject>, parse_object: PFObject) {
         
-        print("Existing User")
+        //print("Existing User parse")
         
         //Update User data in Parse based on FB
         PFUser.currentUser()?["name"] = fb_result["name"]
@@ -98,7 +117,7 @@ class LoginViewController: UIViewController {
     
     private func newUserAdd(fb_result: Dictionary<String,AnyObject>, parse_object: PFObject){
         
-        print("New User")
+        //print("New User parse")
         
         //Create new Parse data for user
         PFUser.currentUser()?["FB_id"] = fb_result["id"]
@@ -177,13 +196,114 @@ class LoginViewController: UIViewController {
         }
     }
     
+    private func firebaseAuthwithFB() {
+        
+        let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
+        
+        firebase.authWithOAuthProvider("facebook", token: accessToken) { (error, authData) -> Void in
+            if error != nil {
+                print(error)
+                self.activityIndFunc(0)
+                
+            } else {
+                if let authData = authData {
+                    
+                    let facebookID = authData.uid.stringByReplacingOccurrencesOfString("facebook:", withString: "")
+                    
+                    //Check if new user
+                    self.firebase.observeEventType(FEventType.Value) { (snapshot: FDataSnapshot!) -> Void in
+                        guard let snapshot = snapshot.value["users"] else {
+                            print("Error in retrieving snapshot")
+                            self.activityIndFunc(0)
+                            return
+                        }
+                        
+                        if ((snapshot?.objectForKey(facebookID)) == nil) {
+                            print("New user firebase")
+                        self.firebase.childByAppendingPath("users").childByAppendingPath(facebookID).setValue(["phoneNumber": "needs validation", "name":""])
+                            
+                            /* ??unsure if needed
+                            //self.firebase.removeAllObservers()
+                            //self.activityIndFunc(0)
+                            //self.performSegueWithIdentifier("phoneVarification", sender: self)
+                            */
+                        
+                        } else {
+                            
+                            let user_phoneNum = (snapshot!.objectForKey(facebookID)!["phoneNumber"]!)! as! String
+                            
+                            let valid_phone = self.phoneValidate(user_phoneNum)
+                            
+                            if valid_phone == false {
+                                print("Existing user firebase. Invalid phone.")
+                                self.firebase.removeAllObservers()
+                                self.activityIndFunc(0)
+                                self.performSegueWithIdentifier("phoneVarification", sender: self)
+                                
+                            } else if valid_phone == true {
+                                print("Existing user firebase. Valid phone.")
+                                self.firebase.removeAllObservers()
+                                self.activityIndFunc(0)
+                                self.performSegueWithIdentifier("tabBarSegue", sender: self)
+
     
-    private func initiateUserData() {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func parseAuthwithFB(result_dict: Dictionary<String, AnyObject>) {
+        
+        let query = PFQuery(className: "_User")
+        
+        query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+            if error != nil {
+                print(error)
+                self.activityIndFunc(0)
+                
+            } else if let object = object {
+                
+                query.whereKey("FB_id", equalTo: result_dict["id"] as! String)
+                query.findObjectsInBackgroundWithBlock {
+                    (objects: [AnyObject]?, error: NSError?) in
+                    if error != nil {
+                        print(error)
+                        self.activityIndFunc(0)
+                        
+                    } else {
+                        
+                        if (objects!.count > 0){
+                            
+                            print("Existing User Parse Update")
+                            self.existingUserUpdate(result_dict, parse_object: object)
+                            
+                            self.remoteStoreUpdate(result_dict["id"] as! String) //Remote store update
+                            
+                            self.firebaseAuthwithFB()
+                            
+                        } else {
+                            
+                            print("New User Add Parse")
+                            self.newUserAdd(result_dict, parse_object: object)
+                            
+                            self.remoteStoreUpdate(result_dict["id"] as! String) //Remote store update
+                            
+                            self.firebaseAuthwithFB()
+                        }
+                    }
+                }
+                
+            }
+        })
+    }
+    
+    private func init_Authentication() {
         
         //Gets information about the user from Facebook.
         let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, gender, locale"])
-        
-        self.activityIndFunc(1, warningMsg: "Loading...")
         
         graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
             if error != nil {
@@ -191,97 +311,64 @@ class LoginViewController: UIViewController {
                 self.activityIndFunc(0)
                 
             } else if let result = result {
+                //print(result)
                 
-                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
                     
-                    print(result)
+                    let result_dict = result as! Dictionary<String, AnyObject>
                     
-                    let query = PFQuery(className: "_User")
+                    self.parseAuthwithFB(result_dict)
                     
-                    query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
-                        if error != nil {
-                            print(error)
-                            self.activityIndFunc(0)
-                            
-                        } else if let object = object {
-                            
-                            query.whereKey("FB_id", equalTo: result["id"] as! String)
-                            query.findObjectsInBackgroundWithBlock {
-                                (objects: [AnyObject]?, error: NSError?) in
-                                if error != nil {
-                                    print(error)
-                                    self.activityIndFunc(0)
-                                    
-                                } else {
-                                    if (objects!.count > 0){
-                                        
-                                        //Existing User Data Update
-                                        self.existingUserUpdate(result as! Dictionary<String, AnyObject>, parse_object: object)
-                                        
-                                        self.activityIndFunc(0)
-                                        
-                                        self.performSegueWithIdentifier("tabBarSegue", sender: self)
-                                        
-                                    } else {
-                                        
-                                        //New User Add Data
-                                        self.newUserAdd(result as! Dictionary<String, AnyObject>, parse_object: object)
-                                        
-                                        self.activityIndFunc(0)
-                                        
-                                        self.performSegueWithIdentifier("tabBarSegue", sender: self)
-                                        
-                                    }
-                                }
-                            }
-                            
-                        }
-                    })
+                })
+            }
+        }
+    
+    }
+    
+    
+    @IBAction func FBloginButton(sender: AnyObject) {
+        
+        self.activityIndFunc(1, warningMsg: "Loading...")
+        
+        let permission = ["public_profile"]
+        
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permission) { (user: PFUser?, error: NSError?) -> Void in
+            
+            if error != nil {
+                print(error)
+                self.activityIndFunc(0)
+                
+            } else {
+                if let user = user {
+                    //print(user)
                     
+                    self.init_Authentication()
                 }
-                
             }
             
         }
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-        let testObject = PFObject(className: "TestObject")
-        testObject["foo"] = "bar"
-        testObject.saveInBackgroundWithBlock { (success, error) -> Void in
-            print("Object has been saved.")
-        }
-        */
-    }
-    
-    @IBAction func FBloginButton(sender: AnyObject) {
-        let permission = ["public_profile"]
-        
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permission) { (user: PFUser?, error: NSError?) -> Void in
-            
-            if let error = error {
-                print(error)
-            } else {
-                if let user = user {
-                    print(user)
-                    
-                    self.initiateUserData()
-                }
-            }
-        }
-        
     }
     
     override func viewWillAppear(animated: Bool) {
-        if let username = PFUser.currentUser()?.username {
-            
-            self.initiateUserData()
-            
+        
+        self.activityIndFunc(1, warningMsg: "Loading...")
+        
+        guard let username = PFUser.currentUser()?.username else {
+            self.activityIndFunc(0)
+            return
         }
+        
+        guard firebase.authData != nil else {
+            self.activityIndFunc(0)
+            return
+        }
+        
+        self.init_Authentication()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -297,19 +384,21 @@ class LoginViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let tab = segue.destinationViewController as! UITabBarController
-        let nav_0 = tab.viewControllers![0] as! UINavigationController
-        let nav_1 = tab.viewControllers![1] as! UINavigationController
-        let nav_2 = tab.viewControllers![2] as! UINavigationController
-        
-        let chatTabVC = nav_0.topViewController as! ChatTabController
-        let favoritesTabVC = nav_1.topViewController as! FavoritesTabController
-        let contactsTabVC = nav_2.topViewController as! ContactsTabController
-        
-        chatTabVC.context = context
-        favoritesTabVC.context = context
-        contactsTabVC.context = context
+        if segue.identifier == "tabBarSegue" {
+            
+            let tab = segue.destinationViewController as! UITabBarController
+            let nav_0 = tab.viewControllers![0] as! UINavigationController
+            let nav_1 = tab.viewControllers![1] as! UINavigationController
+            let nav_2 = tab.viewControllers![2] as! UINavigationController
+            
+            let chatTabVC = nav_0.topViewController as! ChatTabController
+            let favoritesTabVC = nav_1.topViewController as! FavoritesTabController
+            let contactsTabVC = nav_2.topViewController as! ContactsTabController
+            
+            chatTabVC.context = context
+            favoritesTabVC.context = context
+            contactsTabVC.context = context
+        }
     }
-    
 }
 

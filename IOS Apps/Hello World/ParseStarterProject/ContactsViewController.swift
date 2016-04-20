@@ -38,7 +38,7 @@ class ContactsViewController: UIViewController, TableViewFetchedResultsDisplayer
         super.viewDidLoad()
         
         //Set up Nav Bar
-        title = "Friends"
+        navigationController?.navigationBar.topItem?.title = "Friends"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "backButton")
         automaticallyAdjustsScrollViewInsets = false
         
@@ -121,9 +121,13 @@ extension ContactsViewController: UITableViewDelegate {
         
         //Add contact as a participant in the chat instance
         guard let context = context else {return}
+        
+        /*
         guard let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat else {return}
         
         chat.add(participant: contact)
+        */
+        let chat = Chat.existing(directWith: contact, inContext: context) ?? Chat.new(directWith: contact, inContext: context) //If chat does not exist then create new chat
         
         chatCreationDelegate?.created(chat: chat, inContext: context)
         dismissViewControllerAnimated(false, completion: nil)

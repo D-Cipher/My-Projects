@@ -81,6 +81,110 @@
             </objects>
             <point key="canvasLocation" x="-934" y="-966"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yCa-BI-JbX">
+            <objects>
+                <navigationController id="O0s-6E-2Cq" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tZx-QO-LtU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="viX-Ib-GU2" kind="relationship" relationship="rootViewController" id="UxF-bT-IHL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5Q-xn-dAp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1465" y="-966"/>
+        </scene>
+        <!--Phone Varification Controller-->
+        <scene sceneID="3fi-Xw-BMm">
+            <objects>
+                <viewController id="viX-Ib-GU2" customClass="PhoneVarificationController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Otf-ia-FSz"/>
+                        <viewControllerLayoutGuide type="bottom" id="zrF-FU-wEg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kZO-dE-Mep">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm your country code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pD8-sQ-asG">
+                                <rect key="frame" x="78" y="105" width="258" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and mobile phone number:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgI-1d-bFT">
+                                <rect key="frame" x="105" y="126" width="205" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Mobile number" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Boj-FQ-1kf">
+                                <rect key="frame" x="137" y="167" width="227" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="227" id="buN-8v-wub"/>
+                                    <constraint firstAttribute="height" constant="30" id="fS2-PE-3so"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYl-3i-vGk">
+                                <rect key="frame" x="51" y="213" width="313" height="38"/>
+                                <color key="backgroundColor" red="0.27339096931212253" green="0.61640153657616892" blue="0.12806397360647329" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="313" id="Uv2-fD-zWx"/>
+                                    <constraint firstAttribute="height" constant="38" id="X7h-qi-NhZ"/>
+                                </constraints>
+                                <state key="normal" title="Send Varification">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitButtonAction:" destination="viX-Ib-GU2" eventType="touchUpInside" id="RuJ-Vr-A77"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1" borderStyle="bezel" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="yAh-pZ-lZ5">
+                                <rect key="frame" x="51" y="167" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bcG-hI-G1A"/>
+                                    <constraint firstAttribute="width" constant="70" id="bg6-aM-G4K"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <connections>
+                                    <action selector="countryTextAction:" destination="viX-Ib-GU2" eventType="editingDidEnd" id="T6n-2F-G5o"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pD8-sQ-asG" firstAttribute="top" secondItem="Otf-ia-FSz" secondAttribute="bottom" constant="41" id="1G1-g8-HNQ"/>
+                            <constraint firstItem="Boj-FQ-1kf" firstAttribute="trailing" secondItem="QYl-3i-vGk" secondAttribute="trailing" id="BwN-hE-4GW"/>
+                            <constraint firstItem="pD8-sQ-asG" firstAttribute="centerX" secondItem="kZO-dE-Mep" secondAttribute="centerX" id="CBz-0u-SMj"/>
+                            <constraint firstItem="Boj-FQ-1kf" firstAttribute="top" secondItem="IgI-1d-bFT" secondAttribute="bottom" constant="20" id="Ec7-ts-ANj"/>
+                            <constraint firstItem="Boj-FQ-1kf" firstAttribute="bottom" secondItem="yAh-pZ-lZ5" secondAttribute="bottom" id="IxU-bu-cpf"/>
+                            <constraint firstItem="QYl-3i-vGk" firstAttribute="centerX" secondItem="kZO-dE-Mep" secondAttribute="centerX" id="TGd-GJ-xSs"/>
+                            <constraint firstItem="QYl-3i-vGk" firstAttribute="top" secondItem="yAh-pZ-lZ5" secondAttribute="bottom" constant="16" id="cQo-yM-8mq"/>
+                            <constraint firstItem="pD8-sQ-asG" firstAttribute="centerX" secondItem="IgI-1d-bFT" secondAttribute="centerX" id="h6L-Mo-3G8"/>
+                            <constraint firstItem="IgI-1d-bFT" firstAttribute="top" secondItem="pD8-sQ-asG" secondAttribute="bottom" id="iEl-ZQ-pWT"/>
+                            <constraint firstItem="Boj-FQ-1kf" firstAttribute="leading" secondItem="yAh-pZ-lZ5" secondAttribute="trailing" constant="16" id="uHh-qf-B1e"/>
+                            <constraint firstItem="Boj-FQ-1kf" firstAttribute="baseline" secondItem="yAh-pZ-lZ5" secondAttribute="baseline" id="x1O-gR-sXX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vj6-mj-EgO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="countryTextOutlet" destination="yAh-pZ-lZ5" id="RuC-5V-uA7"/>
+                        <outlet property="mobileTextOutlet" destination="Boj-FQ-1kf" id="hyF-r1-rpH"/>
+                        <outlet property="submitButtonOutlet" destination="QYl-3i-vGk" id="dNJ-8r-MxY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j5Q-Me-k0q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1465" y="-1758"/>
+        </scene>
         <!--Chat Tab-->
         <scene sceneID="K98-D0-gfr">
             <objects>
@@ -94,7 +198,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Chat Tab" id="QU8-Mo-5eG"/>
+                    <navigationItem key="navigationItem" title="Chat Tab" id="QU8-Mo-5eG">
+                        <barButtonItem key="leftBarButtonItem" title="PhoneNum" id="tZm-Be-dYw">
+                            <connections>
+                                <action selector="hiFirebase:" destination="5mN-bK-dQA" id="wmf-7K-a6Y"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <segue destination="6Fb-Bo-gf4" kind="presentation" identifier="contactSegue" id="nNl-uM-aIh"/>
@@ -204,11 +314,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <segue destination="Ymy-n8-5sN" kind="show" identifier="tabBarSegue" id="A4q-gx-Dcj"/>
+                        <segue destination="O0s-6E-2Cq" kind="presentation" identifier="phoneVarification" id="C9w-CN-BiX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1465" y="-971"/>
+            <point key="canvasLocation" x="-1993" y="-554"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zUE-f1-uEm">

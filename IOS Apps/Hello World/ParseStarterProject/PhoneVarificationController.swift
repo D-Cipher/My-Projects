@@ -7,17 +7,59 @@
 //
 
 import UIKit
+import CoreData
 
 class PhoneVarificationController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var countryTextOutlet: UITextField!
     @IBOutlet var mobileTextOutlet: UITextField!
     @IBOutlet var submitButtonOutlet: UIButton!
-
+    
+    var facebookID = ""
+    
+    var context: NSManagedObjectContext? //Core Data Context
+    
+    var contactImporter: ContactImporter? //Contact Importer
+    
+    var remoteStore: RemoteStore? //Remote Store
+    
+    private func remoteStoreUpdate(phoneNumber: String, fbID_input: String) {
+        //Remote Store
+        self.remoteStore?.signUp(phoneNumber: phoneNumber, facebookID: fbID_input, success: {
+            print("remote store")
+            self.remoteStore?.startSyncing()
+            self.contactImporter?.fetch()
+            self.contactImporter?.listenForChanges()
+            
+            }, error: {
+                errorString in
+        })
+    }
     
     @IBAction func submitButtonAction(sender: AnyObject) {
         
-        dismissViewControllerAnimated(true, completion: nil)
+        guard phoneValidate(mobileTextOutlet.text!) == true else {
+            okAlert("Invalid Phone", message: "Please your mobile phone number.")
+            return
+        }
+        
+        let alertMsg = ["Phone Number Varification", "We will send a varification code to the following number: " + countryTextOutlet.text! + " " + mobileTextOutlet.text!]
+        
+        let continueAlert = UIAlertController(title: alertMsg[0], message: alertMsg[1], preferredStyle: UIAlertControllerStyle.Alert)
+        
+        continueAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            
+            self.remoteStoreUpdate(self.mobileTextOutlet.text!, fbID_input: self.facebookID)
+            //dismissViewControllerAnimated(true, completion: nil)
+            
+        }))
+        
+        continueAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) -> Void in
+        }))
+        
+        presentViewController(continueAlert, animated: true, completion: nil)
+        
+        
         
     }
     

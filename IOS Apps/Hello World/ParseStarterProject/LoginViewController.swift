@@ -24,21 +24,15 @@ class LoginViewController: UIViewController {
     
     var remoteStore: RemoteStore? //Remote Store
     
-    private func remoteStoreUpdate(id_input: String) {
-        //Remote Store
-        self.remoteStore?.signUp(facebookID: id_input, success: {
-            self.remoteStore?.startSyncing()
-            self.contactImporter?.fetch()
-            self.contactImporter?.listenForChanges()
-            
-            }, error: {
-                errorString in
-        })
-    }
-    
     private func existingUserUpdate(fb_result: Dictionary<String,AnyObject>, parse_object: PFObject) {
         
         //print("Existing User parse")
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("phoneNumber") != nil {
+            PFUser.currentUser()?["phoneNumber"] = NSUserDefaults.standardUserDefaults().objectForKey("phoneNumber") as! String
+        } else {
+            PFUser.currentUser()?["phoneNumber"] = "N/A"
+        }
         
         //Update User data in Parse based on FB
         PFUser.currentUser()?["name"] = fb_result["name"]
@@ -120,6 +114,7 @@ class LoginViewController: UIViewController {
         //print("New User parse")
         
         //Create new Parse data for user
+        PFUser.currentUser()?["phoneNumber"] = "N/A"
         PFUser.currentUser()?["FB_id"] = fb_result["id"]
         PFUser.currentUser()?["name"] = fb_result["name"]
         PFUser.currentUser()?["first_name"] = fb_result["first_name"]
@@ -196,7 +191,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func firebaseAuthwithFB() {
+    private func firebaseAuthwithFB(userFullName: String) {
         
         let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
         
@@ -220,7 +215,7 @@ class LoginViewController: UIViewController {
                         
                         if ((snapshot?.objectForKey(facebookID)) == nil) {
                             print("New user firebase")
-                        self.firebase.childByAppendingPath("users").childByAppendingPath(facebookID).setValue(["phoneNumber": "needs validation", "name":""])
+                            self.firebase.childByAppendingPath("users").childByAppendingPath(facebookID).setValue(["phoneNumber": "needs validation", "name":userFullName])
                             
                             /* ??unsure if needed
                             //self.firebase.removeAllObservers()
@@ -230,6 +225,8 @@ class LoginViewController: UIViewController {
                         
                         } else {
                             
+                            self.firebase.childByAppendingPath("users").childByAppendingPath(facebookID).updateChildValues(["name" : userFullName])
+                            
                             let user_phoneNum = (snapshot!.objectForKey(facebookID)!["phoneNumber"]!)! as! String
                             
                             let valid_phone = self.phoneValidate(user_phoneNum)
@@ -238,15 +235,15 @@ class LoginViewController: UIViewController {
                                 print("Existing user firebase. Invalid phone.")
                                 self.firebase.removeAllObservers()
                                 self.activityIndFunc(0)
-                                self.performSegueWithIdentifier("phoneVarification", sender: self)
+                                self.performSegueWithIdentifier("phoneVarification", sender: facebookID)
                                 
                             } else if valid_phone == true {
                                 print("Existing user firebase. Valid phone.")
+                                
                                 self.firebase.removeAllObservers()
                                 self.activityIndFunc(0)
                                 self.performSegueWithIdentifier("tabBarSegue", sender: self)
-
-    
+                                
                             }
                         }
                     }
@@ -280,18 +277,14 @@ class LoginViewController: UIViewController {
                             print("Existing User Parse Update")
                             self.existingUserUpdate(result_dict, parse_object: object)
                             
-                            self.remoteStoreUpdate(result_dict["id"] as! String) //Remote store update
-                            
-                            self.firebaseAuthwithFB()
+                            self.firebaseAuthwithFB(result_dict["name"] as! String)
                             
                         } else {
                             
                             print("New User Add Parse")
                             self.newUserAdd(result_dict, parse_object: object)
                             
-                            self.remoteStoreUpdate(result_dict["id"] as! String) //Remote store update
-                            
-                            self.firebaseAuthwithFB()
+                            self.firebaseAuthwithFB(result_dict["name"] as! String)
                         }
                     }
                 }
@@ -399,6 +392,19 @@ class LoginViewController: UIViewController {
             favoritesTabVC.context = context
             contactsTabVC.context = context
         }
+        
+        if segue.identifier == "phoneVarification" {
+            
+            let nav = segue.destinationViewController as! UINavigationController
+
+            if let phoneVarVC = nav.topViewController as? PhoneVarificationController {
+                phoneVarVC.facebookID = sender as! String
+                phoneVarVC.context = context
+                phoneVarVC.remoteStore = remoteStore
+                phoneVarVC.contactImporter = contactImporter
+            }
+        }
+
     }
 }
 

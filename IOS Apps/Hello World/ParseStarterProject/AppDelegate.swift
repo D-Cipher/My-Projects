@@ -22,9 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var contactImporter: ContactImporter? //Contact Importer Attribute
     
-    private var contactsSyncer: Syncer? //Implement Syncer
+    private var contactsSyncer: Syncer?
     
-    private var firebaseSyncer: Syncer? //Implement firebase Syncer
+    private var contactsUploadSyncer: Syncer?
+    
+    private var firebaseSyncer: Syncer?
+    
+    private var firebaseStore: FirebaseStore?
 
     //--------------------------------------
     // MARK: - UIApplicationDelegate
@@ -51,24 +55,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainContext.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
         root.context = mainContext
         
+        //fakeData(context) //fake contacts
         
-        //====Setup Contact Data Context====
-        //fakeData(context)
+        //====Setup Contacts and Firebase Context====
         let contactsContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         contactsContext.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
         
-        
-        //Firebase Syncer
         let firebaseContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         firebaseContext.persistentStoreCoordinator = CDHelper.sharedInstance.coordinator
-        //contactsUploadSyncer = Syncer(mainContext: mainContext, backgroundContext: firebaseContext)
-        firebaseSyncer = Syncer(mainContext: mainContext, backgroundContext: firebaseContext)
-        
         
         contactsSyncer = Syncer(mainContext: mainContext, backgroundContext: contactsContext)
         
+        //====Setup Remote Store=====
+        let firebaseStore = FirebaseStore(context: firebaseContext)
+        self.firebaseStore = firebaseStore
+        
+        contactsUploadSyncer = Syncer(mainContext: mainContext, backgroundContext: firebaseContext)
+        contactsUploadSyncer?.remoteStore = firebaseStore
+        
+        firebaseSyncer = Syncer(mainContext: mainContext, backgroundContext: firebaseContext)
+        firebaseSyncer?.remoteStore = firebaseStore
+        
         contactImporter = ContactImporter(context: contactsContext)
-        importContacts(contactsContext)
+        //importContacts(contactsContext) //imports local contacts
+        
+        root.remoteStore = firebaseStore
+        root.contactImporter = contactImporter
+        
+        //Start Syncing
+        firebaseStore.startSyncing()
         contactImporter?.listenForChanges()
         
         

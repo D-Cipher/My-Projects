@@ -24,7 +24,7 @@ import CoreData
  */
 
 protocol RemoteStore {
-    func signUp(facebookID facebookID: String, success: ()->(), error:(errorMessage: String)->())
+    func signUp(phoneNumber phoneNumber: String, facebookID: String, success: ()->(), error:(errorMessage: String)->())
     
     func startSyncing()
     

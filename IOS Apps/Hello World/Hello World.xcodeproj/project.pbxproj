@@ -20,6 +20,7 @@
 		3404103D1C95B18C00FC7259 /* hill-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3404103C1C95B18B00FC7259 /* hill-background.png */; };
 		340612031C95362000E126BE /* Magnifier30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 340612021C95362000E126BE /* Magnifier30x30.png */; };
 		340612051C95362800E126BE /* Settings30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 340612041C95362800E126BE /* Settings30x30.png */; };
+		340635441CC906CE001D17AA /* FirebaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340635431CC906CE001D17AA /* FirebaseStore.swift */; };
 		340919801CBEEC2500404131 /* ContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409197F1CBEEC2500404131 /* ContextViewController.swift */; };
 		340B2B8B1C989FE30032C656 /* EditProfileTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340B2B8A1C989FE30032C656 /* EditProfileTextField.swift */; };
 		3417C9601CBD911D000C5770 /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3417C95F1CBD911D000C5770 /* NewGroupViewController.swift */; };
@@ -65,6 +66,7 @@
 		34DF95CC1CBE95000062A9E1 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF95CB1CBE95000062A9E1 /* ContactImporter.swift */; };
 		34DF95CF1CBE9FBC0062A9E1 /* PhoneNumber+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF95CD1CBE9FBC0062A9E1 /* PhoneNumber+CoreDataProperties.swift */; };
 		34DF95D01CBE9FBC0062A9E1 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF95CE1CBE9FBC0062A9E1 /* PhoneNumber.swift */; };
+		34E53B851CC8342600AAAA63 /* UIViewController+OkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E53B841CC8342600AAAA63 /* UIViewController+OkAlert.swift */; };
 		3C0A590ECDB37C31E489081C /* Pods_Hello_World.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AAB9BD0FAE8A7237E0427A8 /* Pods_Hello_World.framework */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* LoginViewController.swift */; };
@@ -95,6 +97,7 @@
 		3404103C1C95B18B00FC7259 /* hill-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hill-background.png"; sourceTree = "<group>"; };
 		340612021C95362000E126BE /* Magnifier30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Magnifier30x30.png; sourceTree = "<group>"; };
 		340612041C95362800E126BE /* Settings30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings30x30.png; sourceTree = "<group>"; };
+		340635431CC906CE001D17AA /* FirebaseStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStore.swift; sourceTree = "<group>"; };
 		3409197F1CBEEC2500404131 /* ContextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextViewController.swift; sourceTree = "<group>"; };
 		340B2B8A1C989FE30032C656 /* EditProfileTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileTextField.swift; sourceTree = "<group>"; };
 		3417C95F1CBD911D000C5770 /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 		34DF95CB1CBE95000062A9E1 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactImporter.swift; sourceTree = "<group>"; };
 		34DF95CD1CBE9FBC0062A9E1 /* PhoneNumber+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PhoneNumber+CoreDataProperties.swift"; path = "ParseStarterProject/PhoneNumber+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		34DF95CE1CBE9FBC0062A9E1 /* PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneNumber.swift; path = ParseStarterProject/PhoneNumber.swift; sourceTree = "<group>"; };
+		34E53B841CC8342600AAAA63 /* UIViewController+OkAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+OkAlert.swift"; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* Hello World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hello World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -252,9 +256,11 @@
 		347A6C981CB567F0000A245B /* Addons and Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				340635431CC906CE001D17AA /* FirebaseStore.swift */,
 				34CEED461CC518AD00FD9E02 /* RemoteStore.swift */,
 				34A11E631CC1701300FA585A /* Syncer.swift */,
 				347A6C9B1CB56DEA000A245B /* UIViewController+ActivityInd.swift */,
+				34E53B841CC8342600AAAA63 /* UIViewController+OkAlert.swift */,
 				3402D0291CC7DA7D00B12666 /* UIViewController+PhoneValidate.swift */,
 				341DDDAB1CBBF23D009D505B /* UIViewController+FillWithView.swift */,
 				340404A51CB6D3D5003764FE /* UITableView+Scroll.swift */,
@@ -564,6 +570,7 @@
 				3417C9621CBDB843000C5770 /* AddGroupParticipantsController.swift in Sources */,
 				34DF1CC11CC7020200CE338A /* PhoneVarificationController.swift in Sources */,
 				340404AA1CB6E6FD003764FE /* CDHelper.swift in Sources */,
+				340635441CC906CE001D17AA /* FirebaseStore.swift in Sources */,
 				34AF0BD31CBAE841005652EA /* Contact.swift in Sources */,
 				3446C4D81CBA8EF3007AC330 /* Message+CoreDataProperties.swift in Sources */,
 				340919801CBEEC2500404131 /* ContextViewController.swift in Sources */,
@@ -581,6 +588,7 @@
 				34B3A9F91C83A63B0083B52B /* EditProfileUploadImage.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				340404A61CB6D3D5003764FE /* UITableView+Scroll.swift in Sources */,
+				34E53B851CC8342600AAAA63 /* UIViewController+OkAlert.swift in Sources */,
 				34A11E641CC1701300FA585A /* Syncer.swift in Sources */,
 				34A11E621CC15B5900FA585A /* ContactSelector.swift in Sources */,
 				34A11E681CC181AC00FA585A /* FavoriteCell.swift in Sources */,

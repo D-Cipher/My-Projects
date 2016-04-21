@@ -34,8 +34,21 @@ class ContactImporter: NSObject {
         fetch()
     }
     
+    //Formats phone numbers to 000-000-0000
     func formatPhoneNumber(number: CNPhoneNumber) -> String {
-        return number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
+        
+        let stripped_number = number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
+        
+        //Attempt to format
+        if stripped_number.characters.count == 10 {
+            let stringts: NSMutableString = NSMutableString(string: stripped_number)
+            stringts.insertString("-", atIndex: 3)
+            stringts.insertString("-", atIndex: 7)
+            let formatted_phoneNum = String(stringts)
+            return formatted_phoneNum
+        } else {
+            return stripped_number
+        }
     }
     
     private func fetchExisting() -> (contacts: [String:Contact], phoneNumbers: [String: PhoneNumber]) {

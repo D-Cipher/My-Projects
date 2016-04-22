@@ -225,7 +225,7 @@ class PublicProfileController: UIViewController, UIScrollViewDelegate {
         nameLabel.textColor = col_tungsten
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.textAlignment = NSTextAlignment.Center
-        nameLabel.text = "Alison"
+        nameLabel.text = "The-w"
         secondaryScroll.addSubview(nameLabel)
         
         //====Adds Sub-description label

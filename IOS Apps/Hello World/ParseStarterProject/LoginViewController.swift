@@ -240,6 +240,10 @@ class LoginViewController: UIViewController {
                             } else if valid_phone == true {
                                 print("Existing user firebase. Valid phone.")
                                 
+                                if NSUserDefaults.standardUserDefaults().objectForKey("phoneNumber") == nil {
+                                    NSUserDefaults.standardUserDefaults().setObject(user_phoneNum, forKey: "phoneNumber")
+                                }
+                                
                                 self.firebase.removeAllObservers()
                                 self.activityIndFunc(0)
                                 self.performSegueWithIdentifier("tabBarSegue", sender: self)

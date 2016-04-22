@@ -198,13 +198,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Chat Tab" id="QU8-Mo-5eG">
-                        <barButtonItem key="leftBarButtonItem" title="PhoneNum" id="tZm-Be-dYw">
-                            <connections>
-                                <action selector="hiFirebase:" destination="5mN-bK-dQA" id="wmf-7K-a6Y"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Chat Tab" id="QU8-Mo-5eG"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <segue destination="6Fb-Bo-gf4" kind="presentation" identifier="contactSegue" id="nNl-uM-aIh"/>

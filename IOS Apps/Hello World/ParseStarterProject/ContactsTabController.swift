@@ -87,6 +87,8 @@ class ContactsTabController: UIViewController, ContextViewController, TableViewF
             
             let request = NSFetchRequest(entityName: "Contact")
             
+            request.predicate = NSPredicate(format: "storageID != nil") //constrains to only those in firebase
+            
             request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending:  true), NSSortDescriptor(key: "firstName", ascending: true)]
             
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: nil)

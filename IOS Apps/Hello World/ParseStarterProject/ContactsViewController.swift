@@ -52,8 +52,9 @@ class ContactsViewController: UIViewController, TableViewFetchedResultsDisplayer
         //Set up Context
         if let context = context {
             let request = NSFetchRequest(entityName: "Contact")
+            request.predicate = NSPredicate(format: "storageID != nil")
             request.sortDescriptors = [ NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true)]
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewChatViewController")
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: nil)
             
             fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: tableView, displayer: self)
             fetchedResultsController?.delegate = fetchedResultsDelegate

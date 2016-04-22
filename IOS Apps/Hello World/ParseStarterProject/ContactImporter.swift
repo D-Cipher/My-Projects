@@ -10,6 +10,21 @@ import Foundation
 import CoreData
 import Contacts
 
+/*/====Extension====//
+ Name: Contact Importer
+ File: ContactImporter.swift
+ 
+ ===Description===
+ NSObject extension that allows app to access the user's 
+ local contacts and import them into the app.
+ 
+ * Copyright 2016 d-cy.
+ * Credit: Cy at http://www.d-cy.net
+ * https://github.com/D-Cipher
+ * License: GPL v3
+ */
+
+
 class ContactImporter: NSObject {
     
     private var context: NSManagedObjectContext

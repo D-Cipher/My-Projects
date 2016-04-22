@@ -2,7 +2,7 @@
 //  Chat+CoreDataProperties.swift
 //  Hello World
 //
-//  Created by Tingbo Chen on 4/12/16.
+//  Created by Tingbo Chen on 4/22/16.
 //  Copyright © 2016 Parse. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,6 +16,7 @@ extension Chat {
 
     @NSManaged var lastMessageTime: NSDate?
     @NSManaged var name: String?
+    @NSManaged var storageID: String?
     @NSManaged var messages: NSSet?
     @NSManaged var participants: NSSet?
 

@@ -64,6 +64,7 @@ class AddGroupParticipantsController: UIViewController {
         
         if let context = context {
             let request = NSFetchRequest(entityName: "Contact")
+            request.predicate = NSPredicate(format: "storageID != nil")
             request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending:  true)]
             
             do {

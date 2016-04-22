@@ -36,6 +36,9 @@ class ContactImporter: NSObject {
     
     //Formats phone numbers to 000-000-0000
     func formatPhoneNumber(number: CNPhoneNumber) -> String {
+        /*
+        return number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
+        */
         
         let stripped_number = number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
         

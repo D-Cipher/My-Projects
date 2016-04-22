@@ -34,6 +34,12 @@ class FirebaseStore {
         return rootRef.authData != nil
     }
     */
+    
+    private func upload(model: NSManagedObject) {
+        guard let model = model as? FirebaseModel else {return}
+        model.upload(rootRef, context: context)
+        
+    }
 }
 
 extension FirebaseStore: RemoteStore {
@@ -42,6 +48,7 @@ extension FirebaseStore: RemoteStore {
     }
     
     func store(inserted inserted: [NSManagedObject], updated: [NSManagedObject], deleted: [NSManagedObject]) {
+        inserted.forEach(upload)
     }
     
     func signUp(phoneNumber phoneNumber: String, facebookID: String, success: () -> (), error: (errorMessage: String) -> ()) {
@@ -51,4 +58,6 @@ extension FirebaseStore: RemoteStore {
         self.currentPhoneNumber = phoneNumber
         
     }
+    
+    
 }

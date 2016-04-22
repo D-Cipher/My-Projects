@@ -69,7 +69,7 @@ class FavoritesTabController: UIViewController, TableViewFetchedResultsDisplayer
         if let context = context {
             let request = NSFetchRequest(entityName: "Contact")
             
-            request.predicate = NSPredicate(format: "favorite = true") //constrains the request to only where favorite = true
+            request.predicate = NSPredicate(format: "storageID != nil AND favorite = true") //constrains the request to only where favorite = true
             
             request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true)]
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)

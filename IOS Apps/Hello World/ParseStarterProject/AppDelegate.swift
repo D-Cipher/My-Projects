@@ -70,14 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firebaseStore = FirebaseStore(context: firebaseContext)
         self.firebaseStore = firebaseStore
         
-        contactsUploadSyncer = Syncer(mainContext: mainContext, backgroundContext: firebaseContext)
+        contactsUploadSyncer = Syncer(mainContext: contactsContext, backgroundContext: firebaseContext)
         contactsUploadSyncer?.remoteStore = firebaseStore
         
         firebaseSyncer = Syncer(mainContext: mainContext, backgroundContext: firebaseContext)
         firebaseSyncer?.remoteStore = firebaseStore
         
         contactImporter = ContactImporter(context: contactsContext)
-        //importContacts(contactsContext) //imports local contacts
+        importContacts(contactsContext) //imports local contacts
         
         root.remoteStore = firebaseStore
         root.contactImporter = contactImporter
@@ -85,7 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Start Syncing
         firebaseStore.startSyncing()
         contactImporter?.listenForChanges()
-        
         
         //====Set up Parse=====
         Parse.enableLocalDatastore() //Enable storing and querying data from Local Datastore. Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.

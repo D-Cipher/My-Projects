@@ -344,7 +344,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        contactImporter?.listenForChanges()
     }
     
     override func viewWillAppear(animated: Bool) {

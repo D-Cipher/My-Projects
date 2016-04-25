@@ -52,7 +52,9 @@ class ContactsViewController: UIViewController, TableViewFetchedResultsDisplayer
         //Set up Context
         if let context = context {
             let request = NSFetchRequest(entityName: "Contact")
-            request.sortDescriptors = [ NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true)]
+            
+            request.sortDescriptors = [NSSortDescriptor(key: "nonAlphaName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "contactID", ascending: true)]
+            
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: "NewChatViewController")
             
             fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: tableView, displayer: self)
@@ -108,7 +110,7 @@ extension ContactsViewController: UITableViewDataSource {
         let currentSection = sections[section]
         return currentSection.name
     }
-    
+ 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -127,6 +129,7 @@ extension ContactsViewController: UITableViewDelegate {
         
         chat.add(participant: contact)
         */
+        
         let chat = Chat.existing(directWith: contact, inContext: context) ?? Chat.new(directWith: contact, inContext: context) //If chat does not exist then create new chat
         
         chatCreationDelegate?.created(chat: chat, inContext: context)

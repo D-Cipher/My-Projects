@@ -69,7 +69,9 @@ class FirebaseStore {
     }
     
     private func observeChats() {
+        
         let facebookID = self.rootRef.authData.uid.stringByReplacingOccurrencesOfString("facebook:", withString: "")
+        
         self.rootRef.childByAppendingPath("users/"+facebookID+"/chats").observeEventType(.ChildAdded, withBlock: {
             snapshot in
             let uid = snapshot.key

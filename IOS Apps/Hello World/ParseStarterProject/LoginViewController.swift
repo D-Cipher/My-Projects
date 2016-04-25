@@ -244,6 +244,10 @@ class LoginViewController: UIViewController {
                                     NSUserDefaults.standardUserDefaults().setObject(user_phoneNum, forKey: "phoneNumber")
                                 }
                                 
+                                //Start Syncing
+                                self.remoteStore?.startSyncing()
+                                self.contactImporter?.listenForChanges()
+                                
                                 self.firebase.removeAllObservers()
                                 self.activityIndFunc(0)
                                 self.performSegueWithIdentifier("tabBarSegue", sender: self)
@@ -348,7 +352,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        contactImporter?.listenForChanges()
+        
+        //contactImporter?.listenForChanges()
     }
     
     override func viewWillAppear(animated: Bool) {

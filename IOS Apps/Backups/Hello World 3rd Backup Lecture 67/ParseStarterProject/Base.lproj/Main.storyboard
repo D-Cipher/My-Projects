@@ -174,6 +174,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Version 3.67" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PhW-Hb-1bn">
+                                <rect key="frame" x="92" y="201" width="231" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="2YW-Nw-XOk"/>
+                                    <constraint firstAttribute="width" constant="231" id="kn8-JK-6ns"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99f-Nf-Oqi">
                                 <rect key="frame" x="128" y="264" width="159" height="34"/>
                                 <constraints>
@@ -185,20 +195,13 @@
                                     <action selector="FBloginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qkc-l0-bbB"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timber_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="JiO-MS-QjG">
-                                <rect key="frame" x="88" y="158" width="247" height="84"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="84" id="FHW-vi-zqh"/>
-                                    <constraint firstAttribute="width" constant="247" id="XBc-Hs-W0q"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JiO-MS-QjG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="138" id="3Ff-S3-rTd"/>
-                            <constraint firstItem="99f-Nf-Oqi" firstAttribute="top" secondItem="JiO-MS-QjG" secondAttribute="bottom" constant="22" id="55U-Lp-wnj"/>
+                            <constraint firstItem="PhW-Hb-1bn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5Jt-mb-xSx"/>
                             <constraint firstItem="99f-Nf-Oqi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MnD-rR-S4l"/>
-                            <constraint firstItem="JiO-MS-QjG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="4" id="uf2-zB-HmW"/>
+                            <constraint firstItem="99f-Nf-Oqi" firstAttribute="top" secondItem="PhW-Hb-1bn" secondAttribute="bottom" constant="8" id="fM9-RT-XBF"/>
+                            <constraint firstItem="PhW-Hb-1bn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="181" id="n2K-f8-5Zf"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -1255,7 +1258,6 @@
         <image name="Match30x30orange.png" width="30" height="30"/>
         <image name="QRcode30x30.png" width="30" height="30"/>
         <image name="Settings30x30.png" width="30" height="30"/>
-        <image name="Timber_logo.png" width="430" height="156"/>
         <image name="Wrench30x30blue.png" width="30" height="30"/>
         <image name="blacktexture.png" width="691" height="389"/>
         <image name="chat_icon" width="33" height="22"/>

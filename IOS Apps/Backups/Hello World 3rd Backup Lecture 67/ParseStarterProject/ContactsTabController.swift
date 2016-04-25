@@ -34,7 +34,13 @@ class ContactsTabController: UIViewController, ContextViewController, TableViewF
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else {return}
-        cell.textLabel?.text = contact.fullName
+        
+        if contact.fullName != "" {
+            cell.textLabel?.text = contact.fullName
+        } else {
+            cell.textLabel?.text = "(not named)"
+        }
+        
     }
     
     func selectedContact(contact: Contact) {
@@ -87,7 +93,7 @@ class ContactsTabController: UIViewController, ContextViewController, TableViewF
             
             let request = NSFetchRequest(entityName: "Contact")
             
-            request.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending:  true), NSSortDescriptor(key: "firstName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "nonAlphaName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "contactID", ascending: true)]
             
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: nil)
             fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: tableView, displayer: self)

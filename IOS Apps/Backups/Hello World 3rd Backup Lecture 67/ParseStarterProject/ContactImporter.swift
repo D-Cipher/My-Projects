@@ -69,7 +69,6 @@ class ContactImporter: NSObject {
                     do {
                         let (contacts, phoneNumbers) = self.fetchExisting()
                         
-                        
                         let req = CNContactFetchRequest(keysToFetch: [
                             CNContactGivenNameKey,
                             CNContactFamilyNameKey,
@@ -81,11 +80,28 @@ class ContactImporter: NSObject {
                             
                             guard let contact = contacts[cnContact.identifier] ?? NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: self.context) as? Contact else {return}
                             
+                            contact.contactID = cnContact.identifier
+                            contact.lastName = cnContact.familyName
                             contact.firstName = cnContact.givenName
                             
-                            contact.lastName = cnContact.familyName
+                            let first_char = contact.firstName?.characters.first
+                            var first_str = ""
                             
-                            contact.contactID = cnContact.identifier
+                            if first_char != nil {
+                                first_str = String(first_char!)
+                            } else {
+                                first_str = ""
+                            }
+                            
+                            let alphaNameTest = NSPredicate(format: "SELF MATCHES %@", "^([a-zA-Z])")
+                            
+                            let result = alphaNameTest.evaluateWithObject(first_str)
+                            
+                            if result == true {
+                                contact.nonAlphaName = "false"
+                            } else if result == false {
+                                contact.nonAlphaName = "true"
+                            }
                             
                             for cnVal in cnContact.phoneNumbers {
                                 guard let cnPhoneNumber = cnVal.value as? CNPhoneNumber else {continue}

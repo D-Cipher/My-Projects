@@ -50,7 +50,7 @@ class PhoneVarificationController: UIViewController, UITextFieldDelegate, UINavi
         continueAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             
             self.remoteStoreUpdate(self.mobileTextOutlet.text!, fbID_input: self.facebookID)
-            //dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
             
         }))
         

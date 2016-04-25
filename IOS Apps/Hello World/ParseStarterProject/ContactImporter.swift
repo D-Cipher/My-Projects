@@ -91,15 +91,27 @@ class ContactImporter: NSObject {
     }
     
     func fetch() {
+        let status = CNContactStore.authorizationStatusForEntityType(.Contacts)
+        if status == .Denied || status == .Restricted {
+            print("need contact premission")
+            // user previously denied, so tell them to fix that in settings
+            return
+        }
+        
         let store = CNContactStore()
-        store.requestAccessForEntityType(.Contacts, completionHandler: {
-            granted, error in
+        store.requestAccessForEntityType(.Contacts) { granted, error in
+            guard granted else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    // user didn't grant authorization, so tell them to fix that in settings
+                    print(error)
+                }
+                return
+            }
             
             self.context.performBlock {
                 if granted {
                     do {
                         let (contacts, phoneNumbers) = self.fetchExisting()
-                        
                         
                         let req = CNContactFetchRequest(keysToFetch: [
                             CNContactGivenNameKey,
@@ -145,7 +157,7 @@ class ContactImporter: NSObject {
                     }
                 }
             }
-        })
+        }
     }
     
 }

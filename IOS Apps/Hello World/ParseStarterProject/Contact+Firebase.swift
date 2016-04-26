@@ -66,27 +66,31 @@ extension Contact: FirebaseModel {
     func upload(rootRef: Firebase, context: NSManagedObjectContext) {
         guard let phoneNumbers = phoneNumbers?.allObjects as? [PhoneNumber] else {return}
         
-        for number in phoneNumbers {
-            rootRef.childByAppendingPath("users").queryOrderedByChild("phoneNumber").queryEqualToValue(number.value).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                
-                guard let user = snapshot.value as? NSDictionary else {return}
-                
-                let uid = user.allKeys.first as? String
-                
-                context.performBlock({
-                    self.storageID = uid
-                    number.registered = true
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
+            for number in phoneNumbers {
+                rootRef.childByAppendingPath("users").queryOrderedByChild("phoneNumber").queryEqualToValue(number.value).observeSingleEventOfType(.Value, withBlock: { snapshot in
                     
-                    do {
-                        try context.save()
-                    } catch {
-                        print("error saving")
-                    }
+                    //print(number.value)
                     
-                    self.observerStatus(rootRef, context: context)
+                    guard let user = snapshot.value as? NSDictionary else {return}
+                    
+                    let uid = user.allKeys.first as? String
+                    
+                    context.performBlock({
+                        self.storageID = uid
+                        number.registered = true
+                        
+                        do {
+                            try context.save()
+                        } catch {
+                            print("error saving")
+                        }
+                        
+                        self.observerStatus(rootRef, context: context)
+                    })
                 })
-            })
-        }
+            }
+        })
     }
     
     func observerStatus(rootRef:Firebase, context: NSManagedObjectContext) {

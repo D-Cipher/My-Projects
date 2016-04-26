@@ -244,11 +244,13 @@ class LoginViewController: UIViewController {
                                     NSUserDefaults.standardUserDefaults().setObject(user_phoneNum, forKey: "phoneNumber")
                                 }
                                 
+                                self.firebase.removeAllObservers()
+                                
                                 //Start Syncing
                                 self.remoteStore?.startSyncing()
+                                self.contactImporter?.fetch()
                                 self.contactImporter?.listenForChanges()
                                 
-                                self.firebase.removeAllObservers()
                                 self.activityIndFunc(0)
                                 self.performSegueWithIdentifier("tabBarSegue", sender: self)
                                 

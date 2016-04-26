@@ -63,7 +63,7 @@ class MessageViewController: UIViewController {
         //Create Message Field Area and Message Field and sendButton
         let newMessageArea = UIView()
         newMessageArea.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
-        newMessageArea.layer.borderWidth = 2
+        newMessageArea.layer.borderWidth = 1
         newMessageArea.layer.borderColor = UIColor.lightGrayColor().CGColor
         newMessageArea.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(newMessageArea)
@@ -71,7 +71,7 @@ class MessageViewController: UIViewController {
         //Add Message Field
         newMessageField.translatesAutoresizingMaskIntoConstraints = false
         newMessageField.scrollEnabled = false
-        newMessageField.layer.borderWidth = 2
+        newMessageField.layer.borderWidth = 1
         newMessageField.layer.borderColor = UIColor.lightGrayColor().CGColor
         newMessageField.layer.cornerRadius = 10
         newMessageField.layer.masksToBounds = true
@@ -120,7 +120,7 @@ class MessageViewController: UIViewController {
             newMessageField.centerYAnchor.constraintEqualToAnchor(newMessageArea.centerYAnchor),
             cameraButton.centerYAnchor.constraintEqualToAnchor(newMessageField.centerYAnchor),
             sendButton.centerYAnchor.constraintEqualToAnchor(newMessageField.centerYAnchor),
-            newMessageArea.heightAnchor.constraintEqualToAnchor(newMessageField.heightAnchor, constant: 20)
+            newMessageArea.heightAnchor.constraintEqualToAnchor(newMessageField.heightAnchor, constant: 18)
         ]
         
         NSLayoutConstraint.activateConstraints(messageAreaConstraints)

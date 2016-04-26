@@ -31,7 +31,11 @@ class ContactsViewController: UIViewController, TableViewFetchedResultsDisplayer
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         guard let contact = fetchedResultsController?.objectAtIndexPath(indexPath) as? Contact else {return}
-        cell.textLabel?.text = contact.fullName
+        if contact.fullName != "" {
+            cell.textLabel?.text = contact.fullName
+        } else {
+            cell.textLabel?.text = "(not named)"
+        }
     }
     
     override func viewDidLoad() {
@@ -53,7 +57,8 @@ class ContactsViewController: UIViewController, TableViewFetchedResultsDisplayer
         if let context = context {
             let request = NSFetchRequest(entityName: "Contact")
             request.predicate = NSPredicate(format: "storageID != nil")
-            request.sortDescriptors = [ NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "nonAlphaName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "contactID", ascending: true)]
+            
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "sortLetter", cacheName: nil)
             
             fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: tableView, displayer: self)

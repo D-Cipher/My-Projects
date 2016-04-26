@@ -1,0 +1,34 @@
+#Cloning Facebook Login
+
+##Create a new app in Parse and facebook.
+-In developer.facebook need to add the Bundle Identifier.
+
+
+##Change Items in Xcode
+
+Need to change "AppDelegate.swift":
+'''
+Parse.setApplicationId("pylRald7yYLGVt0Swqo9rIQBMxQIf7XnwlgCc89P",
+            clientKey: "8tqC7IscC9XeOXX8JGHMMMSsMuzxJb5eTCXQKvBd")
+'''
+
+Need to change "info.plist":
+'''
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb527132770791563</string>
+				<string>fbauth2</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.7.5</string>
+	<key>FacebookAppID</key>
+	<string>527132770791563</string>
+	<key>FacebookDisplayName</key>
+	<string>Timber</string>
+'''
+

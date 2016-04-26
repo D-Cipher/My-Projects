@@ -2,7 +2,7 @@
 //  Contact+CoreDataProperties.swift
 //  Hello World
 //
-//  Created by Tingbo Chen on 4/21/16.
+//  Created by Tingbo Chen on 4/25/16.
 //  Copyright © 2016 Parse. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,6 +20,7 @@ extension Contact {
     @NSManaged var lastName: String?
     @NSManaged var status: String?
     @NSManaged var storageID: String?
+    @NSManaged var nonAlphaName: String?
     @NSManaged var chats: NSSet?
     @NSManaged var messages: NSSet?
     @NSManaged var phoneNumbers: NSSet?

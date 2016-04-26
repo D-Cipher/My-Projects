@@ -51,11 +51,13 @@ class ContactImporter: NSObject {
     
     //Formats phone numbers to 000-000-0000
     func formatPhoneNumber(number: CNPhoneNumber) -> String {
-        /*
-        return number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
-        */
         
-        let stripped_number = number.stringValue.stringByReplacingOccurrencesOfString(" ", withString: "").stringByReplacingOccurrencesOfString("-", withString: "").stringByReplacingOccurrencesOfString("(", withString: "").stringByReplacingOccurrencesOfString(")", withString: "")
+        let orig_str = number.stringValue
+        
+        let string_arr = orig_str.componentsSeparatedByCharactersInSet(
+            NSCharacterSet.decimalDigitCharacterSet().invertedSet)
+        
+        let stripped_number = string_arr.joinWithSeparator("")
         
         //Attempt to format
         if stripped_number.characters.count == 10 {
@@ -67,6 +69,7 @@ class ContactImporter: NSObject {
         } else {
             return stripped_number
         }
+        
     }
     
     private func fetchExisting() -> (contacts: [String:Contact], phoneNumbers: [String: PhoneNumber]) {
@@ -124,11 +127,28 @@ class ContactImporter: NSObject {
                             
                             guard let contact = contacts[cnContact.identifier] ?? NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: self.context) as? Contact else {return}
                             
+                            contact.contactID = cnContact.identifier
+                            contact.lastName = cnContact.familyName
                             contact.firstName = cnContact.givenName
                             
-                            contact.lastName = cnContact.familyName
+                            let first_char = contact.firstName?.characters.first
+                            var first_str = ""
                             
-                            contact.contactID = cnContact.identifier
+                            if first_char != nil {
+                                first_str = String(first_char!)
+                            } else {
+                                first_str = ""
+                            }
+                            
+                            let alphaNameTest = NSPredicate(format: "SELF MATCHES %@", "^([a-zA-Z])")
+                            
+                            let result = alphaNameTest.evaluateWithObject(first_str)
+                            
+                            if result == true {
+                                contact.nonAlphaName = "false"
+                            } else if result == false {
+                                contact.nonAlphaName = "true"
+                            }
                             
                             for cnVal in cnContact.phoneNumbers {
                                 guard let cnPhoneNumber = cnVal.value as? CNPhoneNumber else {continue}

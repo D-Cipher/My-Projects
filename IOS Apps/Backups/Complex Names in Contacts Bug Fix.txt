@@ -1,0 +1,135 @@
+##Complex Names in Contacts Bug Fix - posted on lecture 47.2
+
+Hi guys,
+
+I tried building the app on my phone instead of on my simulator at lecture 87 and got this nasty crash message "specialized_fatalErrorMessage(StaticString,StaticString,StaticString)) -> ())". I did a ton of digging and found the issue stems from the contacts section.
+
+If you build the app on your phone instead of the simulator at this point, you will likely get a crash as well. The reason is the simulator has nice and neat model contacts, whereas your real device probably doesn't look that neat. I have many contacts with missing first or last names, contacts with non-english, people with symbols and hyphens in there names, duplicate contacts, etc. Our current code does not account for all these cases.
+
+So I put together a fix that will account for those cases and you should be able to build it on your real device.
+
+
+###Add Some Complex Names to Simulator
+
+First, delete whale talk and add some complex names to your iphone simulator. Try to add at least one of each of the following:
+-missing first name
+-missing last name
+-no name
+-other language / non-alphabetical name
+-number / symbol names
+-duplicate contacts
+
+Then run the app and that should crash you app if you try to look at your contacts.
+
+###Update Model
+
+In our core data model add a string attribute and call it "nonAlphaName". This variable will help us identify those complext names.
+'''
+Model.xcdatamodelId > Contact > Attributes > + 
+Add: "nonAlphaName"
+Type: String
+Editor > Create NSManagedSubclass... 
+'''
+In the popup screen:
+-Make sure Model is selected then click next...
+-Make sure Contact is selected (and nothing else is selected) then click next...
+
+-IMPORTANT: Make sure "Use scalar properties for primative data types" is NOT selected UNLESS you have already reached or past the lectures in which we added favorites to our app (around lecture 57). If you have added the "favorite" attribute then you want to continue to check "Use scalar properties..."
+
+-Then click create...
+-Go to Contact+CoreDataProperties.swift and make sure "@NSManaged var nonAlphaName: String?" has been added to the file.
+-Then delete the app and Re-run
+
+###Update Contact.swift
+
+In the Contact.swift file, find the "var sortLetter: String { ..... }" method (should be the first one), then delete it and replace it with the following. This code uses regular expressions to test the first letter for complexity and places it in the proper section headers group. 
+
+'''
+var sortLetter: String {
+        
+        let first_char = firstName?.characters.first
+        var first_str = ""
+        
+        if first_char != nil {
+            first_str = String(first_char!)
+        } else {
+            first_str = ""
+        }
+        
+        let alphaNameTest = NSPredicate(format: "SELF MATCHES %@", "^([a-zA-Z])")
+        
+        let result = alphaNameTest.evaluateWithObject(first_str)
+        
+        guard result == true else {
+            let symbol_str = "#"
+            
+            return symbol_str
+        }
+        
+        return first_str
+        
+    }
+'''
+
+###Update ContactImporter.swift
+
+In the ContactImporter.swift file find this line of code (in this video, lecture 47.2, you can see it at the 2:23 minute mark):
+'''
+contact.lastName = cnContact.familyName
+contact.firstName = cnContact.givenName
+contact.contactID = cnContact.identifier
+'''
+
+Replace that line of code with the following. This code checks for complexity in the first letter of the first name as you bring in your contacts and if there is complexity then it will add a "true" string designation to the .nonAlphaName attribute. This way when we sort, the sort will not mix the complex names into our normal names.
+'''
+contact.contactID = cnContact.identifier
+contact.lastName = cnContact.familyName
+contact.firstName = cnContact.givenName
+                            
+let first_char = contact.firstName?.characters.first
+var first_str = ""
+                            
+if first_char != nil {
+    first_str = String(first_char!)
+} else {
+    first_str = ""
+}
+                            
+let alphaNameTest = NSPredicate(format: "SELF MATCHES %@", "^([a-zA-Z])")
+                            
+let result = alphaNameTest.evaluateWithObject(first_str)
+                            
+if result == true {
+    contact.nonAlphaName = "false"
+} else if result == false {
+    contact.nonAlphaName = "true"
+}
+'''
+
+###Update sortDescriptors
+
+Finally, we need to update our sort descriptors to reflect our changes.
+
+In both the NewChatsViewController and the ContactsViewController, change the "request.sortDescriptors = [.....]" to the following.
+
+We want to make our "nonAlphaName" the first sort we perform. Then, first name, last name, then contactId in case the first and last names are missing or duplicated.
+
+'''
+request.sortDescriptors = [NSSortDescriptor(key: "nonAlphaName", ascending: true), NSSortDescriptor(key: "firstName", ascending: true), NSSortDescriptor(key: "lastName", ascending: true), NSSortDescriptor(key: "contactID", ascending: true)]
+'''
+
+This will account for all of those complex scenerios. It won't sort your contacts to like how Apple sorts them because, for one, my preference is to sort by first name, and two, this code only identifies complex contacts and lumps them together, it doesn't go back and evaluate them to try to sort them back into your normal contacts. But at least now they are accounted for.
+
+###Additional fix and run.
+
+In both the NewChatsViewController and the ContactsViewController, replace the "cell.textLabel?.text = contact.fullName" line with the following.
+'''
+if contact.fullName != "" {
+    cell.textLabel?.text = contact.fullName
+} else {
+    cell.textLabel?.text = "(not named)"
+}
+'''
+
+Finally, IMPORTANT: delete the app from the simulator and run the app to generate a new instance. Make sure you Delete the app first before running.
+

@@ -23,19 +23,6 @@ class PhoneVarificationController: UIViewController, UITextFieldDelegate, UINavi
     
     var remoteStore: RemoteStore? //Remote Store
     
-    private func remoteStoreUpdate(phoneNumber: String, fbID_input: String) {
-        //Remote Store
-        self.remoteStore?.signUp(phoneNumber: phoneNumber, facebookID: fbID_input, success: {
-            print("remote store")
-            self.remoteStore?.startSyncing()
-            self.contactImporter?.fetch()
-            self.contactImporter?.listenForChanges()
-            
-            }, error: {
-                errorString in
-        })
-    }
-    
     @IBAction func submitButtonAction(sender: AnyObject) {
         
         guard phoneValidate(mobileTextOutlet.text!) == true else {
@@ -49,9 +36,13 @@ class PhoneVarificationController: UIViewController, UITextFieldDelegate, UINavi
         
         continueAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
             
-            self.remoteStoreUpdate(self.mobileTextOutlet.text!, fbID_input: self.facebookID)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.remoteStore?.signUp(phoneNumber: self.mobileTextOutlet.text!, facebookID: self.facebookID, success: {
+                
+                }, error: {
+                    errorString in
+            })
             
+            self.dismissViewControllerAnimated(true, completion: nil)
         }))
         
         continueAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) -> Void in

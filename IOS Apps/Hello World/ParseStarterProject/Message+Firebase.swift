@@ -21,7 +21,7 @@ extension Message: FirebaseModel {
         ]
         guard let chat = chat, timestamp = timestamp, storageID = chat.storageID else {return}
         
-        let timeInterval = String(Int(timestamp.timeIntervalSince1970 * 100000))
+        let timeInterval = String(UInt64(timestamp.timeIntervalSince1970 * 1000))
         
         rootRef.childByAppendingPath("chats/"+storageID+"/messages/"+timeInterval).setValue(data)
     }

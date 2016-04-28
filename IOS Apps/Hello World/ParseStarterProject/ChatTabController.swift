@@ -24,8 +24,6 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
     
     private let cellIdentifier = "MessageCell"
     
-    let firebaseEliot = Firebase(url: "https://eliotwhaletalk.firebaseio.com")
-    
     func fakeData(){ //For testing
         guard let context = context else {return}
         let chat = NSEntityDescription.insertNewObjectForEntityForName("Chat", inManagedObjectContext: context) as? Chat
@@ -45,6 +43,15 @@ class ChatTabController: UIViewController, TableViewFetchedResultsDisplayer, Cha
         cell.nameLabel.text = contact.fullName
         cell.dateLabel.text = formatter.stringFromDate(timestamp)
         cell.messageLabel.text = text
+        
+        
+//        let avatar_img = UIImage(named: "placeholder-camera-green.png")
+//        let avatar = cell.resizeImage(avatar_img!, toTheSize: CGSizeMake(70, 70))
+//
+//        let cellImageLayer: CALayer?  = cell.cellImage.layer
+//        cellImageLayer!.cornerRadius = 10
+//        cellImageLayer!.masksToBounds = true
+//        cell.cellImage.image = avatar
     }
     
     func contactSegueAction() {
@@ -223,7 +230,8 @@ extension ChatTabController: UITableViewDataSource {
 extension ChatTabController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        return 85 * (self.view.frame.height / 736.0)
+
     }
     
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -248,3 +256,21 @@ extension ChatTabController: UITableViewDelegate {
         
     }
 }
+/*
+extension UIImage {
+    var circleMask: UIImage {
+        let square = size.width < size.height ? CGSize(width: size.width, height: size.width) : CGSize(width: size.height, height: size.height)
+        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.image = self
+        imageView.layer.cornerRadius = square.width/2
+        imageView.layer.borderColor = UIColor.whiteColor().CGColor
+        imageView.layer.borderWidth = 5
+        imageView.layer.masksToBounds = true
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        imageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+    }
+}*/

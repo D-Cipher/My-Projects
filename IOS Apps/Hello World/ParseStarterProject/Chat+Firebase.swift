@@ -16,14 +16,14 @@ extension Chat: FirebaseModel {
         guard let storageID = storageID else {return}
         let lastFetch = lastMessage?.timestamp?.timeIntervalSince1970 ?? 0
         
-        rootRef.childByAppendingPath("chats/"+storageID+"/messages").queryOrderedByKey().queryStartingAtValue(String(lastFetch * 100000)).observeEventType(.ChildAdded, withBlock: {
+        rootRef.childByAppendingPath("chats/"+storageID+"/messages").queryOrderedByKey().queryStartingAtValue(String(lastFetch * 1000)).observeEventType(.ChildAdded, withBlock: {
             snapshot in
             context.performBlock{
                 guard let phoneNumber = snapshot.value["sender"] as? String where phoneNumber != FirebaseStore.currentPhoneNumber else {return}
                 guard let text = snapshot.value["message"] as? String else {return}
                 guard let timeInterval = Double(snapshot.key) else {return}
                 
-                let date = NSDate(timeIntervalSince1970: timeInterval/100000)
+                let date = NSDate(timeIntervalSince1970: timeInterval/1000)
                 
                 guard let message = NSEntityDescription.insertNewObjectForEntityForName("Message", inManagedObjectContext: context) as? Message else {return}
                 

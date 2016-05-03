@@ -1,0 +1,31 @@
+body { background-color: #ffffff; color: #756A66; font-family: "Monsterrat",Helvetica,Arial,sans-serif; font-size: 16px; }
+@media screen and (max-width: 674px) { body { font-size: 14px; } }
+
+a { color: #da552f; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.main { margin: 0 auto; max-width: 900px; overflow: auto; padding: 50px 20px 0px; }
+@media screen and (max-width: 674px) { .main { padding-top: 25px; } }
+
+.title { width: 50%; float: right; display: inline-block; text-align: center; margin: 75px auto 60px; }
+.title h1 { color: #534540; font-weight: 300; }
+.title h2 { color: #756A66; font-weight: 300; }
+.title p { font-size: 18px; font-weight: 300; }
+@media screen and (max-width: 674px) { .title { width: 100%; float: none; margin: 40px auto 60px; } }
+
+.appicon { width: 150px; }
+
+.appstore { width: 205px; height: 70px; }
+
+.phone { width: 50%; height: 622px; display: inline-block; float: left; text-align: center; background-image: url("../img/iphone6_white.png"); background-size: 300px 614px; background-repeat: no-repeat; background-position: center center; }
+@media screen and (max-width: 674px) { .phone { width: 100%; float: none; padding: 0px; } }
+
+.ph-link { font-size: 14px; }
+
+.demo { width: 260px; margin-top: 79px; }
+
+.footer { text-align: center; margin: 50px auto 15px; max-width: 900px; }
+
+.inline { list-style: none; margin-left: -40px; }
+.inline li { display: inline-block; padding-right: 10px; padding-left: 10px; }
+

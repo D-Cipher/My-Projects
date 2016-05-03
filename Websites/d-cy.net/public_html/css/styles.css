@@ -3,12 +3,15 @@
 @charset "UTF-8";
 html {
     font-size: 17px;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     html {
-        font-size: 16px;
+        font-size: 15px;
     }
+	 @media screen and (max-width: 476px) {
+    html {
+        font-size: 13px;
+    	}
+	}
 }
 
 body {
@@ -97,21 +100,18 @@ body {
 
 .foot-blog a:hover {
     color: #534540;
-}
-
-/*===== Widgets =====*/
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .foot-blog {
         padding: 0 1rem 7.5rem;
     }
 }
 
+/*===== Widgets =====*/
+
 .form {
     width: 50%;
     float: right;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .form {
         width: 100%;
         float: none;
@@ -196,9 +196,7 @@ body {
 .left {
     width: 48%;
     float: left;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .left {
         width: 100%;
         float: none;
@@ -214,9 +212,7 @@ body {
 .head-intro {
     margin: 17rem 0 0;
     text-align: center;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .head-intro {
         margin: 8rem 0 0;
     }
@@ -228,28 +224,180 @@ body {
     color: #534540;
 }
 
-/*===== About Page =====*/
+/*===== About Me Page =====*/
 
-.aboutme-container {
+.about-main { 
+	margin: 0 auto; 
+	max-width: 980px; 
+	overflow: auto; 
+	padding: 0px; 
+	font-family: "Monsterrat",Helvetica,Arial,sans-serif; 
+	font-size: 16px;  
+	}
+	@media screen and (max-width: 885px) { 
+	.about-main { 
+		max-width: 800px; 
+		} 
+	@media screen and (max-width: 815px) { 
+	.about-main { 
+		max-width: 650px;
+		} 
+	@media screen and (max-width: 635px) { 
+	.about-main { 
+		max-width: 475px;
+		text-align: center;
+		} 
+		}
+	}
+}
+
+.about-title { 
+	width: 50%; 
+	float: right; 
+	text-align: center; 
+	margin: 100px auto 60px; 
+	} 
+	@media screen and (max-width: 885px) { 
+	.about-title { 
+		padding-top: 10px; 
+		font-size: 14px; 
+	} 
+	@media screen and (max-width: 815px) { 
+	.about-title { 
+		padding-top: 20px;
+		font-size: 12px;
+		} 
+	@media screen and (max-width: 635px) { 
+	.about-title { 
+		width: 90%; 
+		padding-top: 0px;
+		padding-left: 3px;
+		margin: 0 auto;
+		display: inline-block;
+		float: none;
+		} 
+		}
+	}
+}
+
+.about-title h1 { 
+	color: #534540; font-weight: 300; 
+}
+
+.about-title h2 { 
+	color: #756A66; font-weight: 300;
+}
+
+.about-title p { 
+	color: #756A66; font-size: 18px; font-weight: 300; 
+	} 
+	@media screen and (max-width: 885px) { 
+	.about-title p {  
+		} 
+	@media screen and (max-width: 815px) { 
+	.about-title p { 
+		font-size: 16px;
+		} 
+	@media screen and (max-width: 635px) { 
+	.about-title p { 
+	font-size: 14px;
+	float: none; 
+	margin: 0px; 
+		}
+		}
+	}
+}
+
+.inline-link {
+	color: #da552f; 
+	text-decoration: none;  
+}
+
+.inline-link:hover { 
+	text-decoration: underline; 
+}
+
+.ph-link {
+	font-size: 14px;
+	color: #da552f; 
+	text-decoration: none;  
+}
+
+.ph-link:hover { 
+	text-decoration: underline; 
+}
+
+.profile-container {  
+	padding-top: 25px;
+	padding-left: 25px;
+	margin: 0px; 
+	float: left; 
+	text-align: left;
+	} 
+	@media screen and (max-width: 885px) { 
+	.profile-container { 
+	padding-top: 40px;
+		}
+	@media screen and (max-width: 815px) { 
+	.profile-container { 
+	padding-top: 80px;
+		}
+	@media screen and (max-width: 635px) { 
+	.profile-container { 
+		padding-top: 25px;
+		padding-left: 0px;
+		margin: 0 auto;
+		display: inline-block;
+		float: none;
+		} 
+		}
+	}
+}
+
+.profile-pic-main {
+	height: 500px;
+	padding: 0px;
+	margin: 0px;
+	opacity: 0.8; 
+	} 
+	@media screen and (max-width: 885px) { 
+	.profile-pic-main { 
+	height: 450px; 
+		}
+	@media screen and (max-width: 815px) { 
+	.profile-pic-main { 
+	height: 350px; 
+		}
+	@media screen and (max-width: 635px) { 
+	.profile-pic-main { 
+	height: 250px;
+		} 
+		}
+	}
+}
+
+/*===== More About Me Page =====*/
+
+.aboutmore-container {
     width: 200px;
     float: left;
 }
 
-.aboutme-container a:hover > .aboutme-main-img {
+.aboutmore-container a:hover > .aboutme-main-img {
     opacity: 0;
 }
 
-.aboutme-container a:hover > .aboutme-alt-img {
+.aboutmore-container a:hover > .aboutme-alt-img {
     /* opacity: 1; */
 }
 
-.aboutme-main-img {
+.aboutmore-main-img {
     width: 200px;
     transition: 1s;
     position: absolute;
 }
 
-.aboutme-alt-img {
+.aboutmore-alt-img {
     width: 200px;
     transition: 1s;
     position: absolute;
@@ -438,9 +586,7 @@ body {
     margin: 0.5rem 0 0.25rem;
     font-weight: 300;
     font-size: 1.25rem;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .project-about {
         margin: 0.94rem 0 0;
     }
@@ -476,9 +622,7 @@ body {
 .project-image {
     margin: 25px auto 2.5px;
     max-width: 115px;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .project-image {
         margin: 25px auto 5px;
         max-width: 100px;
@@ -487,9 +631,7 @@ body {
 
 .project-icon {
     width: 115px;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .project-icon {
         width: 100px;
     }
@@ -690,9 +832,7 @@ pre {
 .error {
     margin: 5rem 0 1rem;
     text-align: center;
-}
-
-@media screen and (max-width: 667px) {
+} @media screen and (max-width: 667px) {
     .error {
         margin: 4rem 0 1rem;
     }
@@ -746,12 +886,34 @@ pre {
 
 .email-discrip {
     float: left;
-    margin-right: 2rem;
-    margin-top: 0.9rem;
+    margin-right: 32px;
+    margin-top: 12px;
+} @media screen and (max-width: 675px) {
+    .email-discrip {
+        margin-top: 7px;
+    }
+    @media screen and (max-width: 476px) {
+    .email-link {
+        margin-top: 10px;
+    	}
+    }
 }
 
 .email-link {
-    font: 300 0.9rem "Lato", Helvetica, sans-serif;
+    font: 300 17px "Lato", Helvetica, sans-serif;
+    margin-top: 8px;
+    margin-bottom: 0px
+    padding: 0px
+} @media screen and (max-width: 675px) {
+    .email-link {
+        margin-top: 0px;
+        padding-left: 130px;
+    }
+    @media screen and (max-width: 476px) {
+    .email-link {
+        padding-left: 86px;
+    	}
+    }
 }
 
 .email-link a {
@@ -769,12 +931,23 @@ pre {
 }
 
 .contact-section {
-    margin-top: 3rem;
+    margin-top: 48px;
     margin-right: auto;
-    margin-bottom: 0rem;
+    margin-bottom: 0px;
     margin-left: auto;
     padding: 0;
-    max-width: 36rem;
+    max-width: 576px;
+} @media screen and (max-width: 675px) {
+    .contact-section {
+        font-size: 15px;
+        margin: 15px auto;
+        max-width: 350px;
+    }
+    @media screen and (max-width: 476px) {
+    .contact-section {
+        max-width: 300px;
+    	}
+    }
 }
 
 .contact-section ul {
@@ -789,46 +962,84 @@ pre {
 
 .contact-discrip {
     float: left;
-    margin-right: 2rem;
-    margin-top: 0.2rem;
-
+    margin-right: 32px;
+    margin-top: 3.2px;
+} @media screen and (max-width: 675px) {
+    .contact-discrip {
+    margin-top: 3.2px; 
+    }
 }
 
 .contact-avatar {
     width: 150px;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+    margin-bottom: 16px;
+    margin-right: 16px;
     padding: 0px;
     float: left;
+} @media screen and (max-width: 675px) {
+    .contact-avatar {
+        width: 100px;
+		margin: 0 auto;
+		padding-left: 125px;
+		display: inline-block;
+		float: none;
+    }
+    @media screen and (max-width: 476px) {
+    .contact-avatar {
+        padding-left: 90px;
+    	}
+    }
 }
 
 form {
    display: inline;
    margin: 0;
    padding: 0;
-}
-
-form.email input, form.email textarea {
-    font-family: Arial;
-    font-size: 15px;
-    margin: 0 0 20px 0;
-}
+} 
 
 form.email input {
+	font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 20px 0;
     background: #f5f5f5;
     padding: 5px;
     border: 1px solid #bbb;
     border-radius: 5px;
-    width: 17.3rem;
+    width: 285px;
+} @media screen and (max-width: 675px) {
+    form.email input {
+        width: 360px;
+        margin-bottom: 5px;
+    } 
+    @media screen and (max-width: 476px) {
+    form.email input {
+        width: 285px;
+    	}
+    }
 }
 
 form.email textarea {
+	font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 20px 0;
     background: #f5f5f5;
     padding: 5px;
     border: 1px solid #bbb;
     border-radius: 5px;
-    width: 550px;
+    width: 540px;
     height: 150px;
+    resize: none;
+} @media screen and (max-width: 675px) {
+    form.email textarea {
+        width: 360px;
+    	height: 100px;
+    	margin-bottom: 10px;
+    } 
+    @media screen and (max-width: 476px) {
+    form.email textarea {
+        width: 290px;
+    	}
+    }
 }
 
 form.email input.send {

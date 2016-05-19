@@ -1,0 +1,151 @@
+/*===== About Me Page =====*/
+
+.about-main { 
+	margin: 0 auto; 
+	max-width: 980px; 
+	overflow: auto; 
+	padding: 0px; 
+	font-family: "Monsterrat",Helvetica,Arial,sans-serif; 
+	font-size: 16px;  
+	}
+	@media screen and (max-width: 885px) { 
+	.about-main { 
+		max-width: 800px; 
+		} 
+	@media screen and (max-width: 815px) { 
+	.about-main { 
+		max-width: 650px;
+		} 
+	@media screen and (max-width: 635px) { 
+	.about-main { 
+		max-width: 475px;
+		text-align: center;
+		} 
+		}
+	}
+}
+
+.about-title { 
+	width: 50%; 
+	float: right; 
+	text-align: center; 
+	margin: 100px auto 60px; 
+	} 
+	@media screen and (max-width: 885px) { 
+	.about-title { 
+		padding-top: 10px; 
+		font-size: 14px; 
+	} 
+	@media screen and (max-width: 815px) { 
+	.about-title { 
+		padding-top: 20px;
+		font-size: 12px;
+		} 
+	@media screen and (max-width: 635px) { 
+	.about-title { 
+		width: 90%; 
+		padding-top: 0px;
+		padding-left: 3px;
+		margin: 0 auto;
+		display: inline-block;
+		float: none;
+		} 
+		}
+	}
+}
+
+.about-title h1 { 
+	color: #534540; font-weight: 300; 
+}
+
+.about-title h2 { 
+	color: #756A66; font-weight: 300;
+}
+
+.about-title p { 
+	color: #756A66; font-size: 18px; font-weight: 300; 
+	} 
+	@media screen and (max-width: 885px) { 
+	.about-title p {  
+		} 
+	@media screen and (max-width: 815px) { 
+	.about-title p { 
+		font-size: 16px;
+		} 
+	@media screen and (max-width: 635px) { 
+	.about-title p { 
+	font-size: 14px;
+	float: none; 
+	margin: 0px; 
+		}
+		}
+	}
+}
+
+.inline-link {
+	color: #da552f; 
+	text-decoration: none;  
+}
+
+.inline-link:hover { 
+	text-decoration: underline; 
+}
+
+.ph-link {
+	font-size: 14px;
+	color: #da552f; 
+	text-decoration: none;  
+}
+
+.ph-link:hover { 
+	text-decoration: underline; 
+}
+
+.profile-container {  
+	padding-top: 25px;
+	padding-left: 25px;
+	margin: 0px; 
+	float: left; 
+	text-align: left;
+	} 
+	@media screen and (max-width: 885px) { 
+	.profile-container { 
+	padding-top: 40px;
+		}
+	@media screen and (max-width: 815px) { 
+	.profile-container { 
+	padding-top: 80px;
+		}
+	@media screen and (max-width: 635px) { 
+	.profile-container { 
+		padding-top: 25px;
+		padding-left: 0px;
+		margin: 0 auto;
+		display: inline-block;
+		float: none;
+		} 
+		}
+	}
+}
+
+.profile-pic-main {
+	height: 500px;
+	padding: 0px;
+	margin: 0px;
+	opacity: 0.8; 
+	} 
+	@media screen and (max-width: 885px) { 
+	.profile-pic-main { 
+	height: 450px; 
+		}
+	@media screen and (max-width: 815px) { 
+	.profile-pic-main { 
+	height: 350px; 
+		}
+	@media screen and (max-width: 635px) { 
+	.profile-pic-main { 
+	height: 250px;
+		} 
+		}
+	}
+}

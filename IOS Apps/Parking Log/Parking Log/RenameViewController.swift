@@ -59,7 +59,7 @@ class RenameViewController: UIViewController, UITextFieldDelegate {
         
         if self.tempBmArray.count > 0 && inputFieldOutlet.text != "" {
             
-            self.newname_dict = ["name":self.inputFieldOutlet.text!,"lat":(self.tempBmArray[0]["lat"] as? String)!,"long":(self.tempBmArray[0]["long"] as? String)!]
+            self.newname_dict = ["name":self.inputFieldOutlet.text!,"lat":(self.tempBmArray[0]["lat"] as? String)!,"long":(self.tempBmArray[0]["long"] as? String)!,"address":(self.tempBmArray[0]["address"] as? String)!]
             
             self.bookmarkedArray.insert(self.newname_dict, atIndex: 0)
             

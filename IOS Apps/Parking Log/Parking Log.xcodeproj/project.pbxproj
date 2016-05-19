@@ -14,8 +14,18 @@
 		343991F11C6D00F000BAA72A /* Help30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 343991F01C6D00F000BAA72A /* Help30x30.png */; };
 		343CD6E31CAC304D007EB023 /* Settings30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 343CD6E21CAC304D007EB023 /* Settings30x30.png */; };
 		344F890C1C4DD6ED0099F7AD /* RecentLocController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344F890B1C4DD6ED0099F7AD /* RecentLocController.swift */; };
+		34CE95181CE2D156001A35D7 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CE95171CE2D156001A35D7 /* SettingsController.swift */; };
+		34CE951A1CE38A79001A35D7 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CE95191CE38A79001A35D7 /* AddItemViewController.swift */; };
+		34CE951C1CE38CE8001A35D7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CE951B1CE38CE8001A35D7 /* Item.swift */; };
+		34CE951E1CE397C9001A35D7 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CE951D1CE397C9001A35D7 /* ItemsViewController.swift */; };
+		34CE95201CE397F7001A35D7 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CE951F1CE397F7001A35D7 /* ItemCell.swift */; };
+		34CE95221CE39829001A35D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE95211CE39829001A35D7 /* Foundation.framework */; };
+		34CE95241CE39831001A35D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE95231CE39831001A35D7 /* UIKit.framework */; };
+		34CE95261CE3983E001A35D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CE95251CE3983E001A35D7 /* CoreGraphics.framework */; };
 		34D3CB371CAC08DF00048325 /* AddList30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D3CB361CAC08DF00048325 /* AddList30x30.png */; };
 		34DCD50B1C6D25BF00F88E29 /* RenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DCD50A1C6D25BF00F88E29 /* RenameViewController.swift */; };
+		34EF73811CE9DA6700417C59 /* LocationAccMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF73801CE9DA6700417C59 /* LocationAccMultipleChoice.swift */; };
+		34EF73831CEA323D00417C59 /* bluetooth_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 34EF73821CEA323D00417C59 /* bluetooth_logo.png */; };
 		34F6288B1C48571500393412 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F6288A1C48571500393412 /* AppDelegate.swift */; };
 		34F6288D1C48571500393412 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F6288C1C48571500393412 /* MapViewController.swift */; };
 		34F628901C48571500393412 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34F6288E1C48571500393412 /* Main.storyboard */; };
@@ -32,8 +42,18 @@
 		343991F01C6D00F000BAA72A /* Help30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Help30x30.png; sourceTree = "<group>"; };
 		343CD6E21CAC304D007EB023 /* Settings30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings30x30.png; sourceTree = "<group>"; };
 		344F890B1C4DD6ED0099F7AD /* RecentLocController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentLocController.swift; sourceTree = "<group>"; };
+		34CE95171CE2D156001A35D7 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		34CE95191CE38A79001A35D7 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		34CE951B1CE38CE8001A35D7 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		34CE951D1CE397C9001A35D7 /* ItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
+		34CE951F1CE397F7001A35D7 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		34CE95211CE39829001A35D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		34CE95231CE39831001A35D7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		34CE95251CE3983E001A35D7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		34D3CB361CAC08DF00048325 /* AddList30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddList30x30.png; sourceTree = "<group>"; };
 		34DCD50A1C6D25BF00F88E29 /* RenameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenameViewController.swift; sourceTree = "<group>"; };
+		34EF73801CE9DA6700417C59 /* LocationAccMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAccMultipleChoice.swift; sourceTree = "<group>"; };
+		34EF73821CEA323D00417C59 /* bluetooth_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluetooth_logo.png; sourceTree = "<group>"; };
 		34F628871C48571500393412 /* Parking Log.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parking Log.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34F6288A1C48571500393412 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34F6288C1C48571500393412 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +69,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34CE95261CE3983E001A35D7 /* CoreGraphics.framework in Frameworks */,
+				34CE95241CE39831001A35D7 /* UIKit.framework in Frameworks */,
+				34CE95221CE39829001A35D7 /* Foundation.framework in Frameworks */,
 				3428D8D21C6CDB5D00697635 /* CoreBluetooth.framework in Frameworks */,
 				34F6289D1C485B0E00393412 /* CoreLocation.framework in Frameworks */,
 			);
@@ -60,6 +83,9 @@
 		34F6287E1C48571500393412 = {
 			isa = PBXGroup;
 			children = (
+				34CE95251CE3983E001A35D7 /* CoreGraphics.framework */,
+				34CE95231CE39831001A35D7 /* UIKit.framework */,
+				34CE95211CE39829001A35D7 /* Foundation.framework */,
 				3428D8D11C6CDB5D00697635 /* CoreBluetooth.framework */,
 				34F6289C1C485B0D00393412 /* CoreLocation.framework */,
 				34F628891C48571500393412 /* Parking Log */,
@@ -83,11 +109,18 @@
 				343991F01C6D00F000BAA72A /* Help30x30.png */,
 				34D3CB361CAC08DF00048325 /* AddList30x30.png */,
 				343CD6E21CAC304D007EB023 /* Settings30x30.png */,
+				34EF73821CEA323D00417C59 /* bluetooth_logo.png */,
 				34F6288A1C48571500393412 /* AppDelegate.swift */,
 				34F6288C1C48571500393412 /* MapViewController.swift */,
 				344F890B1C4DD6ED0099F7AD /* RecentLocController.swift */,
 				343991E61C6CF3C300BAA72A /* BookmarkedController.swift */,
 				34DCD50A1C6D25BF00F88E29 /* RenameViewController.swift */,
+				34CE95171CE2D156001A35D7 /* SettingsController.swift */,
+				34EF73801CE9DA6700417C59 /* LocationAccMultipleChoice.swift */,
+				34CE951D1CE397C9001A35D7 /* ItemsViewController.swift */,
+				34CE95191CE38A79001A35D7 /* AddItemViewController.swift */,
+				34CE951B1CE38CE8001A35D7 /* Item.swift */,
+				34CE951F1CE397F7001A35D7 /* ItemCell.swift */,
 				34F6288E1C48571500393412 /* Main.storyboard */,
 				34F628911C48571500393412 /* Assets.xcassets */,
 				34F628931C48571500393412 /* LaunchScreen.storyboard */,
@@ -160,6 +193,7 @@
 				343991ED1C6CFCBE00BAA72A /* Navigation-30x30.png in Resources */,
 				343CD6E31CAC304D007EB023 /* Settings30x30.png in Resources */,
 				34F628921C48571500393412 /* Assets.xcassets in Resources */,
+				34EF73831CEA323D00417C59 /* bluetooth_logo.png in Resources */,
 				34D3CB371CAC08DF00048325 /* AddList30x30.png in Resources */,
 				343991EB1C6CFAD000BAA72A /* Bookmark-add-32x32.png in Resources */,
 				34F628901C48571500393412 /* Main.storyboard in Resources */,
@@ -173,9 +207,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34CE95181CE2D156001A35D7 /* SettingsController.swift in Sources */,
 				34DCD50B1C6D25BF00F88E29 /* RenameViewController.swift in Sources */,
+				34EF73811CE9DA6700417C59 /* LocationAccMultipleChoice.swift in Sources */,
 				343991E71C6CF3C300BAA72A /* BookmarkedController.swift in Sources */,
 				34F6288D1C48571500393412 /* MapViewController.swift in Sources */,
+				34CE95201CE397F7001A35D7 /* ItemCell.swift in Sources */,
+				34CE951E1CE397C9001A35D7 /* ItemsViewController.swift in Sources */,
+				34CE951C1CE38CE8001A35D7 /* Item.swift in Sources */,
+				34CE951A1CE38A79001A35D7 /* AddItemViewController.swift in Sources */,
 				344F890C1C4DD6ED0099F7AD /* RecentLocController.swift in Sources */,
 				34F6288B1C48571500393412 /* AppDelegate.swift in Sources */,
 			);
@@ -289,6 +329,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Parking Log/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tbc.Parking-Log";
 				PRODUCT_NAME = "Parking Log";
@@ -300,6 +341,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Parking Log/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tbc.Parking-Log";
 				PRODUCT_NAME = "Parking Log";

@@ -23,22 +23,33 @@ class TableViewController: UITableViewController {
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         if NSUserDefaults().objectForKey("savedArray") != nil {
             self.savedArray = NSUserDefaults().objectForKey("savedArray")! as! NSArray as [AnyObject] //Converting back to Array
-        }
-        
-        if self.savedArray.count > 0{
+            
+            if self.savedArray.count > 0{
+                self.recent_loc = []
+                
+                for (index,_) in self.savedArray.enumerate(){
+                    self.recent_loc.append(self.savedArray[index]["name"]!!)
+                }
+                
+                self.tableView.reloadData()
+                
+                //print(self.savedArray) //for testing
+            }
+            
+        } else {
+            
             self.recent_loc = []
             
-            for (index,_) in self.savedArray.enumerate(){
-                self.recent_loc.append(self.savedArray[index]["name"]!!)
-            }
-
+            //print(self.recent_loc.count)
+            
             self.tableView.reloadData()
             
-            //print(self.savedArray) //for testing
+            
         }
         
     }

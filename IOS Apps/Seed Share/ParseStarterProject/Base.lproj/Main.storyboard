@@ -299,7 +299,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDy-kE-4RN">
-                                <rect key="frame" x="62" y="535" width="110" height="35"/>
+                                <rect key="frame" x="67" y="535" width="110" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="Yv0-PR-qmU"/>
@@ -340,7 +340,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1F-S7-SVr">
-                                <rect key="frame" x="242" y="535" width="110" height="35"/>
+                                <rect key="frame" x="237" y="535" width="110" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="ZtS-zj-I00"/>
@@ -363,15 +363,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="wfC-e5-xPM" secondAttribute="trailing" constant="-9" id="D1l-bi-v6n"/>
                             <constraint firstItem="xhb-Ra-blt" firstAttribute="top" secondItem="fos-uP-hzR" secondAttribute="topMargin" id="N6q-fU-cQR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xhb-Ra-blt" secondAttribute="trailing" constant="-20" id="TYC-6Z-UYf"/>
+                            <constraint firstItem="t1F-S7-SVr" firstAttribute="centerX" secondItem="fos-uP-hzR" secondAttribute="centerX" constant="85" id="UEd-iW-s2Z"/>
                             <constraint firstItem="1yA-kr-9S1" firstAttribute="leading" secondItem="fos-uP-hzR" secondAttribute="leadingMargin" id="dIU-Bp-cDS"/>
                             <constraint firstItem="FDy-kE-4RN" firstAttribute="top" secondItem="1yA-kr-9S1" secondAttribute="bottom" constant="23" id="fmm-iH-qfj"/>
                             <constraint firstItem="t1F-S7-SVr" firstAttribute="top" secondItem="1yA-kr-9S1" secondAttribute="bottom" constant="23" id="glD-D3-c63"/>
                             <constraint firstItem="1yA-kr-9S1" firstAttribute="top" secondItem="7fO-sI-lII" secondAttribute="bottom" constant="15" id="h39-x9-S2q"/>
                             <constraint firstItem="7fO-sI-lII" firstAttribute="leading" secondItem="fos-uP-hzR" secondAttribute="leadingMargin" id="hLO-25-hlN"/>
-                            <constraint firstItem="FDy-kE-4RN" firstAttribute="leading" secondItem="fos-uP-hzR" secondAttribute="leadingMargin" constant="42" id="p6Y-uo-YO9"/>
-                            <constraint firstItem="t1F-S7-SVr" firstAttribute="trailing" secondItem="fos-uP-hzR" secondAttribute="trailingMargin" constant="-42" id="pZo-pM-b8H"/>
                             <constraint firstItem="wfC-e5-xPM" firstAttribute="top" secondItem="7fO-sI-lII" secondAttribute="bottom" constant="8" id="sng-xk-MXX"/>
                             <constraint firstItem="7fO-sI-lII" firstAttribute="top" secondItem="xhb-Ra-blt" secondAttribute="bottom" constant="13" id="tXM-RM-rq8"/>
+                            <constraint firstItem="FDy-kE-4RN" firstAttribute="centerX" secondItem="fos-uP-hzR" secondAttribute="centerX" constant="-85" id="vZ4-AO-8M3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Upload" image="Instagram-Filled-30x30.png" id="93z-y8-pSO"/>

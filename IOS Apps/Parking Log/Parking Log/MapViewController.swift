@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
-import AddressBook
+import Contacts
 
 /*
 To Set Up User location:
@@ -47,13 +47,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let SpotLocation = CLLocationCoordinate2DMake(currPlace_dict["lat"] as! Double, currPlace_dict["long"] as! Double)
         
-        let currentPlacemark = MKPlacemark(coordinate: SpotLocation, addressDictionary: ["current location" : currPlace_dict["title"]!])
-        
-        print(currentPlacemark)
+        let currentPlacemark = MKPlacemark(coordinate: SpotLocation, addressDictionary: [String(CNPostalAddressStateKey): currPlace_dict["address"]!])
         
         let mapItem = MKMapItem(placemark: currentPlacemark)
         
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+        var launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+        
+        if fromSegue_Global == "bmPlaceSegue" {
+            launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        }
         
         mapItem.openInMapsWithLaunchOptions(launchOptions)
     }
@@ -146,7 +148,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             currPlace_dict["lat"] = NSString(string: String(self.savedArray[activePlace_GLOBAL]["lat"]!!)).doubleValue
             currPlace_dict["long"] = NSString(string: String(self.savedArray[activePlace_GLOBAL]["long"]!!)).doubleValue
             currPlace_dict["title"] = String(self.savedArray[activePlace_GLOBAL]["name"]!!)
+            currPlace_dict["address"] = String(self.savedArray[activePlace_GLOBAL]["address"]!!)
             
+            self.navigationController?.navigationBar.topItem?.title = currPlace_dict["address"] as? String
             self.statusOutlet.text = currPlace_dict["title"] as? String
             //print(latitude) // for testing
             
@@ -174,7 +178,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             currPlace_dict["lat"] = NSString(string: String(self.bookmarkedArray[activePlace_GLOBAL]["lat"]!!)).doubleValue
             currPlace_dict["long"] = NSString(string: String(self.bookmarkedArray[activePlace_GLOBAL]["long"]!!)).doubleValue
             currPlace_dict["title"] = String(self.bookmarkedArray[activePlace_GLOBAL]["name"]!!)
+            currPlace_dict["address"] = String(self.bookmarkedArray[activePlace_GLOBAL]["address"]!!)
             
+            self.navigationController?.navigationBar.topItem?.title = currPlace_dict["address"] as? String
             self.statusOutlet.text = currPlace_dict["title"] as? String
             //print(latitude) // for testing
             
@@ -261,6 +267,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let dateComponents = calendar.components([.Day , .Month , .Year, .Hour, .Minute], fromDate: date)
+        var minuteCorrection = "00"
+        
+        if dateComponents.minute < 10 {
+            minuteCorrection = "0"+String(dateComponents.minute)
+        } else {
+            minuteCorrection = String(dateComponents.minute)
+        }
         
         if newState == MKAnnotationViewDragState.Ending {
             let droppedAt = view.annotation?.coordinate
@@ -294,14 +307,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     
                 }
                 
-                self.places_dict = ["name":String(dateComponents.month)+"/"+String(dateComponents.day)+" "+String(dateComponents.hour)+":"+String(dateComponents.minute)+", "+title,"lat":String(droppedAt!.latitude),"long":String(droppedAt!.longitude)]
+                self.places_dict = ["name":String(dateComponents.month)+"/"+String(dateComponents.day)+" "+String(dateComponents.hour)+":"+minuteCorrection+", "+title,"lat":String(droppedAt!.latitude),"long":String(droppedAt!.longitude), "address": title]
                 
+                self.navigationController?.navigationBar.topItem?.title = title
                 self.statusOutlet.text = title
                 
                 //Set current Place
                 self.currPlace_dict["lat"] = droppedAt!.latitude
                 self.currPlace_dict["long"] = droppedAt!.longitude
                 self.currPlace_dict["title"] = title
+                self.currPlace_dict["address"] = title
 
                 //print(self.places_dict) //for testing
                 //print(self.places_dict["name"]!)
@@ -336,6 +351,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let dateComponents = calendar.components([.Day , .Month , .Year, .Hour, .Minute], fromDate: date)
+        var minuteCorrection = "00"
+        
+        if dateComponents.minute < 10 {
+            minuteCorrection = "0"+String(dateComponents.minute)
+        } else {
+            minuteCorrection = String(dateComponents.minute)
+        }
         
         //print("test")
         
@@ -364,14 +386,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 
             }
             
-            self.places_dict = ["name":String(dateComponents.month)+"/"+String(dateComponents.day)+" "+String(dateComponents.hour)+":"+String(dateComponents.minute)+", "+title,"lat":String(annotation.coordinate.latitude),"long":String(annotation.coordinate.longitude)]
+            self.places_dict = ["name":String(dateComponents.month)+"/"+String(dateComponents.day)+" "+String(dateComponents.hour)+":"+minuteCorrection+", "+title,"lat":String(annotation.coordinate.latitude),"long":String(annotation.coordinate.longitude), "address": title]
             
+            self.navigationController?.navigationBar.topItem?.title = title
             self.statusOutlet.text = title
             
             //Set current Place
             self.currPlace_dict["lat"] = annotation.coordinate.latitude
             self.currPlace_dict["long"] = annotation.coordinate.longitude
             self.currPlace_dict["title"] = title
+            self.currPlace_dict["address"] = title
             
             //print(self.places_dict) //for testing
             //print(self.places_dict["name"]!)

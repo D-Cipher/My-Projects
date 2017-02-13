@@ -17,8 +17,6 @@ class FeedViewController: UIViewController {
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    //var overlay : UIView?
-    
     var refresher: UIRefreshControl!
     
     var user_ls: [AnyObject] = []

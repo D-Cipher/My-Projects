@@ -1,0 +1,32 @@
+WHOOH Hi Everybody!!! We’re hosting another Crash Course Live on MS Excel Data and Functions!
+
+In this course we will learn how to use Microsoft Excel to quickly cut data and perform some exploratory analysis. In the philosophy of our crash courses, we will teach you the most important skills and tools you will need in about 3 hours and get you guys using those tools and skills on a real excel project. By the end of this course, you will be comfortable to use the most important functions in excel. No excel experience needed. 
+
+
+
+What you we will learn
+
+--Become comfortable working with in Excel 2016.
+
+--Learn the basic core functions: if, sumifs, countifs, averageifs, indexmatch, v / hlookup.
+
+--Basics of tables and pivot tables.
+
+--Macros basics.
+
+--Put it all together and analyze a raw data file.
+
+
+Prerequisites and Requirements
+
+--None
+
+
+
+About the instructor
+
+Cy is a software engineer and one of the co-founders of Object-Oriented.org and organizer for Tech DC and NOVA iOS. 
+
+He’s worked as a data research consultant for Government Executive and the National Journal Group. He frequently speaks on technology and programming at conventions across the country. Currently, he is building an tech / entrepreneurial community in DC. The goal is to bring together bring together an elite group of socially responsible entrepreneurs, developers, and young professionals. 
+
+Cy is passionate about using data analytics and building data driven products to help government and business leaders meet their challenges. Visit his website at www.cynonymous.com to learn more.

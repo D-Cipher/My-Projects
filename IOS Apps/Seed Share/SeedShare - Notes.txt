@@ -1,0 +1,34 @@
+Two more things I need to do in InstantFeed:
+x1) always following self
+x2) clean up so that doesnt crash when not following any one
+x--Reload the feed page (maybe view did appear??)
+x--pull to refresh feed page
+3) Log out button
+...4) Sort by date
+5) remove or edit your own posted feeds
+6) tap to zoom
+7) tap to show comments and post comments
+
+
+//Low Priority
+Profile picture
+only show last 10 feeds
+pull up to load older feeds
+
+
+// take a snapshot of the detail ViewController so we can do whatever with it (cause it's only a view), and don't have to care about breaking constraints
+        let snapshotView = toViewController.view.resizableSnapshotViewFromRect(toViewController.view.frame, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsZero)
+
+
+if let userPicture = object.valueForKey("Image")! as! PFFile {
+   userPicture.getDataInBackgroundWithBlock({
+      (imageData: NSData!, error NSError!) -> Void in
+         if (error == nil) {
+            let image = UIImage(data:imageData)
+            self.ImageArray.append(image)
+         }
+      })
+}
+
+
+https://www.youtube.com/watch?v=nre-ALSA740

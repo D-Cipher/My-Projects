@@ -1,0 +1,64 @@
+Community of socially responsible entreprenurers, developers, and young professionals....
+
+Courses: 
+
+IOS 100 Crash Course - iOS Development
+
+IOS 101 Crash Course Live - iOS Development
+
+EXL 101 Crash Course Live - Excel Data and Functions
+
+EXL 102 Crash Course Live - Excel Charts and Tables
+
+Py 100 Crash Course Live - 
+
+WP 100 Crash Course Live - Website Dev with Wordpress
+
+Minecraft Camp - for at risk youth
+
+Video game development - for at risk youth
+
+iOS App Attack - for at risk youth
+
+Video game hackathon - for at risk youth
+
+
+What is your favorite mobile app? Are you a huge fan of Candy Crush? Want to develop your own game app one day? Building a mobile app is not that far away! Join us for "Intro to Mobile App Development", we’ll cover all the core aspects of what it takes to develop a successful mobile application. You’ll come away with deeper appreciation of mobile app ecosystems, design best practices, development workflow, and prototyping tools. We’ll also cover the some of the nuances of the different technological approaches including native, mobile web, and the increasingly popular hybrid approach.
+
+He frequently speaks on technical topics and mentors at hackathons across the country. Currently, he is building an internal mobile automation community using shared patterns in Fastlane with the Jenkins DSL and OS X provisioning / management. The goal is to connect the company’s geographically distributed engineers through inner sourcing. Outside of work he enjoys exploring new technologies, practicing improv and visiting new places with his fiancée.
+
+Cy is a software engineer and one of the first founders of Object-Oriented.org and organizer for Tech DC and NOVA iOS. 
+
+He’s worked as a data research consultant for the National Journal Group and Government Executive. He frequently speaks on technology and programming at conventions across the country. Currently, he is building an tech / entrepreneurial community in DC. The goal is to bring together bring together an elite group of socially responsible entrepreneurs, developers, and young professionals. 
+
+Cy is passionate about using data analytics and building data driven products to help government and business leaders meet their challenges. Visit his website at www.cynonymous.com to learn more.
+
+
+====
+
+Community
+
+-half testamonial 
+-half posts on courses and services we offer
+
+Events
+-Calender of events
+
+recognition [meetup-calendar]
+
+Donate now page
+
+<?php echo do_shortcode("[Total_Soft_Cal id="6"]");?>
+
+
+We offer cutting-edge creative technology and STEM courses for summer camps and enrichment youth programs.
+
+
+
+Our purpose is improving awareness by providing education on health related risks, accidents, insurance, and promoting a healthy and safe lifestyle among international student community.
+Provide a local support network for international students, specifically financial assistance and resources for victims who are uncovered or undercovered.
+Foster greater support system for D.C area international students with health accidents or unforeseeable medical problem.
+
+supporting them with funding, education, skills training, networking opportunities, and recognition.  
+
+

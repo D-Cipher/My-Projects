@@ -1,0 +1,15 @@
+To Do Recipe Timer
+
+Needs:
+-Fix ability to move items in list
+-Fully Rename
+-Change Color Scheme
+-Fix Minute Slider
+-Add Hour Slider
+-Add Reset button
+-Change Start/Stop to Start/Pause
+-Add if press done without saving any text then add in time stamp.
+
+Nice to have:
+-Recipe Notes
+-Snooze Button

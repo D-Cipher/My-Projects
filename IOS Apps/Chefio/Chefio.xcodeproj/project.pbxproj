@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		340283C71CE670A90023125F /* chefio_splash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 340283C61CE670A90023125F /* chefio_splash2.png */; };
+		3409E3CF1D22FE5F009C9377 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409E3CE1D22FE5F009C9377 /* Cell.swift */; };
 		341E98561CEFB05D00D083B5 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341E98551CEFB05D00D083B5 /* FeedViewController.swift */; };
 		341E98581CEFB1AC00D083B5 /* cancel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 341E98571CEFB1AC00D083B5 /* cancel_icon.png */; };
 		341E985A1CEFB1B900D083B5 /* placeholder-camera-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 341E98591CEFB1B900D083B5 /* placeholder-camera-green.png */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		340283C61CE670A90023125F /* chefio_splash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chefio_splash2.png; sourceTree = "<group>"; };
+		3409E3CE1D22FE5F009C9377 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		341E98551CEFB05D00D083B5 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		341E98571CEFB1AC00D083B5 /* cancel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_icon.png; sourceTree = "<group>"; };
 		341E98591CEFB1B900D083B5 /* placeholder-camera-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-camera-green.png"; sourceTree = "<group>"; };
@@ -111,8 +113,9 @@
 				81BA814C1A49DA1800E65899 /* LoginViewController.swift */,
 				34C91B2D1C73AD9000384C49 /* ProfileTabController.swift */,
 				341E98551CEFB05D00D083B5 /* FeedViewController.swift */,
-				341E985B1CEFB44700D083B5 /* UploadImageController.swift */,
+				3409E3CE1D22FE5F009C9377 /* Cell.swift */,
 				34D6CF391CF8F115005848CC /* UploadDescriptionController.swift */,
+				341E985B1CEFB44700D083B5 /* UploadImageController.swift */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
@@ -250,6 +253,7 @@
 			files = (
 				81BA814D1A49DA1800E65899 /* LoginViewController.swift in Sources */,
 				34C91B2E1C73AD9000384C49 /* ProfileTabController.swift in Sources */,
+				3409E3CF1D22FE5F009C9377 /* Cell.swift in Sources */,
 				341E985C1CEFB44700D083B5 /* UploadImageController.swift in Sources */,
 				341E98561CEFB05D00D083B5 /* FeedViewController.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,

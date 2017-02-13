@@ -16,6 +16,8 @@ class UploadDescriptionController: UIViewController, UINavigationControllerDeleg
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    var postData = Dictionary<String,AnyObject>()
+    
     @IBOutlet var titleInput: UITextView!
 
     @IBOutlet var descripInput: UITextView!
@@ -67,33 +69,6 @@ class UploadDescriptionController: UIViewController, UINavigationControllerDeleg
         return dateValue
     }
     
-    func placeholdTextReset(status: Int = 0) {
-        if status == 1 {
-            //Resets placeholders
-            //self.ImageOutlet.contentMode = .ScaleToFill
-            
-            //self.ImageOutlet.image = UIImage(named: "placeholder-camera-green.png")
-            
-            //self.ImageOutlet.alpha = 0.5
-            
-            descripInput.text = ""
-            
-            titleInput.text = ""
-            
-            descripInputSpecs(0)
-            
-            titleInputSpecs(0)
-            
-        } else if status == 0 {
-            
-            //self.ImageOutlet.contentMode = .ScaleToFill
-            
-            //self.ImageOutlet.alpha = 1
-            
-        }
-        
-    }
-    
     func textBoxSpecs() {
         
         let textBoxes = [descripInput, titleInput]
@@ -112,130 +87,103 @@ class UploadDescriptionController: UIViewController, UINavigationControllerDeleg
     func descripInputSpecs(status: Int = 0) {
         
         if status == 0 && self.descripInput.text.isEmpty {
-            self.descripInput.text = "Add Description"
-            self.descripInput.textColor = textGrey
+            descripInput.text = "Add Description"
+            descripInput.textColor = textGrey
+            
         } else if status == 1 && descripInput.textColor == textGrey {
-            self.descripInput.text = nil
-            self.descripInput.textColor = UIColor.blackColor()
+            descripInput.text = nil
+            descripInput.textColor = UIColor.blackColor()
         }
     }
     
     func titleInputSpecs(status: Int = 0) {
         
         if status == 0 && self.titleInput.text.isEmpty {
-            self.titleInput.text = "Add Title"
-            self.titleInput.textColor = textGrey
+            titleInput.text = "Add Title"
+            titleInput.textColor = textGrey
+            
         } else if status == 1 && titleInput.textColor == textGrey {
-            self.titleInput.text = nil
-            self.titleInput.textColor = UIColor.blackColor()
+            titleInput.text = nil
+            titleInput.textColor = UIColor.blackColor()
         }
     }
     
     
-    @IBAction func postButton(sender: AnyObject) {
+    func populateFields() {
         
-        /*if ImageOutlet.image != nil && self.ImageOutlet.image != UIImage(named: "placeholder-camera-green.png") {
+        if NSUserDefaults().objectForKey("postData") != nil {
             
-            let postWarning = ["Are you sure?", "Are you sure you want to post?"]
+            var postData = NSUserDefaults().objectForKey("postData")! as! NSDictionary as! Dictionary<String,AnyObject>
             
-            let alert = UIAlertController(title: postWarning[0], message: postWarning[1], preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                print("OK")
-                
-                //Turn on Spinner
-                self.activityIndFunc(1)
-                
-                //Upload Image To Parse
-                let post = PFObject(className: "Posts")
-                
-                if self.addMessageField.text == "Add message" {
-                    post["message"] = ""
-                } else {
-                    post["message"] = self.addMessageField.text
-                }
-                
-                post["userID"] = PFUser.currentUser()!.objectId!
-                
-                post["date"] = self.dateString()
-                
-                let imageData = UIImagePNGRepresentation(self.ImageOutlet.image!)
-                
-                let imageFile = PFFile(name: "image.png", data: imageData!)
-                
-                post["imageFile"] = imageFile
-                
-                post.saveInBackgroundWithBlock { (success, error) -> Void in
-                    if error == nil {
-                        //print("success")
-                        self.activityIndFunc(0)
-                        
-                        //Post Success Alert
-                        //self.alertFunc(["Upload Successful", "Your post has been updated."])
-                        
-                        self.placeholdPicReset(1)
-                        
-                    } else {
-                        
-                        self.alertFunc(["Upload Unsuccessful", String(error)])
-                        self.activityIndFunc(0)
-                    }
-                }
-                
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) -> Void in
-                
-            }))
-            
-            self.presentViewController(alert, animated: true, completion: nil)
+            descripInput.text = postData["descrip"]! as! String
+            titleInput.text = postData["title"]! as! String
             
         } else {
-            //Please select Image Alert
-            self.alertFunc(["No Image to Post", "Please choose an image to post."])
-        }*/
-        
-    }
-    /*
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        //print("image selected")
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-        ImageOutlet.image = image
-        
-        if self.ImageOutlet.image != nil && self.ImageOutlet.image != UIImage(named: "placeholder-camera-green.png") {
             
-            self.placeholdPicReset(0)
+            descripInput.text = ""
+            titleInput.text = ""
+            descripInputSpecs(0)
+            titleInputSpecs(0)
+            
+        }
+
+    }
+    
+    
+    @IBAction func nextButtonAction(sender: AnyObject) {
+        
+        if titleInput.text == "" || titleInput.text == nil || descripInput.text == "" || descripInput.text == nil || titleInput.text == "Add Title" || descripInput.text == "Add Description" {
+            
+            alertFunc(["Fields cannot be blank", "Your post must have a title and a description."])
+            
+        } else {
+            
+            postData["title"] = titleInput.text
+            
+            postData["descrip"] = descripInput.text
+            
+            NSUserDefaults.standardUserDefaults().setObject(postData, forKey: "postData")
+            
+            self.performSegueWithIdentifier("postImageSegue", sender: nil)
+            
         }
         
-    }*/
-    
-    @IBAction func chooseImageButton(sender: AnyObject) {
-        
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        //image.sourceType = UIImagePickerControllerSourceType.Camera //To import from camera
-        image.allowsEditing = true
-        self.presentViewController(image, animated: true, completion: nil)
         
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textBoxSpecs()
         
-        descripInputSpecs(0)
-        titleInputSpecs(0)
+        populateFields()
         
         descripInput.delegate = self
         titleInput.delegate = self
         
-        navigationController?.navigationBar.topItem?.title = self.dateString()
+        navigationController?.navigationBar.topItem?.title = "Post"
         
-        placeholdTextReset(1)
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0)) { () -> Void in
+            
+            let query = PFQuery(className: "_User")
+            
+            query.getObjectInBackgroundWithId(PFUser.currentUser()!.objectId!, block: { (object, error) -> Void in
+                if error != nil {
+                    print(error)
+                    self.activityIndFunc(0)
+                    
+                } else if let object = object {
+                    
+                    self.postData["name"] = object["name"]!
+                    
+                    //self.postData["userID"] = object["userID"]!
+                    
+                }
+            })
+            
+        }
+        
         
     }
     

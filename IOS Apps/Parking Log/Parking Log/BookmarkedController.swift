@@ -46,8 +46,6 @@ class BookmarkedController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         
-        
-        
         //Set Reorder button
         self.tableView.editing = false
         reorderOutlet.title = "Edit"

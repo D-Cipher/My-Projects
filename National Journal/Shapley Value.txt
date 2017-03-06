@@ -1,0 +1,17 @@
+Shapily Value Regression
+- Run every combination of variables to tease out independ effects.
+- For high collinearity.
+
+
+Can run 9 different models and techniques and picks the best one.
+-linear regression
+-clustering techniques
+
+Text analytics:
+-Look for sentement and content
+-Natural language processing
+-Define your own templates and it pulls out all of the quotes or conversation segments that relate to that template/catagory.
+-Frequency counts of the sentements used.
+-Dictionary it gets better and smarter the more you us it. It learns the patterns and conversation structures specific to your study.
+
+

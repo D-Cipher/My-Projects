@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B1579251536FAD4535FB3F559DEED9B3826A3B23",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A8A43306CF193E23A985031E340F84E11D0B8A97" : 0,
+    "A30A6A1DB56C284A99B54D46F307A2A63667A04E" : 0,
+    "B1579251536FAD4535FB3F559DEED9B3826A3B23" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "190A940B-0B87-4289-B166-7DA26FAADA18",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A8A43306CF193E23A985031E340F84E11D0B8A97" : "..",
+    "A30A6A1DB56C284A99B54D46F307A2A63667A04E" : "..\/..\/..",
+    "B1579251536FAD4535FB3F559DEED9B3826A3B23" : "Alerts\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Alerts",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Alerts.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/acani\/Chats",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A30A6A1DB56C284A99B54D46F307A2A63667A04E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/Chats-iPhone-Client.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A8A43306CF193E23A985031E340F84E11D0B8A97"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/Alerts.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1579251536FAD4535FB3F559DEED9B3826A3B23"
+    }
+  ]
+}

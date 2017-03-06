@@ -1,0 +1,118 @@
+relaimpo: Relative Importance of Regressors
+Relative importance is an old topic in regression applications: Many scientists want to quantify the relative contributions of the regressors to the model's total explanatory value. The R-package relaimpo offers six different metrics for relative importance in linear models.
+
+In the beginning, the intention of developing relaimpo simply was to provide a reasonably fast version of the (relatively) well-known method of averaging sequential sums of squares over orderings of regressors. This method is called lmg in package relaimpo because of the first known mention in Lindeman, Merenda and Gold (1980, p.119ff); Kruskall (1987) is a more well-known source for this method, and it has been re-invented by various researchers from different fields, e.g. under the names of "Shapley value regression" or "dominance analysis" . When working on this method and its properties, also in comparison to other methods, particularly also the newly-proposed method pmvd by Feldman (2005), the package grew to include the total of six metrics. After the latest additions of a less-well-known metric from Genizi (1993) and a new one from Zuber and Strimmer (2010), there are now eight different metrics, five of which yield "natural" decompositions of the model R2 in linear regression models. Besides calculation of metrics, it is also possible to obtain bootstrap confidence intervals (exploratory in nature) for the metrics themselves, their ranks and their pairwise differences. Basic printing and plotting facilities are also provided.
+
+Versions of relaimpo
+A version of package relaimpo for non-US users is offered for download on this website. Users from the US have to use the global version because of Legalese.
+
+References on relative importance
+The most important references for the R-package relaimpo are marked with an asterisk.
+
+Azen, R. and Budescu, D.V. (2003). The dominance analysis approach for comparing predictors in multiple regression. Psychological Methods 8, 129-148.
+
+Azen, R. (2003). Dominance Analysis SAS Macros. URL: www.uwm.edu/~azen/damacro.html.
+
+Bring, J. (1996). A geometric approach to compare variables in a regression model. The American Statistician 50, 57-62.
+
+Budescu, D.V. (1993). Dominance Analysis: A new approach to the problem of relative importance in multiple regression. Psychological Bulletin 114, 542-551.
+
+Budescu, D.V. and Azen, R. (2004). Beyond Global Measures of Relative Importance: Some Insights from Dominance Analysis. Organizational Research Methods 7, 341 - 350.
+
+Chevan, A. and Sutherland, M. (1991). Hierarchical Partitioning. The American Statistician 45, 90-96.
+
+Conklin, M., Powaga, K. and Lipovetsky, S. (2004). Customer satisfaction analysis: Identification of key drivers. European Journal of Operational Research 154, 819–827.
+
+*Darlington, R.B. (1968). Multiple regression in psychological research and practice. Psychological Bulletin 69, 161-182. (last, first, betasq, pratt)
+
+Feldman, B. (1999). The proportional value of a cooperative game. Manuscript for a contributed paper at the Econometric Society World Congress 2000. Downloadable at http://fmwww.bc.edu/RePEc/es2000/1140.pdf.
+
+Feldman, B. (2002). A Dual Model of Cooperative Value. Manuscript, downloadable from http://ssrn.com/abstract=317284.
+
+*Feldman, B. (2005). Relative Importance and Value. Manuscript (latest version), downloadable at http://papers.ssrn.com/sol3/papers.cfm?abstract_id=2255827. (pmvd)
+
+Feldman, B. (2007). A theory of attribution. MPRA Paper No. 3349. Downloadable at http://mpra.ub.uni-muenchen.de/3349/01/MPRA_paper_3349.pdf.
+
+Fickel, N. (2001). Sequenzialregression: Eine neodeskriptive Lösung des Multikollinearitätsproblems mittels stufenweise bereinigter und synchronisierter Variablen. Habilitationsschrift, University of Erlangen-Nuremberg. VWF, Berlin.
+
+Fickel, N. (2003). Measuring Supplementary Influence by Using Sequential Linear Regression. Downloadable from Mathematics Preprint Server.
+
+Firth, D. (1998). Relative importance of explanatory variables. Conference ”Statistical Issues in the Social Sciences”, Stockholm, October 1998. URL: http://www.nuff.ox.ac.uk/sociology/alcd/relimp.pdf.
+
+Fox, J. (2002). Bootstrapping regression models. In: An R and S-PLUS Companion to Applied Regression: A web appendix to the book. Sage, Thousand Oaks, CA. URL: http://cran.r-project.org/doc/contrib/Fox-Companion/appendix-bootstrapping.pdf. (appropriate bootstrapping in regression models)
+
+*Genizi, A. (1993). Decomposition of R2 in multiple regression with correlated regressors. Statistica Sinica 3, 407-420.
+
+*Grömping, U. (2006). Relative Importance for Linear Regression in R: The Package relaimpo. Journal of Statistical Software 17, Issue 1.
+
+*Grömping, U. (2007). Estimators of Relative Importance in Linear Regression Based on Variance Decomposition. The American Statistician 61, 139-147.
+
+Grömping, U. (2007). Response to comment by Scott Menard, re: Estimators of Relative Importance in Linear Regression Based on Variance Decomposition. In: Letters to the Editor, The American Statistician 61, 280-284.
+
+Grömping, U. (2009). Variable Importance Assessment in Regression: Linear Regression Versus Random Forest. The American Statistician 63, 308-319.
+
+Grömping, U. and Landau, S. (2009). Do not adjust coefficients in Shapley value regression. To appear in Applied Stochastic Models in Business and Industry. Online early view: DOI: 10.1002/asmb.773.
+
+Hart, S. and Mas-Colell, A. (1989). Potential, value and consistency. Econometrica 57, 589-614. (game-theoretic background for lmg)
+
+Healy, M.J.R. (1990). Measuring importance. Statistics in Medicine 9, 633-637.
+
+Hoffman, P.J. (1960). The paramorphic representation of clinical judgment. Psychological Bulletin 57, 116-131.
+
+Hoffman, P.J. (1962). Assessment of the independent contributions of predictors. Psychological Bulletin 59, 77-80.
+
+Johnson, J.W. (2000). A heuristic method for estimating the relative weight of predictor variables in multiple regression. Multivariate behavioral research 35, 1-19.
+
+Johnson, J.W. (2004). Factors affecting relative weights: the influence of sampling and measurement error. Organizational Research Methods 7, 283-299.
+
+Johnson, J.W. and Lebreton, J.M. (2004). History and Use of Relative Importance Indices in Organizational Research. Organizational Research Methods 7, 238 - 257.
+
+Kruskal, W. (1987). Relative importance by averaging over orderings. The American Statistician 41: 6-10.
+
+Kruskal, W. (1987b): Correction to ”Relative importance by averaging over orderings”. The American Statistician 41: 341.
+
+Kruskal, W. and Majors, R. (1989). Concepts of relative importance in recent scientific literature. The American Statistician 43: 2-6.
+
+Lebreton, J.M., Ployhart, R.E. and Ladd, R.T. (2004). A Monte Carlo Comparison of Relative Importance Methodologies. Organizational Research Methods 7, 258 - 282.
+
+*Lindeman, R.H., Merenda, P.F. and Gold, R.Z. (1980). Introduction to Bivariate and Multivariate Analysis, Scott, Foresman, Glenview IL. (lmg, p.119ff)
+
+Lipovetsky, S. and Conklin, M. (2001). Analysis of Regression in Game Theory Approach. Applied Stochastic Models in Business and Industry 17, 319-330.
+
+MacNally, R. (2000) Regression and model building in conservation biology, biogeography and ecology: the distinction between and reconciliation of 'predictive' and 'explanatory' models. Biodiversity and Conservation 9: 655-671.
+
+MacNally, R. (2002) Multiple regression and inference in conservation biology and ecology: further comments on identifying important predictor variables. Biodiversity and Conservation 11: 1397-1401.
+
+MacNally, R. & Walsh, C. (2004). Hierarchical partitioning public-domain software. Biodiversity and Conservation 13, 659-660.
+
+Nimon K. and Roberts, J.K. (2009). yhat: Interpreting Regression Effects. R package version 1.0-2. http://cran.r-project.org/web/packages/yhat/yhat.pdfhttp://cran.r-project.org/package=yhat
+
+Ortmann, K.M. (2000). The proportional value of a positive cooperative game. Mathematical Methods of Operations Research 51, 235-248. (game-theoretic background for pmvd)
+
+Pedhazur, E.J. (1982, 2nd ed.). Multiple regression in behavioral research: explanation and prediction. Holt, Rinehart and Winston, New York.
+
+*Pratt, J.W. (1987). Dividing the indivisible: Using simple symmetry to partition variance explained. In: Pukkila, T. and Puntanen, S. (Eds.): Proceedings of second Tampere conference in statistics, University of Tampere, Finland, 245-260. (pratt)
+
+Shapley, L. (1953). A value for n-person games. Reprinted in: Roth, A. (1988, ed.): The Shapley Value: Essays in Honor of Lloyd S. Shapley. Cambridge University Press, Cambridge. (game-theoretic background for lmg)
+
+Soofi, E.S., Retzer, J.J. and Yasai-Ardekani, M. (2000). A Framework for Measuring the Importance of Variables with Applications to Management Research and Decision Models. Decision Sciences 31, 1-31.
+
+Theil, H. (1971). Principles of Econometrics. Wiley, New York..
+
+Theil, H. (1987). How many bits of information does an independent variable yield in a multiple regression? Statistics and Probability Letters 6, 107-108.
+
+Theil, H. and Chung, C.-F. (1988a). Relations between two sets of variates: the bits of information provided by each variate in each set. Statistics and Probability Letters 6, 137-139.
+
+Theil, H. and Chung, C.-F. (1988). Information-theoretic measures of fit for univariate and multivariate linear regressions. The American Statistician 42, 249-252.
+
+Thomas, D.R., Hughes, E. and Zumbo, B.D. (1998). On variable importance in linear regression. Social Indicators Research 45, 253-275.
+
+Thomas, D.R., Zhu, P.C. and Decady, Y.J. (2007). Point estimates and confidence intervals for variable importance in multiple linear regression. J. Educational and Behavioral Statistics 32, 61-91.
+
+Ward, J.H. (1962). Comments on ”The paramorphic representation of clinical judgment”. Psychological Bulletin 59, 74-76.
+
+Walsh C. & Mac Nally, R. (2003). The hier.part Package: Hierarchical Partitioning. (Part of: Documentation for R: A language and environment for statistical computing.) R Foundation for Statistical Computing, Vienna, Austria. URL: http://cran.r-project.org/web/packages/hier.part/hier.part.pdf.
+
+Whittaker, T.A.; Fouladi, R.T.; Williams, N.J. (2002). Determining Predictor Importance in Multiple Regression Under Varied Correlational And Distributional Conditions. J. Modern Applied Statistical Methods 1, 354-366.
+
+*Zuber, V. and Strimmer, K. (2011). Variable importance and model selection by decorrelation. Statistical Applications in Genetics and Molecular Biology 10.1 (2011): 1-27. Preprint at http://arxiv.org/abs/1007.5516

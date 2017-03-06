@@ -1,0 +1,66 @@
+Hansa Marketing Services Blog
+
+Brand Assessment Tools: Measuring Relative Importance with Shapley Value Regression
+
+ 
+inShare
+0  
+Be careful that you use the right analytic technique in asessing your brand's performance!
+
+Hansa’s brand assessment approach utilizes numerous methodological tools – perceptual mapping, maximum difference scaling, and key driver analysis to name a few. Typically, these tools focus on predicting the factors that most directly impact the bottom line: behavioral outcomes.
+
+These behavioral outcomes are frequently viewed as loyalty metrics and include purchase behaviors, willingness to recommend, and increases in wallet share.
+
+Among the methods of predicting outcomes, key driver analysis is by far the most popular method to assess the relative importance of brand attributes. Key driver analysis answers which brand attributes are critical in predicting customer loyalty. Is it the perception that a brand is cost effective, a leading innovator, or provider of top-of-the-line customer support?
+
+To address this question, three measures are commonly used in support of driver analysis:
+
+Simple correlations between brand attributes and the outcome variable
+
+Standardized regression coefficients
+
+Statistical significance (i.e. the p-value associated with the regression coefficient)
+
+The first two techniques estimate importance as a function of variance explained in an outcome, while statistical significance only tells us that our conclusions are not the result of a fluke, a random occurrence. To better understand the problems with these traditional techniques, let’s examine the following diagram:
+
+ 
+
+Ven Diagram resized 600 
+
+Region A accounts for the impact of the perception of fees on brand loyalty and region C captures customer support. The problem lies with region B. The more customer support and value for fees are correlated, the larger Region B is. Such strong correlations between drivers, termed multicollinearity, are almost universal in brand research. Which variable owns the bulk of the effect of region B on loyalty? Is it value for fees or customer support that plays a more important role in shaping brand loyalty? How we go about answering these questions will have a significant impact on how an organization chooses to structure a program to capture market share.
+
+Simple correlation analysis leads us to exaggerate the impact of either driver on loyalty. That is, correlation analysis credits both attributes with the overlap highlighted in region B, therefore double-counting region B. In regression analysis, multicollinearity is also a major concern. The items we use as independent variables in predictive models often are not independent at all – they are highly interrelated. This lack of independence can bias results in a major and unpredictable way. In terms of the diagram above, standardized regression coefficients credit neither of the attributes with the overlap, therefore effectively ignoring region B.
+
+The bottom line is that we end up with results that either overstate the true impact of a brand attribute on an outcome or misrepresent that impact, either over- or understated. Before we look at ways to remedy these deleterious effects, let’s take a moment to understand the negative impact of multicollinearity on relative importance analysis. Multicollinearity wreaks havoc on regression models, including:
+
+Unstable estimates that fluctuate with negligible changes in the sample, leading to serious doubts about the robustness of the model.
+
+Signs opposite to signs of simple correlations, for example income and education which by all accounts is a positive relationship. Imagine a model outcome suggesting that higher levels of education reduces income earning potential.  Weird outcomes like this can happen in statistical analysis.
+
+Theoretically important variables having insignificant coefficients. Let’s take our income and education example above, imagine output that suggests no relationship exists between these two relevant factors. This gives us pause as to whether we have used the right analytic technique.
+
+The goal of any next generation technique is to remedy these distorting effects by attributing the appropriate amount of variance explained to each predictor in the model. In other words, correctly decomposing region B and giving value for fees and customer support their due impact.
+
+At Hansa, we employ Shapley Value Regression as a viable approach to relative importance analysis to overcome these issues. Unlike the pitfalls discussed above, Shapley Value is able to parcel out the relative impact of any predictor within the model as a function of R2. R2 is the total amount of variance that a set of predictors are able to account for in an outcome variable. In our example above, R2 would reflect the cumulative impact of both value for fees and customer support on brand loyalty (A + B + C). In Shapley Value regression, the contribution of each attribute is measured by the improvement in R2.
+
+The Shapley Value is calculated across all possible models, that is, all possible combinations of predictors, making it different and unique from other measures of attribute importance. Without getting too technical, Shapley Value estimates the net effects obtained via averaging over all possible combinations of the explanatory variables on the regression model. By giving an average estimate across multiple iterations, we’re eliminating much of the order bias found in standard regression analysis, thereby mitigating the detrimental impact of multicollinearity.
+
+To illustrate this example, let’s take a look at the following graphs using hypothetical data that includes an attribute list with four predictors:
+
+Correlation Analysis
+
+Correlation Analysis resized 600
+
+As we can see, correlation does a poor job identifying a clear winner from this list of attributes. Furthermore, all of the attributes appear to be important predictors of brand loyalty with the exception of “takes the long view.”
+
+Standardized Regression Analysis resized 600
+
+With traditional regression analysis, we do begin to see some differentiation, but the top attribute (customer support) is not given its proper credit, and value for fees and understands my needs show little to no difference. Let’s take a look at Shapley Value output to see the true impact of customer support on brand loyalty…
+
+Shapley Value Regression
+
+Shapley Value Regression3 resized 600
+
+Regression accurately identified customer support as the top predictor in the model, but underestimated its impact. Some researchers would erroneously conclude that customer support was important, but from a pure regression standpoint, the impact is somewhat weak in the grand scheme of things. On the other hand, with Shapley Value, we see that providing support to customers accounts for nearly 40% of the predictive power in the model, by no means a weak predictor.
+
+In conclusion, Shapley Value provides a robust framework for measuring relative importance in brand assessment analysis and is an important step forward over ordinary regression techniques. This approach addresses the problem of multicollinearity between independent variables in the model by providing an accurate decomposition of the total variance explained (R2). Since so many important business decisions rely on findings derived from relative importance analysis, organizations must take these findings seriously and adopt better methods in their brand research. Failing to account for the distortions of traditional approaches will lead organizations to either ignore or over/under-emphasize critical brand elements.

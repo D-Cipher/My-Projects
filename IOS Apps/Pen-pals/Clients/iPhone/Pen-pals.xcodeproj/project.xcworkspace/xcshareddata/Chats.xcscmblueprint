@@ -1,0 +1,86 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A8A43306CF193E23A985031E340F84E11D0B8A97",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "EA7662C8B6DD0BCE94FAF1C4D124048D83E5F86F" : 0,
+    "A30A6A1DB56C284A99B54D46F307A2A63667A04E" : 0,
+    "A8A43306CF193E23A985031E340F84E11D0B8A97" : 0,
+    "8846F06AEB1B7D872AFF01F2E53AC89F7E8C7CE0" : 0,
+    "C5EA77C46C46B210E8FA08045069E0843FBEDF42" : 0,
+    "7AF80681E774E680AFEFB048D491F8F660F35FC3" : 0,
+    "BB7FB2F9019531AC41D8AC338DD4F07290950269" : 0,
+    "B929B5AAB30A7298E43FB177594378709DE608EB" : 0,
+    "36B83728521CC899DF6F29A8C9EAF02D9D23CC60" : 0,
+    "B1579251536FAD4535FB3F559DEED9B3826A3B23" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0E1A3C6A-3B44-49D2-BF58-D687DED186F1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "EA7662C8B6DD0BCE94FAF1C4D124048D83E5F86F" : "iPhone\/Libraries\/AutoLayout\/",
+    "A30A6A1DB56C284A99B54D46F307A2A63667A04E" : "..",
+    "A8A43306CF193E23A985031E340F84E11D0B8A97" : "iPhone\/",
+    "8846F06AEB1B7D872AFF01F2E53AC89F7E8C7CE0" : "iPhone\/Libraries\/CodeInputView\/",
+    "C5EA77C46C46B210E8FA08045069E0843FBEDF42" : "iPhone\/Libraries\/LoadingViews\/",
+    "7AF80681E774E680AFEFB048D491F8F660F35FC3" : "iPhone\/Libraries\/Networking\/",
+    "BB7FB2F9019531AC41D8AC338DD4F07290950269" : "iPhone\/Libraries\/TextFieldTableViewCell\/",
+    "B929B5AAB30A7298E43FB177594378709DE608EB" : "iPhone\/Libraries\/UIButtonBackgroundColor\/",
+    "36B83728521CC899DF6F29A8C9EAF02D9D23CC60" : "iPhone\/Libraries\/Validator\/",
+    "B1579251536FAD4535FB3F559DEED9B3826A3B23" : "iPhone\/Libraries\/Alerts\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Chats",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Chats.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/Validator.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "36B83728521CC899DF6F29A8C9EAF02D9D23CC60"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/Networking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7AF80681E774E680AFEFB048D491F8F660F35FC3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/CodeInputView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8846F06AEB1B7D872AFF01F2E53AC89F7E8C7CE0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/acani\/Chats",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A30A6A1DB56C284A99B54D46F307A2A63667A04E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/Chats-iPhone-Client.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A8A43306CF193E23A985031E340F84E11D0B8A97"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/Alerts.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1579251536FAD4535FB3F559DEED9B3826A3B23"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/UIButtonBackgroundColor.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B929B5AAB30A7298E43FB177594378709DE608EB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/TextFieldTableViewCell.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BB7FB2F9019531AC41D8AC338DD4F07290950269"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/LoadingViews.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C5EA77C46C46B210E8FA08045069E0843FBEDF42"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/acani\/AutoLayout.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA7662C8B6DD0BCE94FAF1C4D124048D83E5F86F"
+    }
+  ]
+}

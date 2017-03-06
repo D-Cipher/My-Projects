@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A70B37501B5D9822001127C2 /* ChoiceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70B374F1B5D9822001127C2 /* ChoiceRecord.swift */; };
+		A7C2FBFD1B376B9E0064A59B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C2FBFC1B376B9E0064A59B /* AppDelegate.swift */; };
+		A7C2FC021B376B9E0064A59B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7C2FC001B376B9E0064A59B /* Main.storyboard */; };
+		A7C2FC041B376B9E0064A59B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7C2FC031B376B9E0064A59B /* Images.xcassets */; };
+		A7C2FC071B376B9E0064A59B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7C2FC051B376B9E0064A59B /* LaunchScreen.xib */; };
+		A7C2FC131B376B9E0064A59B /* MedCaserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C2FC121B376B9E0064A59B /* MedCaserTests.swift */; };
+		A7C2FC311B37A84F0064A59B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C2FC301B37A84F0064A59B /* libxml2.dylib */; };
+		A7C2FCC71B39023B0064A59B /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C2FCC61B39023B0064A59B /* SearchGroupViewController.swift */; };
+		A7C2FCCD1B39C6530064A59B /* MedCaser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A7C2FCCB1B39C6530064A59B /* MedCaser.xcdatamodeld */; };
+		A7C2FCD11B39D7390064A59B /* MyGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C2FCD01B39D7390064A59B /* MyGroupsViewController.swift */; };
+		A7C904361B51C7AB00C09FE7 /* GroupServiceService.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C904351B51C7AB00C09FE7 /* GroupServiceService.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7C904381B56B00700C09FE7 /* medcaser logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C904371B56B00700C09FE7 /* medcaser logo.png */; };
+		A7C904401B56C0DC00C09FE7 /* blankscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = A7C9043F1B56C0DC00C09FE7 /* blankscreen.png */; };
+		A7C904461B56EEF200C09FE7 /* GGFullScreenImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C904451B56EEF200C09FE7 /* GGFullScreenImageViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7DAC9961B7169DA004C62CE /* NSDate+ISO8601Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DAC98D1B7169DA004C62CE /* NSDate+ISO8601Parsing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7DAC9971B7169DA004C62CE /* NSDate+ISO8601Unparsing.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DAC98F1B7169DA004C62CE /* NSDate+ISO8601Unparsing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7DAC9981B7169DA004C62CE /* USAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DAC9911B7169DA004C62CE /* USAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7DAC9991B7169DA004C62CE /* USGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DAC9931B7169DA004C62CE /* USGlobals.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7DAC99A1B7169DA004C62CE /* xs.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DAC9951B7169DA004C62CE /* xs.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A7DB53EB1B5E97FA00E47543 /* CustomCaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DB53EA1B5E97FA00E47543 /* CustomCaseTableViewCell.swift */; };
+		A7F01F821B3B991F00E7C011 /* MyGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F7E1B3B991F00E7C011 /* MyGroups.swift */; };
+		A7F01F831B3B991F00E7C011 /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F7F1B3B991F00E7C011 /* Case.swift */; };
+		A7F01F841B3B991F00E7C011 /* AnswerChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F801B3B991F00E7C011 /* AnswerChoice.swift */; };
+		A7F01F851B3B991F00E7C011 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F811B3B991F00E7C011 /* Category.swift */; };
+		A7F01F8A1B3BFAD000E7C011 /* CaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F891B3BFAD000E7C011 /* CaseViewController.swift */; };
+		A7F01F8D1B3C90C100E7C011 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F8C1B3C90C100E7C011 /* SWRevealViewController.m */; };
+		A7F01F8F1B3C93EA00E7C011 /* CategoryMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F8E1B3C93EA00E7C011 /* CategoryMenuTableViewController.swift */; };
+		A7F01F911B3C941800E7C011 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F901B3C941800E7C011 /* CategoryViewController.swift */; };
+		A7F01F931B3CB46C00E7C011 /* CategoryRevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F01F921B3CB46C00E7C011 /* CategoryRevealViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7C2FC0D1B376B9E0064A59B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7C2FBEF1B376B9E0064A59B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7C2FBF61B376B9E0064A59B;
+			remoteInfo = MedCaser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A70B374F1B5D9822001127C2 /* ChoiceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceRecord.swift; sourceTree = "<group>"; };
+		A7C2FBF71B376B9E0064A59B /* MedCaser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedCaser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7C2FBFB1B376B9E0064A59B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7C2FBFC1B376B9E0064A59B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A7C2FC011B376B9E0064A59B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A7C2FC031B376B9E0064A59B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A7C2FC061B376B9E0064A59B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A7C2FC0C1B376B9E0064A59B /* MedCaserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedCaserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7C2FC111B376B9E0064A59B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7C2FC121B376B9E0064A59B /* MedCaserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedCaserTests.swift; sourceTree = "<group>"; };
+		A7C2FC1D1B37A3B50064A59B /* MedCaser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MedCaser-Bridging-Header.h"; sourceTree = "<group>"; };
+		A7C2FC301B37A84F0064A59B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		A7C2FCC61B39023B0064A59B /* SearchGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupViewController.swift; sourceTree = "<group>"; };
+		A7C2FCCC1B39C6530064A59B /* MedCaser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MedCaser.xcdatamodel; sourceTree = "<group>"; };
+		A7C2FCD01B39D7390064A59B /* MyGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyGroupsViewController.swift; path = ../MyGroupsViewController.swift; sourceTree = "<group>"; };
+		A7C904341B51C7AB00C09FE7 /* GroupServiceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupServiceService.h; sourceTree = "<group>"; };
+		A7C904351B51C7AB00C09FE7 /* GroupServiceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupServiceService.m; sourceTree = "<group>"; };
+		A7C904371B56B00700C09FE7 /* medcaser logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "medcaser logo.png"; sourceTree = "<group>"; };
+		A7C9043F1B56C0DC00C09FE7 /* blankscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blankscreen.png; sourceTree = "<group>"; };
+		A7C904441B56EEF200C09FE7 /* GGFullScreenImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGFullScreenImageViewController.h; sourceTree = "<group>"; };
+		A7C904451B56EEF200C09FE7 /* GGFullScreenImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGFullScreenImageViewController.m; sourceTree = "<group>"; };
+		A7DAC98C1B7169DA004C62CE /* NSDate+ISO8601Parsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601Parsing.h"; sourceTree = "<group>"; };
+		A7DAC98D1B7169DA004C62CE /* NSDate+ISO8601Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601Parsing.m"; sourceTree = "<group>"; };
+		A7DAC98E1B7169DA004C62CE /* NSDate+ISO8601Unparsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601Unparsing.h"; sourceTree = "<group>"; };
+		A7DAC98F1B7169DA004C62CE /* NSDate+ISO8601Unparsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601Unparsing.m"; sourceTree = "<group>"; };
+		A7DAC9901B7169DA004C62CE /* USAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAdditions.h; sourceTree = "<group>"; };
+		A7DAC9911B7169DA004C62CE /* USAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAdditions.m; sourceTree = "<group>"; };
+		A7DAC9921B7169DA004C62CE /* USGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USGlobals.h; sourceTree = "<group>"; };
+		A7DAC9931B7169DA004C62CE /* USGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USGlobals.m; sourceTree = "<group>"; };
+		A7DAC9941B7169DA004C62CE /* xs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xs.h; sourceTree = "<group>"; };
+		A7DAC9951B7169DA004C62CE /* xs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xs.m; sourceTree = "<group>"; };
+		A7DB53EA1B5E97FA00E47543 /* CustomCaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCaseTableViewCell.swift; sourceTree = "<group>"; };
+		A7F01F7E1B3B991F00E7C011 /* MyGroups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGroups.swift; sourceTree = "<group>"; };
+		A7F01F7F1B3B991F00E7C011 /* Case.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
+		A7F01F801B3B991F00E7C011 /* AnswerChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerChoice.swift; sourceTree = "<group>"; };
+		A7F01F811B3B991F00E7C011 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		A7F01F891B3BFAD000E7C011 /* CaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseViewController.swift; sourceTree = "<group>"; };
+		A7F01F8B1B3C90C100E7C011 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		A7F01F8C1B3C90C100E7C011 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		A7F01F8E1B3C93EA00E7C011 /* CategoryMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryMenuTableViewController.swift; sourceTree = "<group>"; };
+		A7F01F901B3C941800E7C011 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		A7F01F921B3CB46C00E7C011 /* CategoryRevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryRevealViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7C2FBF41B376B9E0064A59B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7C2FC311B37A84F0064A59B /* libxml2.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7C2FC091B376B9E0064A59B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A7C2FBEE1B376B9E0064A59B = {
+			isa = PBXGroup;
+			children = (
+				A7C2FC301B37A84F0064A59B /* libxml2.dylib */,
+				A7C2FBF91B376B9E0064A59B /* MedCaser */,
+				A7C2FC0F1B376B9E0064A59B /* MedCaserTests */,
+				A7C2FBF81B376B9E0064A59B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A7C2FBF81B376B9E0064A59B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7C2FBF71B376B9E0064A59B /* MedCaser.app */,
+				A7C2FC0C1B376B9E0064A59B /* MedCaserTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7C2FBF91B376B9E0064A59B /* MedCaser */ = {
+			isa = PBXGroup;
+			children = (
+				A7F01F721B3A09BF00E7C011 /* Controllers */,
+				A7F01F711B3A099900E7C011 /* Models */,
+				A7C2FC001B376B9E0064A59B /* Main.storyboard */,
+				A7C2FCCB1B39C6530064A59B /* MedCaser.xcdatamodeld */,
+				A7C2FC1C1B37A3980064A59B /* WebServices */,
+				A7C2FBFA1B376B9E0064A59B /* Supporting Files */,
+			);
+			path = MedCaser;
+			sourceTree = "<group>";
+		};
+		A7C2FBFA1B376B9E0064A59B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7C904441B56EEF200C09FE7 /* GGFullScreenImageViewController.h */,
+				A7C904451B56EEF200C09FE7 /* GGFullScreenImageViewController.m */,
+				A7C2FC1D1B37A3B50064A59B /* MedCaser-Bridging-Header.h */,
+				A7F01F8B1B3C90C100E7C011 /* SWRevealViewController.h */,
+				A7C9043F1B56C0DC00C09FE7 /* blankscreen.png */,
+				A7F01F8C1B3C90C100E7C011 /* SWRevealViewController.m */,
+				A7C2FC031B376B9E0064A59B /* Images.xcassets */,
+				A7C2FC051B376B9E0064A59B /* LaunchScreen.xib */,
+				A7C904371B56B00700C09FE7 /* medcaser logo.png */,
+				A7C2FBFC1B376B9E0064A59B /* AppDelegate.swift */,
+				A7C2FBFB1B376B9E0064A59B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A7C2FC0F1B376B9E0064A59B /* MedCaserTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7C2FC121B376B9E0064A59B /* MedCaserTests.swift */,
+				A7C2FC101B376B9E0064A59B /* Supporting Files */,
+			);
+			path = MedCaserTests;
+			sourceTree = "<group>";
+		};
+		A7C2FC101B376B9E0064A59B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7C2FC111B376B9E0064A59B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A7C2FC1C1B37A3980064A59B /* WebServices */ = {
+			isa = PBXGroup;
+			children = (
+				A7C904341B51C7AB00C09FE7 /* GroupServiceService.h */,
+				A7C904351B51C7AB00C09FE7 /* GroupServiceService.m */,
+				A7DAC98C1B7169DA004C62CE /* NSDate+ISO8601Parsing.h */,
+				A7DAC98D1B7169DA004C62CE /* NSDate+ISO8601Parsing.m */,
+				A7DAC98E1B7169DA004C62CE /* NSDate+ISO8601Unparsing.h */,
+				A7DAC98F1B7169DA004C62CE /* NSDate+ISO8601Unparsing.m */,
+				A7DAC9901B7169DA004C62CE /* USAdditions.h */,
+				A7DAC9911B7169DA004C62CE /* USAdditions.m */,
+				A7DAC9921B7169DA004C62CE /* USGlobals.h */,
+				A7DAC9931B7169DA004C62CE /* USGlobals.m */,
+				A7DAC9941B7169DA004C62CE /* xs.h */,
+				A7DAC9951B7169DA004C62CE /* xs.m */,
+			);
+			name = WebServices;
+			sourceTree = "<group>";
+		};
+		A7F01F711B3A099900E7C011 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A70B374F1B5D9822001127C2 /* ChoiceRecord.swift */,
+				A7F01F7E1B3B991F00E7C011 /* MyGroups.swift */,
+				A7F01F7F1B3B991F00E7C011 /* Case.swift */,
+				A7F01F801B3B991F00E7C011 /* AnswerChoice.swift */,
+				A7F01F811B3B991F00E7C011 /* Category.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A7F01F721B3A09BF00E7C011 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A7C2FCD01B39D7390064A59B /* MyGroupsViewController.swift */,
+				A7C2FCC61B39023B0064A59B /* SearchGroupViewController.swift */,
+				A7F01F891B3BFAD000E7C011 /* CaseViewController.swift */,
+				A7F01F8E1B3C93EA00E7C011 /* CategoryMenuTableViewController.swift */,
+				A7F01F901B3C941800E7C011 /* CategoryViewController.swift */,
+				A7F01F921B3CB46C00E7C011 /* CategoryRevealViewController.swift */,
+				A7DB53EA1B5E97FA00E47543 /* CustomCaseTableViewCell.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7C2FBF61B376B9E0064A59B /* MedCaser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7C2FC161B376B9E0064A59B /* Build configuration list for PBXNativeTarget "MedCaser" */;
+			buildPhases = (
+				A7C2FBF31B376B9E0064A59B /* Sources */,
+				A7C2FBF41B376B9E0064A59B /* Frameworks */,
+				A7C2FBF51B376B9E0064A59B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MedCaser;
+			productName = MedCaser;
+			productReference = A7C2FBF71B376B9E0064A59B /* MedCaser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A7C2FC0B1B376B9E0064A59B /* MedCaserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7C2FC191B376B9E0064A59B /* Build configuration list for PBXNativeTarget "MedCaserTests" */;
+			buildPhases = (
+				A7C2FC081B376B9E0064A59B /* Sources */,
+				A7C2FC091B376B9E0064A59B /* Frameworks */,
+				A7C2FC0A1B376B9E0064A59B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7C2FC0E1B376B9E0064A59B /* PBXTargetDependency */,
+			);
+			name = MedCaserTests;
+			productName = MedCaserTests;
+			productReference = A7C2FC0C1B376B9E0064A59B /* MedCaserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7C2FBEF1B376B9E0064A59B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "University of Virginia";
+				TargetAttributes = {
+					A7C2FBF61B376B9E0064A59B = {
+						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = LJL8G936JS;
+					};
+					A7C2FC0B1B376B9E0064A59B = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = A7C2FBF61B376B9E0064A59B;
+					};
+				};
+			};
+			buildConfigurationList = A7C2FBF21B376B9E0064A59B /* Build configuration list for PBXProject "medcaser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A7C2FBEE1B376B9E0064A59B;
+			productRefGroup = A7C2FBF81B376B9E0064A59B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7C2FBF61B376B9E0064A59B /* MedCaser */,
+				A7C2FC0B1B376B9E0064A59B /* MedCaserTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7C2FBF51B376B9E0064A59B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7C2FC021B376B9E0064A59B /* Main.storyboard in Resources */,
+				A7C904381B56B00700C09FE7 /* medcaser logo.png in Resources */,
+				A7C2FC071B376B9E0064A59B /* LaunchScreen.xib in Resources */,
+				A7C2FC041B376B9E0064A59B /* Images.xcassets in Resources */,
+				A7C904401B56C0DC00C09FE7 /* blankscreen.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7C2FC0A1B376B9E0064A59B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7C2FBF31B376B9E0064A59B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7DAC9961B7169DA004C62CE /* NSDate+ISO8601Parsing.m in Sources */,
+				A7F01F911B3C941800E7C011 /* CategoryViewController.swift in Sources */,
+				A7F01F8F1B3C93EA00E7C011 /* CategoryMenuTableViewController.swift in Sources */,
+				A7DB53EB1B5E97FA00E47543 /* CustomCaseTableViewCell.swift in Sources */,
+				A7DAC99A1B7169DA004C62CE /* xs.m in Sources */,
+				A7C2FBFD1B376B9E0064A59B /* AppDelegate.swift in Sources */,
+				A7C2FCC71B39023B0064A59B /* SearchGroupViewController.swift in Sources */,
+				A7F01F831B3B991F00E7C011 /* Case.swift in Sources */,
+				A7F01F8D1B3C90C100E7C011 /* SWRevealViewController.m in Sources */,
+				A7C904461B56EEF200C09FE7 /* GGFullScreenImageViewController.m in Sources */,
+				A7F01F931B3CB46C00E7C011 /* CategoryRevealViewController.swift in Sources */,
+				A7F01F851B3B991F00E7C011 /* Category.swift in Sources */,
+				A7C2FCCD1B39C6530064A59B /* MedCaser.xcdatamodeld in Sources */,
+				A7C904361B51C7AB00C09FE7 /* GroupServiceService.m in Sources */,
+				A7DAC9991B7169DA004C62CE /* USGlobals.m in Sources */,
+				A70B37501B5D9822001127C2 /* ChoiceRecord.swift in Sources */,
+				A7DAC9971B7169DA004C62CE /* NSDate+ISO8601Unparsing.m in Sources */,
+				A7C2FCD11B39D7390064A59B /* MyGroupsViewController.swift in Sources */,
+				A7F01F8A1B3BFAD000E7C011 /* CaseViewController.swift in Sources */,
+				A7F01F821B3B991F00E7C011 /* MyGroups.swift in Sources */,
+				A7F01F841B3B991F00E7C011 /* AnswerChoice.swift in Sources */,
+				A7DAC9981B7169DA004C62CE /* USAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7C2FC081B376B9E0064A59B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7C2FC131B376B9E0064A59B /* MedCaserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7C2FC0E1B376B9E0064A59B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7C2FBF61B376B9E0064A59B /* MedCaser */;
+			targetProxy = A7C2FC0D1B376B9E0064A59B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A7C2FC001B376B9E0064A59B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7C2FC011B376B9E0064A59B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A7C2FC051B376B9E0064A59B /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7C2FC061B376B9E0064A59B /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A7C2FC141B376B9E0064A59B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A7C2FC151B376B9E0064A59B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A7C2FC171B376B9E0064A59B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = MedCaser/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tbc.MedCaser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MedCaser/MedCaser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A7C2FC181B376B9E0064A59B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = MedCaser/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tbc.MedCaser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MedCaser/MedCaser-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		A7C2FC1A1B376B9E0064A59B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MedCaserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedCaser.app/MedCaser";
+			};
+			name = Debug;
+		};
+		A7C2FC1B1B376B9E0064A59B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MedCaserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedCaser.app/MedCaser";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7C2FBF21B376B9E0064A59B /* Build configuration list for PBXProject "medcaser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7C2FC141B376B9E0064A59B /* Debug */,
+				A7C2FC151B376B9E0064A59B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7C2FC161B376B9E0064A59B /* Build configuration list for PBXNativeTarget "MedCaser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7C2FC171B376B9E0064A59B /* Debug */,
+				A7C2FC181B376B9E0064A59B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7C2FC191B376B9E0064A59B /* Build configuration list for PBXNativeTarget "MedCaserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7C2FC1A1B376B9E0064A59B /* Debug */,
+				A7C2FC1B1B376B9E0064A59B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A7C2FCCB1B39C6530064A59B /* MedCaser.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A7C2FCCC1B39C6530064A59B /* MedCaser.xcdatamodel */,
+			);
+			currentVersion = A7C2FCCC1B39C6530064A59B /* MedCaser.xcdatamodel */;
+			path = MedCaser.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A7C2FBEF1B376B9E0064A59B /* Project object */;
+}

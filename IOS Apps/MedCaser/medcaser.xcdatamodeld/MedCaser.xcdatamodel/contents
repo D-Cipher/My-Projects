@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AnswerChoice" representedClassName="MedCaser.AnswerChoice" syncable="YES">
+        <attribute name="choiceText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="correctAnswer" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="answerChoices" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <entity name="Case" representedClassName="MedCaser.Case" syncable="YES">
+        <attribute name="caseTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="theCase" inverseEntity="Category" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MyGroups" inverseName="cases" inverseEntity="MyGroups" syncable="YES"/>
+    </entity>
+    <entity name="Category" representedClassName="MedCaser.Category" syncable="YES">
+        <attribute name="explanation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="answerChoices" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AnswerChoice" inverseName="category" inverseEntity="AnswerChoice" syncable="YES"/>
+        <relationship name="theCase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Case" inverseName="categories" inverseEntity="Case" syncable="YES"/>
+    </entity>
+    <entity name="ChoiceRecord" representedClassName="MedCaser.ChoiceRecord" syncable="YES">
+        <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="choiceId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="MyGroups" representedClassName="MedCaser.MyGroups" syncable="YES">
+        <attribute name="groupName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="cases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Case" inverseName="group" inverseEntity="Case" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AnswerChoice" positionX="-36" positionY="18" width="128" height="105"/>
+        <element name="Case" positionX="-63" positionY="0" width="128" height="105"/>
+        <element name="Category" positionX="-54" positionY="9" width="128" height="165"/>
+        <element name="ChoiceRecord" positionX="-54" positionY="63" width="128" height="75"/>
+        <element name="MyGroups" positionX="-63" positionY="-18" width="128" height="90"/>
+    </elements>
+</model>
